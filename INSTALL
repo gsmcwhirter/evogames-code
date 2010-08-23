@@ -1,0 +1,42 @@
+#DEPENDENCIES
+perl
+python >= 2.4
+openssl
+wget
+gnu maketools
+git
+
+#INSTALL PROCEDURE
+git clone http://github.com/ry/node.git
+cd node
+./configure
+make
+make install #sudo
+cd ..
+wget http://dl.couchone.com/dl/26f246a0fe23d6a53d5326713308f43c/install-couchdb-1.0.1_rel1-linux-x64.bin #from http://www.couch.io/get#ubuntu
+chmod +x install-couchdb-1.0.1_rel1-linux-x64.bin
+./install-couchdb-1.0.1_rel1-linux-x64.bin #sudo
+git clone http://github.com/isaacs/npm.git
+curl http://npmjs.org/install.sh | sh #sudo sh
+npm install expresso #sudo
+npm install connect #sudo
+npm install ejs #sudo
+npm install underscore #sudo
+npm install less #sudo
+git clone http://github.com/akidee/extensions.js.git extensions
+cp -r extensions /usr/local/lib/node/ #sudo #install extensions
+git clone http://github.com/akidee/schema.js.git schema
+cp -r schema /usr/local/lib/node/ #sudo #install schema
+git clone http://github.com/caolan/dispatch.git
+cd dispatch
+git submodule init
+git submodule update
+cd ..
+cp -r dispatch /usr/local/lib/node/ #sudo #install dispatch
+git clone http://github.com/caolan/quip.git
+cd quip
+perl -p -i.bak -e 's|git@github.com:caolan/nodeunit.git|http://github.com/caolan/nodeunit.git|ig' .gitmodules
+git submodule init
+git submodule update
+cd ..
+cp -r quip /usr/local/lib/node/ #sudo #install quip
