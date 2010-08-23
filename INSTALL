@@ -1,6 +1,6 @@
 #DEPENDENCIES
 perl
-python >= 2.4
+python >= 2.5
 openssl
 wget
 gnu maketools
@@ -16,6 +16,11 @@ cd ..
 wget http://dl.couchone.com/dl/26f246a0fe23d6a53d5326713308f43c/install-couchdb-1.0.1_rel1-linux-x64.bin #from http://www.couch.io/get#ubuntu
 chmod +x install-couchdb-1.0.1_rel1-linux-x64.bin
 ./install-couchdb-1.0.1_rel1-linux-x64.bin #sudo
+curl -O http://python-distribute.org/distribute_setup.py
+python distribute_setup.py #sudo
+curl -O http://peak.telecommunity.com/dist/ez_setup.py
+easy_install pip #sudo
+pip install couchapp #sudo
 git clone http://github.com/isaacs/npm.git
 curl http://npmjs.org/install.sh | sh #sudo sh
 npm install expresso #sudo
