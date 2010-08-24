@@ -21,12 +21,7 @@ python distribute_setup.py #sudo
 git clone git://github.com/couchapp/couchapp.git
 cd couchapp
 python setup.py develop #sudo
-#curl -O http://peak.telecommunity.com/dist/ez_setup.py
-#easy_install pip #sudo
-#pip install couchapp #sudo
-#add-apt-repository ppa:couchapp/couchapp #sudo
-#apt-get update #sudo
-#apt-get install couchapp #sudo
+cd ..
 git clone http://github.com/isaacs/npm.git
 curl http://npmjs.org/install.sh | sh #sudo sh
 npm install expresso #sudo
