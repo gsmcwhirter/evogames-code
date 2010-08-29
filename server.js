@@ -1,10 +1,8 @@
 var connect = require('connect'),
     crypto = require('crypto'),
-    fs = require('fs'),
-    pb = require('paperboy'),
-    sys = require('sys');
+    fs = require('fs');
     
-var vhosts, web_server, ssl_server, pbhandler;
+var vhosts, web_server, ssl_server;
     
 var config = {
 	use_vhosts: false,
@@ -15,33 +13,11 @@ var config = {
 	server_port: 80
 };
 
-pbhandler = function(req, res, next){
-    pb  .deliver(__dirname + "/media", req, res)
-		.addHeader('Expires', 300)
-		.addHeader('X-PaperRoute','Node')
-		.before(function (){
-			sys.log('Received Request');
-    	})
-    	.after(function (statCode){
-    		sys.log('Delivered: ' + req.url);
-    	})
-    	.error(function (statCode, msg){
-    		res.writeHead(statCode, {'Content-type': 'text/plain'});
-    		res.end("Error: "+msg);
-    	})
-    	.otherwise(function (err){
-    		res.writeHead(404, {'Content-type': 'text/plain'});
-    		res.end('');
-    	});
-};
-
 web_server = connect.createServer(
     connect.logger(), //log to terminal
     connect.conditionalGet(), //adds not-modified support
     connect.cache(), //adds caching
     connect.gzip(), //compresses various content type responses
-    //connect.compiler({src: __dirname + "/media/css", enable: ["less"]}), //compiles less files into css to serve statically
-    //connect.staticProvider(__dirname + "/media"), //serve static files in the media directory
     connect.cookieDecoder(), //populates req.cookies
     connect.router(require('./lib/default').urls('')),
     connect.router(require('./lib/club').urls('/club')),
@@ -49,7 +25,8 @@ web_server = connect.createServer(
     connect.router(require('./lib/game').urls('/game')),
     connect.router(require('./lib/news').urls('/news')),
     connect.router(require('./lib/player').urls('/player')),
-    pbhandler
+    connect.compiler({src: __dirname + "/media/css", enable: ["less"]}), //compiles less files into css to serve statically
+    connect.staticProvider(__dirname + "/media") //serve static files in the media directory
 );
 
 if (config.use_ssl)
@@ -62,8 +39,6 @@ if (config.use_ssl)
 		connect.conditionalGet(),
 		connect.cache(),
 		connect.gzip(),
-		//connect.compiler({src: __dirname + "/media/css", enable: ["less"]}), //compiles less files into css to serve statically
-		//connect.staticProvider(__dirname + "/media"), //serve static files in the media directory
 		connect.cookieDecoder(),
 		connect.router(require('./lib/default').sslurls('')),
 		connect.router(require('./lib/club').sslurls('/club')),
@@ -71,7 +46,8 @@ if (config.use_ssl)
 		connect.router(require('./lib/game').sslurls('/game')),
 		connect.router(require('./lib/news').sslurls('/news')),
 		connect.router(require('./lib/player').sslurls('/player')),
-		pbhandler
+		connect.compiler({src: __dirname + "/media/css", enable: ["less"]}), //compiles less files into css to serve statically
+		connect.staticProvider(__dirname + "/media") //serve static files in the media directory
 	);
 	ssl_server.setSecure(config.ssl_creds);
 }
