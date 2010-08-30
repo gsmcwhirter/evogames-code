@@ -7,8 +7,8 @@ var vhosts, web_server, ssl_server;
 var config = {
 	use_vhosts: false,
 	use_ssl: true,
-	ssl_pkey: './certificates/privatekey.pem',
-	ssl_cert: './certificates/certificate.pem',
+	ssl_pkey: __dirname+'/certificates/privatekey.pem',
+	ssl_cert: __dirname+'/certificates/certificate.pem',
 	ssl_port: 443,
 	server_port: 80
 };
