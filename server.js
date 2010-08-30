@@ -7,10 +7,12 @@ var vhosts, web_server, ssl_server;
 var config = {
 	use_vhosts: false,
 	use_ssl: true,
-	ssl_pkey: __dirname+'/certificates/privatekey.pem',
-	ssl_cert: __dirname+'/certificates/certificate.pem',
-	ssl_port: 443,
-	server_port: 80
+	//ssl_pkey: __dirname+'/certificates/privatekey.pem',
+	//ssl_cert: __dirname+'/certificates/certificate.pem',
+	ssl_pkey: '/etc/ssl.key/server.key',
+	ssl_cert: '/etc/ssl.key/server.crt',
+	ssl_port: 7443,
+	server_port: 7080
 };
 
 connect.cache(100000);
