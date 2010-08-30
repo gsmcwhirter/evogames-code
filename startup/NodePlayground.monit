@@ -8,7 +8,7 @@ check host nodejs with address 127.0.0.1
         request /
         with timeout 10 seconds
         then restart
-    if failed port 443 protocol HTTPS
+    if failed port 443 protocol HTTP
         request /
         with timeout 10 seconds
         then restart
