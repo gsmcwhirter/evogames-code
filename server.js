@@ -7,6 +7,7 @@ var vhosts, web_server, ssl_server;
 var config = {
 	use_vhosts: false,
 	use_ssl: true,
+	fake_ssl: true,
 	//ssl_pkey: __dirname+'/certificates/privatekey.pem',
 	//ssl_cert: __dirname+'/certificates/certificate.pem',
 	ssl_pkey: '/etc/ssl.key/server.key',
@@ -35,7 +36,7 @@ var server = function (ssl){
 		connect.staticProvider(__dirname + "/media") //serve static files in the media directory
 	);
 	
-	if (ssl)
+	if (ssl && !fake_ssl)
 	{
 		var pkey = fs.readFileSync(config.ssl_pkey).toString();
 		var cert = fs.readFileSync(config.ssl_cert).toString();
