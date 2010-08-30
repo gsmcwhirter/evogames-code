@@ -186,7 +186,7 @@ textarea
 #header
 {
     margin: 5px 0;
-    background-image: url('../images/djo_header.jpg');
+    background-image: url('/images/djo_header.jpg');
     border: 1px solid #60c;
     height: 120px;
     min-height: 120px;
@@ -566,17 +566,17 @@ body.tinymce
 
 .status-field-ok
 {
-    background-image: url('../images/signup_ok.png');
+    background-image: url('/images/signup_ok.png');
 }
 
 .status-field-not-ok
 {
-    background-image: url('../images/signup_notok.png');
+    background-image: url('/images/signup_notok.png');
 }
 
 .status-field-maybe
 {
-    background-image: url('../images/signup_maybe.png');
+    background-image: url('/images/signup_maybe.png');
 }
 
 table.form
@@ -763,7 +763,7 @@ select.select-correct { width: auto !important; }
 }
 
 /* From jquery-ui */
-.ui-icon { width: 16px; height: 16px; background-image: url(../images/jquery-ui/ui-icons_cccccc_256x240.png); }
+.ui-icon { width: 16px; height: 16px; background-image: url(/images/jquery-ui/ui-icons_cccccc_256x240.png); }
 .ui-icon-carat-1-n { background-position: 0 0; }
 .ui-icon-carat-1-ne { background-position: -16px 0; }
 .ui-icon-carat-1-e { background-position: -32px 0; }
