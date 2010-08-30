@@ -31,3 +31,15 @@ git clone http://github.com/akidee/extensions.js.git extensions
 cp -r extensions /usr/local/lib/node/ #sudo #install extensions
 git clone http://github.com/akidee/schema.js.git schema
 cp -r schema /usr/local/lib/node/ #sudo #install schema
+
+#SETUP NODE DAEMON
+#apt-get install monit #sudo
+cd startup
+cp NodePlayground.conf /etc/init/ #sudo
+chmod u+x /etc/init/NodePlayground.conf #sudo
+cp couchdb.conf /etc/init/ #sudo
+chmod u+x /etc/init/couchdb.conf #sudo
+cp NodePlayground.monit /etc/monit/conf.d/ #sudo
+cp couchdb.monit /etc/monit/conf.d/ #sudo
+cd ..
+
