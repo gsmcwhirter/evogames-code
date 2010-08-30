@@ -36,7 +36,7 @@ var server = function (ssl){
 		connect.staticProvider(__dirname + "/media") //serve static files in the media directory
 	);
 	
-	if (ssl && !fake_ssl)
+	if (ssl && !config.fake_ssl)
 	{
 		var pkey = fs.readFileSync(config.ssl_pkey).toString();
 		var cert = fs.readFileSync(config.ssl_cert).toString();
