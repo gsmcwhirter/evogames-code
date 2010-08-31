@@ -34,7 +34,7 @@ cp -r schema /usr/local/lib/node/ #sudo #install schema
 
 #SETUP NODE DAEMON
 #apt-get install monit #sudo
-cd startup
+cd conf
 cp NodePlayground.conf /etc/init/ #sudo
 cp couchdb.conf /etc/init/ #sudo
 cp NodePlayground.monit /etc/monit/conf.d/ #sudo
