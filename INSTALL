@@ -24,6 +24,7 @@ git clone http://github.com/isaacs/npm.git
 curl http://npmjs.org/install.sh | sh #sudo sh
 npm install expresso #sudo
 npm install connect #sudo
+npm install connect-form #sudo
 npm install jade #sudo
 npm install underscore #sudo
 npm install less #sudo
