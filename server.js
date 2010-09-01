@@ -1,6 +1,7 @@
 var connect = require('connect'),
     crypto = require('crypto'),
-    fs = require('fs');
+    fs = require('fs'),
+    form = require('connect-form');
     
 var vhosts, web_server, ssl_server;
     
@@ -16,6 +17,7 @@ var server = function (ssl){
 		connect.cache(), //adds caching
 		connect.gzip(), //compresses various content type responses
 		connect.cookieDecoder(), //populates req.cookies
+		form({keepExtensions: true}),
 		connect.router(require('./lib/default').urls(ssl, '')),
 		connect.router(require('./lib/club').urls(ssl, '/club')),
 		connect.router(require('./lib/forum').urls(ssl, '/forum')),
