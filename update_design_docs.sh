@@ -6,7 +6,7 @@ then
 	exit
 fi
 
-cd sitedb
+cd couchapps
 for directory in *
 do
 	echo -n "${directory}"
