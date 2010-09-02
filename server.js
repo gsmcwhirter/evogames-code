@@ -1,7 +1,8 @@
 var connect = require('connect'),
     crypto = require('crypto'),
     fs = require('fs'),
-    form = require('connect-form');
+    form = require('connect-form'),
+    base = require('./lib/base');
     
 var vhosts, web_server, ssl_server;
     
@@ -12,19 +13,20 @@ connect.cache(100000);
 var server = function (ssl){
 	ssl = ssl | false;
 	var s = connect.createServer(
-		connect.logger(), //log to terminal
+		//connect.logger(), //log to terminal
 		connect.conditionalGet(), //adds not-modified support
 		connect.cache(), //adds caching
 		connect.gzip(), //compresses various content type responses
 		connect.cookieDecoder(), //populates req.cookies
 		form({keepExtensions: true}),
+		base.determine_login(),
+		connect.compiler({src: __dirname + "/media/css", enable: ["less"]}), //compiles less files into css to serve statically
 		connect.router(require('./lib/default').urls(ssl, '')),
 		connect.router(require('./lib/club').urls(ssl, '/club')),
 		connect.router(require('./lib/forum').urls(ssl, '/forum')),
 		connect.router(require('./lib/game').urls(ssl, '/game')),
 		connect.router(require('./lib/news').urls(ssl, '/news')),
 		connect.router(require('./lib/player').urls(ssl, '/player')),
-		connect.compiler({src: __dirname + "/media/css", enable: ["less"]}), //compiles less files into css to serve statically
 		connect.staticProvider(__dirname + "/media") //serve static files in the media directory
 	);
 	

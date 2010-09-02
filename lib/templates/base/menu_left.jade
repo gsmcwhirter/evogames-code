@@ -1,14 +1,23 @@
 - each menu in menus
-  - if (menu.collapse){
+  - if (menu.collapse)
     .menu-outer.collapse
-  - } else {
+      .menu-header
+        span.icon
+        #{menu.title}
+      ul.menu-inner
+        - menu.items.forEach(function(item){
+          li(title=item.description)
+            span.menu-bullet &raquo;
+            a(href=item.href) #{item.title}
+        - })
+  - else
     .menu-outer.expand
-  - }
-    .menu-header
-      span.icon
-      #{menu.title}
-    ul.menu-inner
-      - each item in menu.items
-        li(title=item.description)
-          span.menu-bullet &raquo;
-            a(href=item.href) item.title
+      .menu-header
+        span.icon
+        #{menu.title}
+      ul.menu-inner
+        - menu.items.forEach(function(item){
+          li(title=item.description)
+            span.menu-bullet &raquo;
+            a(href=item.href) #{item.title}
+        - })

@@ -76,7 +76,7 @@ var site = {
         $(".menu-outer.expand .menu-header .icon").addClass("ui-icon")
                                                   .addClass("ui-icon-triangle-1-n")
                                                   .toggle(menu.collapse, menu.expand);
-        $(".menu-inner.topmenu>li[title]").tooltip({
+        $(".menu-inner>li[title]").tooltip({
             position: "center right",
             offset: [0, 2],
             effect: "slide",
