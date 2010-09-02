@@ -5,10 +5,9 @@ function(doc) {
         {
             emit([doc.group, doc.order], 1);
             
-            for (var ikey in doc.items)
-            {
-                emit([doc.group, doc.order, doc.items[ikey].order], 1);
-            }
+            doc.items.forEach(function(item){
+                emit([doc.group, doc.order, item.order], item);
+            });
         }
     }
 }
