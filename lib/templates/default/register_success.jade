@@ -1,0 +1,18 @@
+.module
+  .module-header Player Registration
+  .module-content
+    h1 Player Registration Success
+    p 
+      | Welcome, #{player.name}. Your registration process is nearly complete.
+      | An e-mail has been sent to the address you provided containing 
+      | instructions for how to activate your account.
+    p
+      | If the link provided in the e-mail does not work, please visit
+      | a(href="/confirm") this confirmation page
+      | to activate your account.
+    p
+      | If you did not receive an e-mail, please send a message to
+      | a(href="mailto:"+default.system.error_email)= default.system.error_email
+      | from the e-mail address you registered under, including in the 
+      | e-mail your username (#{player.username}).
+      | Please do not simply try to re-register.

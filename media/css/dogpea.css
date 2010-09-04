@@ -351,31 +351,36 @@ ul.menu-inner>li:hover
 
 #body
 {
-    width: 635px;
+    /*width: 635px;*/
+    width: 795px;
     float: left;
 }
 
 #body.body-ssl,
 #body.topmenu
 {
-    width: 840px;
-}
+	/*width: 840px;*/
+    width: 1000px;
+    margin-bottom: 10px;
+}*/
 
 div.module
 {
     background-color: #fff;
     padding: 2px;
-    margin: 0 5px;
+    /*margin: 0 5px;*/
+    margin: 0;
+    margin-bottom: 10px;
     border: 1px solid #000;
     background-color: #60c;
 }
 
-#body.body-ssl div.module,
+/*#body.body-ssl div.module,
 #body.topmenu div.module
 {
     margin: 0;
     margin-bottom: 10px;
-}
+}*/
 
 div.module-header
 {
@@ -403,6 +408,7 @@ body.tinymce
 
 #rightmenu
 {
+	display: none;
     width: 150px;
     margin-left: 5px;
     float: right;

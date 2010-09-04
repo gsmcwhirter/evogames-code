@@ -41,77 +41,74 @@ html
                   - else if (player.is_staff)
                     span.staff Staff
                 br
-                a(href="#") Controls
+                a(href="/controls") Controls
                 |
-                a(href="#") Log Out
+                a(href="/logout") Log Out
                 br
                 a(href="#") Inbox [#{player.messages.new}]
-              #status-selector
-                select#club-selector
-                  option(value="0") --My Clubs--
-                  - each club in player.clubs
-                    option(value=club.code)= club.name
             - else
               #status-info
                 #status-avatar
                   img(alt="Player Avatar", src=system.default_avatar)
                 span Welcome, Guest!
                 br
-                a(href="#") Log In
+                a(href="/login") Log In
                 |
-                a(href="#") Register
+                a(href="/register") Register
       #content-1
         #content-2
           #content-3
-            #rightmenu!= menu_content.right
+            - if (menu_content.right)
+              #rightmenu!= menu_content.right
             - if (!system.is_ssl)
               #leftmenu!= menu_content.left
               #body!= body_content
             - else
               #body.body-ssl!= body_content
-      #footer
-        #footer-left &nbsp;
-        #footer-right &nbsp;
-        #footer-center
-          a(href="#") Report Bugs
+      - if (!system.is_ssl)
+        #footer
+          #footer-left &nbsp;
+          #footer-right &nbsp;
+          #footer-center
+            a(href="#") Report Bugs
+            |
+            a(href="#") Site Feedback
+        #subfooter
+          #branding
+          strong= system.name+":"
+          a(href="/") Home
           |
-          a(href="#") Site Feedback
-      #subfooter
-        #branding
-        strong= system.name+":"
-        a(href="#") Home
-        |
-        a(href="#") Help
-        |
-        a(href="#") Contact Us
-        |
-        a(href="#") About Us
-        |
-        a(href="#") Site Map
-        |
-        a(href="#") Volunteer
-        |
-        a(href="#") Management
-        br
-        strong Connect:
-        a(href="#") X-Fire
-        |
-        a(href="#") Facebook
-        |
-        a(href="#") Twitter
-        |
-        a(href="#") YouTube
-        |
-        a(href="#") Blog
-        |
-        a(href="#") RSS
-        br
-        strong Legal:
-        a(href="#") Terms of Use
-        |
-        a(href="#") Privacy Policy
-        |
-        #{system.copyright}
+          a(href="#") Help
+          |
+          a(href="#") Contact Us
+          |
+          a(href="#") About Us
+          |
+          a(href="#") Site Map
+          |
+          a(href="#") Volunteer
+          |
+          a(href="#") Management
+          br
+          strong Connect:
+          a(href="#") X-Fire
+          |
+          a(href="#") Facebook
+          |
+          a(href="#") Twitter
+          |
+          a(href="#") YouTube
+          |
+          a(href="#") Blog
+          |
+          a(href="#") RSS
+          br
+          strong Legal:
+          a(href="#") Terms of Use
+          |
+          a(href="#") Privacy Policy
+          |
+          #{system.copyright}
     - if (player.is_sysop)
       #debug
         #debug-header
