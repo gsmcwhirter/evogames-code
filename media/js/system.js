@@ -5,11 +5,11 @@ var configs = {
     lightbox: {
         overlayBgColor: '#000',
         overlayOpacity: 0.8,
-        imageBlank: '/media/images/lightbox/blank.gif',
-        imageLoading: '/media/images/lightbox/loading.gif',
-        imageBtnClose: '/media/images/lightbox/btn-close.gif',
-        imageBtnPrev: '/media/images/lightbox/btn-prev.gif',
-        imageBtnNext: '/media/images/lightbox/btn-next.gif',
+        imageBlank: '/images/lightbox/blank.gif',
+        imageLoading: '/images/lightbox/loading.gif',
+        imageBtnClose: '/images/lightbox/btn-close.gif',
+        imageBtnPrev: '/images/lightbox/btn-prev.gif',
+        imageBtnNext: '/images/lightbox/btn-next.gif',
         containerResizeSpeed: 400
     }
     , tinymce_page: {
@@ -28,9 +28,9 @@ var configs = {
         theme_advanced_toolbar_location : "top",
         theme_advanced_toolbar_align : "left",
         theme_advanced_statusbar_location : "bottom",
-        theme_advanced_resizing: true, //Ainu: allowing resizing 2010/01/20
+        theme_advanced_resizing: true,
         extended_valid_elements : "s,a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style],style,center",
-        content_css : "/media/css/reset-fonts.css,/media/css/jquery-ui.css,/media/css/lightbox.css,/media/css/dogpea.css",
+        content_css : "/css/reset-fonts.css,/css/jquery-ui.css,/css/lightbox.css,/css/dogpea.css",
         body_class : "tinymce"
     }
     , tinymce_bbcode: {
@@ -60,7 +60,6 @@ var site = {
         tinyMCE.init(configs.tinymce_page);
         tinyMCE.init(configs.tinymce_bbcode);
         site.config_menus();
-        site.init_club_select();
         site.init_debug();
         $(".marquee-vert").scrollable({circular: true, vertical: true}).autoscroll({autoplay: true});
         $(".marquee-horiz").scrollable({circular: true}).autoscroll({autoplay: true});
@@ -86,23 +85,10 @@ var site = {
             slideOffset: 2
         });
     }
-    , init_buttons: function(){
-        $("button, input:button, input:submit, input:reset, .button").button();
-    }
     , init_debug: function(){
         $("#debug-expander").addClass("ui-icon")
                             .addClass("ui-icon-triangle-1-s")
                             .toggle(site.debug_expand, site.debug_collapse);
-    }
-    , init_club_select: function(){
-        $("#club-selector").bind('change', function(){
-            if($("#club-selector").val() != "0")
-            {
-                var domain_parts = document.domain.split(".");
-                var ct = domain_parts.length;
-                window.location = 'http://'+$("#club-selector").val()+'.'+domain_parts[ct-2]+'.'+domain_parts[ct-1]+'/';
-            }
-        });
     }
     , debug_expand: function(){
         $("#debug-expander").removeClass('ui-icon-triangle-1-s')
@@ -139,18 +125,41 @@ var menu = {
 }
 
 var form_validators = {
-    set_tooltip: function(field) {
-        var id = $("#"+field+"_status").attr('id');
-        var classes = $("#"+field+"_status").attr('class');
-        var title = $("#"+field+"_status").attr('title');
-        var new_span = $("<span id='"+id+"' class='"+classes+"' title='"+title+"'>&nbsp;</span>").tooltip({
-            position: "center right",
-            offset: [-2, 10],
-            effect: "toggle",
-            opacity: 1.0
-        });
-        $("#"+field+"_status[title]").replaceWith(new_span);
+    validator: function (){
+        this.set_tooltip = function (field) {
+            var id = $("#"+field+"_status").attr('id');
+            var classes = $("#"+field+"_status").attr('class');
+            var title = $("#"+field+"_status").attr('title');
+            var new_span = $("<span id='"+id+"' class='"+classes+"' title='"+title+"'>&nbsp;</span>").tooltip({
+                position: "center right",
+                offset: [-2, 10],
+                effect: "toggle",
+                opacity: 1.0
+            });
+            $("#"+field+"_status[title]").replaceWith(new_span);
+        };
+        
+        this.set_status_bad = function (sid, msg){
+            $(sid).removeClass("status-field-ok")
+                .removeClass("status-field-maybe")
+                .addClass("status-field-not-ok")
+                .attr("title",msg);
+        };
+        
+        this.set_status_ok = function (sid, msg){
+            $(sid).removeClass("status-field-not-ok")
+                .removeClass("status-field-maybe")
+                .addClass("status-field-ok")
+                .attr("title",msg);
+        };
+        
+        this.set_status_maybe = function (sid, msg){
+            $(sid).removeClass("status-field-not-ok")
+                .removeClass("status-field-ok")
+                .addClass("status-field-maybe")
+                .attr("title",msg);
+        };
     }
-}
+};
 
 $(document).ready(site.init);

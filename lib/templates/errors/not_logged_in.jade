@@ -1,0 +1,17 @@
+.module
+  .module-header Log In Required
+  .module-content
+    h1 Log In Required
+    p You must already be logged in to view this page.
+    - if (redirect)
+      - redirect.time = redirect.time || 3
+      p 
+        You are being redirected
+        a(href=redirect.href) here
+        in #{redirect.time} seconds.
+      :javascript
+        | $(document).ready(function(){
+        |     setTimeout(function(){
+        |         window.location = '#{redirect.href}';
+        |     }, #{redirect.time * 1000});
+        | });
