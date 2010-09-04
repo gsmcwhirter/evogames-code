@@ -100,7 +100,7 @@ form_validators.register = function (register_required_fields){
         switch(field)
         {
             case "username":
-                var re = new RegExp("([^a-zA-Z0-9_\\-.$!@()\\[\\]{}=+*?: ])");
+                //var re = new RegExp("([^a-zA-Z0-9_\\-.$!@()\\[\\]{}=+*?: ])");
                 var name = $.trim($("#"+field).val());
                 if (name.length < 3)
                 {
@@ -108,12 +108,12 @@ form_validators.register = function (register_required_fields){
                     self.set_tooltip(field);
                     if (do_return) return false;
                 }
-                else if (name.match(re))
+                /*else if (name.match(re))
                 {
                     self.set_status_bad(sid, "Contains in-valid characters.");
                     self.set_tooltip(field);
                     if (do_return) return false;
-                }
+                }*/
                 else if (self.name_exists(name))
                 {
                     if (!self.user_cache_loaded())
@@ -373,4 +373,3 @@ form_validators.register = function (register_required_fields){
 
 form_validators.register.prototype = new form_validators.validator();
 form_validators.register.prototype.constructor = form_validators.register;
-//form_validators.register.prototype.me = form_validators.register;

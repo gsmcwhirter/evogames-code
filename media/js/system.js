@@ -61,6 +61,7 @@ var site = {
         tinyMCE.init(configs.tinymce_bbcode);
         site.config_menus();
         site.init_debug();
+        site.init_link_rels();
         $(".marquee-vert").scrollable({circular: true, vertical: true}).autoscroll({autoplay: true});
         $(".marquee-horiz").scrollable({circular: true}).autoscroll({autoplay: true});
         $("a.lightbox").lightBox(configs.lightbox);
@@ -85,20 +86,23 @@ var site = {
             slideOffset: 2
         });
     }
-    , init_debug: function(){
+    , init_debug: function (){
         $("#debug-expander").addClass("ui-icon")
                             .addClass("ui-icon-triangle-1-s")
                             .toggle(site.debug_expand, site.debug_collapse);
     }
-    , debug_expand: function(){
+    , debug_expand: function (){
         $("#debug-expander").removeClass('ui-icon-triangle-1-s')
                             .addClass('ui-icon-triangle-1-n');
         $("#debug-content").slideDown(500);
     }
-    , debug_collapse: function(){
+    , debug_collapse: function (){
         $("#debug-expander").removeClass('ui-icon-triangle-1-n')
                             .addClass('ui-icon-triangle-1-s');
         $("#debug-content").slideUp(500);
+    }
+    , init_link_rels: function (){
+        $("a[rel=blank]").attr("target","_blank");
     }
 };
 

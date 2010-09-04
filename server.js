@@ -20,7 +20,6 @@ var server = function (ssl){
 		connect.cookieDecoder(), //populates req.cookies
 		form({keepExtensions: true}),
 		mw.determineLogin(),
-		mw.verifyRecaptcha(),
 		connect.compiler({src: __dirname + "/media/css", enable: ["less"]}), //compiles less files into css to serve statically
 		connect.router(require('./lib/default').urls(ssl, '')),
 		connect.router(require('./lib/club').urls(ssl, '/club')),

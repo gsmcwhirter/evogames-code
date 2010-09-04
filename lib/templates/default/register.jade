@@ -4,180 +4,176 @@
   .module-content
     h1 Player Registration
     form(method="post", accept-charset="utf-8")
-    fieldset.font-size
-      - if (messages["general"])
-        ul.form-error
-        - each msg in messages["general"]
-          li!= msg
-      table.form.form-two-column
-        tbody
-          tr
-            td.label
-              label(for="username") Username
-            td.field
-              - if (messages["username"])
-                ul.field-error
-                - each msg in messages["username"]
-                  li!= "Username " + msg
-              .field-data
-                span#username_status &nbsp;
-                input#username(tabindex=++tabindex, type="text", name="username", value= errors ? data["username"] : "")
-          tr
-            td.label
-              label(for="name") Alias
-            td.field
-              - if (messages["name"])
-                ul.field-error
-                - each msg in messages["name"]
-                  li!= "Alias " + msg
-              .field-data
-                span#name_status &nbsp;
-                input#name(tabindex=++tabindex, type="text", name="name", value= errors ? data["name"] : "")
-          tr
-            td.label
-              label(for="email") E-Mail Address
-            td.field
-              - if (messages["email"])
-                ul.field-error
-                - each msg in messages["email"]
-                  li!= "E-Mail address " + msg
-              .field-data
-                span#email_status &nbsp;
-                input#email(tabindex=++tabindex, type="text", name="email", value= errors ? data["email"] : "")
-          tr
-            td.label
-              label(for="email_confirm") Confirm E-Mail
-            td.field
-              - if (messages["email_confirm"])
-                ul.field-error
-                - each msg in messages["email_confirm"]
-                  li!= "E-Mail confirmation " + msg
-              .field-data
-                span#email_confirm_status &nbsp;
-                input#email_confirm(tabindex=++tabindex, type="text", name="email_confirm", value= errors ? data["email_confirm"] : "")
-          tr
-            td.label
-              label(for="password") Password
-            td.field
-              - if (messages["password"])
-                ul.field-error
-                - each msg in messages["password"]
-                  li!= "Password " + msg
-              .field-data
-                span#password_status &nbsp;
-                input#password(tabindex=++tabindex, type="password", name="password")
-          tr
-            td.label
-              label(for="password_confirm") Confirm Password
-            td.field
-              - if (messages["password_confirm"])
-                ul.field-error
-                - each msg in messages["password_confirm"]
-                  li!= "Password confirmation " + msg
-              .field-data
-                span#password_confirm_status &nbsp;
-                input#password_confirm(tabindex=++tabindex, type="password", name="password_confirm")
-          tr
-            td.label
-              label(for="question1") Security Question 1
-            td.field
-              - if (messages["question1"])
-                ul.field-error
-                - each msg in messages["question1"]
-                  li!= "Question 1 " + msg
-              .field-data
-                span#question1_status &nbsp;
-                select#question1(tabindex=++tabindex, size="1", name="question1")
-                  option(value="")
-                  - each question in questions
-                    option(value=question, selected=(data.question1 == question))= question
-          tr
-            td.label
-              label(for="answer1") Security Answer 1
-            td.field
-              - if (messages["answer1"])
-                ul.field-error
-                - each msg in messages["answer1"]
-                  li!= "Answer 1 " + msg
-              .field-data
-                span#answer1_status &nbsp;
-                input#answer1(tabindex=++tabindex, type="text", name="answer1", value= errors ? data["answer1"] : "")
-          tr
-            td.label
-              label(for="question2") Security Question 2
-            td.field
-              - if (messages["question2"])
-                ul.field-error
-                - each msg in messages["question2"]
-                  li!= "Question 2 " + msg
-              .field-data
-                span#question2_status &nbsp;
-                select#question2(tabindex=++tabindex, size="1", name="question2")
-                  option(value="")
-                  - each question in questions
-                    option(value=question, selected=(data.question2 == question))= question
-          tr
-            td.label
-              label(for="answer2") Security Answer 2
-            td.field
-              - if (messages["answer2"])
-                ul.field-error
-                - each msg in messages["answer2"]
-                  li!= "Answer 2 " + msg
-              .field-data
-                span#answer2_status &nbsp;
-                input#answer2(tabindex=++tabindex, type="text", name="answer2", value= errors ? data["answer2"] : "")
-          tr
-            td.label
-              label Terms of Service
-            td.field
-              - if (messages["agreement"])
-                ul.field-error
-                - each msg in messages["agreement"]
-                  li!= "Terms of service " + msg
-              .field-data
-                span#agreement_status &nbsp;
-                .field-text
-                  input#agreement(tabindex=++tabindex, type="checkbox", name="agreement", value="yes", checked=(errors && data.agreement == "yes"))
-                  label(for="agreement")  
-                    |  I agree to the 
-                    a(href="/tos") Terms of Service
-                    |  for using the site.
-          tr
-            td.label
-              label(for="recaptcha_response_field") Test for Humanity
-            td.field
-              - if (messages["captcha"])
-                ul.field-error
-                - each msg in messages["captcha"]
-                  li!= "Captcha " + msg
-              .field-data
-                :javascript
-                  | var RecaptchaOptions = {
-                  |   theme : 'clean',
-                  |   tabindex: #{++tabindex}
-                  | };
-                style
-                  | .recaptchatable #recaptcha_response_field
-                  | {
-                  |   width: 140px !important;
-                  | }
-                script(type="text/javascript", src="http://www.google.com/recaptcha/api/challenge?k="+public_key)
-                noscript
-                  iframe(src="http://www.google.com/recaptcha/api/noscript?k="+public_key, height="300", width="500", frameborder="0")
-                  br
-                  textarea(name="recaptcha_challenge_field", rows="3", cols="40") 
-                  input(type="hidden", name="recaptcha_response_field", value="manual_challenge")
-          tr
-            td.action(colspan="2")
-              button(tabindex=++tabindex, type="submit") Register
+      fieldset.font-size
+        - if (messages["general"])
+          ul.form-error
+            - each msg in messages["general"]
+              li!= msg
+        table.form.form-two-column
+          tbody
+            tr
+              td.label
+                label(for="username") Username
+              td.field
+                - if (messages["username"])
+                  ul.field-error
+                    - each msg in messages["username"]
+                      li!= "Username " + msg
+                .field-data
+                  span#username_status &nbsp;
+                  input#username(tabindex=++tabindex, type="text", name="username", value= errors ? data["username"] : "")
+            tr
+              td.label
+                label(for="name") Alias
+              td.field
+                - if (messages["name"])
+                  ul.field-error
+                    - each msg in messages["name"]
+                      li!= "Alias " + msg
+                .field-data
+                  span#name_status &nbsp;
+                  input#name(tabindex=++tabindex, type="text", name="name", value= errors ? data["name"] : "")
+            tr
+              td.label
+                label(for="email") E-Mail Address
+              td.field
+                - if (messages["email"])
+                  ul.field-error
+                    - each msg in messages["email"]
+                      li!= "E-Mail address " + msg
+                .field-data
+                  span#email_status &nbsp;
+                  input#email(tabindex=++tabindex, type="text", name="email", value= errors ? data["email"] : "")
+            tr
+              td.label
+                label(for="email_confirm") Confirm E-Mail
+              td.field
+                - if (messages["email_confirm"])
+                  ul.field-error
+                    - each msg in messages["email_confirm"]
+                      li!= "E-Mail confirmation " + msg
+                .field-data
+                  span#email_confirm_status &nbsp;
+                  input#email_confirm(tabindex=++tabindex, type="text", name="email_confirm", value= errors ? data["email_confirm"] : "")
+            tr
+              td.label
+                label(for="password") Password
+              td.field
+                - if (messages["password"])
+                  ul.field-error
+                    - each msg in messages["password"]
+                      li!= "Password " + msg
+                .field-data
+                  span#password_status &nbsp;
+                  input#password(tabindex=++tabindex, type="password", name="password")
+            tr
+              td.label
+                label(for="password_confirm") Confirm Password
+              td.field
+                - if (messages["password_confirm"])
+                  ul.field-error
+                    - each msg in messages["password_confirm"]
+                      li!= "Password confirmation " + msg
+                .field-data
+                  span#password_confirm_status &nbsp;
+                  input#password_confirm(tabindex=++tabindex, type="password", name="password_confirm")
+            tr
+              td.label
+                label(for="question1") Security Question 1
+              td.field
+                - if (messages["question1"])
+                  ul.field-error
+                    - each msg in messages["question1"]
+                      li!= "Question 1 " + msg
+                .field-data
+                  span#question1_status &nbsp;
+                  select#question1(tabindex=++tabindex, size="1", name="question1")
+                    option(value="")
+                    - each question in questions
+                      option(value=question, selected=(data.question1 == question))= question
+            tr
+              td.label
+                label(for="answer1") Security Answer 1
+              td.field
+                - if (messages["answer1"])
+                  ul.field-error
+                    - each msg in messages["answer1"]
+                      li!= "Answer 1 " + msg
+                .field-data
+                  span#answer1_status &nbsp;
+                  input#answer1(tabindex=++tabindex, type="text", name="answer1", value= errors ? data["answer1"] : "")
+            tr
+              td.label
+                label(for="question2") Security Question 2
+              td.field
+                - if (messages["question2"])
+                  ul.field-error
+                    - each msg in messages["question2"]
+                      li!= "Question 2 " + msg
+                .field-data
+                  span#question2_status &nbsp;
+                  select#question2(tabindex=++tabindex, size="1", name="question2")
+                    option(value="")
+                    - each question in questions
+                      option(value=question, selected=(data.question2 == question))= question
+            tr
+              td.label
+                label(for="answer2") Security Answer 2
+              td.field
+                - if (messages["answer2"])
+                  ul.field-error
+                    - each msg in messages["answer2"]
+                      li!= "Answer 2 " + msg
+                .field-data
+                  span#answer2_status &nbsp;
+                  input#answer2(tabindex=++tabindex, type="text", name="answer2", value= errors ? data["answer2"] : "")
+            tr
+              td.label
+                label Terms of Service
+              td.field
+                - if (messages["agreement"])
+                  ul.field-error
+                    - each msg in messages["agreement"]
+                      li!= "Terms of service " + msg
+                .field-data
+                  span#agreement_status &nbsp;
+                  .field-text
+                    input#agreement(tabindex=++tabindex, type="checkbox", name="agreement", value="yes", checked=(errors && data.agreement == "yes"))
+                    label(for="agreement")  
+                      |  I agree to the 
+                      a(href="/tos", rel="blank") Terms of Service
+                      |  for using the site.
+            tr
+              td.label
+                label(for="recaptcha_response_field") Test for Humanity
+              td.field
+                - if (messages["captcha"])
+                  ul.field-error
+                    - each msg in messages["captcha"]
+                      li!= "Captcha " + msg
+                .field-data
+                  :javascript
+                    | var RecaptchaOptions = {
+                    |   theme : 'clean',
+                    |   tabindex: #{++tabindex}
+                    | };
+                  style
+                    | .recaptchatable #recaptcha_response_field
+                    | {
+                    |   width: 140px !important;
+                    | }
+                  script(type="text/javascript", src="http://www.google.com/recaptcha/api/challenge?k="+public_key)
+                  noscript
+                    iframe(src="http://www.google.com/recaptcha/api/noscript?k="+public_key, height="300", width="500", frameborder="0")
+                    br
+                    textarea(name="recaptcha_challenge_field", rows="3", cols="40") 
+                    input(type="hidden", name="recaptcha_response_field", value="manual_challenge")
+            tr
+              td.action(colspan="2")
+                button(tabindex=++tabindex, type="submit") Register
 script(type="text/javascript", src="/js/validators/register.js")
 :javascript
-  | var register_required_fields = ['username','name','email',
-  |                                 'email_confirm','password',
-  |                                 'password_confirm', 'question1',
-  |                                 'answer1','question2','answer2',
-  |                                 'agreement'];
+  | var register_required_fields = #{required_fields};
   | $(document).ready(function(){
   |   var validator = new form_validators.register(register_required_fields);
   | });
