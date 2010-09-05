@@ -94,61 +94,48 @@ form_validators.register = function (register_required_fields){
         }
     };
     
-    this.validate = function (event, do_return) {
+    this.validate = function (event) {
         var field = event.data.field;
         var sid = "#"+field+"_status"; 
         switch(field)
         {
             case "username":
-                //var re = new RegExp("([^a-zA-Z0-9_\\-.$!@()\\[\\]{}=+*?: ])");
                 var name = $.trim($("#"+field).val());
                 if (name.length < 3)
                 {
-                    self.set_status_bad(sid, "Must be at least 4 characters long.");
+                    self.set_status_bad(sid, "Must be at least 3 characters long.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
-                /*else if (name.match(re))
-                {
-                    self.set_status_bad(sid, "Contains in-valid characters.");
-                    self.set_tooltip(field);
-                    if (do_return) return false;
-                }*/
                 else if (self.name_exists(name))
                 {
                     if (!self.user_cache_loaded())
                     {
                         self.set_status_maybe(sid, "May not be unique.");
                         self.set_tooltip(field);
-                        if(do_return) return true;
                     }
                     else
                     {
                         self.set_status_bad(sid, "Must be unique.");
                         self.set_tooltip(field);
-                        if (do_return) return false;
                     }
                 }
                 else
                 {
                     self.set_status_ok(sid, "OK");
                     self.set_tooltip(field);
-                    if (do_return) return true;
                 }
                 break;
             case "name":
                 var name = $.trim($("#"+field).val());
                 if (name.length < 3)
                 {
-                    self.set_status_bad(sid, "Must be at least 4 characters long.");
+                    self.set_status_bad(sid, "Must be at least 3 characters long.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else
                 {
                     self.set_status_ok(sid, "OK");
                     self.set_tooltip(field);
-                    if (do_return) return true;
                 }
                 break;
             case "email":
@@ -158,13 +145,11 @@ form_validators.register = function (register_required_fields){
                 {
                     self.set_status_bad(sid, "Must not be empty.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else if (!email.match(re))
                 {
                     self.set_status_bad(sid, "Has invalid format.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else if (self.email_exists(email))
                 {
@@ -172,20 +157,17 @@ form_validators.register = function (register_required_fields){
                     {
                         self.set_status_maybe(sid, "May not be unique.");
                         self.set_tooltip(field);
-                        if (do_return) return true;
                     }
                     else
                     {
                         self.set_status_bad(sid, "Must be unique.");
                         self.set_tooltip(field);
-                        if (do_return) return false;
                     }
                 }
                 else
                 {
                     self.set_status_ok(sid, "OK");
                     self.set_tooltip(field);
-                    if (do_return) return true;
                 }
                 break;
             case "email_confirm":
@@ -194,19 +176,16 @@ form_validators.register = function (register_required_fields){
                 {
                     self.set_status_bad(sid, "Must match e-mail.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else if (email_confirm == '')
                 {
                     self.set_status_maybe(sid, "Must not be empty.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else
                 {
                     self.set_status_ok(sid, "OK");
                     self.set_tooltip(field);
-                    if (do_return) return true;
                 }
                 break;
             case "password":
@@ -216,19 +195,16 @@ form_validators.register = function (register_required_fields){
                 {
                     self.set_status_bad(sid, "Must be at least 8 characters long.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else if (!password.match(re))
                 {
                     self.set_status_bad(sid, "Must contain at least one non-letter.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else
                 {
                     self.set_status_ok(sid, "OK");
                     self.set_tooltip(field);
-                    if (do_return) return true;
                 }
                 break;
             case "password_confirm":
@@ -237,19 +213,16 @@ form_validators.register = function (register_required_fields){
                 {
                     self.set_status_bad(sid, "Must match password.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else if (password_confirm == '')
                 {
                     self.set_status_maybe(sid, "Must not be empty.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else
                 {
                     self.set_status_ok(sid, "OK");
                     self.set_tooltip(field);
-                    if (do_return) return true;
                 }
                 break;
             case "question1":
@@ -257,13 +230,11 @@ form_validators.register = function (register_required_fields){
                 {
                     self.set_status_bad(sid, "Must be selected.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else
                 {
                     self.set_status_ok(sid, "OK");
                     self.set_tooltip(field);
-                    if (do_return) return true;
                 }
                 break;
             case "answer1":
@@ -271,13 +242,11 @@ form_validators.register = function (register_required_fields){
                 {
                     self.set_status_bad(sid, "Must be at least 4 characters long.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else
                 {
                     self.set_status_ok(sid, "OK");
                     self.set_tooltip(field);
-                    if (do_return) return true;
                 }
                 break;
             case "question2":
@@ -285,19 +254,16 @@ form_validators.register = function (register_required_fields){
                 {
                     self.set_status_bad(sid, "Must be selected.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else if ($.trim($("#question2").val()) == $.trim($("#question1").val()))
                 {
                     self.set_status_bad(sid, "Must be different from question 1.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else
                 {
                     self.set_status_ok(sid, "OK");
                     self.set_tooltip(field);
-                    if (do_return) return true;
                 }
                 break;
             case "answer2":
@@ -305,19 +271,16 @@ form_validators.register = function (register_required_fields){
                 {
                     self.set_status_bad(sid, "Must be at least 4 characters long.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else if ($.trim($("#answer2").val()) == $.trim($("#answer1").val()))
                 {
                     self.set_status_bad(sid, "Must be different from answer 1.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else
                 {
                     self.set_status_ok(sid, "OK");
                     self.set_tooltip(field);
-                    if (do_return) return true;
                 }
                 break;
             case "agreement":
@@ -325,18 +288,15 @@ form_validators.register = function (register_required_fields){
                 {
                     self.set_status_bad(sid, "You must agree.");
                     self.set_tooltip(field);
-                    if (do_return) return false;
                 }
                 else
                 {
                     self.set_status_ok(sid, "OK");
                     self.set_tooltip(field);
-                    if (do_return) return true;
                 }
                 break;
             default:
                 self.set_tooltip(field);
-                return false;
         }
     }
     

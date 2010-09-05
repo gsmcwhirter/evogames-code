@@ -5,7 +5,7 @@
     h1 Player Registration
     form(method="post", accept-charset="utf-8")
       fieldset.font-size
-        - if (messages["general"])
+        - if (messages["general"] && messages["general"].length)
           ul.form-error
             - each msg in messages["general"]
               li!= msg
@@ -15,7 +15,7 @@
               td.label
                 label(for="username") Username
               td.field
-                - if (messages["username"])
+                - if (messages["username"] && messages["username"].length)
                   ul.field-error
                     - each msg in messages["username"]
                       li!= "Username " + msg
@@ -26,7 +26,7 @@
               td.label
                 label(for="name") Alias
               td.field
-                - if (messages["name"])
+                - if (messages["name"] && messages["name"].length)
                   ul.field-error
                     - each msg in messages["name"]
                       li!= "Alias " + msg
@@ -37,7 +37,7 @@
               td.label
                 label(for="email") E-Mail Address
               td.field
-                - if (messages["email"])
+                - if (messages["email"] && messages["email"].length)
                   ul.field-error
                     - each msg in messages["email"]
                       li!= "E-Mail address " + msg
@@ -48,7 +48,7 @@
               td.label
                 label(for="email_confirm") Confirm E-Mail
               td.field
-                - if (messages["email_confirm"])
+                - if (messages["email_confirm"] && messages["email_confirm"].length)
                   ul.field-error
                     - each msg in messages["email_confirm"]
                       li!= "E-Mail confirmation " + msg
@@ -59,7 +59,7 @@
               td.label
                 label(for="password") Password
               td.field
-                - if (messages["password"])
+                - if (messages["password"] && messages["password"].length)
                   ul.field-error
                     - each msg in messages["password"]
                       li!= "Password " + msg
@@ -70,7 +70,7 @@
               td.label
                 label(for="password_confirm") Confirm Password
               td.field
-                - if (messages["password_confirm"])
+                - if (messages["password_confirm"] && messages["password_confirm"].length)
                   ul.field-error
                     - each msg in messages["password_confirm"]
                       li!= "Password confirmation " + msg
@@ -81,7 +81,7 @@
               td.label
                 label(for="question1") Security Question 1
               td.field
-                - if (messages["question1"])
+                - if (messages["question1"] && messages["question1"].length)
                   ul.field-error
                     - each msg in messages["question1"]
                       li!= "Question 1 " + msg
@@ -95,7 +95,7 @@
               td.label
                 label(for="answer1") Security Answer 1
               td.field
-                - if (messages["answer1"])
+                - if (messages["answer1"] && messages["answer1"].length)
                   ul.field-error
                     - each msg in messages["answer1"]
                       li!= "Answer 1 " + msg
@@ -106,7 +106,7 @@
               td.label
                 label(for="question2") Security Question 2
               td.field
-                - if (messages["question2"])
+                - if (messages["question2"] && messages["question2"].length)
                   ul.field-error
                     - each msg in messages["question2"]
                       li!= "Question 2 " + msg
@@ -120,7 +120,7 @@
               td.label
                 label(for="answer2") Security Answer 2
               td.field
-                - if (messages["answer2"])
+                - if (messages["answer2"] && messages["answer2"].length)
                   ul.field-error
                     - each msg in messages["answer2"]
                       li!= "Answer 2 " + msg
@@ -131,7 +131,7 @@
               td.label
                 label Terms of Service
               td.field
-                - if (messages["agreement"])
+                - if (messages["agreement"] && messages["agreement"].length)
                   ul.field-error
                     - each msg in messages["agreement"]
                       li!= "Terms of service " + msg
@@ -147,7 +147,7 @@
               td.label
                 label(for="recaptcha_response_field") Test for Humanity
               td.field
-                - if (messages["captcha"])
+                - if (messages["captcha"] && messages["captcha"].length)
                   ul.field-error
                     - each msg in messages["captcha"]
                       li!= "Captcha " + msg

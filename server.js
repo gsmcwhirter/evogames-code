@@ -11,9 +11,9 @@ var config = require('./lib/base').config;
 connect.cache(100000);
 
 var server = function (ssl){
-	ssl = ssl | false;
+	ssl = ssl || false;
 	var s = connect.createServer(
-		connect.logger(), //log to terminal
+		//connect.logger(), //log to terminal
 		connect.conditionalGet(), //adds not-modified support
 		connect.cache(), //adds caching
 		connect.gzip(), //compresses various content type responses
