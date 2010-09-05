@@ -1,0 +1,12 @@
+See the INSTALL file for prerequisites/setup.
+
+You will probably want to edit lib/base/index.js to set proper values
+for the config variable.
+
+Running "node server.js" will start up servers at http://localhost:7080
+and http://localhost:7443. The former is the regular http server, and
+the latter is the ssl-equivalent server, which, for testing purposes,
+does not actually run over an ssl connection (also for purposes of being
+behind a proxy that handles the ssl connection in production).
+
+Everything is in an alpha state, so don't be surprised if anything breaks.
