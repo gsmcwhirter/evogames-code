@@ -1,10 +1,10 @@
-#DEPENDENCIES
+#DEPENDENCIES (Ubuntu 10.04)
 apt-get install pkg-config #sudo #pre-req
 apt-get install openssl libssl-dev python-openssl #sudo #openssl
 apt-get install g++ autoconf automake #sudo #gnu maketools
 apt-get install git-core #sudo #git
 
-#INSTALL PROCEDURE
+#BASIC INSTALL PROCEDURE
 git clone http://github.com/ry/node.git
 cd node
 ./configure
@@ -29,11 +29,11 @@ npm install jade #sudo
 npm install underscore #sudo
 npm install less #sudo
 git clone http://github.com/akidee/extensions.js.git extensions
-cp -r extensions /usr/local/lib/node/ #sudo #install extensions
+cp -r extensions /usr/local/lib/node/ #sudo
 git clone http://github.com/akidee/schema.js.git schema
-cp -r schema /usr/local/lib/node/ #sudo #install schema
+cp -r schema /usr/local/lib/node/ #sudo
 
-#SETUP NODE DAEMON
+#SETUP NODE DAEMON (optional -- for production/proxy usage)
 #apt-get install monit #sudo
 cd conf
 cp NodePlayground.conf /etc/init/ #sudo
@@ -44,7 +44,7 @@ cp NodePlayground.nginx /etc/nginx/sites-available #sudo
 ln -s /etc/nginx/sites-available/NodePlayground.nginx /etc/nginx/sites-enabled
 cd ..
 
-#SSL SETUP
+#SSL SETUP (optional -- generates self-signed ssl certificate)
 /usr/bin/openssl genrsa 1024 > /etc/ssl.key/server.key
 chmod go-rwx /etc/httpd/conf/ssl.key/server.key
 /usr/bin/openssl req -new -key /etc/ssl.key/server.key -x509 -days 365 -out /etc/ssl.crt/server.crt
