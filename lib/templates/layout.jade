@@ -1,11 +1,11 @@
 !!! 5
 html
   head
-    title= system.title || "Demo System"
+    title= title || "Demo System"
     meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
-    meta(name="copyright", content=system.copyright)
-    meta(name="description", content=system.description)
-    meta(name="keywords", content=system.keywords)
+    meta(name="copyright", content=copyright)
+    meta(name="description", content=description)
+    meta(name="keywords", content=keywords)
     meta(http-equiv="X-UA-Compatible", content="IE=8")
     
     link(rel="icon", type="image/x-icon", href="/images/favicon.ico")
@@ -25,7 +25,7 @@ html
     #everything
       #header
         a.header(href="/") &nbsp;
-        - if (!system.is_ssl || player)
+        - if (!is_ssl || player)
           #status
             - if (player)
               #status-info
@@ -33,7 +33,7 @@ html
                   - if (player.avatar)
                     img(alt="Player Avatar", src=player.avatar)
                   - else
-                    img(alt="Player Avatar", src=system.default_avatar)
+                    img(alt="Player Avatar", src=default_avatar)
                 span
                   #{player.name}
                   - if (player.is_sysop)
@@ -49,7 +49,7 @@ html
             - else
               #status-info
                 #status-avatar
-                  img(alt="Player Avatar", src=system.default_avatar)
+                  img(alt="Player Avatar", src=default_avatar)
                 span Welcome, Guest!
                 br
                 a(href="/login") Log In
@@ -60,12 +60,12 @@ html
           #content-3
             - if (menu_content.right)
               #rightmenu!= menu_content.right
-            - if (!system.is_ssl)
+            - if (!is_ssl)
               #leftmenu!= menu_content.left
               #body!= body_content
             - else
               #body.body-ssl!= body_content
-      - if (!system.is_ssl)
+      - if (!is_ssl)
         #footer
           #footer-left &nbsp;
           #footer-right &nbsp;
@@ -75,7 +75,7 @@ html
             a(href="#") Site Feedback
         #subfooter
           #branding
-          strong= system.name+":"
+          strong= name+":"
           a(href="/") Home
           |
           a(href="#") Help
@@ -108,7 +108,7 @@ html
           |
           a(href="#") Privacy Policy
           |
-          #{system.copyright}
+          #{copyright}
     - if (player.is_sysop)
       #debug
         #debug-header
@@ -124,6 +124,6 @@ html
     //:javascript
     :cdata
       | try {
-      |   var pageTracker = _gat._getTracker("#{system.analytics}");
+      |   var pageTracker = _gat._getTracker("#{analytics}");
       |   pageTracker._trackPageview();
       | } catch(err) {}
