@@ -2,7 +2,7 @@ var connect = require('connect'),
     form = require('connect-form'),
     mw = require('./lib/base').middleware;
     
-var servers;
+var servers = {};
     
 var config = require('./lib/base').config;
 
