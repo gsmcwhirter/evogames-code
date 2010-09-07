@@ -1,14 +1,14 @@
 #!monit
 set logfile /var/log/monit.log
 
-check host nodejs with address 127.0.0.1
+check host nodejsnp with address 127.0.0.1
     start program = "/sbin/start NodePlayground"
     stop program  = "/sbin/stop NodePlayground"
-    if failed port 80 protocol HTTP
+    if failed port 7080 protocol HTTP
         request /
         with timeout 10 seconds
         then restart
-    if failed port 443 protocol HTTP
+    if failed port 7443 protocol HTTP
         request /
         with timeout 10 seconds
         then restart
