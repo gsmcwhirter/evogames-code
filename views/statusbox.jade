@@ -1,0 +1,28 @@
+- if (player)
+  #status-info
+    #status-avatar
+      - if (player.avatar)
+        img.avatar(alt="Player Avatar", src=player.avatar)
+      - else
+        img.avatar(alt="Player Avatar", src=system.default_avatar)
+    span
+      #{player.name}
+      - if (player.is_sysop)
+        span.sysop SysOp
+      - else if (player.is_staff)
+        span.staff Staff
+    br
+    a(href="/controls") Controls
+    \ |
+    a(href="/logout") Log Out
+    br
+    a(href="#") Inbox [#{player.messages.new}]
+- else
+  #status-info
+    #status-avatar
+      img.avatar(alt="Player Avatar", src=system.default_avatar)
+    span Welcome, Guest!
+    br
+    a(href="/login") Log In
+    \ |
+    a(href="/register") Register
