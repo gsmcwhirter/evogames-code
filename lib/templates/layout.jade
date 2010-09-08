@@ -42,7 +42,7 @@ html
                     span.staff Staff
                 br
                 a(href="/controls") Controls
-                |
+                \ |
                 a(href="/logout") Log Out
                 br
                 a(href="#") Inbox [#{player.messages.new}]
@@ -53,7 +53,7 @@ html
                 span Welcome, Guest!
                 br
                 a(href="/login") Log In
-                |
+                \ |
                 a(href="/register") Register
       #content-1
         #content-2
@@ -77,37 +77,37 @@ html
           #branding
           strong= name+":"
           a(href="/") Home
-           |
+          \ |
           a(href="#") Help
-           |
+          \ |
           a(href="#") Contact Us
-           |
+          \ |
           a(href="#") About Us
-           |
+          \ |
           a(href="#") Site Map
-           |
+          \ |
           a(href="#") Volunteer
-           |
+          \ |
           a(href="#") Management
           br
           strong Connect:
           a(href="#") X-Fire
-           |
+          \ |
           a(href="#") Facebook
-           |
+          \ |
           a(href="#") Twitter
-           |
+          \ |
           a(href="#") YouTube
-           |
+          \ |
           a(href="#") Blog
-           |
+          \ |
           a(href="#") RSS
           br
           strong Legal:
           a(href="#") Terms of Use
-           |
+          \ |
           a(href="#") Privacy Policy
-           |
+          \ |
           #{copyright}
     - if (player.is_sysop)
       #debug
