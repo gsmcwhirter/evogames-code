@@ -75,7 +75,7 @@ var server = function (ssl){
 	    app.use(express.compiler({src: __dirname + "/media/css", enable: ["less"]}));
 	    app.use(express.staticProvider(__dirname + "/media"));
 	    app.use(ssl ? mw.forceNonSSL() : mw.nice404());
-	    //app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+	    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 	    
 	    app.set('config', config(ssl, 'development'));
 	});
