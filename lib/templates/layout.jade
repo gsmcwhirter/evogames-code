@@ -76,6 +76,7 @@ html
         #subfooter
           #branding
           strong= name+":"
+          \ 
           a(href="/") Home
           \ |
           a(href="#") Help
@@ -91,6 +92,7 @@ html
           a(href="#") Management
           br
           strong Connect:
+          \ 
           a(href="#") X-Fire
           \ |
           a(href="#") Facebook
@@ -104,19 +106,12 @@ html
           a(href="#") RSS
           br
           strong Legal:
+          \ 
           a(href="#") Terms of Use
           \ |
           a(href="#") Privacy Policy
           \ |
           #{copyright}
-    - if (player.is_sysop)
-      #debug
-        #debug-header
-          a#debug-expander(href="#")
-          a#debug
-          Debug
-        #debug-content
-          pre= debug_content
     :javascript
       | var _gaq = _gaq || [];
       | _gaq.push(['_setAccount', 'UA-18420729-1']);
