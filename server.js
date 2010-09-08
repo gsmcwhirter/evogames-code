@@ -51,7 +51,7 @@ var server = function (ssl){
                 description: '',
                 keywords: '',
                 default_avatar: '/images/default_avatar.gif',
-                analytics: '',
+                analytics: 'UA-18420729-1',
                 error_email: 'greg@evogames.org',
                 is_ssl: ssl  
             },
