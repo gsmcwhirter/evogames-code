@@ -1,0 +1,22 @@
+- if (menu.collapse)
+  .menu-outer.collapse
+    .menu-header
+      span.icon
+      #{menu.title}
+    ul.menu-inner
+      - menu.items.forEach(function(item){
+        li(title=item.description)
+          span.menu-bullet &raquo;
+          a(href=item.href) #{item.title}
+      - })
+- else
+  .menu-outer.expand
+    .menu-header
+      span.icon
+      #{menu.title}
+    ul.menu-inner
+      - menu.items.forEach(function(item){
+        li(title=item.description)
+          span.menu-bullet &raquo;
+          a(href=item.href) #{item.title}
+      - })
