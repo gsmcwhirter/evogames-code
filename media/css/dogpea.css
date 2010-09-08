@@ -30,7 +30,7 @@ body
 {
     width: 100%;
     height: 100%;
-    background-color: #044;
+    background-color: #022;
     font-family: Verdana,Arial,Helvetica,sans-serif;
     color: #000;
     text-align: center;
@@ -48,7 +48,8 @@ p,ul,ol
 }
 
 a {
-    color: #0aa;
+    color: #088;
+    font-weight: bold;
 }
 
 a:hover {
@@ -56,11 +57,11 @@ a:hover {
 }
 
 a:visited {
-    color: #0aa;
+    color: #088;
 }
 
 h1 {
-    color: #0aa;
+    color: #088;
     font-size: 138.5%;
     font-weight: bold;
     padding-top: 12px;
@@ -266,7 +267,7 @@ textarea
 
 div.menu-outer
 {
-    background-color: #0aa;
+    background-color: #088;
     margin-bottom: 5px;
     padding: 2px;
     border: 1px solid #000;
@@ -372,7 +373,7 @@ div.module
     margin: 0;
     margin-bottom: 10px;
     border: 1px solid #000;
-    background-color: #0aa;
+    background-color: #088;
 }
 
 /*#body.body-ssl div.module,
@@ -416,14 +417,14 @@ body.tinymce
     text-align: center;
     font-size: 77%;
     background-color: #fff;
-    border: 1px solid #0aa;
+    border: 1px solid #088;
 }
 
 #footer
 {
     margin-top: 5px;
     background-color: #fff;
-    border: 1px solid #0aa;
+    border: 1px solid #000;
     font-size: 77%;
     padding: 2px 5px;
     clear: both;
