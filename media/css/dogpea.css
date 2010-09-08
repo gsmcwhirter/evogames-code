@@ -175,6 +175,12 @@ textarea
     height: 20em;
 }
 
+strong,
+.bold
+{
+	font-weight: bold;
+}
+
 #everything
 {
     text-align: left;
@@ -743,6 +749,12 @@ fieldset.no-table select
     float: right;
     width: 50%;
     font-size: 77%;
+}
+
+img.avatar
+{
+	max-width: 64px;
+	max-height: 64px;
 }
 
 input.question-text { font-size: 182%; }
