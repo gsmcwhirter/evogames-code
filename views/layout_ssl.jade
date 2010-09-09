@@ -8,10 +8,10 @@ html
     meta(name="keywords", content=system.keywords)
     meta(http-equiv="X-UA-Compatible", content="IE=8")
     
-    link(rel="icon", type="image/x-icon", href="/images/favicon.ico")
+    link(rel="icon", type="image/x-icon", href="/favicon.ico")
     link(rel="stylesheet", type="text/css", media="all", href="/css/reset-fonts.css")
     link(rel="stylesheet", type="text/css", media="all", href="/css/lightbox.css")
-    link(rel="stylesheet", type="text/css", media="all", href="/css/dogpea.css")
+    link(rel="stylesheet", type="text/css", media="all", href="/css/ifm.css")
     
     script(type="text/javascript", src="/js/jquery/jquery.min.js")
     script(type="text/javascript", src="/js/jquery/lightbox.min.js")
@@ -22,47 +22,61 @@ html
     script(type="text/javascript", src="/js/lib/underscore.min.js")
     script(type="text/javascript", src="/js/system.js")
   body
-    #everything
+    #container
       #header
-        a.header(href="/") &nbsp;
-        - if (player)
-          #status
-            - partial('statusbox',{collection: [player], as: 'player'});
-      #content-1
-        #content-2
-          #body.body-ssl!= body
-      #footer
-        #footer-left &nbsp;
-        #footer-right &nbsp;
-        #footer-center
-          a(href="#") Report Bugs
-          \ |
-          a(href="#") Site Feedback
-      #subfooter
-        #branding
-        strong= system.name+":"
-        \ 
-        a(href="/") Home
-        \ |
-        a(href="#") Help
-        \ |
-        a(href="#") Contact Us
-        \ |
-        a(href="#") About Us
-        \ |
-        a(href="#") Site Map
-        \ |
-        a(href="#") Volunteer
-        \ |
-        a(href="#") Management
-        br
-        strong Legal:
-        \ 
-        a(href="#") Terms of Use
-        \ |
-        a(href="#") Privacy Policy
-        \ |
-        #{system.copyright}
+        a(href="/")
+          h1 EvoGames
+          .tagline Something something something
+    
+      #sidebar
+        -if (player)
+          .aside
+            h3 Current Player
+            .inner
+              != partial('statusbox',{collection: [player], as: 'player'})
+        
+        .aside
+          h3 Description
+          .inner
+            != description || "Description coming soon..."
+        
+        .bubble
+          h3 About #{system.name}
+          .inner
+            != partial('description', {collection: [true], as: 'is_true'})
+      
+      #main
+        != body
+        
+        #footer
+          #footer-left &nbsp;
+          #footer-right &nbsp;
+          #footer-center
+            a(href="#") Report Bugs
+            span.link-sep |
+            a(href="#") Site Feedback  
+        #subfooter
+          strong #{system.name}:
+          a(href="/") Home
+          span.link-sep |
+          a(href="#") Help
+          span.link-sep |
+          a(href="#") Contact Us
+          span.link-sep |
+          a(href="#") About Us
+          span.link-sep |
+          a(href="#") Site Map
+          span.link-sep |
+          a(href="#") Volunteer
+          span.link-sep |
+          a(href="#") Management
+          br
+          strong Legal:
+          a(href="#") Terms of Use
+          span.link-sep |
+          a(href="#") Privacy Policy
+          span.link-sep |
+          #{system.copyright}
     :javascript
       | var _gaq = _gaq || [];
       | _gaq.push(['_setAccount', '#{system.analytics}']);
