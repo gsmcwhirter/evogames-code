@@ -42,6 +42,9 @@ body {
 span.link-sep {
   margin: 0 5px;
 }
+p, ul, ol {
+  margin: 1.5em 0;
+}
 ul,
 ul > li,
 ol,
