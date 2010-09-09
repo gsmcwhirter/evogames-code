@@ -1,47 +1,44 @@
-.module
-  .module-header Log In
-  .module-content 
-    h1 Player Log In
-    form(method="post", accept-charset="utf-8")
-      fieldset.font-size
-        - if (messages["general"])
-          ul.form-error
-          - each msg in messages["general"]
-            li!= msg
-        table.form.form-two-column
-          tbody
-            tr
-              td.label
-                label(for="username") Username
-              td.field
-                - if (messages["username"])
-                  ul.field-error
-                    - each msg in messages["username"]
-                      li= "Username "+msg
-                .field-data
-                  input(type="text", name="username", id="username", value=errors ? data.username : "")
-            tr
-              td.label
-                label(for="password") Password
-              td.field
-                - if (messages["password"])
-                  ul.field-error
-                    - each msg in messages["password"]
-                      li= "Password "+msg
-                .field-data
-                  input(type="password", name="password", id="password", value=errors ? data.password : "")
-            tr
-              td.label
-                label Options
-              td.field
-                input(type="checkbox", name="remember_me", id="remember_me", value="yes")
-                label(for="remember_me") Remember Login?
-            tr
-              td.action(colspan="2")
-                input(type="hidden", name="referrer", id="referrer", value=referrer)
-                button(type="submit") Log In
-            tr
-              td.action(colspan="2")
-                a(href="/lostpass") Lost Password?
-                |
-                a(href="/register") Register
+h1 Player Log In
+form(method="post", accept-charset="utf-8")
+  fieldset.font-size
+    - if (messages["general"])
+      ul.form-error
+      - each msg in messages["general"]
+        li!= msg
+    table.form.form-two-column
+      tbody
+        tr
+          td.label
+            label(for="username") Username
+          td.field
+            - if (messages["username"])
+              ul.field-error
+                - each msg in messages["username"]
+                  li= "Username "+msg
+            .field-data
+              input(type="text", name="username", id="username", value=errors ? data.username : "")
+        tr
+          td.label
+            label(for="password") Password
+          td.field
+            - if (messages["password"])
+              ul.field-error
+                - each msg in messages["password"]
+                  li= "Password "+msg
+            .field-data
+              input(type="password", name="password", id="password", value=errors ? data.password : "")
+        tr
+          td.label
+            label Options
+          td.field
+            input(type="checkbox", name="remember_me", id="remember_me", value="yes")
+            label(for="remember_me") Remember Login?
+        tr
+          td.action(colspan="2")
+            input(type="hidden", name="referrer", id="referrer", value=referrer)
+            button(type="submit") Log In
+        tr
+          td.action(colspan="2")
+            a(href="/lostpass") Lost Password?
+            |
+            a(href="/register") Register
