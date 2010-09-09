@@ -200,7 +200,8 @@ strong, .bold {
 #header h1 {
   font-family: 'FontinSansSmallCaps', sans-serif;
   text-shadow: #000 1px 1px 5px;
-  text-transform: lowercase;
+  /*text-transform: lowercase;*/
+
   font-size: 74px;
   line-height: 1em;
   color: #aaa;
@@ -1032,8 +1033,8 @@ img.avatar {
 }
 @font-face {
   font-family: 'FontinSansSmallCaps';
-  src: url('fontin_sans_sc_45b-webfont.eot');
-  src: local('☺'), url('fontin_sans_sc_45b-webfont.woff') format('woff'), url('fontin_sans_sc_45b-webfont.ttf') format('truetype'), url('fontin_sans_sc_45b-webfont.svg#webfontFZcdVJKv') format('svg');
+  src: url('../fonts/fontin_sans_sc_45b-webfont.eot');
+  src: local('☺'), url('../fonts/fontin_sans_sc_45b-webfont.woff') format('woff'), url('../fonts/fontin_sans_sc_45b-webfont.ttf') format('truetype'), url('../fonts/fontin_sans_sc_45b-webfont.svg#webfontFZcdVJKv') format('svg');
   font-weight: normal;
   font-style: normal;
 }
