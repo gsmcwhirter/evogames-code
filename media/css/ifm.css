@@ -227,7 +227,8 @@ strong, .bold {
   background: -webkit-gradient(linear, 0 0, 0 90%, from(#ffffff), to(#dddddd));
   background-color: #ffffff;
   padding: 10px 30px;
-  min-height: 400px;
+  /*min-height: 400px;*/
+
   min-width: 400px;
   margin-right: 350px;
   -webkit-border-top-left-radius: 10px;
