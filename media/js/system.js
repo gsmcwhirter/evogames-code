@@ -30,7 +30,7 @@ var configs = {
         theme_advanced_statusbar_location : "bottom",
         theme_advanced_resizing: true,
         extended_valid_elements : "s,a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style],style,center",
-        content_css : "/css/reset-fonts.css,/css/jquery-ui.css,/css/lightbox.css,/css/dogpea.css",
+        content_css : "/css/reset-fonts.css,/css/jquery-ui.css,/css/lightbox.css,/css/ifm.css",
         body_class : "tinymce"
     }
     , tinymce_bbcode: {
@@ -60,7 +60,6 @@ var site = {
         tinyMCE.init(configs.tinymce_page);
         tinyMCE.init(configs.tinymce_bbcode);
         site.config_menus();
-        site.init_debug();
         site.init_link_rels();
         $(".marquee-vert").scrollable({circular: true, vertical: true}).autoscroll({autoplay: true});
         $(".marquee-horiz").scrollable({circular: true}).autoscroll({autoplay: true});
@@ -76,7 +75,7 @@ var site = {
         $(".menu-outer.expand .menu-header .icon").addClass("ui-icon")
                                                   .addClass("ui-icon-triangle-1-n")
                                                   .toggle(menu.collapse, menu.expand);
-        $(".menu-inner>li[title]").tooltip({
+        $(".menu-inner>li>.menu-item[title]").tooltip({
             position: "center right",
             offset: [0, 2],
             effect: "slide",
@@ -86,21 +85,6 @@ var site = {
             slideOffset: 2
         });
     }
-    , init_debug: function (){
-        $("#debug-expander").addClass("ui-icon")
-                            .addClass("ui-icon-triangle-1-s")
-                            .toggle(site.debug_expand, site.debug_collapse);
-    }
-    , debug_expand: function (){
-        $("#debug-expander").removeClass('ui-icon-triangle-1-s')
-                            .addClass('ui-icon-triangle-1-n');
-        $("#debug-content").slideDown(500);
-    }
-    , debug_collapse: function (){
-        $("#debug-expander").removeClass('ui-icon-triangle-1-n')
-                            .addClass('ui-icon-triangle-1-s');
-        $("#debug-content").slideUp(500);
-    }
     , init_link_rels: function (){
         $("a[rel=blank]").attr("target","_blank");
     }
@@ -109,10 +93,6 @@ var site = {
 var menu = {
     expand: function(event){
         var menu_block = $(this).parent().parent();
-        if(menu_block.hasClass('topmenu'))
-        {
-            $(".menu-outer.expand .menu-header .icon").click();
-        }
         menu_block.removeClass('collapse').addClass('expand');
         $(".menu-header .icon",menu_block).removeClass('ui-icon-triangle-1-s')
                                           .addClass('ui-icon-triangle-1-n');

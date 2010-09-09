@@ -5,9 +5,10 @@
       #{menu.title}
     ul.menu-inner
       - menu.items.forEach(function(item){
-        li(title=item.description)
+        li
           span.menu-bullet &raquo;
-          a(href=item.href) #{item.title}
+          span.menu-item(title=item.description)
+            a(href=item.href) #{item.title}
       - })
 - else
   .menu-outer.expand
@@ -16,7 +17,8 @@
       #{menu.title}
     ul.menu-inner
       - menu.items.forEach(function(item){
-        li(title=item.description)
+        li
           span.menu-bullet &raquo;
-          a(href=item.href) #{item.title}
+          span.menu-item(title=item.description)
+            a(href=item.href) #{item.title}
       - })
