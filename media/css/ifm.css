@@ -247,6 +247,7 @@ strong, .bold {
 #main h3,
 #main h4,
 #main h5 {
+  font-family: 'FontinSansSmallCaps', sans-serif;
   margin: .5em 0;
 }
 #main h1 {
@@ -384,6 +385,7 @@ strong, .bold {
   line-height: 1.6em;
 }
 #sidebar h3 {
+  font-family: 'FontinSansSmallCaps', sans-serif;
   font-size: 138.5%;
   font-weight: bold;
   line-height: 1em;
