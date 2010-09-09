@@ -198,7 +198,7 @@ strong, .bold {
   text-decoration: none;
 }
 #header h1 {
-  font-family: sans-serif;
+  font-family: 'FontinSansSmallCaps', sans-serif;
   text-shadow: #000 1px 1px 5px;
   text-transform: lowercase;
   font-size: 74px;
@@ -1029,4 +1029,11 @@ img.avatar {
 }
 .ui-icon-grip-diagonal-se {
   background-position: -80px -224px;
+}
+@font-face {
+  font-family: 'FontinSansSmallCaps';
+  src: url('fontin_sans_sc_45b-webfont.eot');
+  src: local('☺'), url('fontin_sans_sc_45b-webfont.woff') format('woff'), url('fontin_sans_sc_45b-webfont.ttf') format('truetype'), url('fontin_sans_sc_45b-webfont.svg#webfontFZcdVJKv') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
