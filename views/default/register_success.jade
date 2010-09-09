@@ -1,8 +1,9 @@
 h1 Player Registration Success
 p 
-  | Welcome, #{player.name_history[player.name_history.length - 1].name}. Your registration process is nearly complete.
-  | An e-mail has been sent to the address you provided containing 
-  | instructions for how to activate your account.
+  | Welcome, #{reg_player.name_history[reg_player.name_history.length - 1].name}. 
+  |  Your registration process is nearly complete.
+  |  An e-mail has been sent to the address you provided containing 
+  |  instructions for how to activate your account.
 p
   | If the link provided in the e-mail does not work, please visit
   a(href="/confirm") this confirmation page
@@ -11,5 +12,5 @@ p
   | If you did not receive an e-mail, please send a message to
   a(href="mailto:" + system.error_email)= system.error_email
   |  from the e-mail address you registered under, including in the 
-  | e-mail your username (#{player.username}).
-  | Please do not simply try to re-register.
+  |  e-mail your username (#{reg_player.username}).
+  |  Please do not simply try to re-register.
