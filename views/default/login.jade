@@ -32,6 +32,7 @@ form(method="post", accept-charset="utf-8")
             label Options
           td.field
             input(type="checkbox", name="remember_me", id="remember_me", value="yes")
+            \ 
             label(for="remember_me") Remember Login?
         tr
           td.action(colspan="2")
@@ -40,5 +41,5 @@ form(method="post", accept-charset="utf-8")
         tr
           td.action(colspan="2")
             a(href="/lostpass") Lost Password?
-            |
+            span.link-sep |
             a(href="/register") Register
