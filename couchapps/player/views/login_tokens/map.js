@@ -1,6 +1,6 @@
 function(doc) {
     if (doc.type == 'login_token')
     {
-        emit(doc._id, {_id: doc.username, last_activity: doc.last_activity});
+        emit(doc.token, {_id: doc.player, token: doc});
     }
 }

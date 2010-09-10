@@ -6,7 +6,7 @@
       - else
         img.avatar(alt="Player Avatar", src=system.default_avatar)
     span
-      #{player.name}
+      @#{player.handle}
       - if (player.is_sysop)
         span.sysop SysOp
       - else if (player.is_staff)
@@ -16,7 +16,7 @@
     span.link-sep |
     a(href="/logout") Log Out
     br
-    a(href="#") Inbox [#{player.messages.new}]
+    a(href="#") Inbox [#{player.messages ? player.messages.new : "0"}]
 - else
   #status-info
     #status-avatar

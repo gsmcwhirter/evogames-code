@@ -1,22 +1,18 @@
 h1 Player Log In
 form(method="post", accept-charset="utf-8")
   fieldset.font-size
-    - if (messages["general"])
-      ul.form-error
-      - each msg in messages["general"]
-        li!= msg
     table.form.form-two-column
       tbody
         tr
           td.label
-            label(for="username") Username
+            label(for="email") E-Mail Address
           td.field
-            - if (messages["username"])
+            - if (messages["email"])
               ul.field-error
-                - each msg in messages["username"]
-                  li= "Username "+msg
+                - each msg in messages["email"]
+                  li= "E-Mail address "+msg
             .field-data
-              input(type="text", name="username", id="username", value=errors ? data.username : "")
+              input#email(type="text", name="email", value=errors ? data.email : "")
         tr
           td.label
             label(for="password") Password
@@ -26,7 +22,7 @@ form(method="post", accept-charset="utf-8")
                 - each msg in messages["password"]
                   li= "Password "+msg
             .field-data
-              input(type="password", name="password", id="password", value=errors ? data.password : "")
+              input#password(type="password", name="password", value=errors ? data.password : "")
         tr
           td.label
             label Options
@@ -36,7 +32,7 @@ form(method="post", accept-charset="utf-8")
             label(for="remember_me") Remember Login?
         tr
           td.action(colspan="2")
-            input(type="hidden", name="referrer", id="referrer", value=referrer)
+            input#referrer(type="hidden", name="referrer", value=referrer)
             button(type="submit") Log In
         tr
           td.action(colspan="2")

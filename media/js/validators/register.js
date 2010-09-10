@@ -77,20 +77,15 @@ form_validators.register = function (register_required_fields){
     };
     
     this.bind = function (field) {
-        if (field != "agreement" && field != "question1" && field != "question2")
+        if (field != "agreement")
         {
             $("#"+field).bind('keyup blur',{field: field}, this.validate);
             $("#"+field).keyup();
         }
-        else if (field == "agreement")
+        else
         {
             $("#"+field).bind('click blur',{field: field}, this.validate);
             this.validate({data: {field: field}});
-        }
-        else
-        {
-            $("#"+field).bind('change blur',{field: field}, this.validate);
-            $("#"+field).change();
         }
     };
     
@@ -99,7 +94,7 @@ form_validators.register = function (register_required_fields){
         var sid = "#"+field+"_status"; 
         switch(field)
         {
-            case "username":
+            case "handle":
                 var name = $.trim($("#"+field).val());
                 if (name.length < 3)
                 {
@@ -217,64 +212,6 @@ form_validators.register = function (register_required_fields){
                 else if (password_confirm == '')
                 {
                     self.set_status_maybe(sid, "Must not be empty.");
-                    self.set_tooltip(field);
-                }
-                else
-                {
-                    self.set_status_ok(sid, "OK");
-                    self.set_tooltip(field);
-                }
-                break;
-            case "question1":
-                if ($.trim($("#question1").val()) == '')
-                {
-                    self.set_status_bad(sid, "Must be selected.");
-                    self.set_tooltip(field);
-                }
-                else
-                {
-                    self.set_status_ok(sid, "OK");
-                    self.set_tooltip(field);
-                }
-                break;
-            case "answer1":
-                if ($.trim($("#answer1").val()).length < 4)
-                {
-                    self.set_status_bad(sid, "Must be at least 4 characters long.");
-                    self.set_tooltip(field);
-                }
-                else
-                {
-                    self.set_status_ok(sid, "OK");
-                    self.set_tooltip(field);
-                }
-                break;
-            case "question2":
-                if ($.trim($("#question2").val()) == '')
-                {
-                    self.set_status_bad(sid, "Must be selected.");
-                    self.set_tooltip(field);
-                }
-                else if ($.trim($("#question2").val()) == $.trim($("#question1").val()))
-                {
-                    self.set_status_bad(sid, "Must be different from question 1.");
-                    self.set_tooltip(field);
-                }
-                else
-                {
-                    self.set_status_ok(sid, "OK");
-                    self.set_tooltip(field);
-                }
-                break;
-            case "answer2":
-                if ($.trim($("#answer2").val()).length < 4)
-                {
-                    self.set_status_bad(sid, "Must be at least 4 characters long.");
-                    self.set_tooltip(field);
-                }
-                else if ($.trim($("#answer2").val()) == $.trim($("#answer1").val()))
-                {
-                    self.set_status_bad(sid, "Must be different from answer 1.");
                     self.set_tooltip(field);
                 }
                 else

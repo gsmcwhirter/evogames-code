@@ -11,8 +11,9 @@ var config = function (ssl, env){
     return {
         is_ssl: ssl,
         server_port: ssl ? 7443 : 7080,
-        couchdb: 'http://localhost:5984/node_playground',
-        login_cookie: 'NPLogin',
+        couchdb_server: 'http://localhost:5984',
+        couchdb: 'evogames',
+        login_cookie: 'EvoGamesLogin',
         recaptcha_keys: {
             "djo-dev.org": {"public": "6LcNrroSAAAAAF3Q8ELHO2IiHDZy1IISNbOjP3ll", "private": "6LcNrroSAAAAAMuecSF1QKmoh5xFSR6_048kV8dG"},
             "evogames.org": {"public": "6Lc15bwSAAAAAFzr7cwwiY-RcqcybDdU9SArAXWa", "private": "6Lc15bwSAAAAAFCBNv4_mYhTj73DzaVwxgc1YqDW"}
@@ -25,10 +26,14 @@ var server = function (ssl){
 	var app = express.createServer();
 	
 	app.configure(function (){
-	    app.use(express.logger());
+	    //app.use(express.logger());
 	    app.use(express.gzip());
 	    app.use(express.conditionalGet());
+	    //app.use(mw.inspectHeaders());
 	    app.use(express.cookieDecoder());
+	    app.use(mw.monkeyHeaders('before'));
+	    app.use(express.session({fingerprint: base.connectionFingerprint, secret: 'yayEvoGames!'}));
+	    app.use(mw.monkeyHeaders('after'));
 	    app.use(express.bodyDecoder());
 	    app.use(mw.determineLogin());
 	    app.use(mw.prepareMenus());
@@ -67,6 +72,9 @@ var server = function (ssl){
                 return function (menu_list){
                     return menus.get(menu_list);
                 };
+            },
+            flash: function (req, res){
+                return function (type){return req.flash(type)};
             }
         });
 	});
