@@ -1,6 +1,6 @@
 function(doc) {
     if (doc.type == 'player')
     {
-        emit([doc.username.toLowerCase(), doc.username], 1);
+        emit([doc.handle.toLowerCase(), doc.handle], 1);
     }  
 }

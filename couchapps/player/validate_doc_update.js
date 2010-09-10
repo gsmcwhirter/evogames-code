@@ -10,10 +10,8 @@ function (newDoc, oldDoc, cdbuser)
 
     if (newDoc.type == 'player')
     {
-        require(!(oldDoc && oldDoc.type != newDoc.type),
+        require((!oldDoc || oldDoc.type == newDoc.type),
                 'You may not change the type.');
-        require((newDoc._id == newDoc.username),
-                'Username must match _id.');
         require((equals(newDoc.pending_email_change, {}) || 
                 newDoc.pending_email_change.email.match(email_regex)),
                 'Pending e-mail is not valid.');
@@ -21,8 +19,8 @@ function (newDoc, oldDoc, cdbuser)
                 'The e-mail address is not valid.');
         require((!oldDoc || preserve_history(newDoc.email_history, oldDoc.email_history)),
                 'You must preserve email history.');
-        require((!oldDoc || preserve_history(newDoc.name_history, oldDoc.name_history)),
-                'You must preserve name history.');    
+        require((!oldDoc || oldDoc.handle == newDoc.handle),
+                'You must not change the handle.');
     }
     
     if (newDoc.type == 'login_token')

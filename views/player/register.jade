@@ -1,35 +1,9 @@
-- tabindex = 0
+- var tabindex = 0
 h1 Player Registration
 form(method="post", accept-charset="utf-8")
   fieldset.font-size
-    - if (messages["general"] && messages["general"].length)
-      ul.form-error
-        - each msg in messages["general"]
-          li!= msg
     table.form.form-two-column
       tbody
-        tr
-          td.label
-            label(for="username") Username
-          td.field
-            - if (messages["username"] && messages["username"].length)
-              ul.field-error
-                - each msg in messages["username"]
-                  li!= "Username " + msg
-            .field-data
-              span#username_status &nbsp;
-              input#username(tabindex=++tabindex, type="text", name="username", value= errors ? data["username"] : "")
-        tr
-          td.label
-            label(for="name") Alias
-          td.field
-            - if (messages["name"] && messages["name"].length)
-              ul.field-error
-                - each msg in messages["name"]
-                  li!= "Alias " + msg
-            .field-data
-              span#name_status &nbsp;
-              input#name(tabindex=++tabindex, type="text", name="name", value= errors ? data["name"] : "")
         tr
           td.label
             label(for="email") E-Mail Address
@@ -76,54 +50,26 @@ form(method="post", accept-charset="utf-8")
               input#password_confirm(tabindex=++tabindex, type="password", name="password_confirm")
         tr
           td.label
-            label(for="question1") Security Question 1
+            label(for="handle") Handle
           td.field
-            - if (messages["question1"] && messages["question1"].length)
+            - if (messages["handle"] && messages["handle"].length)
               ul.field-error
-                - each msg in messages["question1"]
-                  li!= "Question 1 " + msg
+                - each msg in messages["handle"]
+                  li!= "Handle " + msg
             .field-data
-              span#question1_status &nbsp;
-              select#question1(tabindex=++tabindex, size="1", name="question1")
-                option(value="")
-                - each question in questions
-                  option(value=question, selected=(data.question1 == question))= question
+              span#handle_status &nbsp;
+              input#handle(tabindex=++tabindex, type="text", name="handle", value= errors ? data["handle"] : "")
         tr
           td.label
-            label(for="answer1") Security Answer 1
+            label(for="name") Alias
           td.field
-            - if (messages["answer1"] && messages["answer1"].length)
+            - if (messages["name"] && messages["name"].length)
               ul.field-error
-                - each msg in messages["answer1"]
-                  li!= "Answer 1 " + msg
+                - each msg in messages["name"]
+                  li!= "Alias " + msg
             .field-data
-              span#answer1_status &nbsp;
-              input#answer1(tabindex=++tabindex, type="text", name="answer1", value= errors ? data["answer1"] : "")
-        tr
-          td.label
-            label(for="question2") Security Question 2
-          td.field
-            - if (messages["question2"] && messages["question2"].length)
-              ul.field-error
-                - each msg in messages["question2"]
-                  li!= "Question 2 " + msg
-            .field-data
-              span#question2_status &nbsp;
-              select#question2(tabindex=++tabindex, size="1", name="question2")
-                option(value="")
-                - each question in questions
-                  option(value=question, selected=(data.question2 == question))= question
-        tr
-          td.label
-            label(for="answer2") Security Answer 2
-          td.field
-            - if (messages["answer2"] && messages["answer2"].length)
-              ul.field-error
-                - each msg in messages["answer2"]
-                  li!= "Answer 2 " + msg
-            .field-data
-              span#answer2_status &nbsp;
-              input#answer2(tabindex=++tabindex, type="text", name="answer2", value= errors ? data["answer2"] : "")
+              span#name_status &nbsp;
+              input#name(tabindex=++tabindex, type="text", name="name", value= errors ? data["name"] : "")
         tr
           td.label
             label Terms of Service

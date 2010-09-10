@@ -46,6 +46,13 @@ html
             != partial('description', {collection: [true], as: 'is_true'})
       
       #main
+        #flash
+          - (flash('info') || []).forEach(function (msg){
+            .info!= msg
+          - });
+          - (flash('error') || []).forEach(function (msg){
+            .error!= msg
+          - });
         != body
         
         #footer
