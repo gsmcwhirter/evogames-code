@@ -1,2 +1,2 @@
-*.komodoproject
 *-cov
+config.live.json
