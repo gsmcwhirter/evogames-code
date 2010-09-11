@@ -1,0 +1,3 @@
+[submodule "lib/smtp"]
+	path = lib/smtp
+	url = git@github.com:gsmcwhirter/node-smtp-client.git
