@@ -6,11 +6,11 @@
       - else
         img.avatar(alt="Player Avatar", src=system.default_avatar)
     span
-      @#{player.handle}
+      span.handle.only @#{player.handle}
       - if (player.is_sysop)
-        span.sysop SysOp
+        span.position.sysop SysOp
       - else if (player.is_staff)
-        span.staff Staff
+        span.position.staff Staff
     br
     a(href="/controls") Controls
     span.link-sep |

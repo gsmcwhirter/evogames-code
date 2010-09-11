@@ -166,20 +166,6 @@ strong,
     text-align: center;
 }
 
-.sysop
-{
-    font-weight: bold;
-    font-variant: small-caps;
-    color: #f00;
-}
-
-.staff
-{
-    font-weight: bold;
-    font-variant: small-caps;
-    color: #0f0;
-}
-
 .marquee-vert,
 .marquee-horiz
 {
@@ -615,6 +601,42 @@ img.avatar
 	max-height: 64px;
 }
 
+.handle{
+	font-size: 85%;
+	color: #666;
+}
+
+.handle.only{
+	font-size: 108%;
+	font-weight: bold;
+	color: #000;
+}
+
+#sidebar .handle.only{
+	color: #fff;
+}
+
+.alias{
+	font-size: 108%;
+	font-weight: bold;
+}
+
+.position
+{
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+.position.sysop
+{
+    color: #f00;
+}
+
+.position.staff
+{
+    color: #0f0;
+}
+
 .clearfix:after {
 	content: ".";
 	display: block;
@@ -807,8 +829,6 @@ img.avatar
 .ui-icon-grip-solid-horizontal { background-position: -48px -224px; }
 .ui-icon-gripsmall-diagonal-se { background-position: -64px -224px; }
 .ui-icon-grip-diagonal-se { background-position: -80px -224px; }
-
-@import "prettify.css";
 
 @font-face {
 	font-family: 'FontinSansSmallCaps';
