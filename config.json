@@ -1,0 +1,25 @@
+{
+  "server": {
+      "couchdb_server": 'http://localhost:5984',
+      "couchdb": '',
+      "login_cookie": '',
+      "recaptcha_keys": {
+          "example.com": {"public": "", "private": ""}
+      },
+      "smtp_server": "",
+      "smtp_user": "",
+      "smtp_password": "",
+      "smtp_from": "",
+      "smtp_secure": ""
+  },
+  "system": {
+      "title": 'The System',
+      "name": 'The System',
+      "copyright": '&copy; Gregory McWhirter 2010',
+      "description": '',
+      "keywords": '',
+      "default_avatar": '/images/default_avatar.gif',
+      "analytics": '',
+      "error_email": 'you@example.com',
+  }
+}

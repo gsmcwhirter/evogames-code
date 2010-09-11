@@ -1,24 +1,20 @@
 var express = require('express'),
-    base = require('./lib/base');
-var sys = require('sys');
+    base = require('./lib/base'),
+    mixins = require('./lib/base/mixins'),
+    fs = require('fs');
     
 var mw = base.middleware,
     config = base.config;    
     
 var servers = {};
 
+var base_config = JSON.parse(fs.readFileSync('./config.json'));
+
 var config = function (ssl, env){
-    return {
-        is_ssl: ssl,
-        server_port: ssl ? 7443 : 7080,
-        couchdb_server: 'http://localhost:5984',
-        couchdb: 'evogames',
-        login_cookie: 'EvoGamesLogin',
-        recaptcha_keys: {
-            "djo-dev.org": {"public": "6LcNrroSAAAAAF3Q8ELHO2IiHDZy1IISNbOjP3ll", "private": "6LcNrroSAAAAAMuecSF1QKmoh5xFSR6_048kV8dG"},
-            "evogames.org": {"public": "6Lc15bwSAAAAAFzr7cwwiY-RcqcybDdU9SArAXWa", "private": "6Lc15bwSAAAAAFCBNv4_mYhTj73DzaVwxgc1YqDW"}
-        }
-    };
+    var conf = base_config.server;
+    conf.is_ssl = ssl;
+    conf.server_port = ssl ? 7443 : 7080;
+    return conf;
 };
 
 var server = function (ssl){
@@ -48,18 +44,11 @@ var server = function (ssl){
 	    app.error(base.handle404);
 	    app.error(base.handle500);
 	    
+	    var sysconf = base_config.system;
+	    sysconf.is_ssl = ssl;
+	    
 	    app.helpers({
-            system: {
-                title: 'EvoGames: Event Verification of Games',
-                name: 'EvoGames',
-                copyright: '&copy; Gregory McWhirter 2010',
-                description: '',
-                keywords: '',
-                default_avatar: '/images/default_avatar.gif',
-                analytics: 'UA-18420729-1',
-                error_email: 'greg@evogames.org',
-                is_ssl: ssl  
-            },
+            system: sysconf,
             menu_list: false
         });
         
