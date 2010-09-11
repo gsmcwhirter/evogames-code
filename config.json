@@ -21,5 +21,6 @@
       "default_avatar": '/images/default_avatar.gif',
       "analytics": '',
       "error_email": 'you@example.com',
-  }
+  },
+  "session_secret": ""
 }

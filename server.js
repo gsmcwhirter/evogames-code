@@ -1,14 +1,12 @@
 var express = require('express'),
     base = require('./lib/base'),
-    mixins = require('./lib/base/mixins'),
-    fs = require('fs');
-    
-var mw = base.middleware,
-    config = base.config;    
+    fs = require('fs'),
+    mw = base.middleware;
+
+require('./lib/base/mixins');
     
 var servers = {};
-
-var base_config = JSON.parse(fs.readFileSync('./config.json'));
+var base_config = JSON.parse(fs.readFileSync('./config.live.json'));
 
 var config = function (ssl, env){
     var conf = base_config.server;
@@ -28,7 +26,7 @@ var server = function (ssl){
 	    //app.use(mw.inspectHeaders());
 	    app.use(express.cookieDecoder());
 	    app.use(mw.monkeyHeaders('before'));
-	    app.use(express.session({fingerprint: base.connectionFingerprint, secret: 'yayEvoGames!'}));
+	    app.use(express.session({fingerprint: base.connectionFingerprint, secret: base_config.session_secret}));
 	    app.use(mw.monkeyHeaders('after'));
 	    app.use(express.bodyDecoder());
 	    app.use(mw.determineLogin());
@@ -99,4 +97,3 @@ servers.web.listen(servers.web.set('config').server_port);
 
 servers.ssl = server(true);
 servers.ssl.listen(servers.ssl.set('config').server_port);
-
