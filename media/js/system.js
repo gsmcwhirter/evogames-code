@@ -64,17 +64,16 @@ var site = {
         $(".marquee-vert").scrollable({circular: true, vertical: true}).autoscroll({autoplay: true});
         $(".marquee-horiz").scrollable({circular: true}).autoscroll({autoplay: true});
         $("a.lightbox").lightBox(configs.lightbox);
+        site.fade_flash();
     }
     , config_menus: function(){
-        $(".menu-outer.expand.topmenu").removeClass("expand")
-                                       .addClass("collapse");
         $(".menu-outer.collapse .menu-inner").hide();
         $(".menu-outer.collapse .menu-header .icon").addClass("ui-icon")
-                                                    .addClass("ui-icon-triangle-1-s")
-                                                    .toggle(menu.expand, menu.collapse);
+                                                    .addClass("ui-icon-triangle-1-s");
+        $(".menu-outer.collapse .menu-header .clickable").toggle(menu.expand, menu.collapse);
         $(".menu-outer.expand .menu-header .icon").addClass("ui-icon")
-                                                  .addClass("ui-icon-triangle-1-n")
-                                                  .toggle(menu.collapse, menu.expand);
+                                                  .addClass("ui-icon-triangle-1-n");
+        $(".menu-outer.expand .menu-header .clickable").toggle(menu.collapse, menu.expand);
         $(".menu-inner>li>.menu-item[title]").tooltip({
             position: "center right",
             offset: [0, 2],
@@ -88,6 +87,12 @@ var site = {
     , init_link_rels: function (){
         $("a[rel=blank]").attr("target","_blank");
     }
+    , fade_flash: function (){
+        setTimeout(function (){
+            $("#flash .ui-widget>div.error").animate({"backgroundColor": "#ccc", "color": "#cd0a0a"}, "slow", "swing")
+                                            .find(".ui-icon").addClass('alt');
+        }, 1000);
+    }
 };
 
 var menu = {
@@ -97,6 +102,7 @@ var menu = {
         $(".menu-header .icon",menu_block).removeClass('ui-icon-triangle-1-s')
                                           .addClass('ui-icon-triangle-1-n');
         $(".menu-inner",menu_block).slideDown(500);
+        return false;
     }
     , collapse: function(event){
         var menu_block = $(this).parent().parent();
