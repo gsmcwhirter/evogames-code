@@ -15,7 +15,8 @@ function (newDoc, oldDoc, cdbuser)
         {
             require((!oldDoc || oldDoc.type == newDoc.type),
                     'You may not change the type.');
-            require((equals(newDoc.pending_email_change, {}) || 
+            require((!newDoc.pending_email_change ||
+                    equals(newDoc.pending_email_change, {}) || 
                     newDoc.pending_email_change.email.match(email_regex)),
                     'Pending e-mail is not valid.');
             require(!newDoc.email_history.length || newDoc.email_history[newDoc.email_history.length - 1].email.match(email_regex),
