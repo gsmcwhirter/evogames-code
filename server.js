@@ -6,10 +6,10 @@ var express = require('express'),
 require('./lib/base/mixins');
     
 var servers = {};
-var base_config = JSON.parse(fs.readFileSync('./config.live.json'));
+var base_config = function (){return JSON.parse(fs.readFileSync('./config.live.json'));};
 
 var config = function (ssl, env){
-    var conf = base_config.server;
+    var conf = base_config().server;
     conf.is_ssl = ssl;
     conf.server_port = ssl ? 7443 : 7080;
     return conf;
@@ -26,7 +26,7 @@ var server = function (ssl){
 	    //app.use(mw.inspectHeaders());
 	    app.use(express.cookieDecoder());
 	    app.use(mw.monkeyHeaders('before'));
-	    app.use(express.session({fingerprint: base.connectionFingerprint, secret: base_config.session_secret}));
+	    app.use(express.session({fingerprint: base.connectionFingerprint, secret: base_config().session_secret}));
 	    app.use(mw.monkeyHeaders('after'));
 	    app.use(express.bodyDecoder());
 	    app.use(mw.determineLogin());
@@ -39,10 +39,12 @@ var server = function (ssl){
 	    app.set('view engine', 'jade');
 	    app.set('view options', {layout: ssl ? 'layout_ssl' : 'layout'});
 	    
+	    app.set('smtp config', base_config().smtp);
+	    
 	    app.error(base.handle404);
 	    app.error(base.handle500);
 	    
-	    var sysconf = base_config.system;
+	    var sysconf = base_config().system;
 	    sysconf.is_ssl = ssl;
 	    
 	    app.helpers({
@@ -72,13 +74,13 @@ var server = function (ssl){
 	    app.use(ssl ? mw.forceNonSSL() : mw.nice404());
 	    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 	    
-	    app.set('config', config(ssl, 'development'));
+	    app.set('sys config', config(ssl, 'development'));
 	});
 	
 	app.configure('production', function (){
 	    app.use(ssl ? mw.forceNonSSL() : mw.nice404());
 	    
-	    app.set('config', config(ssl, 'production'));
+	    app.set('sys config', config(ssl, 'production'));
 	});
 		
 	require('./lib/default').urls(ssl, '')(app);
@@ -93,7 +95,7 @@ var server = function (ssl){
 }
 
 servers.web = server(false);
-servers.web.listen(servers.web.set('config').server_port);
+servers.web.listen(servers.web.set('sys config').server_port);
 
 servers.ssl = server(true);
-servers.ssl.listen(servers.ssl.set('config').server_port);
+servers.ssl.listen(servers.ssl.set('sys config').server_port);
