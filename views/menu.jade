@@ -1,8 +1,9 @@
 - if (menu.collapse)
   .menu-outer.collapse
     .menu-header
-      span.icon
-      #{menu.title}
+      span.clickable
+        span.icon
+        #{menu.title}
     ul.menu-inner
       - menu.items.forEach(function(item){
         li
@@ -13,8 +14,9 @@
 - else
   .menu-outer.expand
     .menu-header
-      span.icon
-      #{menu.title}
+      span.clickable
+        span.icon
+        #{menu.title}
     ul.menu-inner
       - menu.items.forEach(function(item){
         li

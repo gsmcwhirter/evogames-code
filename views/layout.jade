@@ -12,9 +12,12 @@ html
     link(rel="stylesheet", type="text/css", media="all", href="/css/reset-fonts.css")
     link(rel="stylesheet", type="text/css", media="all", href="/css/lightbox.css")
     link(rel="stylesheet", type="text/css", media="all", href="/css/prettify.css")
+    link(rel="stylesheet", type="text/css", media="all", href="/css/jquery-ui.css")
     link(rel="stylesheet", type="text/css", media="all", href="/css/ifm.css")
     
     script(type="text/javascript", src="/js/jquery/jquery.min.js")
+    script(type="text/javascript", src="/js/jquery/jquery-ui.min.js")
+    script(type="text/javascript", src="/js/jquery/timepicker.js")
     script(type="text/javascript", src="/js/jquery/lightbox.min.js")
     script(type="text/javascript", src="/js/jquery/tools.min.js")
     script(type="text/javascript", src="/js/swfobject/videoembed.js")
@@ -22,6 +25,7 @@ html
     script(type="text/javascript", src="/js/lib/sha1.js")
     script(type="text/javascript", src="/js/lib/underscore.min.js")
     script(type="text/javascript", src="/js/system.js")
+    
   body
     #container
       #header
@@ -48,12 +52,8 @@ html
       
       #main
         #flash
-          - (flash('info') || []).forEach(function (msg){
-            .info!= msg
-          - });
-          - (flash('error') || []).forEach(function (msg){
-            .error!= msg
-          - });
+          != partial('flash_info', {collection: flash('info') || [], as: 'msg'})
+          != partial('flash_error', {collection: flash('error') || [], as: 'msg'})
         != body
         
         #footer

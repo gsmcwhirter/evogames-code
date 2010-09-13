@@ -20,10 +20,10 @@ var server = function (ssl){
 	var app = express.createServer();
 	
 	app.configure(function (){
-	    //app.use(express.logger());
+	    app.use(mw.inspectHeaders());
+	    app.use(express.logger());
 	    app.use(express.gzip());
 	    app.use(express.conditionalGet());
-	    //app.use(mw.inspectHeaders());
 	    app.use(express.cookieDecoder());
 	    app.use(mw.monkeyHeaders('before'));
 	    app.use(express.session({fingerprint: base.connectionFingerprint, secret: base_config().session_secret}));
