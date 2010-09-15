@@ -17,25 +17,25 @@ var config = function (ssl, env){
 
 var server = function (ssl){
 	ssl = ssl || false;
-	var app = express.createServer();
+	var app = express.createServer(
+	    //mw.inspectHeaders(),
+	    express.logger(),
+	    //express.gzip(),
+	    express.conditionalGet(),
+	    express.cookieDecoder(),
+	    mw.monkeyHeaders('before'),
+	    express.session({fingerprint: base.connectionFingerprint, secret: base_config().session_secret}),
+	    mw.monkeyHeaders('after'),
+	    express.bodyDecoder(),
+	    express.cache()
+	);
 	
 	app.configure(function (){
-	    //app.use(mw.inspectHeaders());
-	    app.use(express.logger());
-	    //app.use(express.gzip());
-	    app.use(express.conditionalGet());
-	    app.use(express.cookieDecoder());
-	    app.use(mw.monkeyHeaders('before'));
-	    app.use(express.session({fingerprint: base.connectionFingerprint, secret: base_config().session_secret}));
-	    app.use(mw.monkeyHeaders('after'));
-	    app.use(express.bodyDecoder());
 	    app.use(mw.determineLogin());
 	    app.use(mw.prepareMenus());
-	    app.use(express.cache());
 	    app.use(app.router);
 	    
 	    app.set('views', __dirname+"/views");
-	    //app.set('partials', __dirname+"/views");
 	    app.set('view engine', 'jade');
 	    app.set('view options', {layout: ssl ? 'layout/ssl' : 'layout/main'});
 	    
