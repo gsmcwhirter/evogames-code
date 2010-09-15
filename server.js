@@ -79,6 +79,7 @@ var server = function (ssl){
 	
 	app.configure('production', function (){
 	    app.use(ssl ? mw.forceNonSSL() : mw.nice404());
+	    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 	    
 	    app.set('sys config', config(ssl, 'production'));
 	});
