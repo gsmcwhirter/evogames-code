@@ -2,7 +2,7 @@ var express = require('express'),
     base = require('./lib/base'),
     fs = require('fs'),
     mw = base.middleware;
-var sys = require('sys');
+
 require('./lib/base/mixins');
     
 var servers = {};
@@ -78,9 +78,7 @@ var server = function (ssl){
 	});
 	
 	app.configure('production', function (){
-	    sys.debug('configd');
 	    app.use(ssl ? mw.forceNonSSL() : mw.nice404());
-	    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 	    
 	    app.set('sys config', config(ssl, 'production'));
 	});
