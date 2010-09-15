@@ -2,7 +2,7 @@ server {
     listen 80;
     server_name evogames.org, www.evogames.org;
     
-    if ($host == 'evogames.org'){
+    if ($host = 'evogames.org'){
         rewrite ^ http://www.evogames.org$uri permanent;
     }
         
@@ -40,7 +40,7 @@ server {
     listen   443;
     server_name evogames.org, www.evogames.org;
     
-    if ($host == 'evogames.org'){
+    if ($host = 'evogames.org'){
         rewrite ^ https://www.evogames.org$uri permanent;
     }
 
