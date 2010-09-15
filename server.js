@@ -6,7 +6,7 @@ var express = require('express'),
 require('./lib/base/mixins');
     
 var servers = {};
-var base_config = function (){return JSON.parse(fs.readFileSync('./config.live.json'));};
+var base_config = function (){return JSON.parse(fs.readFileSync(__dirname + '/config.live.json'));};
 
 var config = function (ssl, env){
     var conf = base_config().server;
