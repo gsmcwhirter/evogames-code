@@ -20,9 +20,9 @@ var server = function (ssl){
 	var app = express.createServer();
 	
 	app.configure(function (){
-	    app.use(mw.inspectHeaders());
+	    //app.use(mw.inspectHeaders());
 	    app.use(express.logger());
-	    app.use(express.gzip());
+	    //app.use(express.gzip());
 	    app.use(express.conditionalGet());
 	    app.use(express.cookieDecoder());
 	    app.use(mw.monkeyHeaders('before'));
@@ -35,9 +35,9 @@ var server = function (ssl){
 	    app.use(app.router);
 	    
 	    app.set('views', __dirname+"/views");
-	    app.set('partials', __dirname+"/views");
+	    //app.set('partials', __dirname+"/views");
 	    app.set('view engine', 'jade');
-	    app.set('view options', {layout: ssl ? 'layout_ssl' : 'layout'});
+	    app.set('view options', {layout: ssl ? 'layout/ssl' : 'layout/main'});
 	    
 	    app.set('smtp config', base_config().smtp);
 	    
