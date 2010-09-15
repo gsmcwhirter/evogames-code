@@ -1,6 +1,10 @@
 server {
     listen 80;
-    server_name evogames.org, www.evogames.org;
+    server_name evogames.org www.evogames.org;
+    
+    if ($host = 'evogames.org'){
+        rewrite ^ http://www.evogames.org$uri permanent;
+    }
     
     location / {
         proxy_pass         http://127.0.0.1:7080/;
@@ -34,7 +38,7 @@ server {
 
 server {
     listen   443;
-    server_name evogames.org, www.evogames.org;
+    server_name evogames.org www.evogames.org;
     
     ssl  on;
     ssl_certificate /etc/ssl.key/server.crt;
@@ -45,6 +49,10 @@ server {
     ssl_protocols  SSLv2 SSLv3 TLSv1;
     ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
     ssl_prefer_server_ciphers   on;
+    
+    if ($host = 'evogames.org'){
+        rewrite ^ https://www.evogames.org$uri permanent;
+    }
     
     location / {
         proxy_pass         http://127.0.0.1:7443/;
