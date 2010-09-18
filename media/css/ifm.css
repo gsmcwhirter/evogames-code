@@ -249,6 +249,7 @@ strong, .bold {
   border-bottom-right-radius: 10px;
   font-size: 108%;
   line-height: 1.3em;
+  margin-bottom: 20px;
 }
 #main h1,
 #main h2,
@@ -395,6 +396,19 @@ strong, .bold {
 }
 #main #flash p {
   margin: 0;
+}
+#main ul.grid {
+  display: block;
+  overflow: auto;
+}
+#main ul.grid li {
+  display: block;
+  margin: 5px 10px;
+  padding: 3px 0;
+  float: left;
+  width: 45%;
+  border-top: 1px solid #222;
+  border-bottom: 1px dotted #666;
 }
 #sidebar {
   float: right;
