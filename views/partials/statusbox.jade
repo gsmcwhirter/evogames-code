@@ -12,17 +12,15 @@
       - else if (player.is_staff)
         span.position.staff Staff
     br
-    a(href="/controls") Controls
+    a(href="/player/controls") Controls
     span.link-sep |
-    a(href="/logout") Log Out
-    br
-    a(href="#") Inbox [#{player.messages ? player.messages.new : "0"}]
+    a(href="/player/logout") Log Out
 - else
   #status-info
     #status-avatar
       img.avatar(alt="Player Avatar", src=system.default_avatar)
     span Welcome, Guest!
     br
-    a(href="/login") Log In
+    a(href="/player/login") Log In
     span.link-sep |
-    a(href="/register") Register
+    a(href="/player/register") Register

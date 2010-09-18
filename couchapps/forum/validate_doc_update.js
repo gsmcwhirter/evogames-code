@@ -1,1 +1,0 @@
-function (newDoc, oldDoc, cdbuser){}
