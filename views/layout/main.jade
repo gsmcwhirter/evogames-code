@@ -56,37 +56,7 @@ html
           != partial('flash_error', {collection: flash('error') || [], as: 'msg'})
         != body
         
-        #footer
-          #footer-left &nbsp;
-          #footer-right &nbsp;
-          #footer-center
-            a(href="#") Report Bugs
-            span.link-sep |
-            a(href="#") Site Feedback  
-        #subfooter
-          strong #{system.name}:
-          \ 
-          a(href="/") Home
-          span.link-sep |
-          a(href="#") Help
-          span.link-sep |
-          a(href="#") Contact Us
-          span.link-sep |
-          a(href="#") About Us
-          span.link-sep |
-          a(href="#") Site Map
-          span.link-sep |
-          a(href="#") Volunteer
-          span.link-sep |
-          a(href="#") Management
-          br
-          strong Legal:
-          \ 
-          a(href="#") Terms of Use
-          span.link-sep |
-          a(href="#") Privacy Policy
-          span.link-sep |
-          #{system.copyright}
+        != partial('footer', {collection: [true], as: 'is_true'})
     
     :javascript
       | var _gaq = _gaq || [];
