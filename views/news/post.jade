@@ -1,0 +1,75 @@
+h1 News Editor
+form(method="post", accept-charset="utf-8")
+  fieldset.font-size
+    table.form.form-two-column
+      tbody
+        tr
+          td.label
+            label(for="subject") Subject
+          td.field
+            - if (messages["subject"] && messages["subject"].length)
+              ul.field-error
+                - each msg in messages["subject"]
+                  li!= "Subject " + msg
+            .field-data
+              span#subject_status &nbsp;
+              input#subject(type="text", name="subject", value=data["subject"])
+        tr
+          td.label
+            label(for="slug") Slug
+          td.field
+            - if (messages["slug"] && messages["slug"].length)
+              ul.field-error
+                - each msg in messages["slug"]
+                  li!= "Slug " + msg
+            .field-data
+              span#slug_status &nbsp;
+              input#slug(type="text", name="slug", value=data["slug"])
+              input#saved-slug(type="hidden", value=data["_sslug"])
+        tr
+          td.label
+            label(for="tags") Tags
+          td.field
+            - if (messages["tags"] && messages["tags"].length)
+              ul.field-error
+                - each msg in messages["tags"]
+                  li!= "Tags " + msg
+            .field-data
+              span#tags_status &nbsp;
+              input#tags(type="text", name="tags", value=data["tags"] ? data["tags"].join(", ") : "")
+        tr
+          td.label
+            label(for="body") Content
+          td.field
+            - if (messages["body"] && messages["body"].length)
+              ul.field-error
+                - each msg in messages["body"]
+                  li!= "Content " + msg
+            .field-data
+              textarea#body(name="body")= data["body"] || ""
+        tr
+          td.action(colspan="2")
+            input#action(type="hidden", name="action", value="save")
+            - if (typeof published != "undefined" && published)
+              button#post(type="button") Save Changes
+            - else
+              button#save(type="button") Save Draft
+              span.link-sep
+              button#post(type="button") Publish
+            
+script(type="text/javascript",src="/js/validators/newspost.js")
+:javascript
+  | $(document).ready(function (){
+  |   var validator = new validators.newspost(['subject','slug','tags']);
+  |   $("button#save").bind('click', function (event){
+  |     $("#action").val('save');
+  |     $(event.target).parents("form").submit();
+  |   });
+  |   $("button#post").bind('click', function (event){
+  |     if (confirm("Are you sure you want to publish this article?"))
+  |     {
+  |       $("#action").val('publish');
+  |       $(event.target).parents("form").submit();
+  |     }
+  |   });
+  | });

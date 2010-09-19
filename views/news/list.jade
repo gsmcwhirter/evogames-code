@@ -1,0 +1,8 @@
+h1 #{title}
+.article-list
+  != partial('news/article', {collection: articles, as: 'article'})
+
+- if (nextpage)
+  .pagination
+    a.next(href=self+"?nextpage="+nextpage+"&limit="+limit) older &raquo;
+  

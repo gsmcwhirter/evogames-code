@@ -40,7 +40,7 @@ validators.change_email = function (required_fields){
     };
     
     this.bind = function (field) {
-        $("#"+field).bind('click blur',{field: field}, this.validate);
+        $("#"+field).bind('keyup blur',{field: field}, this.validate);
         this.validate({data: {field: field}});
     };
     
