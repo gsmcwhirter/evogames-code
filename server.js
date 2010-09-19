@@ -57,7 +57,7 @@ var server = function (ssl){
                     email = us._.last(email.email_history).email;
                 }
                 
-                email = email.toString();
+                email = email + "";
                 size = size || 64;
                 return "http://www.gravatar.com/avatar/" +
                     base.util.md5_hex(email.trim().toLowerCase()) +
