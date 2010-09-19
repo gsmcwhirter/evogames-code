@@ -1,10 +1,7 @@
 - if (player)
   #status-info
     #status-avatar
-      - if (player.avatar)
-        img.avatar(alt="Player Avatar", src=player.avatar)
-      - else
-        img.avatar(alt="Player Avatar", src=system.default_avatar)
+      img.avatar(alt="Player Avatar", src=avatar(player))
     span
       span.handle.only @#{player.handle}
       - if (player.is_sysop)
