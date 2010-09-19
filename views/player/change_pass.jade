@@ -1,0 +1,33 @@
+h1 Change Password
+form(method="post", accept-charset="utf-8")
+  fieldset.font-size
+    table.form.form-two-column
+      tbody
+        tr
+          td.label
+            label(for="old_password") Current Password
+          td.field
+            .field-data
+              input#old_password(type="password", name="old_password")
+        tr
+          td.label
+            label(for="new_password") New Password
+          td.field
+            .field-data
+              span#new_password_status &nbsp;
+              input#new_password(type="password", name="new_password")
+        tr
+          td.label
+            label(for="new_password_confirm") Confirm New Password
+          td.field
+            .field-data
+              span#new_password_confirm_status &nbsp;
+              input#new_password_confirm(type="password", name="new_password_confirm")
+        tr
+          td.action(colspan="2")
+            button(type="submit") Change Password
+script(type="text/javascript", src="/js/validators/changepass.js")
+:javascript
+  | $(document).ready(function(){
+  |   var validator = new validators.change_pass(['new_password','new_password_confirm']);
+  | });

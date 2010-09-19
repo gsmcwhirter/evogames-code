@@ -1,4 +1,4 @@
-form_validators.register = function (register_required_fields){
+validators.register = function (required_fields){
     var self = this;
     
     this.fetch_users = function (callback, force) {
@@ -135,7 +135,7 @@ form_validators.register = function (register_required_fields){
                 break;
             case "email":
                 var re = new RegExp("^([a-zA-Z0-9_\\-.]+)@(([a-zA-Z0-9\\-]+\\.)+)([a-zA-Z]{2,9})$");
-                var email = $.trim($("#email").val());
+                var email = $.trim($("#"+field).val());
                 if (email.length == 0)
                 {
                     self.set_status_bad(sid, "Must not be empty.");
@@ -166,8 +166,8 @@ form_validators.register = function (register_required_fields){
                 }
                 break;
             case "email_confirm":
-                var email_confirm = $.trim($("#email_confirm").val());
-                if (email_confirm != $.trim($("#email").val()))
+                var email_confirm = $.trim($("#"+field).val());
+                if (email_confirm != $.trim($("#"+field.substring(-8)).val()))
                 {
                     self.set_status_bad(sid, "Must match e-mail.");
                     self.set_tooltip(field);
@@ -185,7 +185,7 @@ form_validators.register = function (register_required_fields){
                 break;
             case "password":
                 var re = new RegExp("[^a-zA-Z]");
-                var password = $.trim($("#password").val());
+                var password = $.trim($("#"+field).val());
                 if (password.length < 8)
                 {
                     self.set_status_bad(sid, "Must be at least 8 characters long.");
@@ -203,8 +203,8 @@ form_validators.register = function (register_required_fields){
                 }
                 break;
             case "password_confirm":
-                var password_confirm = $.trim($("#password_confirm").val());
-                if (password_confirm != $.trim($("#password").val()))
+                var password_confirm = $.trim($("#"+field).val());
+                if (password_confirm != $.trim($("#"+field.substring(-8)).val()))
                 {
                     self.set_status_bad(sid, "Must match password.");
                     self.set_tooltip(field);
@@ -244,7 +244,7 @@ form_validators.register = function (register_required_fields){
         
         if (email_done && user_done)
         {
-            register_required_fields.forEach(function (item){
+            required_fields.forEach(function (item){
                 self.bind(item);
             });
         }
@@ -268,5 +268,5 @@ form_validators.register = function (register_required_fields){
     });
 };
 
-form_validators.register.prototype = new form_validators.validator();
-form_validators.register.prototype.constructor = form_validators.register;
+validators.register.prototype = new validators.validator();
+validators.register.prototype.constructor = validators.register;
