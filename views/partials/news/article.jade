@@ -1,14 +1,14 @@
-h1
-  a(href="/news/view/"+article.slug)= article.subject
 .article
+  h1
+    a(href="/news/view/"+article.slug)= article.subject
+  - if (player.is_sysop || (player.permissions || []).indexOf("post news") > -1)
+    .editline
+      a(href="/news/edit/"+article._id) Edit
   .byline
     span.by by: #{article.authors.join(", ")}
     span.link-sep
     span.date published on: #{article.status.date}
   .tagline Tags: #{article.tags.join(", ")}
-  - if (player.is_sysop || (player.permissions || []).indexOf("post news") > -1)
-    .editline
-      a(href="/news/edit/"+article._id) Edit
   .body
     != article.article_body
   - if (article.edits && article.edits.length)
