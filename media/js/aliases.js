@@ -65,10 +65,7 @@ var aliases = {
                     site.flash('info', 'Alias added successfully.');
                     if (data.message != "alias exists")
                     {
-                        $("#aliases").append($("<li><span class='alias'>"+data.alias+"</span><span class='link-sep'></span></li>")
-                                                .append($("<a href='#'>Set Default</a>").bind('click', aliases.set_default))
-                                                .append("<span class='link-sep'></span>")
-                                                .append($("<a href='#'>Remove</a>").bind('click', aliases.remove)));
+                        aliases.display_alias(data.alias);
                     }
                     
                     $("#add-link").show();
@@ -88,6 +85,21 @@ var aliases = {
         return false;
     },
     refresh: function (event){
-    
+        $.get("/player/aliases/list", function (data){
+            if (data.ok)
+            {
+                $("#aliases").empty();
+                data.aliases.forEach(function (alias){
+                    aliases.display_alias(alias);
+                });
+            }
+        });
+        
+        return false;
+    },
+    display_alias: function (alias){
+        $("#aliases").append($("<li><span class='alias'>"+alias+"</span></li>")
+                        .append($("<a href='#' class='remove'>Remove</a>").bind('click', aliases.remove))
+                        .append($("<a href='#' class='set-default'>Set Default</a>").bind('click', aliases.set_default)));
     }
 };
