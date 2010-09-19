@@ -413,6 +413,18 @@ strong, .bold {
 #main #alias-add-form {
   display: none;
 }
+#main #breadcrumbs {
+  overflow: auto;
+  font-size: 85%;
+  border-bottom: 1px dotted #666;
+  margin-bottom: 10px;
+}
+#main #breadcrumbs .crumb, #main #breadcrumbs .crumb-sep {
+  float: left;
+}
+#main #breadcrumbs .crumb-sep {
+  margin: 0 5px;
+}
 #sidebar {
   float: right;
   width: 350px;

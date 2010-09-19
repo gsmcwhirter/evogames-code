@@ -1,3 +1,7 @@
+- var crumbs = [{href: "/", text: "Home"}, {href: "/player/controls", text: "Player Controls"}];
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
 h1 Player Control Panel
 ul.grid
   li

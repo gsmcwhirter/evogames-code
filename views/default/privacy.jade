@@ -1,3 +1,7 @@
+- var crumbs = [{href: "/", text: "Home"}, {href: "/privacy", text: "Privacy Policy"}];
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
 h1 Privacy Policy
 p
   | Coming soon...
