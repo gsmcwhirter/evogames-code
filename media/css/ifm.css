@@ -382,6 +382,9 @@ strong, .bold {
 #main ul.form-error li {
   color: #f00;
 }
+#main #flash {
+  margin-bottom: 10px;
+}
 #main #flash .ui-icon {
   float: left;
   margin-right: .3em;
@@ -412,6 +415,30 @@ strong, .bold {
 }
 #main #alias-add-form {
   display: none;
+}
+#main #alias-controls {
+  overflow: auto;
+  font-size: 85%;
+}
+#main #alias-controls #refresh-link {
+  float: right;
+}
+#main #aliases {
+  margin-top: 10px;
+}
+#main #aliases .remove, #main #aliases .set-default {
+  font-size: 85%;
+  margin-left: 20px;
+  float: right;
+}
+#main #aliases .default {
+  margin-left: 20px;
+}
+#main #aliases li {
+  margin: 5px 0;
+  display: block;
+  border: 1px dotted #666;
+  padding: 2px 5px;
 }
 #main #breadcrumbs {
   overflow: auto;

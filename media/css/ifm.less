@@ -470,6 +470,7 @@ strong,
 
 
 	#flash{
+		margin-bottom: 10px;
 		.ui-icon{
 			float: left;
 			margin-right: .3em;
@@ -508,6 +509,19 @@ strong,
 	
 	#alias-add-form {
 		display: none;
+	}
+	
+	#alias-controls {
+		overflow: auto;
+		font-size: 85%;
+		#refresh-link { float: right; }
+	}
+	
+	#aliases {
+		margin-top: 10px;
+		.remove, .set-default { font-size: 85%; margin-left: 20px; float: right;}
+		.default { margin-left: 20px; }
+		li {margin: 5px 0; display: block; border: 1px dotted #666; padding: 2px 5px;}
 	}
 	
 	#breadcrumbs {
