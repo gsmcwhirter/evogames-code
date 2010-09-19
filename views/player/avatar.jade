@@ -2,11 +2,6 @@ h1 Player Avatar
 p
   | #{system.name} uses Gravatars for avatar management. These icons are
   | tied to the e-mail address for your account.
-- if (player)
-  p
-    | Your current avatar is:
-    br
-    img(alt="Player Avatar", src=avatar(player, 256))
 p
   | If you do not already have a gravatar account and would like to 
   | customize your avatar for this site, please visit
@@ -20,3 +15,8 @@ p
   | #{system.name} only allows PG or lower rated Gravatars on the site, 
   | so please keep that in mind when you are selecting an avatar to use
   | with the e-mail address with which you are registered here. 
+- if (player)
+  p
+    | Your current avatar will display as:
+    br
+    img(alt="Player Avatar", src=avatar(player, 256))
