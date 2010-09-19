@@ -1,1 +1,17 @@
-h1 Index!
+.left-col
+  h1 Recent News
+  ul.recent-articles
+    - each article in articles
+      li
+        a(href="/news/view/"+article.slug)= article.subject
+        span.date= article.status.date
+  a(href="/news") Older Articles...
+
+.right-col
+  h1 Recent Registrations
+  ul.recent-members
+    - each member in registrations
+      li
+        span.alias= member.aliases[0]
+        span.handle= "@"+member.handle
+        span.date= member.created_at
