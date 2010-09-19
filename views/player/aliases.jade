@@ -35,7 +35,7 @@ script(type="text/javascript", src="/js/aliases.js")
   | $(document).ready(function (){
   |   $("a.set-default").bind('click', aliases.set_default);
   |   $("a.remove").bind('click', aliases.remove);
-  |   $("a#add-link").bind('click', function (){$("a#add-link").hide(); $("#alias-add-form").show();});
+  |   $("a#add-link").bind('click', function (){$("a#add-link").hide(); $("#alias-add-form").show(); $("#alias").focus(); return false;});
   |   $("#alias-add-form").bind('submit', aliases.add);
   |   $("button.cancel").bind('click', function (){$("a#add-link").show(); $("#alias-add-form").hide(); $("#alias").val('');});
   | });
