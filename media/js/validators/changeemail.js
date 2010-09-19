@@ -1,30 +1,28 @@
-form_validators.changeemail = {
-    init: function() {
-        form_validators.changeemail.fetch_emails();
-        setTimeout(function(){
-            for(i in changeemail_required_fields)
-            {
-                form_validators.changeemail.bind(changeemail_required_fields[i]);
-            }
-        },1000);
-    }
-    ,fetch_emails: function(force) {
-        if(!form_validators.changeemail.email_cache || force)
+validators.change_email = function (required_fields){
+    var self = this;
+    
+    this.fetch_emails = function (callback, force) {
+        if (!this.email_cache || force)
         {
-            $.get("/media/cache/emails.json",function(data){
-                form_validators.changeemail.email_cache = data;
+            $.get("/api/emails.json", function (data){
+                callback(data);
             });
         }
-    }
-    ,email_exists: function(email) {
-        if(!form_validators.changeemail.email_cache)
+        else
+        {
+            callback(this.email_cache);
+        }
+    };
+    
+    this.email_exists = function (email) {
+        if (!this.email_cache)
         {
             return true;
 
         }
         else
         {
-            if($.inArray(hex_sha1($.trim(email).toLowerCase()),form_validators.changeemail.email_cache) >= 0)
+            if ($.inArray(hex_sha1($.trim(email).toLowerCase()), this.email_cache) >= 0)
             {
                 return true;
             }
@@ -34,96 +32,85 @@ form_validators.changeemail = {
             }
         }
     }
-    ,email_cache: false
-    , bind: function(field) {
-        $("#"+field).bind('keyup blur',{field: field},form_validators.changeemail.validate);
-        $("#"+field).keyup();
-    }
-    , validate: function(event, do_return) {
-        switch(event.data.field)
+    
+    this.email_cache = false;
+    
+    this.email_cache_loaded = function (){
+        return this.email_cache ? true : false;
+    };
+    
+    this.bind = function (field) {
+        $("#"+field).bind('click blur',{field: field}, this.validate);
+        this.validate({data: {field: field}});
+    };
+    
+    this.validate = function (event) {
+        var field = event.data.field;
+        var sid = "#"+field+"_status"; 
+        switch(field)
         {
-            case "email":
+            case "new_email":
                 var re = new RegExp("^([a-zA-Z0-9_\\-.]+)@(([a-zA-Z0-9\\-]+\\.)+)([a-zA-Z]{2,9})$");
-                var email = $.trim($("#email").val());
-                if(email.length == 0)
+                var email = $.trim($("#"+field).val());
+                if (email.length == 0)
                 {
-                    $("#email_status").removeClass("status-field-ok")
-                                      .removeClass("status-field-maybe")
-                                      .addClass("status-field-not-ok")
-                                      .attr("title","Must not be empty.");
-                    form_validators.set_tooltip(event.data.field);
-                    if(do_return) return false;
+                    self.set_status_bad(sid, "Must not be empty.");
+                    self.set_tooltip(field);
                 }
-                else if(!email.match(re))
+                else if (!email.match(re))
                 {
-                    $("#email_status").removeClass("status-field-ok")
-                                      .removeClass("status-field-maybe")
-                                      .addClass("status-field-not-ok")
-                                      .attr("title","Has invalid format.");
-                    form_validators.set_tooltip(event.data.field);
-                    if(do_return) return false;
+                    self.set_status_bad(sid, "Has invalid format.");
+                    self.set_tooltip(field);
                 }
-                else if(form_validators.changeemail.email_exists(email))
+                else if (self.email_exists(email))
                 {
-                    if(!form_validators.changeemail.email_cache)
+                    if (!self.email_cache_loaded())
                     {
-                        $("#email_status").removeClass("status-field-ok")
-                                          .removeClass("status-field-not-ok")
-                                          .addClass("status-field-maybe")
-                                          .attr("title","May not be unique.");
-                        form_validators.set_tooltip(event.data.field);
-                        if(do_return) return true;
+                        self.set_status_maybe(sid, "May not be unique.");
+                        self.set_tooltip(field);
                     }
                     else
                     {
-                        $("#email_status").removeClass("status-field-ok")
-                                          .removeClass("status-field-maybe")
-                                          .addClass("status-field-not-ok")
-                                          .attr("title","Must be unique.");
-                        form_validators.set_tooltip(event.data.field);
-                        if(do_return) return false;
+                        self.set_status_bad(sid, "Must be unique.");
+                        self.set_tooltip(field);
                     }
                 }
                 else
                 {
-                    $("#email_status").removeClass("status-field-not-ok")
-                                      .removeClass("status-field-maybe")
-                                      .addClass("status-field-ok")
-                                      .attr("title","OK");
-                    form_validators.set_tooltip(event.data.field);
-                    if(do_return) return true;
+                    self.set_status_ok(sid, "OK");
+                    self.set_tooltip(field);
                 }
                 break;
-            case "email_confirm":
-                var email_confirm = $.trim($("#email_confirm").val());
-                if(email_confirm.length == 0)
+            case "new_email_confirm":
+                var email_confirm = $.trim($("#"+field).val());
+                if (email_confirm != $.trim($("#"+field.substring(-8)).val()))
                 {
-                    $("#email_confirm_status").removeClass("status-field-ok")
-                                              .addClass("status-field-not-ok")
-                                              .attr("title","Must not be empty.");
-                    form_validators.set_tooltip(event.data.field);
-                    if(do_return) return false;
+                    self.set_status_bad(sid, "Must match e-mail.");
+                    self.set_tooltip(field);
                 }
-                else if(email_confirm != $.trim($("#email").val()))
+                else if (email_confirm == '')
                 {
-                    $("#email_confirm_status").removeClass("status-field-ok")
-                                              .addClass("status-field-not-ok")
-                                              .attr("title","Must match e-mail.");
-                    form_validators.set_tooltip(event.data.field);
-                    if(do_return) return false;
+                    self.set_status_maybe(sid, "Must not be empty.");
+                    self.set_tooltip(field);
                 }
                 else
                 {
-                    $("#email_confirm_status").removeClass("status-field-not-ok")
-                                              .addClass("status-field-ok")
-                                              .attr("title","OK");
-                    form_validators.set_tooltip(event.data.field);
-                    if(do_return) return true;
+                    self.set_status_ok(sid, "OK");
+                    self.set_tooltip(field);
                 }
                 break;
             default:
-                form_validators.set_tooltip(event.data.field);
-                return false;
+                self.set_tooltip(field);
         }
     }
-}
+    
+    this.fetch_emails(function (emails){
+        self.email_cache = emails;
+        required_fields.forEach(function (item){
+            self.bind(item);
+        });
+    });
+};
+
+validators.change_email.prototype = new validators.validator();
+validators.change_email.prototype.constructor = validators.change_email;

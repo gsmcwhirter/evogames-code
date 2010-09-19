@@ -84,8 +84,7 @@ var server = function (ssl){
 	});
 		
 	require('./lib/default').urls(ssl, '')(app);
-	require('./lib/club').urls(ssl, '/club')(app);
-	require('./lib/forum').urls(ssl, '/forum')(app);
+	require('./lib/group').urls(ssl, '/group')(app);
 	require('./lib/game').urls(ssl, '/game')(app);
 	require('./lib/news').urls(ssl, '/news')(app);
 	require('./lib/player').urls(ssl, '/player')(app);

@@ -1,0 +1,53 @@
+- if (pending_email_change)
+  h1 Pending E-Mail Change
+  form(method="post", accept-charset="utf-8")
+    fieldset.font-size
+      input#action-cancel(type="hidden", name="action", value="cancel")
+      table.form.form-two-column
+        tbody
+          tr
+            td.label
+              label Pending E-Mail Address
+            td.field
+              .field-data
+                = pending_email_change.email
+                span.link-sep -
+                a(href="/player/confirm_email") Confirm
+                span.link-sep -
+                a#cancel-link(href="#") Cancel
+  :javascript
+    | $(document).ready(function (){
+    |   $("a#cancel-link").click(function (event){
+    |     if (confirm("Are you sure you want to cancel this e-mail change?"))
+    |       $(event.target).parents("form").submit();
+    |     return false;
+    |   });
+    | });
+h1 Change E-Mail Address
+form(method="post", accept-charset="utf-8")
+  fieldset.font-size
+    input#action-change(type="hidden", name="action", value="change")
+    table.form.form-two-column
+      tbody
+        tr
+          td.label
+            label(for="new_email") New E-Mail Address
+          td.field
+            .field-data
+              span#new_email_status &nbsp;
+              input#new_email(type="text", name="new_email")
+        tr
+          td.label
+            label(for="new_email_confirm") Confirm New E-Mail Address
+          td.field
+            .field-data
+              span#new_email_confirm_status &nbsp;
+              input#new_email_confirm(type="text", name="new_email_confirm")
+        tr
+          td.action(colspan="2")
+            button(type="submit") Change E-Mail Address
+script(type="text/javascript", src="/js/validators/changeemail.js")
+:javascript
+  | $(document).ready(function(){
+  |   var validator = new validators.change_email(['new_email','new_email_confirm']);
+  | });

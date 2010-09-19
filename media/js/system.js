@@ -61,6 +61,7 @@ var site = {
         tinyMCE.init(configs.tinymce_bbcode);
         site.config_menus();
         site.init_link_rels();
+        $("button").button();
         $(".marquee-vert").scrollable({circular: true, vertical: true}).autoscroll({autoplay: true});
         $(".marquee-horiz").scrollable({circular: true}).autoscroll({autoplay: true});
         $("a.lightbox").lightBox(configs.lightbox);
@@ -114,7 +115,7 @@ var menu = {
     }
 }
 
-var form_validators = {
+var validators = {
     validator: function (){
         this.set_tooltip = function (field) {
             var id = $("#"+field+"_status").attr('id');
