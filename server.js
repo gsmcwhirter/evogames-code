@@ -49,7 +49,20 @@ var server = function (ssl){
 	    
 	    app.helpers({
             system: sysconf,
-            menu_list: false
+            menu_list: false,
+            avatar: function (email, size){
+                if (typeof email == "object" && email.email_history && email.email_history.length)
+                {
+                    var us = require('underscore');
+                    email = us._.last(email.email_history).email;
+                }
+                
+                email = email.toString();
+                size = size || 64;
+                return "http://www.gravatar.com/avatar/" +
+                    base.util.md5_hex(email.trim().toLowerCase()) +
+                    "?r=pg&s=" + size + "&d="+encodeURI("http://www.evogames.org"+sysconf.default_avatar);
+            }
         });
         
         app.dynamicHelpers({
