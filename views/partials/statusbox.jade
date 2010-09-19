@@ -4,6 +4,7 @@
       img.avatar(alt="Player Avatar", src=avatar(player))
     span
       span.handle.only @#{player.handle}
+      span.link-sep
       - if (player.is_sysop)
         span.position.sysop SysOp
       - else if (player.is_staff)

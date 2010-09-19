@@ -2,7 +2,7 @@ validators.change_pass = function (required_fields){
     var self = this;
     
     this.bind = function (field) {
-        $("#"+field).bind('click blur',{field: field}, this.validate);
+        $("#"+field).bind('keyup blur',{field: field}, this.validate);
         this.validate({data: {field: field}});
     };
     
