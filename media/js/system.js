@@ -89,10 +89,26 @@ var site = {
         $("a[rel=blank]").attr("target","_blank");
     }
     , fade_flash: function (){
+        site.flash_highlight("#flash .ui-widget>div.error");
+    }
+    , flash_highlight: function(target){
+        var target = $(target);
         setTimeout(function (){
-            $("#flash .ui-widget>div.error").animate({"backgroundColor": "#ccc", "color": "#cd0a0a"}, "slow", "swing")
-                                            .find(".ui-icon").addClass('alt');
+            target.animate({"backgroundColor": "#ccc", "color": "#cd0a0a"}, "slow", "swing")
+                  .find(".ui-icon").addClass('alt');
         }, 1000);
+    }
+    , flash: function (type, message){
+        if (type == 'error')
+        {
+            var ndiv = $("<div class='ui-widget'><div class='ui-state-error ui-corner-all error'><p><span class='ui-icon ui-icon-alert'></span><strong>Error:</strong> "+message+"</p></div></div>");
+            $("#flash").append(ndiv);
+            site.flash_highlight("#flash .ui-widget>div.error:last");
+        }
+        else if (type == 'info')
+        {
+            $("#flash").append("<div class='ui-widget'><div class='ui-state-highlight ui-corner-all info'><p><span class='ui-icon ui-icon-info'></span><strong>Info:</strong> "+message+"</p></div></div>");
+        }
     }
 };
 

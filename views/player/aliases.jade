@@ -1,0 +1,41 @@
+h1 Player Aliases
+
+a#add-link(href="#") Add New Alias
+
+form#alias-add-form(accept-charset="utf-8")
+  fieldset.font-size
+    table.form.form-two-column
+      tbody
+        tr
+          td.label
+            label(for="alias") New Alias
+          td.field
+            .field-data
+              input#alias(type="text", name="alias")
+        tr
+          td.action(colspan="2")
+            button.submit(type="submit") Add Alias
+            button.cancel(type="button") Cancel
+  
+ul#aliases
+  - aliases.forEach(function (alias, index){
+    li
+      span.alias
+        = alias
+      - if (index == 0)
+        span.default (Default)
+      span.link-sep
+      a.set-default(href="#") Set Default
+      span.link-sep
+      a.remove(href="#") Remove
+  - });
+  
+script(type="text/javascript", src="/js/aliases.js")
+:javascript
+  | $(document).ready(function (){
+  |   $("a.set-default").bind('click', aliases.set_default);
+  |   $("a.remove").bind('click', aliases.remove);
+  |   $("a#add-link").bind('click', function (){$("a#add-link").hide(); $("#alias-add-form").show();});
+  |   $("#alias-add-form").bind('submit', aliases.add);
+  |   $("button.cancel").bind('click', function (){$("a#add-link").show(); $("#alias-add-form").hide(); $("#alias").val('');});
+  | });
