@@ -268,7 +268,8 @@ strong, .bold {
   margin-bottom: 10px;
   padding-bottom: 5px;
   line-height: 1em;
-  border-bottom: 2px dotted #aaa;
+  /*border-bottom: 2px dotted #aaa;*/
+
   color: #444;
   font-size: 167%;
 }
@@ -451,6 +452,40 @@ strong, .bold {
 }
 #main #breadcrumbs .crumb-sep {
   margin: 0 5px;
+}
+#main .article {
+  overflow: auto;
+  border-top: 1px solid #000;
+  border-bottom: 1px dotted #666;
+  margin-bottom: 10px;
+}
+#main .article h1 a, #main .article h1 a:link, #main .article h1 a:active {
+  font-weight: normal;
+  color: #000;
+}
+#main .article h1 a:hover {
+  color: #444;
+  font-weight: normal;
+  text-decoration: none;
+}
+#main .article .byline {
+  font-size: 85%;
+}
+#main .article .editline {
+  font-size: 85%;
+  float: right;
+}
+#main .article .edits {
+  color: #666;
+  font-size: 77%;
+}
+#main .article .edits li {
+  float: right;
+  clear: right;
+}
+#main .article .tagline {
+  font-size: 85%;
+  border-bottom: 1px dotted #888;
 }
 #sidebar {
   float: right;

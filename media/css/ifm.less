@@ -319,7 +319,7 @@ strong,
     margin-bottom: 10px;
     padding-bottom: 5px;
     line-height: 1em;
-    border-bottom: 2px dotted #aaa;
+    /*border-bottom: 2px dotted #aaa;*/
     color: #444;
     font-size: 167%;
   }
@@ -535,6 +535,46 @@ strong,
 		}
 		.crumb-sep {
 			margin: 0 5px;
+		}
+	}
+	
+	.article{
+		overflow: auto;
+		border-top: 1px solid #000;
+		border-bottom: 1px dotted #666;
+		margin-bottom: 10px;
+	
+		h1 {
+			a, a:link, a:active {
+				font-weight: normal;
+				color: #000;
+			}
+			a:hover {
+				color: #444;
+				font-weight: normal;
+				text-decoration: none;
+			}
+		}
+		
+		.byline {
+			font-size: 85%;
+		}
+		.editline {
+			font-size: 85%;
+			float: right;
+		}
+		.edits {
+			color: #666;
+			font-size: 77%;
+			
+			li {
+				float: right;
+				clear: right;
+			}
+		}
+		.tagline {
+			font-size: 85%;
+			border-bottom: 1px dotted #888;
 		}
 	}
 }
