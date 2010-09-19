@@ -1,3 +1,7 @@
+- var crumbs = [{href: "/", text: "Home"}, {href: "/about", text: "About "+system.name}];
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
 h1 About #{system.name}
 p
   | Coming soon...

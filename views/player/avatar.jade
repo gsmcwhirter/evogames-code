@@ -1,3 +1,7 @@
+- var crumbs = [{href: "/", text: "Home"}, {href: "/player/controls", text: "Player Controls"}, {href: "/player/avatar", text: "Player Avatar"}];
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
 h1 Player Avatar
 p
   | #{system.name} uses Gravatars for avatar management. These icons are
