@@ -410,6 +410,9 @@ strong, .bold {
   border-top: 1px solid #222;
   border-bottom: 1px dotted #666;
 }
+#main #alias-add-form {
+  display: none;
+}
 #sidebar {
   float: right;
   width: 350px;
