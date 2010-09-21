@@ -453,6 +453,10 @@ strong, .bold {
 #main #breadcrumbs .crumb-sep {
   margin: 0 5px;
 }
+#main .date {
+  font-size: 85%;
+  color: #666;
+}
 #main .left-col, #main .right-col {
   width: 42%;
   margin: 5px 0px;
@@ -464,8 +468,6 @@ strong, .bold {
 #main .left-col .recent-members .date,
 #main .right-col .recent-members .date {
   float: right;
-  font-size: 85%;
-  color: #666;
 }
 #main .left-col {
   margin-right: 40px;
@@ -487,6 +489,9 @@ strong, .bold {
 }
 #main .article .byline {
   font-size: 85%;
+}
+#main .article .byline .date {
+  font-size: 100%;
 }
 #main .article .editline {
   font-size: 85%;
