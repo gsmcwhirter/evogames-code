@@ -1,0 +1,60 @@
+- var crumbs = [{href: "/", text: "Home"}, {href: "/player/controls", text: "Player Controls"}, {href: "/player/datetime", text: "Date and Time Preferences"}];
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1 Date and Time Preferences
+form(method="post", accept-charset="utf-8")
+  fieldset.font-size
+    table.form.form-two-column
+      tbody
+        tr
+          td.label
+            label(for="timezone") Timezone
+          td.field
+            .field-data
+              select#timezone(name="timezone", size="1")
+                option(value="") Please select...
+                - each tz in timezones
+                  option(value=tz, selected=(data.timezone == tz)) tz
+              span.link-sep
+              label(for="country") filter by:
+              select#coutry(size="1", style="display: none;")
+                option(value="") Select to filter...
+        tr
+          td.label
+            label(for="date_format") Date Format
+          td.field
+            .field-data
+              select#date_format(name="date_format", size="1")
+                - each datef in date_formats
+                  option(value=datef, selected=(data.date_format == datef)) datef
+              span.link-sep
+              span#current-date
+        tr
+          td.label
+            label(for="time_format") Time Format
+          td.field
+            .field-data
+              select#time_format(name="time_format", size="1")
+                - each timef in time_formats
+                  option(value=timef, selected=(data.time_format == timef)) timef
+              span.link-sep
+              span#current-time
+        tr
+          td.label
+            label(for="datetime_format") DateTime Format
+          td.field
+            .field-data
+              select#datetime_format(name="datetime_format", size="1")
+                - each datetimef in datetime_formats
+                  option(value=datetimef, selected=(data.datetime_format == datetimef)) datetimef
+              span.link-sep
+              span#current-datetime            
+        tr
+          td.action(colspan="2")
+            button(type="submit") Save Preferences
+script(type="text/javascript", src="/js/datetime_prefs.js")
+:javascript
+  | $(document).ready(function(){
+  |   datetime_prefs.init();
+  | });
