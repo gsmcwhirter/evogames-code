@@ -7,11 +7,11 @@
   .byline
     span.by by: #{article.authors.join(", ")}
     span.link-sep
-    span.date published on: #{article.status.date}
+    span.date published on: #{datetime(article.status.date)}
   .tagline Tags: #{article.tags.join(", ")}
   .body
     != article.article_body
   - if (article.edits && article.edits.length)
     ul.edits
       - each edit in article.edits
-        li Edited by #{edit.name} on #{edit.date}
+        li Edited by #{edit.name} on #{datetime(edit.date)}

@@ -1,3 +1,6 @@
 [submodule "lib/smtp"]
 	path = lib/smtp
 	url = git://github.com/gsmcwhirter/node-smtp-client.git
+[submodule "lib/node-zoneinfo"]
+	path = lib/node-zoneinfo
+	url = git://github.com/gsmcwhirter/node-zoneinfo.git
