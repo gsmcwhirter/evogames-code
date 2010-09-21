@@ -1,26 +1,33 @@
 {
   "server": {
-      "couchdb_server": 'http://localhost:5984',
-      "couchdb": '',
-      "login_cookie": '',
+      "login_cookie": "login",
       "recaptcha_keys": {
           "example.com": {"public": "", "private": ""}
-      },
-      "smtp_server": "",
-      "smtp_user": "",
-      "smtp_password": "",
-      "smtp_from": "",
-      "smtp_secure": ""
+      }
   },
   "system": {
-      "title": 'The System',
-      "name": 'The System',
-      "copyright": '&copy; Gregory McWhirter 2010',
-      "description": '',
-      "keywords": '',
-      "default_avatar": '/images/default_avatar.gif',
-      "analytics": '',
-      "error_email": 'you@example.com',
+      "title": "",
+      "name": "",
+      "copyright": "",
+      "description": "",
+      "keywords": "",
+      "default_avatar": "",
+      "analytics": "",
+      "error_email": "",
+      "default_timezone": "America/Los_Angeles",
+      "date_format": "Y/m/d",
+      "time_format": "g:i:s a T",
+      "datetime_format": "Y/m/d g:i:s T"
+  },
+  "smtp": {
+      "host": "",
+      "port": 25,
+      "auth_required": true,
+      "user": "",
+      "pass": "",
+      "from_addr": "",
+      "secure": false,
+      "debug": false
   },
   "session_secret": ""
 }

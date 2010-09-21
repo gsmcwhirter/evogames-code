@@ -4,7 +4,7 @@
     - each article in articles
       li
         a(href="/news/view/"+article.slug)= article.subject
-        span.date= article.status.date
+        span.date.short= date(article.status.date)
   a(href="/news") Older Articles...
 
 .right-col
@@ -14,4 +14,4 @@
       li
         span.alias= member.aliases[0]
         span.handle= "@"+member.handle
-        span.date= member.created_at
+        span.date.short= date(member.created_at)

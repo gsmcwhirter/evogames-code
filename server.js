@@ -69,6 +69,24 @@ var server = function (ssl){
             player: function (req, res){
                 return req.player;
             },
+            date: function (req, res){
+                return function (string_or_int, format){
+                    format = format || req.player.date_format || sysconf.date_format || "Y-m-d";
+                    return base.util.date(string_or_int, req.player.timezone || sysconf.default_timezone || "Etc/UTC").format(format);
+                };
+            },
+            time: function (req, res){
+                return function (string_or_int, format){
+                    format = format || req.player.time_format || sysconf.time_format || "H:i:s";
+                    return base.util.date(string_or_int, req.player.timezone || sysconf.default_timezone || "Etc/UTC").format(format);
+                };
+            },
+            datetime: function (req, res){
+                return function (string_or_int, format){
+                    format = format || req.player.datetime_format || sysconf.datetime_format || "";
+                    return base.util.date(string_or_int, req.player.timezone || sysconf.default_timezone || "Etc/UTC").format(format);
+                }
+            },
             menus: function (req, res){
                 var menus = new req.Menus();
                 return function (menu_list){
