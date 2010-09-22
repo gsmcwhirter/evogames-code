@@ -1,4 +1,3 @@
-- var crumbs = [{href: "/", text: "Home"}, {href: "/player/controls", text: "Player Controls"}, {href: "/player/change_email", text: "Change E-Mail Address"}];
 #breadcrumbs
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
 
@@ -7,7 +6,7 @@
   form(method="post", accept-charset="utf-8")
     fieldset.font-size
       input#action-cancel(type="hidden", name="action", value="cancel")
-      table.form.form-two-column
+      table.form
         tbody
           tr
             td.label
@@ -31,7 +30,7 @@ h1 Change E-Mail Address
 form(method="post", accept-charset="utf-8")
   fieldset.font-size
     input#action-change(type="hidden", name="action", value="change")
-    table.form.form-two-column
+    table.form
       tbody
         tr
           td.label

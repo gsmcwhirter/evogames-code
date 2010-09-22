@@ -1,11 +1,10 @@
-- var crumbs = [{href: "/", text: "Home"}, {href: "/player/controls", text: "Player Controls"}, {href: "/player/datetime", text: "Date and Time Preferences"}];
 #breadcrumbs
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
 
 h1 Date and Time Preferences
 form(method="post", accept-charset="utf-8")
   fieldset.font-size
-    table.form.form-two-column
+    table.form
       tbody
         tr
           td.label

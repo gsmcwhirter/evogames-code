@@ -1,4 +1,3 @@
-- var crumbs = [{href: "/", text: "Home"}, {href: "/player/controls", text: "Player Controls"}, {href: "/player/aliases", text: "Player Aliases"}];
 #breadcrumbs
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
   
@@ -10,7 +9,7 @@ h1 Player Aliases
 
 form#alias-add-form(accept-charset="utf-8")
   fieldset.font-size
-    table.form.form-two-column
+    table.form
       tbody
         tr
           td.label
