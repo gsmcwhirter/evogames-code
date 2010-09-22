@@ -371,6 +371,17 @@ strong, .bold {
   position: absolute;
   left: 55%;
 }
+#main table.form.wide input[type=text],
+#main table.form.wide input[type=password],
+#main table.form.wide select,
+#main table.form.wide textarea {
+  width: 90%;
+}
+#main table.form.wide .status-field-ok, #main table.form.wide .status-field-maybe, #main table.form.wide .status-field-not-ok {
+  float: none;
+  position: absolute;
+  left: 95%;
+}
 #main ul.form-error {
   color: #f00;
   margin-bottom: 2px;
@@ -508,6 +519,10 @@ strong, .bold {
 #main .article .tagline {
   font-size: 85%;
   border-bottom: 1px dotted #888;
+}
+#main .content-admin {
+  float: right;
+  font-size: 85%;
 }
 #sidebar {
   float: right;

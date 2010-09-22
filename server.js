@@ -41,8 +41,7 @@ var server = function (ssl){
 	    
 	    app.set('smtp config', base_config().smtp);
 	    
-	    app.error(base.handle404);
-	    app.error(base.handle500);
+	    app.error(base.handleError);
 	    
 	    var sysconf = base_config().system;
 	    sysconf.is_ssl = ssl;
@@ -103,7 +102,6 @@ var server = function (ssl){
 	    app.use(express.compiler({src: __dirname + "/media/css", enable: ["less"]}));
 	    app.use(express.staticProvider(__dirname + "/media"));
 	    app.use(ssl ? mw.forceNonSSL() : mw.nice404());
-	    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 	    
 	    app.set('sys config', config(ssl, 'development'));
 	});

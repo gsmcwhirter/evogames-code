@@ -1,7 +1,10 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
 h1 News Editor
 form(method="post", accept-charset="utf-8")
   fieldset.font-size
-    table.form.form-two-column
+    table.form.wide
       tbody
         tr
           td.label

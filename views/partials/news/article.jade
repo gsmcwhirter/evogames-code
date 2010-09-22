@@ -1,3 +1,7 @@
+- if (typeof full != "undefined" && full)
+  #breadcrumbs
+    != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
 .article
   h1
     a(href="/news/view/"+article.slug)= article.subject
