@@ -12,7 +12,11 @@
     span.by by: #{article.authors.join(", ")}
     span.link-sep
     span.date published on: #{datetime(article.status.date)}
-  .tagline Tags: #{article.tags.join(", ")}
+  .tagline 
+    | Tags: 
+    - each tag in article.tags
+      a(href="/news/tag/"+tag)= tag
+      span.link-sep
   .body
     != article.article_body
   - if (article.edits && article.edits.length)
