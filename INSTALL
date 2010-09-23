@@ -5,8 +5,9 @@ apt-get install g++ autoconf automake #sudo #gnu maketools
 apt-get install git-core #sudo #git
 
 #BASIC INSTALL PROCEDURE
-git clone http://github.com/ry/node.git
-cd node
+curl -O http://nodejs.org/dist/node-v0.2.2.tar.gz
+tar xzf node-v0.2.2.tar.gz
+cd node-v0.2.2
 ./configure
 make
 make install #sudo
@@ -23,25 +24,22 @@ cd ..
 git clone http://github.com/isaacs/npm.git
 curl http://npmjs.org/install.sh | sh #sudo sh
 npm install expresso #sudo
-npm install connect #sudo
-npm install connect-form #sudo
-npm install jade #sudo
+npm install express #sudo #includes connect
+npm install ejs #sudo
+npm install jade@0.4.1 #sudo #0.5.0 was messed up
 npm install underscore #sudo
 npm install less #sudo
-git clone http://github.com/akidee/extensions.js.git extensions
-cp -r extensions /usr/local/lib/node/ #sudo
-git clone http://github.com/akidee/schema.js.git schema
-cp -r schema /usr/local/lib/node/ #sudo
 
 #SETUP NODE DAEMON (optional -- for production/proxy usage)
-#apt-get install monit #sudo
+#apt-get install nginx #sudo #get this configured independently
+#apt-get install monit #sudo #get this configured independently
 cd conf
-cp NodePlayground.conf /etc/init/ #sudo
+cp EvoGames.conf /etc/init/ #sudo
 cp couchdb.conf /etc/init/ #sudo
-cp NodePlayground.monit /etc/monit/conf.d/ #sudo
+cp EvoGames.monit /etc/monit/conf.d/ #sudo
 cp couchdb.monit /etc/monit/conf.d/ #sudo
-cp NodePlayground.nginx /etc/nginx/sites-available #sudo
-ln -s /etc/nginx/sites-available/NodePlayground.nginx /etc/nginx/sites-enabled
+cp EvoGames.nginx /etc/nginx/sites-available #sudo
+ln -s ../sites-available/EvoGames.nginx /etc/nginx/sites-enabled/
 cd ..
 
 #SSL SETUP (optional -- generates self-signed ssl certificate)
