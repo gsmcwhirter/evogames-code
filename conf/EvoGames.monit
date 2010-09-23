@@ -2,8 +2,8 @@
 set logfile /var/log/monit.log
 
 check host nodejsnp with address 127.0.0.1
-    start program = "/sbin/start NodePlayground"
-    stop program  = "/sbin/stop NodePlayground"
+    start program = "/sbin/start EvoGames"
+    stop program  = "/sbin/stop EvoGames"
     if failed port 7080 protocol HTTP
         request /
         with timeout 10 seconds
