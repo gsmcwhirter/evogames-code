@@ -1,14 +1,14 @@
 #footer
-  #footer-left &nbsp;
+  #footer-left= process.version
   #footer-right &nbsp;
   #footer-center
-    a(href="#") Report Bugs
+    a(href="http://evogames.lighthouseapp.com/projects/60532-evogames/tickets/new" rel="blank") Report Bugs
     span.link-sep |
     a(href="#") Site Feedback
     
 #subfooter
   strong #{system.name}:
-  \ 
+  span.link-sep
   a(href="/") Home
   span.link-sep |
   a(href="#") Help
@@ -24,7 +24,7 @@
   a(href="#") Management
   br
   strong Legal:
-  \ 
+  span.link-sep 
   a(href="/tos") Terms of Service
   span.link-sep |
   a(href="/privacy") Privacy Policy
