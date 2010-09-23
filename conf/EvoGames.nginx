@@ -29,7 +29,7 @@ server {
 
     # Static files location
     location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|doc|xls|exe|pdf|ppt|txt|tar|mid|midi|wav|bmp|rtf|js|woff|eot|ttf|svg)$ {
-        root   /var/nodeapps/NodePlayground/media;
+        root   /var/nodeapps/EvoGames/media;
     }
 }
 
@@ -77,6 +77,6 @@ server {
     
     # Static files location
     location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|doc|xls|exe|pdf|ppt|txt|tar|mid|midi|wav|bmp|rtf|js|woff|eot|ttf|svg)$ {
-        root   /var/nodeapps/NodePlayground/media;
+        root   /var/nodeapps/EvoGames/media;
     }
 }
