@@ -487,6 +487,9 @@ strong, .bold {
   border-bottom: 1px dotted #666;
   margin-bottom: 10px;
 }
+#main .article h1 {
+  margin-bottom: 0.1em;
+}
 #main .article h1 a, #main .article h1 a:link, #main .article h1 a:active {
   font-weight: normal;
   color: #000;
@@ -495,6 +498,9 @@ strong, .bold {
   color: #444;
   font-weight: normal;
   text-decoration: none;
+}
+#main .article h2 {
+  margin-top: 0.1em;
 }
 #main .article .byline {
   font-size: 85%;
@@ -516,7 +522,9 @@ strong, .bold {
 }
 #main .article .tagline {
   font-size: 85%;
-  border-bottom: 1px dotted #888;
+  border-bottom: 1px dotted #aaa;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
 }
 #main .content-admin {
   float: right;
