@@ -2,10 +2,10 @@
   #footer-left &nbsp;
   #footer-right &nbsp;
   #footer-center
-    a(href="http://evogames.lighthouseapp.com/projects/60532-evogames/tickets/new", rel="blank") Report Bugs and Request Features
+    a(href="http://evogames.lighthouseapp.com/projects/60532-evogames/tickets/new", rel="blank") Features and Bug Reports
     
 #subfooter
-  strong #{system.name}:
+  strong= system.name+":"
   span.link-sep
   a(href="/") Home
   span.link-sep |
@@ -16,10 +16,9 @@
   a(href="/about") About
   span.link-sep |
   a(href="#") Site Map
-  span.link-sep |
-  span.link-sep 
+  span.link-sep | 
   a(href="/tos") Terms of Service
   span.link-sep |
   a(href="/privacy") Privacy Policy
-  span.link-sep |
+  br
   #{system.copyright}
