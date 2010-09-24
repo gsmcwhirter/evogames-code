@@ -1,0 +1,36 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+  
+h1 Create Group
+form(method="post", accept-charset="utf-8")
+  fieldset.font-size
+    table.form
+      tbody
+        tr
+          td.label
+            label(for="name") Group Name
+          td.field
+            .field-data
+              input#name(type="text", name="name", value=data.name)
+        tr
+          td.label
+            label(for="code") Group Code
+          td.field
+            .field-data
+              #code_status &nbsp;
+              input#code(type="text", name="code", value=data.code)
+        tr
+          td.label
+            label(for="description") Description
+          td.field
+            .field-data
+              textarea#description(name="description")= date.description || ""
+        tr
+          td.action(colspan="2")
+            button(type="submit") Create Group
+
+script(type="text/javascript",src="/js/validators/creategroup.js")
+:javascript
+  | $(document).ready(function(){
+  |   var validator = new validators.create_group(["code"]);
+  | });
