@@ -18,7 +18,6 @@ var config = function (ssl, env){
 var server = function (ssl){
 	ssl = ssl || false;
 	var app = express.createServer(
-	    //mw.inspectHeaders(),
 	    express.logger(),
 	    //express.gzip(),
 	    express.conditionalGet(),
