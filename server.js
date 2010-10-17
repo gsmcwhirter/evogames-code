@@ -19,12 +19,11 @@ var server = function (ssl){
 	ssl = ssl || false;
 	var app = express.createServer(
 	    express.logger(),
-	    //express.gzip(),
 	    express.conditionalGet(),
 	    express.cookieDecoder(),
-	    mw.monkeyHeaders('before'),
+	    //mw.monkeyHeaders('before'),
 	    express.session({fingerprint: base.connectionFingerprint, secret: base_config().session_secret}),
-	    mw.monkeyHeaders('after'),
+	    //mw.monkeyHeaders('after'),
 	    express.bodyDecoder(),
 	    express.cache()
 	);
