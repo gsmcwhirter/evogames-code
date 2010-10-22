@@ -1,6 +1,9 @@
 function (doc){
     if (doc.type == "ticket")
     {
-        emit(doc.sorting, 1);
+        if (doc.status && doc.status.category && doc.status.category != "closed")
+        {
+            emit(doc.sorting, 1);
+        }
     }
 }
