@@ -1,7 +1,6 @@
 var express = require('express'),
     base = require('./lib/base'),
-    fs = require('fs'),
-    mw = base.middleware;
+    fs = require('fs');
 
 require('./lib/base/mixins');
     
@@ -21,16 +20,14 @@ var server = function (ssl){
 	    express.logger(),
 	    express.conditionalGet(),
 	    express.cookieDecoder(),
-	    //mw.monkeyHeaders('before'),
 	    express.session({fingerprint: base.connectionFingerprint, secret: base_config().session_secret}),
-	    //mw.monkeyHeaders('after'),
 	    express.bodyDecoder(),
 	    express.cache()
 	);
 	
 	app.configure(function (){
-	    app.use(mw.determineLogin());
-	    app.use(mw.prepareMenus());
+	    app.use(base.middleware.determineLogin());
+	    app.use(base.middleware.prepareMenus());
 	    app.use(app.router);
 	    
 	    app.set('views', __dirname+"/views");
@@ -50,15 +47,20 @@ var server = function (ssl){
             avatar: function (email, size){
                 if (typeof email == "object" && email.email_history && email.email_history.length)
                 {
-                    var us = require('underscore');
-                    email = us._.last(email.email_history).email;
+                    if (email.gravatar_url)
+                    {
+                        return email.gravatar_url + "&d=" + encodeURI("http://www.evogames.org" + sysconf.default_avatar);
+                    }
+                    else
+                    {
+                        var us = require('underscore');
+                        email = us._.last(email.email_history).email;
+                    }
                 }
                 
                 email = email + "";
                 size = size || 64;
-                return "http://www.gravatar.com/avatar/" +
-                    base.util.md5_hex(email.trim().toLowerCase()) +
-                    "?r=pg&s=" + size + "&d="+encodeURI("http://www.evogames.org"+sysconf.default_avatar);
+                return base.util.gravatar_url(email, size) + "&d=" + encodeURI("http://www.evogames.org" + sysconf.default_avatar);;
             }
         });
         
@@ -99,13 +101,13 @@ var server = function (ssl){
 	app.configure('development', function (){
 	    app.use(express.compiler({src: __dirname + "/media/css", enable: ["less"]}));
 	    app.use(express.staticProvider(__dirname + "/media"));
-	    app.use(ssl ? mw.forceNonSSL() : mw.nice404());
+	    app.use(ssl ? base.middleware.forceNonSSL() : base.middleware.nice404());
 	    
 	    app.set('sys config', config(ssl, 'development'));
 	});
 	
 	app.configure('production', function (){
-	    app.use(ssl ? mw.forceNonSSL() : mw.nice404());
+	    app.use(ssl ? base.middleware.forceNonSSL() : base.middleware.nice404());
 	    
 	    app.set('sys config', config(ssl, 'production'));
 	});
