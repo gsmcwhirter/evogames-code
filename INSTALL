@@ -29,6 +29,14 @@ npm install ejs #sudo
 npm install jade@0.4.1 #sudo #0.5.0 was messed up
 npm install underscore #sudo
 npm install less #sudo
+curl -o discount-1.6.8.tar.gz http://download.github.com/Orc-discount-v1.6.8-0-gc673eaa.tar.gz
+tar xzf discount-1.6.8.tar.gz
+cd Orc-discount-0abaf53
+./configure --enable-dl-tag --enable-pandoc-header --enable-superscript --relaxed-emphasis --with-tabstops=2 
+#add -fPIC to Makefile CC variable
+make
+make install #sudo
+npm install markdown
 
 #SETUP NODE DAEMON (optional -- for production/proxy usage)
 #apt-get install nginx #sudo #get this configured independently
