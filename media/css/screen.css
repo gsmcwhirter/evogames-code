@@ -363,6 +363,9 @@ strong, .bold {font-weight:bold;}
 #main fieldset.narrow-fields input[type=text], #main fieldset.narrow-fields input[type=password], #main fieldset.narrow-fields input[type=email], #main fieldset.narrow-fields input[type=url], #main fieldset.narrow-fields input[type=number], #main fieldset.narrow-fields input[type=date], #main fieldset.narrow-fields input[type=datetime], #main fieldset.narrow-fields input[type=month], #main fieldset.narrow-fields input[type=week], #main fieldset.narrow-fields input[type=time], #main fieldset.narrow-fields input[type=search], #main fieldset.narrow-fields input[type=color], #main fieldset.narrow-fields select, #main fieldset.narrow-fields textarea {width:50%;}
 #main ul.form-error {color:#f00;margin-bottom:2px;padding:10px;border:2px solid #800;background-color:#ddd;display:block;font-weight:bold;}
 #main ul.form-error li {color:#f00;}
+#main #new-ticket-form {display:none;}
+#noscript {background-color:#1a0000;color:#f00;font-weight:bold;border:2px solid red;margin-top:10px;}
+#noscript p {padding:5px;}
 #sidebar {font-family:sans-serif;font-size:108%;line-height:1.6em;}
 #sidebar h3 {font-family:'FontinSansSmallCaps', sans-serif;font-size:138.5%;font-weight:bold;line-height:1em;border-bottom:1px solid #aaa;margin-bottom:0;}
 #sidebar ul {padding:0 0 0 20px;margin:0;}
@@ -383,7 +386,9 @@ img.avatar {max-width:64px;max-height:64px;}
 /* semantic class names */
 #container2 {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:950px;margin-right:0;}
 #footer {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:870px;padding-right:40px;padding-left:40px;}
-#sidebar {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:190px;padding-right:40px;}
-#main {float:left;margin-right:10px;width:630px;padding-left:40px;padding-right:24px;margin-right:25px;border-right:1px solid #ddd;}
+#subfooter {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:950px;margin-right:0;}
+#sidebar {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:230px;padding-right:40px;}
+#noscript {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:950px;margin-right:0;}
+#main {float:left;margin-right:10px;width:590px;padding-left:40px;padding-right:24px;margin-right:25px;border-right:1px solid #ddd;}
 #header {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:950px;margin-right:0;}
 #container {width:950px;margin:0 auto;display:block;margin:0 auto;text-align:left;background-color:transparent !important;}

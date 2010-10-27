@@ -11,7 +11,6 @@ html
     link(rel="icon", type="image/x-icon", href="/favicon.ico")
     link(rel="stylesheet", type="text/css", media="all", href="/css/reset-fonts.css")
     link(rel="stylesheet", type="text/css", media="all", href="/css/prettify.css")
-    //link(rel="stylesheet", type="text/css", media="all", href="/css/jquery-ui.css")
     link(rel="stylesheet", type="text/css", media="screen,projection", href="/css/screen.css")
     link(rel="stylesheet", type="text/css", media="print", href="/css/print.css")
     
@@ -26,6 +25,7 @@ html
     
   body
     #container
+      != partial('noscript')
       #header
         a(href="/")
           h1= system.name
@@ -40,7 +40,7 @@ html
         
         #sidebar
           #player-info.sidebar-div
-            != partial('statusbox', {collection: [player], as: 'player'})
+            != partial('statusbox', {object: player, as: 'player'})
           
           #menu.sidebar-div
             h3 Navigation
@@ -49,9 +49,9 @@ html
           
           #about.sidebar-div
             h3 About #{system.name}
-            != partial('description', {collection: [true], as: 'is_true'})
+            != partial('description')
             
-        != partial('footer', {collection: [true], as: 'is_true'})
+        != partial('footer')
       #subfooter &nbsp;
       
 	script(type="text/javascript", src="/js/system.js")    
