@@ -1,0 +1,31 @@
+form(method="post",accept-charset="utf-8")
+  fieldset
+    .form-line
+      label(for="subject") Subject
+      br
+      input#subject.title(type="text", name="subject")
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="type") Issue Type
+      br
+      select#type(name="type", size="1")
+        option(value="-") Please select...
+        - each type in ["bug report","feature request","other"]
+          option(value=type)= type
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="body") Issue Description
+      br
+      textarea#body(name="body")
+    .form-line
+      button#submit.button.positive(type="submit")
+        img(src="/css/icons/tick.png", alt="")
+        | &#32;Save Issue
+      button#cancel.button.negative(type="button")
+        img(src="/css/icons/cross.png", alt="")
+        | &#32;Cancel
+          
+script(type="text/javascript", src="/js/validators/ticketsubject.js")
+script(type="text/javascript", src="/js/validators/tickettype.js")
