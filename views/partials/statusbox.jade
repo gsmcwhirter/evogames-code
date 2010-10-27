@@ -1,7 +1,6 @@
-- if (player)
-  #status-info
-    #status-avatar
-      img.avatar(alt="Player Avatar", src=avatar(player))
+#player-info
+  - if (player)
+    img.avatar(alt="Player Avatar", src=avatar(player))
     span
       span.handle.only @#{player.handle}
       span.link-sep
@@ -13,10 +12,8 @@
     a(href="/player/controls") Controls
     span.link-sep |
     a(href="/player/logout") Log Out
-- else
-  #status-info
-    #status-avatar
-      img.avatar(alt="Player Avatar", src=system.default_avatar)
+  - else
+    img.avatar(alt="Player Avatar", src=system.default_avatar)
     span Welcome, Guest!
     br
     a(href="/player/login") Log In

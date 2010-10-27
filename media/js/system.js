@@ -1,172 +1,195 @@
-// Bust out of frames!
-if (top != self) top.location.href = location.href;
+$("a[rel=blank]").evently({
+    _init: function (){
+        $(this).attr("target","_blank");
+    }
+});
 
-var configs = {
-    lightbox: {
-        overlayBgColor: '#000',
-        overlayOpacity: 0.8,
-        imageBlank: '/images/lightbox/blank.gif',
-        imageLoading: '/images/lightbox/loading.gif',
-        imageBtnClose: '/images/lightbox/btn-close.gif',
-        imageBtnPrev: '/images/lightbox/btn-prev.gif',
-        imageBtnNext: '/images/lightbox/btn-next.gif',
-        containerResizeSpeed: 400
+$("#flash").evently({
+    _init: {
+        before: function (){
+            var self = $(this);
+            $("div", self).unbind("delayhighlight")
+                .unbind("highlight");
+            $("div>.x", self).remove();
+            $("div", self).prepend("<span class='x'>x</span>");
+        },
+        selectors: {
+            "div": {
+                "delayhighlight": function (){
+                    var self = $(this);
+                    if (!self.hasClass("done")){
+                        self.addClass("done");
+                        setTimeout(function (){ self.trigger("highlight"); }, 1000);
+                    }
+                },
+                
+                "highlight": function (){
+                    var self = $(this);
+                    self.fadeTo("slow",0.5);
+                }
+            },
+            "div>.x": {
+                click: function (){
+                    var self = $(this);
+                    self.parent().remove();
+                }
+            }
+        },
+        after: function (){
+            var self = $(this)
+            $("div", self).trigger("delayhighlight");
+        }
+    },
+    
+    "info": function (e, msg){
+        var self = $(this);
+        self.append("<div class='info'><span><strong>Info:</strong> "+msg+"</span></div>");
+        self.trigger("_init");
+    },
+    
+    "error": function (e, msg){
+        var self = $(this);
+        self.append("<div class='error'><span><strong>Error:</strong> "+msg+"</span></div>");
+        self.trigger("_init");
     }
-    , tinymce_page: {
-        strict_loading_mode : true,
-        mode: 'specific_textareas',
-        editor_selector: 'site_page_editor',
-        theme : "advanced",
-        plugins : "table,advhr,advimage,advlink,preview,searchreplace,contextmenu,xhtmlxtras,safari,style",
-        relative_urls : false,
-        remove_linebreaks : false,
-        theme_advanced_buttons1_add : "fontselect,fontsizeselect",
-        theme_advanced_buttons2_add : "separator,preview,zoom,separator,forecolor,backcolor",
-        theme_advanced_buttons2_add_before: "cut,copy,paste,separator,search,replace,separator",
-        theme_advanced_buttons3_add_before : "tablecontrols,separator",
-        theme_advanced_buttons3_add : "cite,ins,del,abbr,acronym,styleprops",
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_toolbar_align : "left",
-        theme_advanced_statusbar_location : "bottom",
-        theme_advanced_resizing: true,
-        extended_valid_elements : "s,a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style],style,center",
-        content_css : "/css/reset-fonts.css,/css/jquery-ui.css,/css/lightbox.css,/css/ifm.css",
-        body_class : "tinymce"
-    }
-    , tinymce_bbcode: {
-        strict_loading_mode : true,
-        mode : "specific_textareas",
-        editor_selector: 'site_bbcode_editor',
-        theme : "advanced",
-        plugins : "bbcode",
-        relative_urls : false,
-        theme_advanced_buttons1 : "bold,italic,underline,undo,redo,link,unlink,image,forecolor,styleselect,removeformat,cleanup",
-        theme_advanced_buttons2 : "",
-        theme_advanced_buttons3 : "",
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_toolbar_align : "left",
-        theme_advanced_styles : "quote=quoteStyle",
-        content_css : "bbcode.css",
-        entity_encoding : "raw",
-        add_unload_trigger : false,
-        remove_linebreaks : false,
-        force_br_newlines : true,
-        forced_root_block : ''
-    }
-};
+});
 
-var site = {
-    init: function(){
-        tinyMCE.init(configs.tinymce_page);
-        tinyMCE.init(configs.tinymce_bbcode);
-        site.config_menus();
-        site.init_link_rels();
-        $("button").button();
-        $(".marquee-vert").scrollable({circular: true, vertical: true}).autoscroll({autoplay: true});
-        $(".marquee-horiz").scrollable({circular: true}).autoscroll({autoplay: true});
-        $("a.lightbox").lightBox(configs.lightbox);
-        site.fade_flash();
+$(".menu-outer").evently({
+    _init: {
+        selectors: {
+            ".menu-inner": {
+                "show": function (){
+                    $(this).show();
+                },
+                "hide": function (){
+                    $(this).hide();
+                },
+                "slideDown": function (){
+                    $(this).slideDown(500);
+                },
+                "slideUp": function (){
+                    $(this).slideUp(500);
+                }
+            },
+            ".menu-header .icon": {
+                "up_arrow": function (){
+                    $(this).removeClass("ui-icon-triangle-1-s")
+                        .addClass("ui-icon-triangle-1-n");
+                },
+                "down_arrow": function (){
+                    $(this).removeClass("ui-icon-triangle-1-s")
+                        .addClass("ui-icon-triangle-1-n");
+                }
+            },
+            ".menu-inner>li>.menu-item[title]": {
+                "set_tooltip": function (){
+                    $(this).tooltip({
+                        position: "center right",
+                        offset: [0, 2],
+                        effect: "slide",
+                        opacity: 1.0,
+                        direction: 'right',
+                        bounce: false,
+                        slideOffset: 2
+                    });
+                }
+            }
+        },
+        
+        after: function (){
+            var self = $(this);
+            
+            $(".menu-header .icon").addClass("ui-icon");
+            $(".menu-inner>li>.menu-item[title]", self).trigger("set_tooltip");
+            
+            if (self.hasClass("collapse")){
+                $(".menu-header .clickable", self).toggle(
+                    function (){ self.trigger("expand"); },
+                    function (){ self.trigger("collapse"); }
+                );
+                self.trigger("collapse", [true]);
+            } 
+            else if (self.hasClass("expand")){
+                $(".menu-header .clickable", self).toggle(
+                    function (){ self.trigger("collapse"); },
+                    function (){ self.trigger("expand"); }
+                );
+                self.trigger("expand", [true]);
+            }
+        }
+    },
+    
+    collapse: function (e, instant){
+        var self = $(this)
+        self.removeClass("expand").addClass("collapse");
+        if (instant){
+            $(".menu-inner", self).trigger("hide");
+        }
+        else{
+            $(".menu-inner", self).trigger("slideUp");
+        }
+        $(".menu-header .icon", self).trigger("down_arrow");
+    },
+    
+    expand: function (e, instant){
+        var self = $(this);
+        self.removeClass("collapse").addClass("expand");
+        if (instant){
+            $(".menu-inner", self).trigger("show");
+        }
+        else {
+            $(".menu-inner", self).trigger("slideDown");
+        }
+        $(".menu-header .icon", self).trigger("up_arrow");
     }
-    , config_menus: function(){
-        $(".menu-outer.collapse .menu-inner").hide();
-        $(".menu-outer.collapse .menu-header .icon").addClass("ui-icon")
-                                                    .addClass("ui-icon-triangle-1-s");
-        $(".menu-outer.collapse .menu-header .clickable").toggle(menu.expand, menu.collapse);
-        $(".menu-outer.expand .menu-header .icon").addClass("ui-icon")
-                                                  .addClass("ui-icon-triangle-1-n");
-        $(".menu-outer.expand .menu-header .clickable").toggle(menu.collapse, menu.expand);
-        $(".menu-inner>li>.menu-item[title]").tooltip({
+    
+});
+
+$(".field-status").evently({
+    "refresh": function (){
+        var self = $(this);
+        var span = $("span", self);
+        var classes = span.attr('class');
+        var title = span.attr('title');
+        var new_span = $("<span class='"+classes+"' title='"+title+"'>&nbsp;</span>").tooltip({
             position: "center right",
-            offset: [0, 2],
-            effect: "slide",
-            opacity: 1.0,
-            direction: 'right',
-            bounce: false,
-            slideOffset: 2
+            offset: [-2, 10],
+            effect: "toggle",
+            opacity: 1.0
         });
-    }
-    , init_link_rels: function (){
-        $("a[rel=blank]").attr("target","_blank");
-    }
-    , fade_flash: function (){
-        site.flash_highlight("#flash .ui-widget>div.error");
-    }
-    , flash_highlight: function(target){
-        var target = $(target);
-        setTimeout(function (){
-            target.animate({"backgroundColor": "#ccc", "color": "#cd0a0a"}, "slow", "swing")
-                  .find(".ui-icon").addClass('alt');
-        }, 1000);
-    }
-    , flash: function (type, message){
-        if (type == 'error')
-        {
-            var ndiv = $("<div class='ui-widget'><div class='ui-state-error ui-corner-all error'><p><span class='ui-icon ui-icon-alert'></span><strong>Error:</strong> "+message+"</p></div></div>");
-            $("#flash").append(ndiv);
-            site.flash_highlight("#flash .ui-widget>div.error:last");
-        }
-        else if (type == 'info')
-        {
-            $("#flash").append("<div class='ui-widget'><div class='ui-state-highlight ui-corner-all info'><p><span class='ui-icon ui-icon-info'></span><strong>Info:</strong> "+message+"</p></div></div>");
-        }
-    }
-};
-
-var menu = {
-    expand: function(event){
-        var menu_block = $(this).parent().parent();
-        menu_block.removeClass('collapse').addClass('expand');
-        $(".menu-header .icon",menu_block).removeClass('ui-icon-triangle-1-s')
-                                          .addClass('ui-icon-triangle-1-n');
-        $(".menu-inner",menu_block).slideDown(500);
-        return false;
-    }
-    , collapse: function(event){
-        var menu_block = $(this).parent().parent();
-        menu_block.removeClass('expand').addClass('collapse');
-        $(".menu-header .icon",menu_block).removeClass('ui-icon-triangle-1-n')
-                                          .addClass('ui-icon-triangle-1-s');
-        $(".menu-inner",menu_block).slideUp(500);
-        return false;
-    }
-}
-
-var validators = {
-    validator: function (){
-        this.set_tooltip = function (field) {
-            var id = $("#"+field+"_status").attr('id');
-            var classes = $("#"+field+"_status").attr('class');
-            var title = $("#"+field+"_status").attr('title');
-            var new_span = $("<span id='"+id+"' class='"+classes+"' title='"+title+"'>&nbsp;</span>").tooltip({
-                position: "center right",
-                offset: [-2, 10],
-                effect: "toggle",
-                opacity: 1.0
-            });
-            $("#"+field+"_status[title]").replaceWith(new_span);
-        };
         
-        this.set_status_bad = function (sid, msg){
-            $(sid).removeClass("status-field-ok")
-                .removeClass("status-field-maybe")
-                .addClass("status-field-not-ok")
-                .attr("title",msg);
-        };
+        span.replaceWith(new_span);
+    },
+    
+    "bad": function (e, msg){
+        var self = $(this);
+        self.css("border-color", "#800");
+        $("span", self).removeClass("status-field-ok")
+                       .removeClass("status-field-maybe")
+                       .addClass("status-field-not-ok")
+                       .attr("title",msg);
+        self.trigger("refresh");
+    },
+    
+    "ok": function (e, msg){
+        var self = $(this);
+        msg = msg || "OK";
         
-        this.set_status_ok = function (sid, msg){
-            $(sid).removeClass("status-field-not-ok")
-                .removeClass("status-field-maybe")
-                .addClass("status-field-ok")
-                .attr("title",msg);
-        };
-        
-        this.set_status_maybe = function (sid, msg){
-            $(sid).removeClass("status-field-not-ok")
-                .removeClass("status-field-ok")
-                .addClass("status-field-maybe")
-                .attr("title",msg);
-        };
+        self.css("border-color", "#080");
+        $("span", self).removeClass("status-field-not-ok")
+                       .removeClass("status-field-maybe")
+                       .addClass("status-field-ok")
+                       .attr("title",msg);
+        self.trigger("refresh");
+    },
+    
+    "maybe": function (e, msg){
+        var self = $(this);
+        self.css("border-color", "#008");
+        $("span", self).removeClass("status-field-not-ok")
+                       .removeClass("status-field-ok")
+                       .addClass("status-field-maybe")
+                       .attr("title",msg);
+        self.trigger("refresh");
     }
-};
-
-$(document).ready(site.init);
+});
