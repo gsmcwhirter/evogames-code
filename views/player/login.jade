@@ -1,41 +1,24 @@
 h1 Player Log In
 form(method="post", accept-charset="utf-8")
-  fieldset.font-size
-    table.form
-      tbody
-        tr
-          td.label
-            label(for="email") E-Mail Address
-          td.field
-            - if (messages["email"])
-              ul.field-error
-                - each msg in messages["email"]
-                  li= "E-Mail address "+msg
-            .field-data
-              input#email(type="text", name="email", value=errors ? data.email : "")
-        tr
-          td.label
-            label(for="password") Password
-          td.field
-            - if (messages["password"])
-              ul.field-error
-                - each msg in messages["password"]
-                  li= "Password "+msg
-            .field-data
-              input#password(type="password", name="password", value=errors ? data.password : "")
-        tr
-          td.label
-            label Options
-          td.field
-            input(type="checkbox", name="remember_me", id="remember_me", value="yes")
-            \ 
-            label(for="remember_me") Remember Login?
-        tr
-          td.action(colspan="2")
-            input#referrer(type="hidden", name="referrer", value=referrer)
-            button(type="submit") Log In
-        tr
-          td.action(colspan="2")
-            a(href="/player/lostpass") Lost Password?
-            span.link-sep |
-            a(href="/player/register") Register
+  fieldset
+    .form-line
+      label(for="email") E-Mail Address
+      br
+      input#email.text(type="email", name="email", value=errors ? data.email : "")
+    .form-line
+      label(for="password") Password
+      br
+      input#password.text(type="password", name="password", value=errors ? data.password : "")
+    .form-line
+      input(type="checkbox", name="remember_me", id="remember_me", value="yes") 
+      | &#32;
+      label(for="remember_me") Remember Login?
+    .form-line
+      input#referrer(type="hidden", name="referrer", value=referrer)
+      button.button.positive(type="submit")
+        img(src="/css/icons/tick.png",alt="")
+        | &#32;Log In
+    .form-line
+      a(href="/player/lostpass") Lost Password?
+      span.link-sep |
+      a(href="/player/register") Register

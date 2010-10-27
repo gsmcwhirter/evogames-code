@@ -1,105 +1,211 @@
-var aliases = {
-    remove: function (event){
-        var li = $(event.target).parent();
-        var alias = $.trim(li.find(".alias").html());
+$("#aliases").evently({
+
+    _init: {
+        before: function (){
+            $("a.set-default").unbind('click.set-default');
+            $("a.remove").unbind('click.remove');
+        },
+        selectors: {
+            "a.set-default": {
+                "click.set-default": function (){
+                    $("#aliases").trigger("save_default", [$(this).parent()]);
+                    return false;
+                }
+            },
+            
+            "a.remove": {
+                "click.remove": function (){
+                    $("#aliases").trigger("remove", [$(this).parent()]);
+                    return false;
+                }
+            }
+        },
+        
+        after: function (){
+        
+        }
+    },
+    
+    "set_default": function (e, target){
+        var self = $(this);
+        
+        self.trigger("clear_default");
+        if (target){
+            target = $(target);
+        
+            self.prepend(target.detach());
+        }
+        else {
+            target = $("li.alias", self).first();
+        }
+        $(".alias", target).after("<span class='default'>(Default)</span>");
+        
+    },
+    
+    "save_default": function (e, target){
+        var self = $(this);
+        target = $(target);
+        if (!$(".default", target).length){
+            var alias = $.trim($(".alias", target).html());
+            $.ajax({
+                type: 'put',
+                url: '/player/aliases/default',
+                data: {alias: alias},
+                dataType: 'json',
+                success: function (data, textStatus){
+                    if (data.ok)
+                    {
+                        $("#flash").trigger("info", ['Set default alias successfully.']);
+                        self.trigger("set_default", [target]);
+                    }
+                    else
+                    {
+                        $("#flash").trigger('error', ['Default alias not set: '+data.error]);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown){
+                    $("#flash").trigger('error', 'Request error');
+                }
+            });
+        }
+    },
+    
+    "remove_default": function (e, target){
+        $(".default", $(target)).remove();
+    },
+    
+    "remove": function (e, target){
+        var self = $(this);
+        target = $(target);
+        
+        var alias = $.trim($(".alias", target).html());
         $.ajax({
             type: 'delete',
             url: '/player/aliases/remove/'+alias,
             success: function (data, textStatus){
                 if (data.ok)
                 {
-                    site.flash('info', 'Alias removed successfully.');
-                    li.remove();
-                    $("#aliases .default").remove();
-                    $("#aliases").children().first().children(".alias").after($("<span class='default'>(Default)</span>"));
+                    $("#flash").trigger('info', ['Alias removed successfully.']);
+                    target.remove();
+                    $("#aliases").trigger("set_default");
                 }
                 else
                 {
-                    site.flash('error', 'Alias not removed: '+data.error);
+                    $("#flash").trigger('error', ['Alias not removed: '+data.error]);
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown){
-                site.flash('error', 'Request error');
+                $("#flash").trigger('error', 'Request error');
             }
         });
-        
-        return false;
     },
-    set_default: function (event){
-        var li = $(event.target).parent();
-        var alias = $.trim(li.find(".alias").html());
-        $.ajax({
-            type: 'put',
-            url: '/player/aliases/default',
-            data: {alias: alias},
-            dataType: 'json',
-            success: function (data, textStatus){
-                if (data.ok)
-                {
-                    site.flash('info', 'Set default alias successfully.');
-                    $("#aliases").find(".default").remove();
-                    li.detach().prependTo("#aliases").children(".alias").after($("<span class='default'>(Default)</span>"));
-                }
-                else
-                {
-                    site.flash('error', 'Default alias not set: '+data.error);
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown){
-                site.flash('error', 'Request error');
-            }
-        });
-        
-        return false;
+    
+    "clear_default": function (){
+        var self = $(this);
+        $("li.alias .default", self).remove();
     },
-    add: function (event){
-        $.ajax({
-            type: 'put',
-            url: '/player/aliases/add',
-            data: $(this).serialize(),
-            dataType: 'json',
-            processData: false,
-            success: function (data, textStatus){
-                if (data.ok)
-                {
-                    site.flash('info', 'Alias added successfully.');
-                    if (data.message != "alias exists")
-                    {
-                        aliases.display_alias(data.alias);
-                    }
-                    
-                    $("#add-link").show();
-                    $("#alias-add-form").hide();
-                    $("#alias").val('');
-                }
-                else
-                {
-                    site.flash('error', 'Alias not added: '+data.error);
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown){
-                site.flash('error', 'Request error');
-            }
-        });
-        
-        return false;
+    
+    "add": function (e, alias){
+        var self = $(this);
+        self.append($("<li class='alias'><span class='alias'>"+alias+"</span></li>")
+                        .append("<a href='#' class='remove'>Remove</a>")
+                        .append("<a href='#' class='set-default'>Set Default</a>"));
+        self.trigger("_init");
     },
-    refresh: function (event){
+    
+    "refresh": function (){
+        var self = $(this);
         $.get("/player/aliases/list", function (data){
             if (data.ok)
             {
-                $("#aliases").empty();
+                self.empty();
                 data.aliases.forEach(function (alias){
-                    aliases.display_alias(alias);
+                    self.trigger("add", [alias]);
                 });
+                self.trigger("set_default");
+            }
+        });
+    }
+});
+
+$("a#add-link").evently({
+    click: function (){
+        var self = $(this);
+        self.trigger("hide");
+        $("#alias-add-form").trigger("show");
+        
+        return false;
+    },
+    
+    hide: function (){
+        var self = $(this);
+        self.hide();
+    },
+    
+    show: function (){
+        var self = $(this);
+        self.show();
+    }
+});
+
+$("#alias-add-form").evently({
+    submit: function (){
+        var self = $(this);
+        $.ajax({
+            type: 'put',
+            url: '/player/aliases/add',
+            data: self.serialize(),
+            dataType: 'json',
+            processData: false,
+            success: function (data, textStatus){
+                if (data.ok){
+                    $("#flash").trigger('info', ['Alias added successfully.']);
+                    if (data.message != "alias exists"){
+                        $("#aliases").trigger("add", [data.alias]);
+                    }
+                    
+                    $("#alias-add-form").trigger("hide");
+                }
+                else {
+                    $("#flash").trigger('error', ['Alias not added: '+data.error]);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown){
+                $("#flash").trigger('error', ['Request error']);
             }
         });
         
         return false;
     },
-    display_alias: function (alias){
-        $("#aliases").append($("<li><span class='alias'>"+alias+"</span></li>")
-                        .append($("<a href='#' class='remove'>Remove</a>").bind('click', aliases.remove))
-                        .append($("<a href='#' class='set-default'>Set Default</a>").bind('click', aliases.set_default)));
+    
+    show: function (){
+        var self = $(this);
+        self.show();
+        $(".alias", self).first().focus();
+    },
+    
+    hide: function (){
+        var self = $(this);
+        self.hide();
+        $("input[name=alias]", self).val('');
+        $("a#add-link").trigger("show");
     }
-};
+});
+
+$("button.cancel").evently({
+    click: function (){
+        $("#alias-add-form").trigger("hide");
+        
+        return false;
+    }
+});
+
+$("a#refresh-link").evently({
+    click: function (){
+        console.log("refresh");
+        $("#aliases").trigger("refresh");
+        
+        return false;
+    }
+});
+

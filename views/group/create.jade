@@ -3,34 +3,24 @@
   
 h1 Create Group
 form(method="post", accept-charset="utf-8")
-  fieldset.font-size
-    table.form
-      tbody
-        tr
-          td.label
-            label(for="name") Group Name
-          td.field
-            .field-data
-              input#name(type="text", name="name", value=data.name)
-        tr
-          td.label
-            label(for="code") Group Code
-          td.field
-            .field-data
-              #code_status &nbsp;
-              input#code(type="text", name="code", value=data.code)
-        tr
-          td.label
-            label(for="description") Description
-          td.field
-            .field-data
-              textarea#description(name="description")= date.description || ""
-        tr
-          td.action(colspan="2")
-            button(type="submit") Create Group
+  fieldset
+    .form-line
+      label(for="name") Group Name
+      br
+      input#name.title(type="text", name="name", value=data.name)
+    .form-line
+      label(for="code") Group Code
+      br
+      input#code.text(type="text", name="code", value=data.code)
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="description") Description  
+      br
+      textarea#description(name="description")= date.description || ""
+    .form-line
+      button.button.positive(type="submit")
+        img(src="/css/icons/tick.png",alt="")
+        | &#32;Create Group
 
-script(type="text/javascript",src="/js/validators/creategroup.js")
-:javascript
-  | $(document).ready(function(){
-  |   var validator = new validators.create_group(["code"]);
-  | });
+script(type="text/javascript",src="/js/validators/groupcode.js")

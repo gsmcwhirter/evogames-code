@@ -6,58 +6,55 @@ html
     meta(name="copyright", content=system.copyright)
     meta(name="description", content=system.description)
     meta(name="keywords", content=system.keywords)
-    meta(http-equiv="X-UA-Compatible", content="IE=8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
     
     link(rel="icon", type="image/x-icon", href="/favicon.ico")
     link(rel="stylesheet", type="text/css", media="all", href="/css/reset-fonts.css")
-    link(rel="stylesheet", type="text/css", media="all", href="/css/lightbox.css")
     link(rel="stylesheet", type="text/css", media="all", href="/css/prettify.css")
-    link(rel="stylesheet", type="text/css", media="all", href="/css/jquery-ui.css")
-    link(rel="stylesheet", type="text/css", media="all", href="/css/ifm.css")
+    //link(rel="stylesheet", type="text/css", media="all", href="/css/jquery-ui.css")
+    link(rel="stylesheet", type="text/css", media="screen,projection", href="/css/screen.css")
+    link(rel="stylesheet", type="text/css", media="print", href="/css/print.css")
     
     script(type="text/javascript", src="/js/jquery/jquery.min.js")
-    script(type="text/javascript", src="/js/jquery/jquery-ui.min.js")
-    script(type="text/javascript", src="/js/jquery/timepicker.js")
-    script(type="text/javascript", src="/js/jquery/lightbox.min.js")
+    script(type="text/javascript", src="/js/jquery/mustache.js")
+    script(type="text/javascript", src="/js/jquery/pathbinder.js")
+    script(type="text/javascript", src="/js/jquery/evently.js")
     script(type="text/javascript", src="/js/jquery/tools.min.js")
-    script(type="text/javascript", src="/js/swfobject/videoembed.js")
-    script(type="text/javascript", src="/js/tinymce/tiny_mce.js")
     script(type="text/javascript", src="/js/lib/sha1.js")
     script(type="text/javascript", src="/js/lib/underscore.min.js")
-    script(type="text/javascript", src="/js/system.js")
+    script(type="text/javascript", src="/js/base.js")
     
   body
     #container
       #header
         a(href="/")
-          h1 EvoGames
+          h1= system.name
           .tagline Event, tournament, and ladder statistics done right.
-    
-      #sidebar
-        -if (player)
-          .aside
-            h3 Current Player
-            .inner
-              != partial('statusbox',{collection: [player], as: 'player'})
+          
+      #container2
+        #main
+          #flash
+            != partial('flash_info', {collection: flash('info') || [], as: 'msg'})
+            != partial('flash_error', {collection: flash('error') || [], as: 'msg'})
+          != body
         
-        .aside
-          h3 Description
-          .inner 
-            != description || "Description coming soon..."
-        
-        .bubble
-          h3 About #{system.name}
-          .inner
+        #sidebar
+          - if (player)
+            #player-info.sidebar-div
+              != partial('statusbox', {collection: [player], as: 'player'})
+          
+          #description.sidebar-div
+            h3 Description
+            p!= typeof(description) == "undefined" ? "" : description
+          
+          #about.sidebar-div
+            h3 About #{system.name}
             != partial('description', {collection: [true], as: 'is_true'})
-      
-      #main
-        #flash
-          != partial('flash_info', {collection: flash('info') || [], as: 'msg'})
-          != partial('flash_error', {collection: flash('error') || [], as: 'msg'})
-        != body
-        
+            
         != partial('footer', {collection: [true], as: 'is_true'})
-        
+      #subfooter &nbsp;
+
+	script(type="text/javascript", src="/js/system.js")        
     :javascript
       | var _gaq = _gaq || [];
       | _gaq.push(['_setAccount', '#{system.analytics}']);

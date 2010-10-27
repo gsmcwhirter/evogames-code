@@ -1,117 +1,105 @@
 - var tabindex = 0
 h1 Player Registration
 form(method="post", accept-charset="utf-8")
-  fieldset.font-size
-    table.form
-      tbody
-        tr
-          td.label
-            label(for="email") E-Mail Address
-          td.field
-            - if (messages["email"] && messages["email"].length)
-              ul.field-error
-                - each msg in messages["email"]
-                  li!= "E-Mail address " + msg
-            .field-data
-              span#email_status &nbsp;
-              input#email(tabindex=++tabindex, type="text", name="email", value= errors ? data["email"] : "")
-        tr
-          td.label
-            label(for="email_confirm") Confirm E-Mail
-          td.field
-            - if (messages["email_confirm"] && messages["email_confirm"].length)
-              ul.field-error
-                - each msg in messages["email_confirm"]
-                  li!= "E-Mail confirmation " + msg
-            .field-data
-              span#email_confirm_status &nbsp;
-              input#email_confirm(tabindex=++tabindex, type="text", name="email_confirm", value= errors ? data["email_confirm"] : "")
-        tr
-          td.label
-            label(for="password") Password
-          td.field
-            - if (messages["password"] && messages["password"].length)
-              ul.field-error
-                - each msg in messages["password"]
-                  li!= "Password " + msg
-            .field-data
-              span#password_status &nbsp;
-              input#password(tabindex=++tabindex, type="password", name="password")
-        tr
-          td.label
-            label(for="password_confirm") Confirm Password
-          td.field
-            - if (messages["password_confirm"] && messages["password_confirm"].length)
-              ul.field-error
-                - each msg in messages["password_confirm"]
-                  li!= "Password confirmation " + msg
-            .field-data
-              span#password_confirm_status &nbsp;
-              input#password_confirm(tabindex=++tabindex, type="password", name="password_confirm")
-        tr
-          td.label
-            label(for="handle") Handle
-          td.field
-            - if (messages["handle"] && messages["handle"].length)
-              ul.field-error
-                - each msg in messages["handle"]
-                  li!= "Handle " + msg
-            .field-data
-              span#handle_status &nbsp;
-              input#handle(tabindex=++tabindex, type="text", name="handle", value= errors ? data["handle"] : "")
-        tr
-          td.label
-            label(for="name") Alias
-          td.field
-            - if (messages["name"] && messages["name"].length)
-              ul.field-error
-                - each msg in messages["name"]
-                  li!= "Alias " + msg
-            .field-data
-              span#name_status &nbsp;
-              input#name(tabindex=++tabindex, type="text", name="name", value= errors ? data["name"] : "")
-        tr
-          td.label
-            label Terms of Service
-          td.field
-            - if (messages["agreement"] && messages["agreement"].length)
-              ul.field-error
-                - each msg in messages["agreement"]
-                  li!= "Terms of service " + msg
-            .field-data
-              span#agreement_status &nbsp;
-              .field-text
-                input#agreement(tabindex=++tabindex, type="checkbox", name="agreement", value="yes", checked=(errors && data.agreement == "yes"))
-                label(for="agreement")  
-                  |  I agree to the 
-                  a(href="/tos", rel="blank") Terms of Service
-                  |  for using the site.
-        tr
-          td.label
-            label(for="recaptcha_response_field") Test for Humanity
-          td.field
-            - if (messages["captcha"] && messages["captcha"].length)
-              ul.field-error
-                - each msg in messages["captcha"]
-                  li!= "Captcha " + msg
-            .field-data
-              :javascript
-                | var RecaptchaOptions = {
-                |   theme : 'clean',
-                |   tabindex: #{++tabindex}
-                | };
-              script(type="text/javascript", src="http://www.google.com/recaptcha/api/challenge?k="+public_key)
-              noscript
-                iframe(src="http://www.google.com/recaptcha/api/noscript?k="+public_key, height="300", width="500", frameborder="0")
-                br
-                textarea(name="recaptcha_challenge_field", rows="3", cols="40") 
-                input(type="hidden", name="recaptcha_response_field", value="manual_challenge")
-        tr
-          td.action(colspan="2")
-            button(tabindex=++tabindex, type="submit") Register
-script(type="text/javascript", src="/js/validators/register.js")
-:javascript
-  | var register_required_fields = #{required_fields};
-  | $(document).ready(function(){
-  |   var validator = new validators.register(register_required_fields);
-  | });
+  fieldset
+    .form-line
+      label(for="email") E-Mail Address
+      br
+      - if (messages["email"] && messages["email"].length)
+        ul.field-error
+          - each msg in messages["email"]
+            li!= "E-Mail address " + msg
+      input#email.text(tabindex=++tabindex, type="email", name="email", value= errors ? data["email"] : "")
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="confirm_email") Confirm E-Mail
+      br
+      - if (messages["email_confirm"] && messages["email_confirm"].length)
+        ul.field-error
+          - each msg in messages["email_confirm"]
+            li!= "E-Mail confirmation " + msg
+      input#email_confirm.text(tabindex=++tabindex, type="email", name="email_confirm", value= errors ? data["email_confirm"] : "")
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="password") Password
+      br
+      - if (messages["password"] && messages["password"].length)
+        ul.field-error
+          - each msg in messages["password"]
+            li!= "Password " + msg
+      input#password.text(tabindex=++tabindex, type="password", name="password")
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="password_confirm") Confirm Password
+      br
+      - if (messages["password_confirm"] && messages["password_confirm"].length)
+        ul.field-error
+          - each msg in messages["password_confirm"]
+            li!= "Password confirmation " + msg
+      input#password_confirm.text(tabindex=++tabindex, type="password", name="password_confirm")
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="handle") Handle
+      br
+      - if (messages["handle"] && messages["handle"].length)
+        ul.field-error
+          - each msg in messages["handle"]
+            li!= "Handle " + msg
+      input#handle.text(tabindex=++tabindex, type="text", name="handle", value= errors ? data["handle"] : "")
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="name") Alias
+      br
+      - if (messages["name"] && messages["name"].length)
+        ul.field-error
+          - each msg in messages["name"]
+            li!= "Alias " + msg
+      input#name.text(tabindex=++tabindex, type="text", name="name", value= errors ? data["name"] : "")
+      span.field-status
+        span &nbsp;
+    .form-line
+      - if (messages["agreement"] && messages["agreement"].length)
+        ul.field-error
+          - each msg in messages["agreement"]
+            li!= "Terms of service " + msg
+      span(style="height: 28px; margin-top: 6px; display: inline-block; vertical-align: middle;")
+        input#agreement(tabindex=++tabindex, type="checkbox", name="agreement", value="yes", checked=(errors && data.agreement == "yes"))
+        label(for="agreement")  
+          | &#32;I agree to the 
+          a(href="/tos", rel="blank") Terms of Service
+          | &#32;for using the site.
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="recaptcha_response_field") Test for Humanity
+      br
+      - if (messages["captcha"] && messages["captcha"].length)
+        ul.field-error
+          - each msg in messages["captcha"]
+            li!= "Captcha " + msg
+      :javascript
+        | var RecaptchaOptions = {
+        |   theme : 'clean',
+        |   tabindex: #{++tabindex}
+        | };
+      script(type="text/javascript", src="http://www.google.com/recaptcha/api/challenge?k="+public_key)
+      noscript
+        iframe(src="http://www.google.com/recaptcha/api/noscript?k="+public_key, height="300", width="500", frameborder="0")
+        br
+        textarea(name="recaptcha_challenge_field", rows="3", cols="40") 
+        input(type="hidden", name="recaptcha_response_field", value="manual_challenge")
+    .form-line
+      button.button.positive(tabindex=++tabindex, type="submit")
+        img(src="/css/icons/tick.png",alt="") 
+        | &#32;Register
+
+script(type="text/javascript", src="/js/validators/playeremail.js")
+script(type="text/javascript", src="/js/validators/playerpassword.js")
+script(type="text/javascript", src="/js/validators/playerhandle.js")
+script(type="text/javascript", src="/js/validators/playeralias.js")
+script(type="text/javascript", src="/js/validators/agreement.js")
