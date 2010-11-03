@@ -77,8 +77,8 @@ $(".menu-outer").evently({
                         .addClass("ui-icon-triangle-1-n");
                 },
                 "down_arrow": function (){
-                    $(this).removeClass("ui-icon-triangle-1-s")
-                        .addClass("ui-icon-triangle-1-n");
+                    $(this).removeClass("ui-icon-triangle-1-n")
+                        .addClass("ui-icon-triangle-1-s");
                 }
             },
             ".menu-inner>li>.menu-item[title]": {

@@ -29,6 +29,7 @@ npm install ejs #sudo
 npm install jade@0.4.1 #sudo #0.5.0 was messed up
 npm install underscore #sudo
 npm install less #sudo
+npm install recatpcha #sudo
 curl -o discount-1.6.8.tar.gz http://download.github.com/Orc-discount-v1.6.8-0-gc673eaa.tar.gz
 tar xzf discount-1.6.8.tar.gz
 cd Orc-discount-0abaf53

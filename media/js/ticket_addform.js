@@ -21,36 +21,38 @@ $("#new-ticket-form").evently({
                 "clear": function (){
                     $(this).val('');
                 }
+            },
+            "form": {
+                submit: function (){
+                    var self = $(this);
+                    console.log(self);
+                    console.log(self.serialize());
+                    
+                    $.ajax({
+                        type: 'put',
+                        url: '/issues/add',
+                        data: self.serialize(),
+                        dataType: 'json',
+                        processData: false,
+                        success: function (data, textStatus){
+                            if (data.ok){
+                                $("#flash").trigger('info', ['Ticket added successfully.']);
+                                $(".tickets#nonclosed").trigger("add", [data.ticket]);
+                                $("#new-ticket-form").trigger("hide");
+                            }
+                            else {
+                                $("#flash").trigger('error', ['Ticket not added: '+data.error]);
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown){
+                            $("#flash").trigger('error', ['Request error']);
+                        }
+                    });
+                    
+                    return false;
+                }
             }
         }
-    },
-    
-    submit: function (){
-        var self = $(this);
-        
-        $.ajax({
-            type: 'put',
-            url: '/issues/add',
-            data: self.serialize(),
-            dataType: 'json',
-            processData: false,
-            success: function (data, textStatus){
-                if (data.ok){
-                    $("#flash").trigger('info', ['Ticket added successfully.']);
-                    $(".tickets#nonclosed").trigger("add", [data.ticket]);
-                    
-                    $("#new-ticket-form").trigger("hide");
-                }
-                else {
-                    $("#flash").trigger('error', ['Ticket not added: '+data.error]);
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown){
-                $("#flash").trigger('error', ['Request error']);
-            }
-        });
-        
-        return false;
     },
     
     "show": function (){
