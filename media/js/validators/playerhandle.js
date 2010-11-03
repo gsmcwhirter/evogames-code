@@ -32,12 +32,12 @@ $("#handle").evently({
             return $$(self).user_cache ? true : false;
         }
         
-        var name = $.trim(self.val());
-        if (name.length < 3)
+        var handle = $.trim(self.val());
+        if (handle.length < 3)
         {
             fstat.trigger("bad", ["Must be at least 3 characters long."]);
         }
-        else if (name_exists(name))
+        else if (name_exists(handle))
         {
             if (!user_cache_loaded())
             {
