@@ -37,7 +37,7 @@ $("#handle").evently({
         {
             fstat.trigger("bad", ["Must be at least 3 characters long."]);
         }
-        else if (name_exists(handle))
+        else if (user_exists(handle))
         {
             if (!user_cache_loaded())
             {
