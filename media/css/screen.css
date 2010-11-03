@@ -281,8 +281,8 @@ a.negative:active {background-color:#d12f19;border:1px solid #d12f19;color:#fff;
 
 /* evogames.css */
 html, body {width:100%;height:100%;text-align:center;margin:0;padding:0;}
-html {background-color:#000022;}
-body {margin-top:-15px;height:100%;font-family:Verdana, Arial, Helvetica, sans-serif;padding:10px 0;background:-moz-linear-gradient(top, #000066, #000022);background:-webkit-gradient(linear, 0 0, 0 90%, from(#000066), to(#000022));background-color:#000022;}
+html {background-color:#553300;}
+body {margin-top:-15px;height:100%;font-family:Verdana, Arial, Helvetica, sans-serif;padding:10px 0;background:-moz-linear-gradient(top, #aa6600, #553300);background:-webkit-gradient(linear, 0 0, 0 90%, from(#aa6600), to(#553300));background-color:#553300;}
 span.link-sep {margin:0 5px;}
 p, ul, ol {margin-bottom:1.5em;}
 ul, ul > li, ol, ol > li {list-style-position:outside;}
@@ -358,6 +358,7 @@ strong, .bold {font-weight:bold;}
 #main fieldset .field-status .status-field-ok {background-image:url('../images/signup_ok.png');}
 #main fieldset .field-status .status-field-not-ok {background-image:url('../images/signup_notok.png');}
 #main fieldset .field-status .status-field-maybe {background-image:url('../images/signup_maybe.png');}
+#main fieldset input.title + .field-status {margin-top:13px;}
 #main fieldset ul.field-error {color:#f00;margin:0;margin-bottom:2px;}
 #main fieldset ul.field-error li {color:#f00;}
 #main fieldset.narrow-fields input[type=text], #main fieldset.narrow-fields input[type=password], #main fieldset.narrow-fields input[type=email], #main fieldset.narrow-fields input[type=url], #main fieldset.narrow-fields input[type=number], #main fieldset.narrow-fields input[type=date], #main fieldset.narrow-fields input[type=datetime], #main fieldset.narrow-fields input[type=month], #main fieldset.narrow-fields input[type=week], #main fieldset.narrow-fields input[type=time], #main fieldset.narrow-fields input[type=search], #main fieldset.narrow-fields input[type=color], #main fieldset.narrow-fields select, #main fieldset.narrow-fields textarea {width:50%;}
@@ -371,7 +372,7 @@ strong, .bold {font-weight:bold;}
 #sidebar ul {padding:0 0 0 20px;margin:0;}
 #sidebar #player-info {overflow:auto;}
 #sidebar #player-info img.avatar {float:left;margin-right:10px;}
-#sidebar .sidebar-div {margin-top:1em;}
+#sidebar .sidebar-div {margin-top:20px;}
 #footer {margin-top:1em;border-top:1px solid #ccc;font-size:85%;}
 img.avatar {max-width:64px;max-height:64px;}
 .handle {font-size:85%;color:#666;}
@@ -389,6 +390,6 @@ img.avatar {max-width:64px;max-height:64px;}
 #subfooter {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:950px;margin-right:0;}
 #sidebar {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:230px;padding-right:40px;}
 #noscript {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:950px;margin-right:0;}
-#main {float:left;margin-right:10px;width:590px;padding-left:40px;padding-right:24px;margin-right:25px;border-right:1px solid #ddd;}
+#main {float:left;margin-right:10px;width:590px;padding-right:40px;padding-left:40px;}
 #header {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:950px;margin-right:0;}
 #container {width:950px;margin:0 auto;display:block;margin:0 auto;text-align:left;background-color:transparent !important;}

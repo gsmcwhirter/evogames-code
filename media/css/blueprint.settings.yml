@@ -1,0 +1,17 @@
+# refer to http://www.yaml.org/spec/1.1/ for clarification on YAML collections
+evogames:
+  path: /home/gmcwhirt/Documents/Sources/EvoGames/media/css
+  custom_css:
+    screen.css:
+      - evogames.css
+  plugins:
+    - buttons
+  semantic_classes:
+    "#container": ".container"
+    "#noscript": ".span-24, .last"
+    "#header": ".span-24, .last"
+    "#container2": ".span-24, .last"
+    "#main": ".span-15, .prepend-1, .append-1"
+    "#sidebar": ".span-6, .append-1, .last"
+    "#footer": ".span-22, .prepend-1, .append-1, .last"
+    "#subfooter": ".span-24, .last"

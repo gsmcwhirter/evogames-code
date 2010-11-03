@@ -117,7 +117,7 @@ var server = function (ssl){
 	require('./lib/game').urls(ssl, '/game')(app);
 	require('./lib/news').urls(ssl, '/news')(app);
 	require('./lib/player').urls(ssl, '/player')(app);
-	require('./lib/issues').urls(ssl, '/issues')(app);
+	//require('./lib/issues').urls(ssl, '/issues')(app);
 	require('./lib/api').urls(ssl, '/api')(app);
 	
 	return app;

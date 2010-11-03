@@ -63,19 +63,6 @@ form(method="post", accept-charset="utf-8")
       span.field-status
         span &nbsp;
     .form-line
-      - if (messages["agreement"] && messages["agreement"].length)
-        ul.field-error
-          - each msg in messages["agreement"]
-            li!= "Terms of service " + msg
-      span(style="height: 28px; margin-top: 6px; display: inline-block; vertical-align: middle;")
-        input#agreement(tabindex=++tabindex, type="checkbox", name="agreement", value="yes", checked=(errors && data.agreement == "yes"))
-        label(for="agreement")  
-          | &#32;I agree to the 
-          a(href="/tos", rel="blank") Terms of Service
-          | &#32;for using the site.
-      span.field-status
-        span &nbsp;
-    .form-line
       label(for="recaptcha_response_field") Test for Humanity
       br
       - if (messages["captcha"] && messages["captcha"].length)
@@ -87,13 +74,13 @@ form(method="post", accept-charset="utf-8")
         |   theme : 'clean',
         |   tabindex: #{++tabindex}
         | };
-      script(type="text/javascript", src="http://www.google.com/recaptcha/api/challenge?k="+public_key)
-      noscript
-        iframe(src="http://www.google.com/recaptcha/api/noscript?k="+public_key, height="300", width="500", frameborder="0")
-        br
-        textarea(name="recaptcha_challenge_field", rows="3", cols="40") 
-        input(type="hidden", name="recaptcha_response_field", value="manual_challenge")
+      != recaptcha_form
     .form-line
+      span
+        | &#32;By registering, you indicate that you agree to the 
+        a(href="/tos", rel="blank") Terms of Service
+        | &#32;for the site.
+      br
       button.button.positive(tabindex=++tabindex, type="submit")
         img(src="/css/icons/tick.png",alt="") 
         | &#32;Register
@@ -102,4 +89,3 @@ script(type="text/javascript", src="/js/validators/playeremail.js")
 script(type="text/javascript", src="/js/validators/playerpassword.js")
 script(type="text/javascript", src="/js/validators/playerhandle.js")
 script(type="text/javascript", src="/js/validators/playeralias.js")
-script(type="text/javascript", src="/js/validators/agreement.js")
