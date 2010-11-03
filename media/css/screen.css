@@ -350,7 +350,7 @@ strong, .bold {font-weight:bold;}
 #main .content-admin {float:right;font-size:85%;}
 #main fieldset {background-color:#ffffff;border-color:1px solid #888888;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
 #main fieldset .form-line {overflow:auto;margin-bottom:.5em;}
-#main fieldset input[type=text], #main fieldset input[type=password], #main fieldset input[type=email], #main fieldset input[type=url], #main fieldset input[type=number], #main fieldset input[type=date], #main fieldset input[type=datetime], #main fieldset input[type=month], #main fieldset input[type=week], #main fieldset input[type=time], #main fieldset input[type=search], #main fieldset input[type=color], #main fieldset select, #main fieldset textarea {width:75%;}
+#main fieldset input[type=text], #main fieldset input[type=password], #main fieldset input[type=email], #main fieldset input[type=url], #main fieldset input[type=number], #main fieldset input[type=date], #main fieldset input[type=datetime], #main fieldset input[type=month], #main fieldset input[type=week], #main fieldset input[type=time], #main fieldset input[type=search], #main fieldset input[type=color], #main fieldset select, #main fieldset textarea {width:75%;margin:0.5em 0px;padding:5px;}
 #main fieldset textarea {height:20em;}
 #main fieldset button {border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 #main fieldset .field-status {display:inline-block;width:30px;height:26px;vertical-align:top;margin-top:6px;margin-left:1em;border:1px solid #ccc;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
