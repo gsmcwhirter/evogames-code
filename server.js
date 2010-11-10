@@ -60,7 +60,7 @@ var server = function (ssl){
                 
                 email = email + "";
                 size = size || 64;
-                return base.util.gravatar_url(email, size) + "&d=" + encodeURI("http://www.evogames.org" + sysconf.default_avatar);;
+                return base.util.gravatar_url(email, size) + "&d=" + encodeURI("http://www.evogames.org" + sysconf.default_avatar);
             }
         });
         

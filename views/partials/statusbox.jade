@@ -1,22 +1,21 @@
-#player-info
-  - if (player)
-    img.avatar(alt="Player Avatar", src=avatar(player))
-    span
-      span.handle.only @#{player.handle}
+- if (player)
+  img.avatar(alt="Player Avatar", src=avatar(player))
+  span
+    span.handle.only @#{player.handle}
+  br
+  a(href="/player/controls") Controls
+  span.link-sep |
+  a(href="/player/logout") Log Out
+  - if (player.is_sysop)
     br
-    a(href="/player/controls") Controls
-    span.link-sep |
-    a(href="/player/logout") Log Out
-    - if (player.is_sysop)
-      br
-      span.position.sysop SysOp
-    - else if (player.is_staff)
-      br
-      span.position.staff Staff
-  - else
-    img.avatar(alt="Player Avatar", src=system.default_avatar)
-    span Welcome, Guest!
+    span.position.sysop SysOp
+  - else if (player.is_staff)
     br
-    a(href="/player/login") Log In
-    span.link-sep |
-    a(href="/player/register") Register
+    span.position.staff Staff
+- else
+  img.avatar(alt="Player Avatar", src=system.default_avatar)
+  span Welcome, Guest!
+  br
+  a(href="/player/login") Log In
+  span.link-sep |
+  a(href="/player/register") Register
