@@ -1,4 +1,8 @@
 {
+  "couchdb": {
+    "host": "http://localhost:5984",
+    "db": "http://localhost:5984/mydb"
+  },
   "server": {
       "login_cookie": "login",
       "recaptcha_keys": {

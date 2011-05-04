@@ -2,3 +2,6 @@
 config.live.json
 media/css/evogames.css
 media/css/readme.txt
+nbproject
+config.live.js
+node_modules
