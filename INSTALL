@@ -5,9 +5,9 @@ apt-get install g++ autoconf automake #sudo #gnu maketools
 apt-get install git-core #sudo #git
 
 #BASIC INSTALL PROCEDURE
-curl -O http://nodejs.org/dist/node-v0.2.2.tar.gz
-tar xzf node-v0.2.2.tar.gz
-cd node-v0.2.2
+curl -O http://nodejs.org/dist/node-v0.2.4.tar.gz
+tar xzf node-v0.2.4.tar.gz
+cd node-v0.2.4
 ./configure
 make
 make install #sudo
@@ -26,7 +26,7 @@ curl http://npmjs.org/install.sh | sh #sudo sh
 npm install expresso #sudo
 npm install express #sudo #includes connect
 npm install ejs #sudo
-npm install jade@0.4.1 #sudo #0.5.0 was messed up
+npm install jade #sudo
 npm install underscore #sudo
 npm install less #sudo
 npm install recatpcha #sudo

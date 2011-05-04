@@ -69,11 +69,11 @@ form(method="post", accept-charset="utf-8")
         ul.field-error
           - each msg in messages["captcha"]
             li!= "Captcha " + msg
-      :javascript
-        | var RecaptchaOptions = {
-        |   theme : 'clean',
-        |   tabindex: #{++tabindex}
-        | };
+      script(type="text/javascript")
+        var RecaptchaOptions = {
+          theme : 'clean',
+          tabindex: #{++tabindex}
+        };
       != recaptcha_form
     .form-line
       span

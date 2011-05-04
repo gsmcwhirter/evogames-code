@@ -61,17 +61,17 @@ form(method="post", accept-charset="utf-8")
 script(type="text/javascript",src="/js/validators/newssubject.js")
 script(type="text/javascript",src="/js/validators/newsslug.js")
 script(type="text/javascript",src="/js/validators/newstags.js")
-:javascript
-  | $("button#save").evently({
-  |   click: function (){
-  |     $("#action").val('save');
-  |     $(this).parents("form").submit();
-  |   }
-  | });
-  | 
-  | $("button#post").evently({
-  |   click: function (){
-  |     $("#action").val('publish');
-  |     $(this).parents("form").submit();
-  |   }
-  | });
+script(type="text/javascript")
+  $("button#save").evently({
+    click: function (){
+      $("#action").val('save');
+      $(this).parents("form").submit();
+    }
+  });
+  
+  $("button#post").evently({
+    click: function (){
+      $("#action").val('publish');
+      $(this).parents("form").submit();
+    }
+  });
