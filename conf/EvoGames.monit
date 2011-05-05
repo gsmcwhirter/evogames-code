@@ -8,7 +8,7 @@ check host nodejsnp with address 127.0.0.1
         request /
         with timeout 10 seconds
         then restart
-    if failed port 7443 protocol HTTP
-        request /
-        with timeout 10 seconds
-        then restart
+    #if failed port 7443 protocol HTTP
+    #    request /
+    #    with timeout 10 seconds
+    #    then restart
