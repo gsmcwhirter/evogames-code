@@ -5,7 +5,7 @@ apt-get install g++ autoconf automake #sudo #gnu maketools
 apt-get install git-core #sudo #git
 
 #BASIC INSTALL PROCEDURE
-curl -O http://nodejs.org/dist/node-v0.2.4.tar.gz
+curl -O http://nodejs.org/dist/node-v0.4.7.tar.gz
 tar xzf node-v0.2.4.tar.gz
 cd node-v0.2.4
 ./configure
@@ -21,15 +21,17 @@ git clone git://github.com/couchapp/couchapp.git
 cd couchapp
 python setup.py develop #sudo
 cd ..
-git clone http://github.com/isaacs/npm.git
+#git clone http://github.com/isaacs/npm.git
 curl http://npmjs.org/install.sh | sh #sudo sh
-npm install expresso #sudo
-npm install express #sudo #includes connect
-npm install ejs #sudo
-npm install jade #sudo
-npm install underscore #sudo
-npm install less #sudo
-npm install recatpcha #sudo
+#npm install expresso #sudo
+#npm install express #sudo #includes connect
+#npm install ejs #sudo
+#npm install jade #sudo
+#npm install underscore #sudo
+#npm install less #sudo
+#npm install recatpcha #sudo
+#npm install zoneinfo #sudo
+npm install express expresso ejs jade less recaptcha underscore zoneinfo #in source directory for the site
 curl -o discount-1.6.8.tar.gz http://download.github.com/Orc-discount-v1.6.8-0-gc673eaa.tar.gz
 tar xzf discount-1.6.8.tar.gz
 cd Orc-discount-0abaf53
@@ -55,5 +57,3 @@ cd ..
 /usr/bin/openssl genrsa 1024 > /etc/ssl.key/server.key
 chmod go-rwx /etc/httpd/conf/ssl.key/server.key
 /usr/bin/openssl req -new -key /etc/ssl.key/server.key -x509 -days 365 -out /etc/ssl.crt/server.crt
-
-
