@@ -5,7 +5,7 @@
   a(href="/news/post") New Article
 h1 #{title}
 .article-list
-  != partial('news/article', {collection: articles, as: 'article'})
+  != partial('article', {collection: articles, as: 'article'})
 
 - if (nextpage)
   .pagination
