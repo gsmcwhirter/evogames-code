@@ -5,6 +5,7 @@
   h1 Pending E-Mail Change
   form(method="post", accept-charset="utf-8")
     fieldset
+      input(type="hidden", name="csrf", value=csrf)
       .form-line
         input#action-cancel(type="hidden", name="action", value="cancel")
         label Pending E-Mail Address
@@ -26,6 +27,7 @@
 h1 Change E-Mail Address
 form(method="post", accept-charset="utf-8")
   fieldset
+    input(type="hidden", name="csrf", value=csrf)
     input#action-change(type="hidden", name="action", value="change")
     .form-line
       label(for="email") New E-Mail Address

@@ -9,10 +9,11 @@ var config = JSON.parse(fs.readFileSync(__dirname + '/config.live.json', 'utf8')
 var server = express.createServer(
     express.profiler(),
     express.logger(),
+    express.responseTime(),
     express.cookieParser(),
     express.session({fingerprint: base.connectionFingerprint, secret: config.session_secret}),
     express.bodyParser(),
-    express.responseTime(),
+    base.middleware.csrf.check(),
     base.middleware.determineLogin(),
     base.middleware.prepareMenus()
 );
@@ -59,6 +60,7 @@ server.configure(function (){
     });
 
     server.dynamicHelpers({
+        csrf: base.middleware.csrf.token,
         player: function (req, res){
             return req.player;
         },

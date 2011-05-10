@@ -1,0 +1,1 @@
+- Redis w/ connect-redis for session store instead of MemoryStore
