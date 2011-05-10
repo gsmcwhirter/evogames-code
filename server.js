@@ -13,7 +13,7 @@ var server = express.createServer(
     express.cookieParser(),
     express.session({fingerprint: base.connectionFingerprint, secret: config.session_secret}),
     express.bodyParser(),
-    base.middleware.csrf.check(),
+    base.middleware.csrf.check,
     base.middleware.determineLogin(),
     base.middleware.prepareMenus()
 );
