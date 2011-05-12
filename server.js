@@ -1,5 +1,7 @@
 var express = require('express'),
     base = require('./lib/base'),
+    SMTP = require('./lib/smtp'),
+    API = require('./lib/api/internal'),
     fs = require('fs');
 
 require('./lib/base/mixins');
@@ -20,16 +22,17 @@ var server = express.createServer(
 
 server.configure(function (){
     var sysconf = config.system;
-    var iapi = require('./lib/api/internal');
     var couchdb = new base.couchdb(config.couchdb);
-    iapi = new iapi(couchdb);
+    var iapi = new API(couchdb);
+    var smtp = new SMTP(config.smtp);
 
     server.set('sys config', config.server);
     server.set('iapi', iapi);
+    server.set('smtp', smtp);
     server.set('views', __dirname+"/views");
     server.set('view engine', 'jade');
     server.set('view options', {layout: 'layout/main'});
-    server.set('smtp config', config.smtp);
+    //server.set('smtp config', config.smtp);
 
     server.error(base.handleError);
 
