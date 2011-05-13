@@ -12,7 +12,7 @@
   ul.recent-members.fp-block
     - each member in registrations
       li
-        a(href="/player/profile/"+member.aliases[0]+"@"+member.handle)
+        a(href="/player/profile/"+encodeURI(member.aliases[0])+"@"+encodeURI(member.handle))
           span.alias= member.aliases[0]
           span.handle= "@"+member.handle
         span.date.short= date(member.created_at)
