@@ -15,17 +15,18 @@
       | 
       span= datetime(player.created_at)
 
-  h3 Aliases
-  ul.profile
-    - each oalias in player.aliases
-      li
-        a(href="/player/profile/"+encodeURI(oalias)+"@"+encodeURI(player.handle))
-          span.alias= oalias
-          span.handle= "@"+player.handle
-
-  h3 Groups
-  ul.profile
     li
+      span.label Aliases:
+      ul.profile
+        - each oalias in player.aliases
+          li
+            a(href="/player/profile/"+encodeURI(oalias)+"@"+encodeURI(player.handle))
+              span.alias= oalias
+              span.handle= "@"+player.handle
+    li
+      span.label Groups
+      ul.profile
+        li
 
   h2 Events
   ul.profile
