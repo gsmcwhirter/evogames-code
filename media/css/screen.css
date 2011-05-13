@@ -317,6 +317,7 @@ strong, .bold {font-weight:bold;}
 #main h1 {color:#222;font-size:182%;}
 #main h2 {padding-bottom:5px;line-height:1em;color:#444;font-size:167%;}
 #main h3 {color:#666;font-size:153.9%;}
+#main #player-profile img.avatar {float:right;margin:1em;}
 #main ul.grid {display:block;overflow:auto;margin:0;padding:0;}
 #main ul.grid li {display:block;margin:5px 10px;padding:3px 0;float:left;width:45%;border-top:1px solid #222;border-bottom:1px dotted #666;}
 #main ul.recent-articles, #main ul.recent-members {margin:0;padding:0;}
@@ -372,10 +373,9 @@ strong, .bold {font-weight:bold;}
 #sidebar h3 {font-family:'FontinSansSmallCaps', sans-serif;font-size:138.5%;font-weight:bold;line-height:1em;border-bottom:1px solid #aaa;margin-bottom:0;}
 #sidebar ul {padding:0 0 0 20px;margin:0;}
 #sidebar #player-info {overflow:auto;}
-#sidebar #player-info img.avatar {float:right;margin:10px;}
+#sidebar #player-info img.avatar {float:left;margin-right:10px;max-width:64px;max-height:64px;}
 #sidebar .sidebar-div {margin-top:20px;}
 #footer {margin-top:1em;border-top:1px solid #ccc;font-size:85%;}
-img.avatar {max-width:64px;max-height:64px;}
 .handle {font-size:85%;color:#666;}
 .handle.only {font-size:108%;font-weight:bold;color:#000;}
 .alias {font-size:108%;font-weight:bold;}
