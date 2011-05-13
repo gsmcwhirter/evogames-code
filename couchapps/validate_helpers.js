@@ -1,14 +1,18 @@
-
-
 var email_regex = new RegExp('^([a-zA-Z0-9_\\-.]+)@(([a-zA-Z0-9\\-]+\\.)+)([a-zA-Z]{2,9})$');
 
-function require(test, msg)
-{
+function unchanged(field, newer, older){
+    if (!newer._deleted && older && toJSON(older[field]) != toJSON(newer[field])){
+        return false;
+    }
+
+    return true;
+}
+
+function require(test, msg){
     if (!test) throw({forbidden: msg});
 }
 
-function keys(a)
-{
+function keys(a){
     var ret = [];
     if (typeof(a) == 'object')
     {
@@ -21,8 +25,7 @@ function keys(a)
     return ret;
 }
 
-function equals(a, b)
-{
+function equals(a, b){
     if(typeof(a) == 'object' && typeof(b) == 'object')
     {
         if (keys(a).length != keys(b).length)
@@ -46,11 +49,15 @@ function equals(a, b)
     }
 }
     
-function preserve_history(newer, older)
+function preserve_history(field, newer, older)
 {
-    for (var idx in older)
+    if (newer._deleted || !older){
+        return true;
+    }
+
+    for (var idx in older[field])
     {
-        if (!equals(newer[idx], older[idx]))
+        if (!equals(newer[field][idx], older[field][idx]))
         {
             return false;
         }
