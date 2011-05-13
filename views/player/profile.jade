@@ -9,7 +9,10 @@
     span.handle= "@"+player.handle
 
   h2 About
-  p= JSON.stringify(player)
+  ul.grid
+    li
+      span.label Joined On:
+      span= datetime(player.created_at)
 
   h2 Events
 
