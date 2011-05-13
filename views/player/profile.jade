@@ -2,27 +2,27 @@
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
   
 #player-profile
-  img.avatar(src=avatar(player, 160))
+  img.avatar(src=avatar(pplayer, 160))
 
   h1
     span.alias= alias
-    span.handle= "@"+player.handle
+    span.handle= "@"+pplayer.handle
 
   h2 About
   ul.profile
     li
       span.label Joined On:
       | 
-      span= datetime(player.created_at)
+      span= datetime(pplayer.created_at)
 
     li
       span.label Aliases:
       ul
-        - each oalias in player.aliases
+        - each oalias in pplayer.aliases
           li
-            a(href="/player/profile/"+encodeURI(oalias)+"@"+encodeURI(player.handle))
+            a(href="/player/profile/"+encodeURI(oalias)+"@"+encodeURI(pplayer.handle))
               span.alias= oalias
-              span.handle= "@"+player.handle
+              span.handle= "@"+pplayer.handle
     li
       span.label Groups
       ul.profile
