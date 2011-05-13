@@ -17,7 +17,7 @@
 
     li
       span.label Aliases:
-      ul.profile
+      ul
         - each oalias in player.aliases
           li
             a(href="/player/profile/"+encodeURI(oalias)+"@"+encodeURI(player.handle))
