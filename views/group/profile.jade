@@ -12,7 +12,7 @@
       span.label Website:
       |
       span
-        - if group.website
+        - if typeof(group.website) != "undefined" && group.website
           a(href=group.website)= group.website
         - else
           | not listed
