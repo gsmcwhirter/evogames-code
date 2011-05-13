@@ -317,10 +317,10 @@ strong, .bold {font-weight:bold;}
 #main h1 {color:#222;font-size:182%;}
 #main h2 {padding-bottom:5px;line-height:1em;color:#444;font-size:167%;}
 #main h3 {color:#666;font-size:153.9%;}
-#main #player-profile img.avatar {float:right;margin:1em;}
+#main #player-profile img.avatar {display:block;float:right;margin-left:1em;margin-bottom:1em;}
 #main ul.grid {display:block;overflow:auto;margin:0;padding:0;}
 #main ul.grid li {display:block;margin:5px 10px;padding:3px 0;float:left;width:45%;border-top:1px solid #222;border-bottom:1px dotted #666;}
-#main ul.profile {display:block;margin:0;padding:0;border-top:1px solid #222;}
+#main ul.profile {display:block;margin:0;padding:0;margin-bottom:1.5em;border-top:1px solid #222;}
 #main ul.profile li {display:block;margin:2px 5px;padding:3px 0;border-bottom:1px dotted #666;}
 #main ul.recent-articles, #main ul.recent-members {margin:0;padding:0;}
 #main ul.recent-articles .date, #main ul.recent-members .date {float:right;}
