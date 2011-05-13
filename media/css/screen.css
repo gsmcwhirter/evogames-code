@@ -372,7 +372,7 @@ strong, .bold {font-weight:bold;}
 #sidebar h3 {font-family:'FontinSansSmallCaps', sans-serif;font-size:138.5%;font-weight:bold;line-height:1em;border-bottom:1px solid #aaa;margin-bottom:0;}
 #sidebar ul {padding:0 0 0 20px;margin:0;}
 #sidebar #player-info {overflow:auto;}
-#sidebar #player-info img.avatar {float:left;margin-right:10px;}
+#sidebar #player-info img.avatar {float:right;margin:10px;}
 #sidebar .sidebar-div {margin-top:20px;}
 #footer {margin-top:1em;border-top:1px solid #ccc;font-size:85%;}
 img.avatar {max-width:64px;max-height:64px;}
