@@ -321,6 +321,7 @@ strong, .bold {font-weight:bold;}
 #main ul.grid li {display:block;margin:5px 10px;padding:3px 0;float:left;width:45%;border-top:1px solid #222;border-bottom:1px dotted #666;}
 #main ul.recent-articles, #main ul.recent-members {margin:0;padding:0;}
 #main ul.recent-articles .date, #main ul.recent-members .date {float:right;}
+#main ul.fp-block {margin-bottom:1.5em;}
 #main #flash .info, #main #flash .error {padding:5px 20px;margin-bottom:5px;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 #main #flash .info .x, #main #flash .error .x {float:right;font-weight:bold;cursor:pointer;opacity:0.5;}
 #main #alias-add-form {display:none;}

@@ -1,6 +1,6 @@
 .left-col
   h1 Recent News
-  ul.recent-articles
+  ul.recent-articles.fp-block
     - each article in articles
       li
         a(href="/news/view/"+article.slug)= article.subject
@@ -9,7 +9,7 @@
 
 .right-col
   h1 Recent Registrations
-  ul.recent-members
+  ul.recent-members.fp-block
     - each member in registrations
       li
         a(href="/player/profile/"+member.aliases[0]+"@"+member.handle)
@@ -18,7 +18,7 @@
         span.date.short= date(member.created_at)
 
   h1 Recently Added Groups
-  ul.recent-members
+  ul.recent-members.fp-block
     - each group in groups
       li
         a(href="/group/profile/"+group.code)= group.name
