@@ -2,4 +2,17 @@
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
   
 #player-profile
-  = JSON.stringify(player)
+  img.avatar(src=avatar(player, 160))
+
+  h1
+    span.alias= alias
+    span.handle= "@"+player.handle
+
+  h2 About
+  p= JSON.stringify(player)
+
+  h2 Events
+
+  h2 Tournaments
+
+  h2 Ladders
