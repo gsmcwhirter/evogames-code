@@ -12,6 +12,14 @@
   ul.recent-members
     - each member in registrations
       li
-        span.alias= member.aliases[0]
-        span.handle= "@"+member.handle
+        a(href="/player/profile/"+member.aliases[0]+"@"+member.handle)
+          span.alias= member.aliases[0]
+          span.handle= "@"+member.handle
         span.date.short= date(member.created_at)
+
+  h1 Recently Added Groups
+  ul.recent-members
+    - each group in groups
+      li
+        a(href="/group/profile/"+group.code)= group.name
+        span.date.short= date(group.created_at)
