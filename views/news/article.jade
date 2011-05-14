@@ -4,10 +4,10 @@
 
 .article
   h1
-    a(href="/news/view/"+article.slug)= article.subject
+    a(href="/news/"+article.slug)= article.subject
   - if (player.is_sysop || (player.permissions || []).indexOf("post news") > -1)
     .editline
-      a(href="/news/edit/"+article._id) Edit
+      a(href="/news/"+article.slug+"/edit") Edit
   .byline
     span.by by: #{article.authors.join(", ")}
     span.link-sep

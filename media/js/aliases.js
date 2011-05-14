@@ -49,7 +49,7 @@ $("#aliases").evently({
             var alias = $.trim($(".alias", target).html());
             $.ajax({
                 type: 'put',
-                url: '/player/aliases/default',
+                url: '/player/controls/aliases/default',
                 data: {alias: alias},
                 dataType: 'json',
                 success: function (data, textStatus){
@@ -81,7 +81,7 @@ $("#aliases").evently({
         var alias = $.trim($(".alias", target).html());
         $.ajax({
             type: 'delete',
-            url: '/player/aliases/remove/'+alias,
+            url: '/player/controls/aliases/remove/'+alias,
             success: function (data, textStatus){
                 if (data.ok)
                 {
@@ -115,7 +115,7 @@ $("#aliases").evently({
     
     "refresh": function (){
         var self = $(this);
-        $.get("/player/aliases/list", function (data){
+        $.get("/player/controls/aliases/list", function (data){
             if (data.ok)
             {
                 self.empty();
@@ -153,7 +153,7 @@ $("#alias-add-form").evently({
         var self = $(this);
         $.ajax({
             type: 'put',
-            url: '/player/aliases/add',
+            url: '/player/controls/aliases/add',
             data: self.serialize(),
             dataType: 'json',
             processData: false,

@@ -20,102 +20,44 @@ var server = express.createServer(
     base.middleware.prepareMenus()
 );
 
+base.configureServer(server);
+
 server.configure(function (){
-    var sysconf = config.system;
     var couchdb = new base.couchdb(config.couchdb);
     var iapi = new API(couchdb);
     var smtp = new SMTP(config.smtp);
 
-    server.set('sys config', config.server);
-    server.set('iapi', iapi);
-    server.set('smtp', smtp);
-    server.set('views', __dirname+"/views");
-    server.set('view engine', 'jade');
-    server.set('view options', {layout: 'layout/main'});
-    //server.set('smtp config', config.smtp);
+    this.set('sys config', config.system);
+    this.set('iapi', iapi);
+    this.set('smtp', smtp);
+    this.set('views', __dirname+"/views");
+    this.set('view engine', 'jade');
+    this.set('view options', {layout: 'layout/main'});
 
-    server.error(base.handleError);
+    this.redirect("login", "/login");
 
-    server.locals({
-        system: sysconf,
-        menu_list: false
-    })
+    this.error(base.handleError);
 
-    server.helpers({
-        avatar: function (email, size){
-            if (typeof email == "object" && email.email_history && email.email_history.length)
-            {
-                if (email.gravatar_url)
-                {
-                    return email.gravatar_url + "&d=" + encodeURI("http://www.evogames.org" + sysconf.default_avatar);
-                }
-                else
-                {
-                    var us = require('underscore');
-                    email = us._.last(email.email_history).email;
-                }
-            }
-
-            email = email + "";
-            size = size || 64;
-            return base.util.gravatar_url(email, size) + "&d=" + encodeURI("http://www.evogames.org" + sysconf.default_avatar);
-        }
-    });
-
-    server.dynamicHelpers({
-        csrf: base.middleware.csrf.token,
-        player: function (req, res){
-            return req.player;
-        },
-        date: function (req, res){
-            return function (string_or_int, format){
-                format = format || req.player.date_format || sysconf.date_format || "Y-m-d";
-                return base.util.date(string_or_int, req.player.timezone || sysconf.default_timezone || "Etc/UTC").format(format);
-            };
-        },
-        time: function (req, res){
-            return function (string_or_int, format){
-                format = format || req.player.time_format || sysconf.time_format || "H:i:s";
-                return base.util.date(string_or_int, req.player.timezone || sysconf.default_timezone || "Etc/UTC").format(format);
-            };
-        },
-        datetime: function (req, res){
-            return function (string_or_int, format){
-                format = format || req.player.datetime_format || sysconf.datetime_format || "";
-                return base.util.date(string_or_int, req.player.timezone || sysconf.default_timezone || "Etc/UTC").format(format);
-            }
-        },
-        menus: function (req, res){
-            var menus = new req.Menus();
-            return function (menu_list){
-                return menus.get(menu_list);
-            };
-        },
-        flash: function (req, res){
-            return function (type){return req.flash(type)};
-        }
-    });
 });
 
 server.configure('development', function (){
-    server.use(express.static(__dirname + "/media"));
-    server.use(server.router);
-    server.use(base.middleware.nice404());
+    this.use(express.static(__dirname + "/media"));
 });
 
-server.configure('production', function (){
-    server.use(server.router);
-    server.use(base.middleware.nice404());
+server.configure('production', function (){});
+
+server.configure(function (){
+    this.use(this.router);
+
+    this.use('/', require('./lib/default'));
+    this.use('/player', require('./lib/player'));
+    this.use('/group', require('./lib/group'));
+    this.use('/news', require('./lib/news'));
+    this.use('/api', require('./lib/api'));
+    this.use('/game', require('./lib/game'));
+    //this.use('/issues', require('./lib/issues'));
+
+    this.use(base.middleware.nice404());
 });
-
-
-require('./lib/default').urls('')(server);
-require('./lib/group').urls('/group')(server);
-require('./lib/game').urls('/game')(server);
-require('./lib/news').urls('/news')(server);
-require('./lib/player').urls('/player')(server);
-//require('./lib/issues').urls('/issues')(app);
-require('./lib/api').urls('/api')(server);
-
 
 module.exports = server;
