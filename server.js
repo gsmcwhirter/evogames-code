@@ -34,8 +34,6 @@ server.configure(function (){
     this.set('view engine', 'jade');
     this.set('view options', {layout: 'layout/main'});
 
-    this.redirect("login", "/login");
-
     this.error(base.handleError);
 
 });
