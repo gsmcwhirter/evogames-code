@@ -3,7 +3,7 @@
   ul.recent-articles.fp-block
     - each article in articles
       li
-        a(href="/news/view/"+article.slug)= article.subject
+        a(href="/news/"+article.slug)= article.subject
         span.date.short= date(article.status.date)
   a(href="/news") Older Articles...
 
