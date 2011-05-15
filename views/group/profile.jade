@@ -9,7 +9,7 @@
 
   ul.profile
     li
-      span.label Website:&#nbsp;
+      span.label Website:&nbsp;
       - if (typeof website != "undefined")
         span
           a(href=website)= website
@@ -17,11 +17,11 @@
         span (not listed)
         
     li
-      span.label Created On:&#nbsp;
+      span.label Created On:&nbsp;
       span= datetime(group.created_at)
 
     li
-      span.label Owners:&#nbsp;
+      span.label Owners:&nbsp;
       ul
         - each owner in owners
           li
@@ -30,7 +30,7 @@
               span.handle= "@"+owner.handle
 
     li
-      span.label Members:&#nbsp;
+      span.label Members:&nbsp;
       ul
         li
 
