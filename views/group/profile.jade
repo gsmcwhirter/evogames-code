@@ -11,11 +11,11 @@
     li
       span.label Website:
       |
-      span
-        - if (typeof website != "undefined")
+      - if (typeof website != "undefined")
+        span
           a(href=website)= website
-        - else
-          | (not listed)
+      - else
+        span (not listed)
         
     li
       span.label Created On:
@@ -23,7 +23,7 @@
       span= datetime(group.created_at)
 
     li
-      span.label Owners
+      span.label Owners:
       |
       ul
         - each owner in owners
