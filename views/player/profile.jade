@@ -24,8 +24,15 @@
               span.alias= oalias
               span.handle= "@"+pplayer.handle
     li
-      span.label Groups
-      ul.profile
+      span.label Groups Owned
+      ul
+        - each group in ogroups
+          li
+            a(href="/group/profile/"+encodeURI(group.code))= group.name
+
+    li
+      span.label Group Memberships
+      ul
         li
 
   h2 Events
