@@ -6,7 +6,8 @@ h1 Welcome!
       li
         a(href="/news/"+article.slug)= article.subject
         span.date.short= date(article.status.date)
-  a(href="/news") Older Articles...
+    li
+      a(href="/news") Older Articles...
 
   h2 Recent Registrations
   ul.recent-members.fp-block
