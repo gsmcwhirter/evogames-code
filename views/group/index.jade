@@ -1,0 +1,19 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1 Group Services
+
+ul.grid
+  li
+    a(href="/group/search") Group Search
+    br
+    | Search for groups by name or code.
+  - if player
+    li
+      a(href="/group/create") Create a Group
+      br
+      | Register a new group
+    li
+      a(href="/group/controls") Manage Groups
+      br
+      | Manage groups

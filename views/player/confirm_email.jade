@@ -1,7 +1,5 @@
-- if (typeof(crumbs) == "undefined") var crumbs = []
-- if (crumbs.length)
-  #breadcrumbs
-    != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
 
 h1 E-Mail Address Confirmation
 form(method="post", action="?", accept-charset="utf-8")
