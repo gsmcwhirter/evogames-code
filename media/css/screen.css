@@ -323,8 +323,8 @@ strong, .bold {font-weight:bold;}
 #main ul.profile {display:block;margin:0;padding:0;margin-bottom:1.5em;}
 #main ul.profile li {display:block;margin:2px 5px;padding:3px 0;}
 #main ul.profile li span.label {font-weight:bold;}
-#main ul.recent-articles, #main ul.recent-members {margin:0;padding:0;}
-#main ul.recent-articles .date, #main ul.recent-members .date {float:right;}
+#main ul.recent-articles, #main ul.recent-members, #main ul.recent-groups, #main ul.current-events, #main ul.current-tournaments, #main ul.current-ladders {margin:0;padding:0;}
+#main ul.recent-articles .date, #main ul.recent-members .date, #main ul.recent-groups .date, #main ul.current-events .date, #main ul.current-tournaments .date, #main ul.current-ladders .date {float:right;}
 #main ul.fp-block {margin-bottom:1.5em;}
 #main #flash .info, #main #flash .error {padding:5px 20px;margin-bottom:5px;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 #main #flash .info .x, #main #flash .error .x {float:right;font-weight:bold;cursor:pointer;opacity:0.5;}
