@@ -11,12 +11,26 @@
     li
       span.label Website:
       |
-      span= ""
+      span
+        - if (typeof website != "undefined")
+          a(href=website)= website
+        - else
+          | (not listed)
         
     li
       span.label Created On:
       | 
       span= datetime(group.created_at)
+
+    li
+      span.label Owners
+      |
+      ul
+        - each owner in owners
+          li
+            a(href="/player/profile/"+encodeURI(owner.aliases[0])+"@"+encodeURI(owner.handle))
+              span.alias= owner.aliases[0]
+              span.handle= "@"+owner.handle
 
     li
       span.label Members
