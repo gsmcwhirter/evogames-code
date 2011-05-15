@@ -1,5 +1,6 @@
+h1 Welcome!
 .left-col
-  h1 Recent News
+  h2 Recent News
   ul.recent-articles.fp-block
     - each article in articles
       li
@@ -7,7 +8,7 @@
         span.date.short= date(article.status.date)
   a(href="/news") Older Articles...
 
-  h1 Recent Registrations
+  h2 Recent Registrations
   ul.recent-members.fp-block
     - each member in registrations
       li
@@ -16,7 +17,7 @@
           span.handle= "@"+member.handle
         span.date.short= date(member.created_at)
 
-  h1 Recent Groups
+  h2 Recent Groups
   ul.recent-groups.fp-block
     - each group in groups
       li
@@ -24,14 +25,14 @@
         span.date.short= date(group.created_at)
 
 .right-col
-  h1 Current Events
+  h2 Current Events
   ul.current-events.fp-block
     li
 
-  h1 Current Tournaments
+  h2 Current Tournaments
   ul.current-tournaments.fp-block
     li
 
-  h1 Current Ladders
+  h2 Current Ladders
   ul.current-ladders.fp-block
     li
