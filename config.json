@@ -3,12 +3,6 @@
     "host": "http://localhost:5984",
     "db": "http://localhost:5984/mydb"
   },
-  "server": {
-      "login_cookie": "login",
-      "recaptcha_keys": {
-          "example.com": {"public": "", "private": ""}
-      }
-  },
   "system": {
       "title": "",
       "name": "",
@@ -21,7 +15,11 @@
       "default_timezone": "America/Los_Angeles",
       "date_format": "Y/m/d",
       "time_format": "g:i:s a T",
-      "datetime_format": "Y/m/d g:i:s T"
+      "datetime_format": "Y/m/d g:i:s T",
+      "login_cookie": "login",
+      "recaptcha_keys": {
+          "example.com": {"public": "", "private": ""}
+      }
   },
   "smtp": {
       "host": "",
