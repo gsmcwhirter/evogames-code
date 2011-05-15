@@ -7,7 +7,6 @@
         span.date.short= date(article.status.date)
   a(href="/news") Older Articles...
 
-.right-col
   h1 Recent Registrations
   ul.recent-members.fp-block
     - each member in registrations
@@ -18,8 +17,21 @@
         span.date.short= date(member.created_at)
 
   h1 Recent Groups
-  ul.recent-members.fp-block
+  ul.recent-groups.fp-block
     - each group in groups
       li
         a(href="/group/profile/"+group.code)= group.name
         span.date.short= date(group.created_at)
+
+.right-col
+  h1 Current Events
+  ul.current-events.fp-block
+    li
+
+  h1 Current Tournaments
+  ul.current-tournaments.fp-block
+    li
+
+  h1 Current Ladders
+  ul.current-ladders.fp-block
+    li
