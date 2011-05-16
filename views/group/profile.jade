@@ -2,7 +2,14 @@
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
   
 #group-profile
+  - if (group.logo)
+    img.logo(src=group.logo, alt="Group Logo")
+
   h1= group.name
+
+  - if (editable)
+    span.small
+      a(href="/group/controls/"+group.code) Manage Group
 
   h2 About
   != gdescription

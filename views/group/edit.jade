@@ -24,6 +24,16 @@ form(method="post", accept-charset="utf-8")
       span.field-status
         span &nbsp;
     .form-line
+      label(for="logo") Logo
+      br
+      - if (messages["logo"] && messages["logo"].length)
+        ul.field-error
+          - each msg in messages["logo"]
+            li!= "Logo " + msg
+      input#logo.text(type="text", name="logo", value=data.logo)
+      span.field-status
+        span &nbsp;
+    .form-line
       label(for="join_type") Join Type
       br
       - if (messages["join_type"] && messages["join_type"].length)
@@ -58,6 +68,7 @@ form(method="post", accept-charset="utf-8")
         | Cancel
 
 script(type="text/javascript",src="/js/validators/website.js")
+script(type="text/javascript",src="/js/validators/logo.js")
 script(type="text/javascript",src="/js/validators/groupjointype.js")
 script(type="text/javascript")
     $("button.cancel").evently({
