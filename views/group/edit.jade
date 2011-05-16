@@ -39,9 +39,9 @@ form(method="post", accept-charset="utf-8")
     .form-line
       label(for="description") Description
       span.small
-        | (
+        |  (
         a(href="http://daringfireball.net/projects/markdown/syntax") markdown syntax
-        | )
+        |  )
       br
       - if (messages["description"] && messages["description"].length)
         ul.field-error
