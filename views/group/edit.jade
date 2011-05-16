@@ -1,0 +1,63 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+  
+h1 Create Group
+form(method="post", accept-charset="utf-8")
+  fieldset
+    input(type="hidden", name="csrf", value=csrf)
+    .form-line
+      label(for="name") Group Name
+      br
+      - if (messages["name"] && messages["name"].length)
+        ul.field-error
+          - each msg in messages["name"]
+            li!= "Name " + msg
+      input#name.title(type="text", name="name", value=data.name)
+    .form-line
+      label(for="website") Website
+      br
+      - if (messages["website"] && messages["website"].length)
+        ul.field-error
+          - each msg in messages["website"]
+            li!= "Website " + msg
+      input#website.text(type="text", name="website", value=data.website)
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="join_type") Join Type
+      br
+      - if (messages["join_type"] && messages["join_type"].length)
+        ul.field-error
+          - each msg in messages["join_type"]
+            li!= "Join type "+msg
+      select#join_type.text(size="1", name="join_type")
+        option(value="open", selected=(data.join_type == "open")) Open
+        option(value="approval", selected=(data.join_type == "approval") Request Approval
+        option(value="invite", selected=(data.join_type == "invite") Invite Only
+        option(value="dummy") Dummy
+    .form-line
+      label(for="description") Description  
+      br
+      - if (messages["description"] && messages["description"].length)
+        ul.field-error
+          - each msg in messages["description"]
+            li!= "Description " + msg
+      textarea#description(name="description")= data.description || ""
+    .form-line
+      button.button.positive(type="submit")
+        img(src="/css/icons/tick.png", alt="")
+        | Save Information
+      span.link-sep
+      button.button.negative.cancel(type="button")
+        img(src="/css/icons/cross.png, alt="")
+        | Cancel
+
+script(type="text/javascript",src="/js/validators/groupcode.js")
+script(type="text/javascript")
+    $("button.cancel").evently({
+        click: function (){
+            window.location = "/group/controls";
+
+            return false;
+        }
+    });

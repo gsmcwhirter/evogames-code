@@ -8,17 +8,29 @@ form(method="post", accept-charset="utf-8")
     .form-line
       label(for="name") Group Name
       br
+      - if (messages["name"] && messages["name"].length)
+        ul.field-error
+          - each msg in messages["name"]
+            li!= "Name " + msg
       input#name.title(type="text", name="name", value=data.name)
     .form-line
       label(for="code") Group Code
       br
+      - if (messages["code"] && messages["code"].length)
+        ul.field-error
+          - each msg in messages["code"]
+            li!= "Code " + msg
       input#code.text(type="text", name="code", value=data.code)
       span.field-status
         span &nbsp;
     .form-line
       label(for="description") Description  
       br
-      textarea#description(name="description")= date.description || ""
+      - if (messages["description"] && messages["description"].length)
+        ul.field-error
+          - each msg in messages["description"]
+            li!= "Description " + msg
+      textarea#description(name="description")= data.description || ""
     .form-line
       button.button.positive(type="submit")
         img(src="/css/icons/tick.png",alt="")
