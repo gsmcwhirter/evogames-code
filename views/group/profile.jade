@@ -10,9 +10,9 @@
   ul.profile
     li
       span.label Website:&nbsp;
-      - if (typeof website != "undefined")
+      - if (group.website)
         span
-          a(href=website)= website
+          a(href=group.website)= group.website
       - else
         span (not listed)
         
