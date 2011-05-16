@@ -7,3 +7,19 @@
   h3= group.name
 
 ul.grid
+  li
+    a(href="/group/controls/"+group.code+"/edit") Group Information
+    br
+    | Edit the group name, description, website, etc.
+  li
+    a(href="/group/controls/"+group.code+"/pending") Membership Requests
+    br
+    | Approve or deny membership requests.
+  li
+    a(href="/group/controls/"+group.code+"/members") Current Members
+    br
+    | Edit group member status.
+  li
+    a(href="/group/controls/"+group.code+"/invite") Invitations
+    br
+    | Invite new members to your group.
