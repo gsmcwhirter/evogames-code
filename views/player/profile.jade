@@ -33,7 +33,9 @@
     li
       span.label Group Memberships
       ul
-        li
+        - each group in mgroups
+          li
+            a(href="/group/profile/"+encodeURI(group.code))= group.name
 
   h2 Events
   ul.profile

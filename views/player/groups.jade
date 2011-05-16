@@ -4,21 +4,30 @@
 h1 Player Groups
 
 h2 Group Memberships
-ul.member-groups
-  - each group in member_groups
-    li
-      a(href="/group/profile/"+group.code)= group.name
-  li
-    a(href="#") Join new group...
+- each key in member_group_keys
+  h3
+    span.alias= member_groups[key][0].value.alias
+    span.handle= "@"+player.handle
+  ul.member-groups
+    - each group in member_groups[key]
+      li
+        a(href="/group/profile/"+group.doc.code)= group.doc.name
+        - if (group.value.approved)
+          a.action(href="#") leave group
+        - else
+          span(style="margin-left: 1em;") (pending)
+          a.action(href="#") cancel request
+      li
+        a(href="#") Join new group...
 
 - if (invited_groups.length)
   h2 Group Invitations
   ul.invited-groups
     -each group in invited_groups
       li
-        a(href="/group/profile/"+group.code)=group.name
-        a.action(href="#") deny
-        a.action(href="#") join
+        a(href="/group/profile/"+group.code)= group.name
+        a.action(href="#") decline
+        a.action(href="/group/join/"+group.code) join
 
 h2 Owned Groups
 ul.owned-groups
