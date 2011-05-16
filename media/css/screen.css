@@ -295,6 +295,7 @@ ol ol ol, ol ol ol > li, ol.roman, ol.roman > li {list-style-type:lower-roman;}
 ol ol ol ol, ol ol ol ol > li, ol.alpha, ol.alpha > li {list-style-type:lower-alpha;}
 strong, .bold {font-weight:bold;}
 .center {text-align:center;}
+.small {font-size:85%;}
 .tooltip {background-color:#000;border:1px solid #fff;padding:10px 15px;width:200px;display:none;color:#fff;text-align:left;font-size:12px;z-index:700;-moz-box-shadow:0 0 10px #000;-webkit-box-shadow:0 0 10px #000;}
 .menu-outer .ui-icon {width:16px;height:16px;background-image:url(../images/jquery-ui/ui-icons_cccccc_256x240.png);}
 .menu-outer .ui-icon-triangle-1-n {background-position:0 -16px;}
