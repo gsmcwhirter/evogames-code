@@ -318,7 +318,7 @@ strong, .bold {font-weight:bold;}
 #main h1 {color:#222;font-size:182%;}
 #main h2 {padding-bottom:5px;line-height:1em;color:#444;font-size:167%;}
 #main h3 {color:#666;font-size:153.9%;}
-#main #player-profile img.avatar {display:block;float:right;margin-left:1em;margin-bottom:1em;}
+#main #player-profile img.avatar, #main #group-profile img.avatar, #main #player-profile img.logo, #main #group-profile img.logo {display:block;float:right;margin-left:1em;margin-bottom:1em;max-width:160px;max-height:160px;}
 #main ul.grid {display:block;overflow:auto;padding:0;}
 #main ul.grid li {display:block;margin:5px 10px;padding:3px 0;float:left;width:45%;border-top:1px solid #222;border-bottom:1px dotted #666;}
 #main ul.profile {display:block;margin:0;padding:0;margin-bottom:1.5em;}
