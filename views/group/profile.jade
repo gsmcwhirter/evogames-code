@@ -37,9 +37,16 @@
               span.handle= "@"+owner.handle
 
     li
-      span.label Members:&nbsp;
-      ul
-        li
+      span.label= "Members: "+ member_count
+      - if (player && (group.join_type == "approval" || group.join_type == "open"))
+        span.small
+          |  (
+          a(href="/group/join/"+group.code) join group
+          |  )
+      br
+      span.small
+        a(href="/group/profile/"+group.code+"/members") view member list
+      
 
   h2 Events
   ul.profile

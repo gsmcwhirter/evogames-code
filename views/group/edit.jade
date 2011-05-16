@@ -73,7 +73,7 @@ script(type="text/javascript",src="/js/validators/groupjointype.js")
 script(type="text/javascript")
     $("button.cancel").evently({
         click: function (){
-            window.location = "/group/controls";
+            window.location = "/group/controls/#{group.code}";
 
             return false;
         }
