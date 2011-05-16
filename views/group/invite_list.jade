@@ -1,0 +1,10 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1 Group Invitations
+ul.grid
+  - each invite in invitations
+    li
+      a(href="/group/invite/"+invite.code)= invite.name
+      br
+      | Accept or decline invitations to join #{invite.name}.

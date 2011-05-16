@@ -1,0 +1,29 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1= "Leaving "+group.name
+form(method="post", accept-charset="utf-8")
+  fieldset
+    input(type="hidden", name="csrf", value=csrf)
+    input(type="hidden", name="do_leave", value="yes")
+    .form-line
+      | Are you sure you want to remove
+      span.alias= alias
+      span.handle= "@"+player.handle
+      |  from #{group.name}?
+    .form-line
+      button.button.positive(type="submit")
+        img(src="/css/icons/tick.png", alt="")
+        | &#32;Remove Alias
+      button.button.negative.cancel(type="button")
+        img(src="/css/icons/cross.png", alt="")
+        | &#32;Cancel
+
+script(type="text/javascript")
+    $("button.cancel").evently({
+        click: function (){
+            window.location = "/group/leave/#{group.code}";
+
+            return false;
+        }
+    });

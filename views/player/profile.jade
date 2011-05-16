@@ -23,19 +23,21 @@
             a(href="/player/profile/"+encodeURI(oalias)+"@"+encodeURI(pplayer.handle))
               span.alias= oalias
               span.handle= "@"+pplayer.handle
-    li
-      span.label Groups Owned
-      ul
-        - each group in ogroups
-          li
-            a(href="/group/profile/"+encodeURI(group.code))= group.name
+    - if (ogroups.length)
+      li
+        span.label Groups Owned
+        ul
+          - each group in ogroups
+            li
+              a(href="/group/profile/"+encodeURI(group.code))= group.name
 
-    li
-      span.label Group Memberships
-      ul
-        - each group in mgroups
-          li
-            a(href="/group/profile/"+encodeURI(group.code))= group.name
+    - if (mgroups.length)
+      li
+        span.label Group Memberships
+        ul
+          - each group in mgroups
+            li
+              a(href="/group/profile/"+encodeURI(group.code))= group.name
 
   h2 Events
   ul.profile
