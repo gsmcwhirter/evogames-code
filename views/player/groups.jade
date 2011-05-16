@@ -4,16 +4,19 @@
 h1 Player Groups
 
 h2 Group Memberships
-ul
+ul.member-groups
   - each group in member_groups
     li
       a(href="/group/profile/"+group.code)= group.name
-a(href="#") Join new group...
+  li
+    a(href="#") Join new group...
 
 
 h2 Owned Groups
-ul
+ul.owned-groups
   - each group in owned_groups
     li
       a(href="/group/profile/"+group.code)= group.name
-a(href="/group/create") Create new group...
+      a.manage(href="/group/controls/"+group.code) manage
+  li
+    a(href="/group/create") Create new group...

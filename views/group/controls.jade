@@ -2,6 +2,17 @@
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
 
 h1 Manage Groups
+
 ul.grid
   li
-    
+    a(href="/group/create") Create New Group
+    br
+    | Start your own group.
+
+h2 Owned Groups
+- each group in ogroups
+  != partial("group_controls", {layout: false, collection: [group], as: 'group'})
+
+h2 Admin Groups
+- each group in agroups
+  != partial("group_controls", {layout: false, collection: [group], as: 'group'})

@@ -1,0 +1,9 @@
+- if (typeof is_full != "undefined" && is_full)
+  #breadcrumbs
+    != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+  h1= "Manage "+group.name
+- else
+  h3= group.name
+
+ul.grid
