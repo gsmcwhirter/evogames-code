@@ -30,7 +30,8 @@ form(method="post", accept-charset="utf-8")
         ul.field-error
           - each msg in messages["join_type"]
             li!= "Join type "+msg
-      
+      select#join_type.text(size="1", name="join_type")
+        
     .form-line
       label(for="description") Description  
       br
