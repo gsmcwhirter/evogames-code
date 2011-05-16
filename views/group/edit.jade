@@ -1,7 +1,7 @@
 #breadcrumbs
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
   
-h1 Create Group
+h1 Edit Group Information
 form(method="post", accept-charset="utf-8")
   fieldset
     input(type="hidden", name="csrf", value=csrf)
@@ -23,7 +23,14 @@ form(method="post", accept-charset="utf-8")
       input#website.text(type="text", name="website", value=data.website)
       span.field-status
         span &nbsp;
-    
+    .form-line
+      label(for="join_type") Join Type
+      br
+      - if (messages["join_type"] && messages["join_type"].length)
+        ul.field-error
+          - each msg in messages["join_type"]
+            li!= "Join type "+msg
+      
     .form-line
       label(for="description") Description  
       br
