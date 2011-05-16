@@ -326,7 +326,7 @@ strong, .bold {font-weight:bold;}
 #main ul.recent-articles, #main ul.recent-members, #main ul.recent-groups, #main ul.current-events, #main ul.current-tournaments, #main ul.current-ladders {margin:0;padding:0;}
 #main ul.recent-articles .date, #main ul.recent-members .date, #main ul.recent-groups .date, #main ul.current-events .date, #main ul.current-tournaments .date, #main ul.current-ladders .date {float:right;}
 #main ul.fp-block {margin-bottom:1.5em;}
-#main ul.owned-groups .manage {float:right;}
+#main ul.member-groups .action, #main ul.owned-groups .action, #main ul.invited-groups .action {float:right;margin-left:1em;font-size:87%;}
 #main #flash .info, #main #flash .error {padding:5px 20px;margin-bottom:5px;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 #main #flash .info .x, #main #flash .error .x {float:right;font-weight:bold;cursor:pointer;opacity:0.5;}
 #main #alias-add-form {display:none;}
