@@ -35,6 +35,8 @@ form(method="post", accept-charset="utf-8")
         option(value="approval", selected=(data.join_type == "approval")) Request Approval
         option(value="invite", selected=(data.join_type == "invite")) Invite Only
         option(value="dummy") Dummy
+      span.field-status
+        span &nbsp;
     .form-line
       label(for="description") Description  
       br
@@ -52,7 +54,8 @@ form(method="post", accept-charset="utf-8")
         img(src="/css/icons/cross.png", alt="")
         | Cancel
 
-script(type="text/javascript",src="/js/validators/groupcode.js")
+script(type="text/javascript",src="/js/validators/website.js")
+script(type="text/javascript",src="/js/validators/groupjointype.js")
 script(type="text/javascript")
     $("button.cancel").evently({
         click: function (){
