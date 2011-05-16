@@ -330,6 +330,7 @@ strong, .bold {font-weight:bold;}
 #main ul.recent-articles .date, #main ul.recent-members .date, #main ul.recent-groups .date, #main ul.current-events .date, #main ul.current-tournaments .date, #main ul.current-ladders .date {float:right;}
 #main ul.fp-block {margin-bottom:1.5em;}
 #main ul.member-groups .action, #main ul.owned-groups .action, #main ul.invited-groups .action {float:right;margin-left:1em;font-size:85%;}
+#main ul.member-groups.admin li, #main ul.owned-groups.admin li, #main ul.invited-groups.admin li {border-top:1px dotted #666;}
 #main #flash .info, #main #flash .error {padding:5px 20px;margin-bottom:5px;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 #main #flash .info .x, #main #flash .error .x {float:right;font-weight:bold;cursor:pointer;opacity:0.5;}
 #main #alias-add-form {display:none;}
@@ -361,7 +362,11 @@ strong, .bold {font-weight:bold;}
 #main fieldset .form-line {overflow:auto;margin-bottom:.5em;}
 #main fieldset input[type=text], #main fieldset input[type=password], #main fieldset input[type=email], #main fieldset input[type=url], #main fieldset input[type=number], #main fieldset input[type=date], #main fieldset input[type=datetime], #main fieldset input[type=month], #main fieldset input[type=week], #main fieldset input[type=time], #main fieldset input[type=search], #main fieldset input[type=color], #main fieldset select, #main fieldset textarea {width:75%;margin:0.5em 0px;padding:5px;}
 #main fieldset textarea {height:20em;}
-#main fieldset button {border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
+#main fieldset button, #main fieldset a.button {border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
+#main fieldset a.button {color:#565656;}
+#main fieldset a.button:hover {color:#369;}
+#main fieldset a.button.negative, #main fieldset a.button.negative:hover {color:#D12F19;}
+#main fieldset a.button.positive, #main fieldset a.button.positive:hover {color:#529214;}
 #main fieldset .field-status {display:inline-block;width:30px;height:26px;vertical-align:top;margin-top:6px;margin-left:1em;border:1px solid #ccc;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 #main fieldset .field-status .status-field-ok, #main fieldset .field-status .status-field-not-ok, #main fieldset .field-status .status-field-maybe {display:inline-block;width:30px;height:26px;background-position:center;background-repeat:no-repeat;}
 #main fieldset .field-status .status-field-ok {background-image:url('../images/signup_ok.png');}

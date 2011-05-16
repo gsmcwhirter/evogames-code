@@ -1,0 +1,10 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1 Leaving Groups
+ul.grid
+  - each mship in memberships
+    li
+      a(href="/group/leave/"+mship.code)= mship.name
+      br
+      | Remove aliases from #{mship.name}.
