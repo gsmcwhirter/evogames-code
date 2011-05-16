@@ -38,6 +38,10 @@ form(method="post", accept-charset="utf-8")
         span &nbsp;
     .form-line
       label(for="body") Content
+      span.small
+        | (
+        a(href="http://daringfireball.net/projects/markdown/syntax") markdown syntax
+        | )
       br
       - if (messages["body"] && messages["body"].length)
         ul.field-error
