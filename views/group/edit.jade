@@ -31,6 +31,7 @@ form(method="post", accept-charset="utf-8")
           - each msg in messages["join_type"]
             li!= "Join type "+msg
       select#join_type.text(size="1", name="join_type")
+        option(value="open", selected=(data.join_type == "open")) Open
         
     .form-line
       label(for="description") Description  
