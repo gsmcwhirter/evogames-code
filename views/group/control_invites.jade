@@ -1,0 +1,12 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1= group.name+" Invitations"
+
+ul.group-members-list
+  - each invite in invites
+    li
+      span.handle.only= "@"+invite.handle
+      a.action.withdraw(href="#") withdraw
+  li
+    a(href="/group/controls/"+group.code+"/invites/add") Invite a new player...
