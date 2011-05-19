@@ -1,14 +1,11 @@
-$("#website").evently({
-    _init: function (){
-        var self = $(this);
-
-        $(function(){self.trigger("validate");});
-    },
-
-    keyup: "validate",
-    blur: "validate",
-
-    "validate": function (){
+$(function (){
+    $("#website").bind('run', function (){
+        this.trigger("validate");
+    }).bind("keyup", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
 
@@ -24,5 +21,6 @@ $("#website").evently({
         {
             fstat.trigger("ok");
         }
-    }
+    }).trigger('run');
 });
+

@@ -1,16 +1,14 @@
-$("#tags").evently({
-    _init: function (){
-        var self = $(this);
-        $(function (){self.trigger("validate");});
-    },
-    
-    keyup: "validate",
-    blur: "validate",
-    
-    "validate": function (){
+$(function (){
+    $("#tags").bind('run', function (){
+        this.trigger("validate");
+    }).bind("keyup", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
-        
+
         var tags = $.trim(self.val());
         if (!tags.match(new RegExp("^[a-zA-Z0-9\\-_.:/,; ]*$")))
         {
@@ -20,5 +18,5 @@ $("#tags").evently({
         {
             fstat.trigger("ok");
         }
-    }
+    }).trigger("run");
 });

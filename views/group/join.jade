@@ -21,10 +21,10 @@ form(method="post", accept-charset="utf-8")
         | Cancel
 
 script(type="text/javascript")
-    $("button.cancel").evently({
-        click: function (){
+    $(function(){
+        $("button.cancel").bind('click', function (){
             window.location = "/group/profile/#{group.code}";
 
             return false;
-        }
+        });
     });

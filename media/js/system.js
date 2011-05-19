@@ -1,6 +1,6 @@
 var flash = $.sammy("#flash", function (){
-    function noop(){}
-    this.get('', noop);
+    this.setLocationProxy({bind: function (){}, unbind: function (){}, getLocation: function (){return '';}, setLocation: function (){}});
+    this.get('', function (){});
 
     function bindings(selector){
         selector.bind("delayhighlight", function (){
@@ -52,8 +52,8 @@ var flash = $.sammy("#flash", function (){
 });
 
 var menus = $.sammy("#menu", function (){
-    function noop(){}
-    this.get('', noop);
+    this.setLocationProxy({bind: function (){}, unbind: function (){}, getLocation: function (){return '';}, setLocation: function (){}});
+    this.get('', function (){});
 
     this.bind('run', function (){
         this.$element(".menu-header .icon").bind("up-arrow", function (){
@@ -117,8 +117,8 @@ var menus = $.sammy("#menu", function (){
 });
 
 var statuses = $.sammy(function (){
-    function noop(){}
-    this.get('', noop);
+    this.setLocationProxy({bind: function (){}, unbind: function (){}, getLocation: function (){return '';}, setLocation: function (){}});
+    this.get('', function (){});
 
     this.bind('run', function (){
         this.$element(".field-status").bind("refresh", function (){

@@ -1,37 +1,49 @@
-$("#email").evently({
-    _init: function (){
-        var self = $(this);
-        
-        self.trigger("fetch_emails", [function (emails){
+$(function (){
+    var email_cache;
+
+    $("#email").bind('run', function (){
+        var self = this;
+        this.trigger("fetch-emails",[function (emails){
+            email_cache = emails;
             self.trigger("validate");
         }]);
-    },
-    
-    keyup: "validate",
-    blur: "validate",
-    
-    "validate": function (){
+    }).bind("keyup", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
+        var self = $(this);
+
+    }).trigger("run");
+
+    $("#email_confirm").bind('run', function (){
+        this.trigger("validate");
+    }).bind("keyup", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
-        
+
         function email_exists(email){
-            if (!$$(self).email_cache)
+            if (!email_cache)
             {
                 return true;
             }
-            
-            if ($.inArray(hex_sha1($.trim(email).toLowerCase()), $$(self).email_cache) >= 0)
+
+            if ($.inArray(hex_sha1($.trim(email).toLowerCase()), email_cache) >= 0)
             {
                 return true;
             }
-            
+
             return false;
         }
-        
+
         function email_cache_loaded(){
-            return $$(self).email_cache ? true : false;
+            return email_cache ? true : false;
         }
-        
+
         var re = new RegExp("^([a-zA-Z0-9_\\-.]+)@(([a-zA-Z0-9\\-]+\\.)+)([a-zA-Z]{2,9})$");
         var email = $.trim(self.val());
         if (email.length == 0)
@@ -57,38 +69,29 @@ $("#email").evently({
         {
             fstat.trigger("ok");
         }
-    },
-    
-    "fetch_emails": function (e, callback, force){
-        var self = $(this);
-        
-        if (!$$(self).email_cache || force)
+    }).bind("fetch-emails", function (e, callback, force){
+        if (!email_cache || force)
         {
             $.get("/api/emails.json", function (data){
-                $$(self).email_cache = data;
                 callback(data);
             });
         }
         else
         {
-            return $$(self).email_cache;
+            callback(email_cache)
         }
-    }
-});
+    }).trigger("run");
 
-$("#email_confirm").evently({
-    _init: function (){
-        var self = $(this);
-        $(document).ready(function (){ self.trigger("validate"); });
-    },
-    
-    keyup: "validate",
-    blur: "validate",
-    
-    "validate": function (){
+    $("#email_confirm").bind('run', function (){
+        this.trigger("validate");
+    }).bind("keyup", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
-        
+
         var email_confirm = $.trim(self.val());
         if (email_confirm != $.trim($("#email").val()))
         {
@@ -102,5 +105,5 @@ $("#email_confirm").evently({
         {
             fstat.trigger("ok");
         }
-    }
+    }).trigger("run");
 });

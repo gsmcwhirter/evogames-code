@@ -2,7 +2,7 @@
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
 
 h1 Date and Time Preferences
-form(method="post", accept-charset="utf-8")
+form#dtprefs(method="post", accept-charset="utf-8")
   fieldset.narrow-fields
     input(type="hidden", name="csrf", value=csrf)
     .form-line
