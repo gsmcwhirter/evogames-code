@@ -1,0 +1,13 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1= group.name+" Membership Requests"
+
+ul.group-members-list
+  - each request in pending_requests
+    li
+      span.alias= request.alias
+      span.handle= "@"+request.handle
+      a.action.deny(href="#") deny
+      a.action.approve(href="#") approve
+  li

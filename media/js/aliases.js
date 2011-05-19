@@ -1,50 +1,40 @@
-$("#aliases").evently({
+var aliases = $.sammy("#aliases", function (){
+    var _app = this;
 
-    _init: {
-        before: function (){
-            $("a.set-default").unbind('click.set-default');
-            $("a.remove").unbind('click.remove');
-        },
-        selectors: {
-            "a.set-default": {
-                "click.set-default": function (){
-                    $("#aliases").trigger("save_default", [$(this).parent()]);
-                    return false;
-                }
-            },
-            
-            "a.remove": {
-                "click.remove": function (){
-                    $("#aliases").trigger("remove", [$(this).parent()]);
-                    return false;
-                }
-            }
-        },
-        
-        after: function (){
-        
-        }
-    },
-    
-    "set_default": function (e, target){
-        var self = $(this);
-        
-        self.trigger("clear_default");
+    function clickRemove(){
+        _app.trigger("remove", {target: $(this).parent()});
+        return false;
+    }
+
+    function clickSetDefault(){
+        _app.trigger("save-default", {target: $(this).parent()});
+        return false;
+    }
+
+    this.bind('run', function (){
+        this.$element("a.set-default").bind('click.set-default', clickSetDefault);
+
+        this.$element("a.remove").bind('click.remove', clickRemove);
+    });
+
+    this.bind('set-default', function (e, data){
+        var target = data.target;
+        var self = this.$element();
+
+        this.trigger('clear-default');
         if (target){
-            target = $(target);
-        
-            self.prepend(target.detach());
+            self.prepend(target);
         }
         else {
             target = $("li.alias", self).first();
         }
+
         $(".alias", target).after("<span class='default'>(Default)</span>");
-        
-    },
-    
-    "save_default": function (e, target){
-        var self = $(this);
-        target = $(target);
+    });
+
+    this.bind('save-default', function (e, data){
+        var target = data.target;
+
         if (!$(".default", target).length){
             var alias = $.trim($(".alias", target).html());
             $.ajax({
@@ -56,7 +46,7 @@ $("#aliases").evently({
                     if (data.ok)
                     {
                         $("#flash").trigger("info", ['Set default alias successfully.']);
-                        self.trigger("set_default", [target]);
+                        _app.trigger("set-default", {target: target});
                     }
                     else
                     {
@@ -68,26 +58,25 @@ $("#aliases").evently({
                 }
             });
         }
-    },
-    
-    "remove_default": function (e, target){
-        $(".default", $(target)).remove();
-    },
-    
-    "remove": function (e, target){
-        var self = $(this);
-        target = $(target);
-        
+    });
+
+    this.bind('remove-default', function (e, data){
+        var target = data.target;
+        $(".default", target).remove();
+    });
+
+    this.bind('remove', function (e, data){
+        var target = data.target;
         var alias = $.trim($(".alias", target).html());
+
         $.ajax({
             type: 'delete',
             url: '/player/controls/aliases/remove/'+alias,
             success: function (data, textStatus){
-                if (data.ok)
-                {
+                if (data.ok){
                     $("#flash").trigger('info', ['Alias removed successfully.']);
                     target.remove();
-                    $("#aliases").trigger("set_default");
+                    _app.trigger("set-default");
                 }
                 else
                 {
@@ -98,73 +87,55 @@ $("#aliases").evently({
                 $("#flash").trigger('error', 'Request error');
             }
         });
-    },
-    
-    "clear_default": function (){
-        var self = $(this);
-        $("li.alias .default", self).remove();
-    },
-    
-    "add": function (e, alias){
-        var self = $(this);
+    });
+
+    this.bind('clear-default', function (){
+        this.$element("li.alias .default").remove();
+    });
+
+    this.bind('add', function (e, data){
+        var alias = data.alias;
+        var self = this.$element();
         self.append($("<li class='alias'><span class='alias'>"+alias+"</span></li>")
-                        .append("<a href='#' class='remove'>Remove</a>")
-                        .append("<a href='#' class='set-default'>Set Default</a>"));
-        self.trigger("_init");
-    },
-    
-    "refresh": function (){
-        var self = $(this);
-        $.get("/player/controls/aliases/list", function (data){
-            if (data.ok)
-            {
-                self.empty();
-                data.aliases.forEach(function (alias){
-                    self.trigger("add", [alias]);
-                });
-                self.trigger("set_default");
-            }
-        });
-    }
-});
+                        .append($("<a href='#' class='remove'>Remove</a>").bind('click.remove', clickRemove))
+                        .append($("<a href='#' class='set-default'>Set Default</a>").bind('click.set-default', clickSetDefault)));
+    });
 
-$("a#add-link").evently({
-    click: function (){
-        var self = $(this);
-        self.trigger("hide");
-        $("#alias-add-form").trigger("show");
-        
-        return false;
-    },
-    
-    hide: function (){
-        var self = $(this);
-        self.hide();
-    },
-    
-    show: function (){
-        var self = $(this);
-        self.show();
-    }
-});
+    this.bind('hide-form', function (){
+        var theform = $("#alias-add-form");
+        theform.hide();
+        $("input[name=alias]", theform).val('');
+        $("a#add-link").show();
+    });
 
-$("#alias-add-form").evently({
-    submit: function (){
-        var self = $(this);
+    function noop(){}
+    
+    this.get("", noop);
+    this.get("#!/", noop);
+
+    this.get("#!/add", function (){
+        var theform = $("#alias-add-form");
+        theform.show();
+        $("a#add-link").hide();
+        $(".alias", theform).first().focus();
+    });
+
+    this.post("#!/add", function (){
         $.ajax({
             type: 'put',
             url: '/player/controls/aliases/add',
-            data: self.serialize(),
+            data: {alias: this.params.alias},
             dataType: 'json',
             processData: false,
             success: function (data, textStatus){
                 if (data.ok){
                     $("#flash").trigger('info', ['Alias added successfully.']);
                     if (data.message != "alias exists"){
-                        $("#aliases").trigger("add", [data.alias]);
+                        _app.trigger('add', {alias: data.alias});
                     }
-                    
-                    $("#alias-add-form").trigger("hide");
+
+                    _app.trigger("hide-form");
+                    _app.redirect("#!/");
                 }
                 else {
                     $("#flash").trigger('error', ['Alias not added: '+data.error]);
@@ -174,38 +145,16 @@ $("#alias-add-form").evently({
                 $("#flash").trigger('error', ['Request error']);
             }
         });
-        
+
         return false;
-    },
-    
-    show: function (){
-        var self = $(this);
-        self.show();
-        $(".alias", self).first().focus();
-    },
-    
-    hide: function (){
-        var self = $(this);
-        self.hide();
-        $("input[name=alias]", self).val('');
-        $("a#add-link").trigger("show");
-    }
+    });
+
+    this.get("#!/cancel", function (){
+        this.trigger('hide-form');
+        this.redirect("#!/");
+    });
 });
 
-$("button.cancel").evently({
-    click: function (){
-        $("#alias-add-form").trigger("hide");
-        
-        return false;
-    }
+$(function(){
+    aliases.run();
 });
-
-$("a#refresh-link").evently({
-    click: function (){
-        console.log("refresh");
-        $("#aliases").trigger("refresh");
-        
-        return false;
-    }
-});
-

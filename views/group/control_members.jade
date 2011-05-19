@@ -1,0 +1,13 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1= group.name+" Member Controls"
+
+ul.group-members-list
+  - each member in members
+    li
+      span.alias= member.alias
+      span.handle= "@"+member.handle
+      a.action.remove(href="#") remove
+      a.action(href="/group/controls/"+group.code+"/members/"+encodeURI(member.alias)+"@"+encodeURI(member.handle)) privileges
+  li

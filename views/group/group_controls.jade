@@ -12,7 +12,7 @@ ul.grid
     br
     | Edit the group name, description, website, etc.
   li
-    a(href="/group/controls/"+group.code+"/pending") Membership Requests
+    a(href="/group/controls/"+group.code+"/requests") Membership Requests
     br
     | Approve or deny membership requests.
   li
@@ -20,9 +20,11 @@ ul.grid
     br
     | Edit group member status.
   li
-    a(href="/group/controls/"+group.code+"/invite") Invitations
+    a(href="/group/controls/"+group.code+"/invites") Invitations
     br
     | Invite new members to your group.
+
+ul.grid
   li
     a(href="/group/profile/"+group.code) View Profile
     br

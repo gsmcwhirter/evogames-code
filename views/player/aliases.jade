@@ -4,10 +4,9 @@
 h1 Player Aliases
 
 #alias-controls
-  a#refresh-link(href="#") Refresh List
-  a#add-link(href="#") Add New Alias
+  a#add-link(href="#!/add") Add New Alias
 
-form#alias-add-form(accept-charset="utf-8")
+form#alias-add-form(method="post", action="#!/add", accept-charset="utf-8")
   fieldset
     .form-line
       label(for="name") New Alias
@@ -20,7 +19,7 @@ form#alias-add-form(accept-charset="utf-8")
         img(src="/css/icons/tick.png",alt="")
         | &#32;Add Alias
       span.link-sep
-      button.button.negative.cancel(type="button")
+      a.button.negative.cancel(href="#!/cancel")
         img(src="/css/icons/cross.png",alt="")
         | &#32;Cancel
   
