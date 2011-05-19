@@ -4,16 +4,16 @@ $(function (){
     var last_autoslug = "";
 
     $("#slug").bind('run', function (){
-        var self = this;
-        this.trigger("fetch-slugs", [function (){
+        var self = $(this);
+        self.trigger("fetch-slugs", [function (){
             slug_cache = slugs;
             self.trigger("validate");
         }]);
-        this.trigger("validate");
+        return false;
     }).bind("keyup", function (){
-        this.trigger("validate");
+        $(this).trigger("validate");
     }).bind("blur", function (){
-        this.trigger("validate");
+        $(this).trigger("validate");
     }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
@@ -80,5 +80,7 @@ $(function (){
             last_autoslug = newslug;
             $(this).val(newslug);
         }
-    }).trigger("run");
+    });
+
+    validators.run("#slug");
 });

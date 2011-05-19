@@ -3,36 +3,38 @@
   
 h1 Player Aliases
 
-#alias-controls
-  a#add-link(href="#!/add") Add New Alias
+div#alias-block
 
-form#alias-add-form(method="post", action="#!/add", accept-charset="utf-8")
-  fieldset
-    .form-line
-      label(for="name") New Alias
-      br
-      input#name.text(type="text", name="alias")
-      span.field-status
-        span &nbsp;
-    .form-line
-      button.button.positive.submit(type="submit")
-        img(src="/css/icons/tick.png",alt="")
-        | &#32;Add Alias
-      span.link-sep
-      a.button.negative.cancel(href="#!/cancel")
-        img(src="/css/icons/cross.png",alt="")
-        | &#32;Cancel
+  #alias-controls
+    a#add-link(href="#!/add") Add New Alias
+
+  form#alias-add-form(method="post", action="#!/add", accept-charset="utf-8")
+    fieldset
+      .form-line
+        label(for="name") New Alias
+        br
+        input#name.text(type="text", name="alias")
+        span.field-status
+          span &nbsp;
+      .form-line
+        button.button.positive.submit(type="submit")
+          img(src="/css/icons/tick.png",alt="")
+          | &#32;Add Alias
+        span.link-sep
+        a.button.negative.cancel(href="#!/cancel")
+          img(src="/css/icons/cross.png",alt="")
+          | &#32;Cancel
   
-ul#aliases
-  - aliases.forEach(function (alias, index){
-    li.alias
-      span.alias
-        = alias
-      - if (index == 0)
-        span.default (Default)
-      a.remove(href="#") Remove
-      a.set-default(href="#") Set Default
-  - });
+  ul#aliases
+    - aliases.forEach(function (alias, index){
+      li.alias
+        span.alias
+          = alias
+        - if (index == 0)
+          span.default (Default)
+        a.remove(href="#") Remove
+        a.set-default(href="#") Set Default
+    - });
   
 script(type="text/javascript", src="/js/aliases.js")
 script(type="text/javascript", src="/js/validators/playeralias.js")

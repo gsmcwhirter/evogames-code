@@ -1,8 +1,47 @@
-var flash = $.sammy("#flash", function (){
-    this.setLocationProxy({bind: function (){}, unbind: function (){}, getLocation: function (){return '';}, setLocation: function (){}});
-    this.get('', function (){});
+var validators = {
+    _ready: false,
+    _validators: [],
+    run: function (){
+        if (arguments.length > 0){
+            var argarray = [];
+            for (var k in arguments){
+                if (arguments[k] instanceof Array){
+                    argarray = argarray.concat(arguments[k]);
+                }
+                else {
+                    argarray.push(arguments[k]);
+                }
+            }
 
+            if (this._ready){
+                for (var i = 0; i < argarray.length; i++){
+                    $(argarray[i]).trigger("run");
+                }
+            }
+            else {
+                this._validators = this._validators.concat(argarray);
+            }
+        }
+    },
+    ready: function (){
+        var self = this;
+        $(function (){
+            self._ready = true;
+            
+            var num = self._validators.length;
+            self._validators.reverse();
+            var selector;
+            for(var i = 0; i < num; i++){
+                selector = self._validators.pop();
+                $(selector).trigger("run");
+            }
+        });
+    }
+};
+
+$(function (){
     function bindings(selector){
+        $(selector).prepend("<span class='x'>x</span>");
         selector.bind("delayhighlight", function (){
             var self = $(this);
             if (!self.hasClass("done")){
@@ -21,48 +60,37 @@ var flash = $.sammy("#flash", function (){
         return selector;
     }
 
-    this.bind('run', function (){
-        bindings(this.$element("div"));
-
-        this.$element("div").trigger("bind-xs");
-        this.$element("div").trigger("delayhighlight");
-    });
-
-    this.bind("info", function (e, data){
-        var msg = data.msg;
-
-        var self = this.$element();
+    $("#flash").bind('run', function (){
+        var self = $(this);
+        bindings($("div", self)).trigger("bind-xs").trigger("delayhighlight");
+    }).bind("info", function (e, msg){
+        var self = $(this)
         var newdiv = $("<div class='info'><span><strong>Info:</strong> "+msg+"</span></div>");
         bindings(newdiv);
         self.append(newdiv);
         newdiv.trigger("bind-xs");
         newdiv.trigger("delayhighlight");
-    });
-
-    this.bind("error", function (e, data){
-        var msg = data.msg;
-
-        var self = this.$element();
+    }).bind("error", function (e, msg){
+        var self = $(this);
         var newdiv = $("<div class='error'><span><strong>Error:</strong> "+msg+"</span></div>");
         bindings(newdiv);
         self.append(newdiv);
         newdiv.trigger("bind-xs");
         newdiv.trigger("delayhighlight");
-    });
+    }).trigger("run");
 });
 
-var menus = $.sammy("#menu", function (){
-    this.setLocationProxy({bind: function (){}, unbind: function (){}, getLocation: function (){return '';}, setLocation: function (){}});
-    this.get('', function (){});
+$(function (){
+    $("#menu").bind('run', function (){
+        var self = $(this);
 
-    this.bind('run', function (){
-        this.$element(".menu-header .icon").bind("up-arrow", function (){
+        $(".menu-header .icon", self).bind("up-arrow", function (){
             $(this).removeClass("ui-icon-triangle-1-s").addClass("ui-icon-triangle-1-n");
         }).bind("down-arrow", function (){
             $(this).removeClass("ui-icon-triangle-1-n").addClass("ui-icon-triangle-1-s");
         }).addClass("ui-icon");
 
-        this.$element(".menu-inner>li>.menu-item[title]").bind('set-tooltip', function (){
+        $(".menu-inner>li>.menu-item[title]", self).bind('set-tooltip', function (){
             $(this).tooltip({
                 position: "center right",
                 offset: [0, 2],
@@ -74,7 +102,7 @@ var menus = $.sammy("#menu", function (){
             });
         }).trigger("set-tooltip");
 
-        this.$element(".menu-outer").bind("collapse", function (e, instant){
+        $(".menu-outer", self).bind("collapse", function (e, instant){
             var self = $(this)
             self.removeClass("expand").addClass("collapse");
             if (instant){
@@ -116,58 +144,51 @@ var menus = $.sammy("#menu", function (){
     });
 });
 
-var statuses = $.sammy(function (){
-    this.setLocationProxy({bind: function (){}, unbind: function (){}, getLocation: function (){return '';}, setLocation: function (){}});
-    this.get('', function (){});
-
-    this.bind('run', function (){
-        this.$element(".field-status").bind("refresh", function (){
-            var self = $(this);
-            var span = $("span", self);
-            var classes = span.attr('class');
-            var title = span.attr('title');
-            var new_span = $("<span class='"+classes+"' title='"+title+"'>&nbsp;</span>").tooltip({
-                position: "center right",
-                offset: [-2, 10],
-                effect: "toggle",
-                opacity: 1.0
-            });
-
-            span.replaceWith(new_span);
-        }).bind("bad", function (e, msg){
-            var self = $(this);
-            self.css("border-color", "#800");
-            $("span", self).removeClass("status-field-ok")
-                           .removeClass("status-field-maybe")
-                           .addClass("status-field-not-ok")
-                           .attr("title",msg);
-            self.trigger("refresh");
-        }).bind("ok", function (e, msg){
-            var self = $(this);
-            msg = msg || "OK";
-
-            self.css("border-color", "#080");
-            $("span", self).removeClass("status-field-not-ok")
-                           .removeClass("status-field-maybe")
-                           .addClass("status-field-ok")
-                           .attr("title",msg);
-            self.trigger("refresh");
-        }).bind("maybe", function (e, msg){
-            var self = $(this);
-            self.css("border-color", "#008");
-            $("span", self).removeClass("status-field-not-ok")
-                           .removeClass("status-field-ok")
-                           .addClass("status-field-maybe")
-                           .attr("title",msg);
-            self.trigger("refresh");
+$(function (){
+    $(".field-status").bind("refresh", function (){
+        var self = $(this);
+        var span = $("span", self);
+        var classes = span.attr('class');
+        var title = span.attr('title');
+        var new_span = $("<span class='"+classes+"' title='"+title+"'>&nbsp;</span>").tooltip({
+            position: "center right",
+            offset: [-2, 10],
+            effect: "toggle",
+            opacity: 1.0
         });
+
+        span.replaceWith(new_span);
+    }).bind("bad", function (e, msg){
+        var self = $(this);
+        self.css("border-color", "#800");
+        $("span", self).removeClass("status-field-ok")
+                       .removeClass("status-field-maybe")
+                       .addClass("status-field-not-ok")
+                       .attr("title",msg);
+        self.trigger("refresh");
+    }).bind("ok", function (e, msg){
+        var self = $(this);
+        msg = msg || "OK";
+
+        self.css("border-color", "#080");
+        $("span", self).removeClass("status-field-not-ok")
+                       .removeClass("status-field-maybe")
+                       .addClass("status-field-ok")
+                       .attr("title",msg);
+        self.trigger("refresh");
+    }).bind("maybe", function (e, msg){
+        var self = $(this);
+        self.css("border-color", "#008");
+        $("span", self).removeClass("status-field-not-ok")
+                       .removeClass("status-field-ok")
+                       .addClass("status-field-maybe")
+                       .attr("title",msg);
+        self.trigger("refresh");
     });
+
+    validators.ready();
 });
 
 $(function (){
     $("a[rel=blank]").attr("target", "_blank");
-
-    flash.run();
-    menus.run();
-    statuses.run();
 });

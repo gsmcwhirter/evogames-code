@@ -2,15 +2,16 @@ $(function (){
     var code_cache;
 
     $("#code").bind('run', function (){
-        var self = this;
-        this.trigger("fetch-codes", [function (codes){
+        var self = $(this);
+        self.trigger("fetch-codes", [function (codes){
             code_cache = codes;
             self.trigger("validate");
         }]);
+        return false;
     }).bind("keyup", function (){
-        this.trigger("validate");
+        $(this).trigger("validate");
     }).bind("blur", function (){
-        this.trigger("validate");
+        $(this).trigger("validate");
     }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
@@ -69,5 +70,7 @@ $(function (){
         {
             callback(code_cache);
         }
-    }).trigger("run");
+    });
+
+    validators.run("#code");
 });

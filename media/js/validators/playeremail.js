@@ -2,26 +2,16 @@ $(function (){
     var email_cache;
 
     $("#email").bind('run', function (){
-        var self = this;
-        this.trigger("fetch-emails",[function (emails){
+        var self = $(this);
+        self.trigger("fetch-emails",[function (emails){
             email_cache = emails;
             self.trigger("validate");
         }]);
+        return false;
     }).bind("keyup", function (){
-        this.trigger("validate");
+        $(this).trigger("validate");
     }).bind("blur", function (){
-        this.trigger("validate");
-    }).bind("validate", function (){
-        var self = $(this);
-
-    }).trigger("run");
-
-    $("#email_confirm").bind('run', function (){
-        this.trigger("validate");
-    }).bind("keyup", function (){
-        this.trigger("validate");
-    }).bind("blur", function (){
-        this.trigger("validate");
+        $(this).trigger("validate");
     }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
@@ -80,14 +70,14 @@ $(function (){
         {
             callback(email_cache)
         }
-    }).trigger("run");
+    });
 
     $("#email_confirm").bind('run', function (){
-        this.trigger("validate");
+        $(this).trigger("validate");
     }).bind("keyup", function (){
-        this.trigger("validate");
+        $(this).trigger("validate");
     }).bind("blur", function (){
-        this.trigger("validate");
+        $(this).trigger("validate");
     }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
@@ -105,5 +95,7 @@ $(function (){
         {
             fstat.trigger("ok");
         }
-    }).trigger("run");
+    });
+
+    validators.run("#email", "#email_confirm");
 });

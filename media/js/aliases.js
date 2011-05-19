@@ -1,5 +1,7 @@
 $(function (){
-    var aliases = $.sammy("#aliases", function (){
+    var aliases = $.sammy("#alias-block", function (){
+        this.use(Sammy.JSON);
+
         var _app = this;
 
         function clickRemove(){
@@ -13,14 +15,16 @@ $(function (){
         }
 
         this.bind('run', function (){
-            this.$element("a.set-default").bind('click.set-default', clickSetDefault);
-
-            this.$element("a.remove").bind('click.remove', clickRemove);
+            this.log("H-1");
+            this.$element("a.set-default").bind('click', clickSetDefault);
+            this.$element("a.remove").bind('click', clickRemove);
         });
 
         this.bind('set-default', function (e, data){
+            this.log("H1");
+
             var target = data.target;
-            var self = this.$element();
+            var self = this.$element("#aliases");
 
             this.trigger('clear-default');
             if (target){
@@ -34,9 +38,14 @@ $(function (){
         });
 
         this.bind('save-default', function (e, data){
-            var target = data.target;
+            this.log("H0");
+
+            this.log(this);
+            
+            var target = $(data.target);
 
             if (!$(".default", target).length){
+                this.log("H0.5");
                 var alias = $.trim($(".alias", target).html());
                 $.ajax({
                     type: 'put',
@@ -46,11 +55,13 @@ $(function (){
                     success: function (data, textStatus){
                         if (data.ok)
                         {
+                            _app.log("H0.6");
                             $("#flash").trigger("info", ['Set default alias successfully.']);
                             _app.trigger("set-default", {target: target});
                         }
                         else
                         {
+                            _app.log("H0.7")
                             $("#flash").trigger('error', ['Default alias not set: '+data.error]);
                         }
                     },
@@ -59,6 +70,8 @@ $(function (){
                     }
                 });
             }
+
+            return false;
         });
 
         this.bind('remove-default', function (e, data){
@@ -91,12 +104,12 @@ $(function (){
         });
 
         this.bind('clear-default', function (){
-            this.$element("li.alias .default").remove();
+            this.$element("#aliases li.alias .default").remove();
         });
 
         this.bind('add', function (e, data){
             var alias = data.alias;
-            var self = this.$element();
+            var self = this.$element("#aliases");
             self.append($("<li class='alias'><span class='alias'>"+alias+"</span></li>")
                             .append($("<a href='#' class='remove'>Remove</a>").bind('click.remove', clickRemove))
                             .append($("<a href='#' class='set-default'>Set Default</a>").bind('click.set-default', clickSetDefault)));
@@ -121,11 +134,13 @@ $(function (){
             $(".alias", theform).first().focus();
         });
 
-        this.post("#!/add", function (){
+        this.post("#!/add", function (context){
+            var self = this;
+            
             $.ajax({
                 type: 'put',
                 url: '/player/controls/aliases/add',
-                data: {alias: this.params.alias},
+                data: $.param({alias: this.params.alias}),
                 dataType: 'json',
                 processData: false,
                 success: function (data, textStatus){
@@ -136,7 +151,7 @@ $(function (){
                         }
 
                         _app.trigger("hide-form");
-                        _app.redirect("#!/");
+                        self.redirect("#!/");
                     }
                     else {
                         $("#flash").trigger('error', ['Alias not added: '+data.error]);
@@ -147,7 +162,7 @@ $(function (){
                 }
             });
 
-            return false;
+            //return false;
         });
 
         this.get("#!/cancel", function (){
