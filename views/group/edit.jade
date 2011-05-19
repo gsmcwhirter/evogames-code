@@ -71,10 +71,10 @@ script(type="text/javascript",src="/js/validators/website.js")
 script(type="text/javascript",src="/js/validators/logo.js")
 script(type="text/javascript",src="/js/validators/groupjointype.js")
 script(type="text/javascript")
-    $("button.cancel").evently({
-        click: function (){
+    $(function(){
+        $("button.cancel").bind('click', function (){
             window.location = "/group/controls/#{group.code}";
 
             return false;
-        }
+        });
     });

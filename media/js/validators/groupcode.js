@@ -1,37 +1,38 @@
-$("#code").evently({
-    _init: function (){
-        var self = $(this);
-        self.trigger("fetch_codes", [function (codes){
+$(function (){
+    var code_cache;
+
+    $("#code").bind('run', function (){
+        var self = this;
+        this.trigger("fetch-codes", [function (codes){
+            code_cache = codes;
             self.trigger("validate");
         }]);
-    },
-    
-    keyup: "validate",
-    blur: "validate",
-    
-    "validate": function (){
+    }).bind("keyup", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
         var self = $(this);
-        
+        var fstat = self.parent().find(".field-status").first();
+
         function code_exists(code){
-            if(!$$(self).code_cache)
+            if(!code_cache)
             {
                 return true;
             }
-            
-            if($.inArray($.trim(code).toLowerCase(), $$(self).code_cache) >= 0)
+
+            if($.inArray($.trim(code).toLowerCase(), code_cache) >= 0)
             {
                 return true;
             }
-                
+
             return false;
         }
-        
+
         function code_cache_loaded(){
-            return $$(self).code_cache ? true : false;
+            return code_cache ? true : false;
         }
-        
-        var fstat = self.parent().find(".field-status").first();
-        
+
         var re = new RegExp("^[a-zA-Z0-9\\-_\\[\\]]*$");
         var code = $.trim(self.val());
         if (code.length == 0)
@@ -57,21 +58,16 @@ $("#code").evently({
         {
             fstat.trigger("ok");
         }
-        
-    },
-    
-    "fetch_codes": function (e, callback, force){
-        var self = $(this);
-        if (!$$(self).code_cache || force)
+    }).bind("fetch-codes", function (e, callback, force){
+        if (!code_cache || force)
         {
             $.get("/api/group_codes.json", function (data){
-                $$(self).code_cache = data;
                 callback(data);
             });
         }
         else
         {
-            callback($$(self).code_cache);
+            callback(code_cache);
         }
-    }
+    }).trigger("run");
 });

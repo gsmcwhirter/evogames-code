@@ -1,16 +1,14 @@
-$("#name").evently({
-    _init: function (){
-        var self = $(this);
-        $(document).ready(function (){ self.trigger("validate"); });
-    },
-    
-    keyup: "validate",
-    blur: "validate",
-    
-    "validate": function (){
+$(function (){
+    $("#name").bind('run', function (){
+        this.trigger("validate");
+    }).bind("keyup", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
-        
+
         var name = $.trim(self.val());
         if (name.length < 3)
         {
@@ -20,5 +18,5 @@ $("#name").evently({
         {
             fstat.trigger("ok");
         }
-    }
+    }).trigger("run");
 });

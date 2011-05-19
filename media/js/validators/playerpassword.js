@@ -1,16 +1,14 @@
-$("#password").evently({
-    _init: function (){
-        var self = $(this);
-        $(document).ready(function (){ self.trigger("validate"); });
-    },
-    
-    keyup: "validate",
-    blur: "validate",
-    
-    "validate": function (){
+$(function (){
+    $("#password").bind('run', function (){
+        this.trigger("validate");
+    }).bind("keyup", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
-        
+
         var re = new RegExp("[^a-zA-Z]");
         var password = $.trim(self.val());
         if (password.length < 8)
@@ -25,22 +23,18 @@ $("#password").evently({
         {
             fstat.trigger("ok");
         }
-    }
-});
+    }).trigger("run");
 
-$("#password_confirm").evently({
-    _init: function (){
-        var self = $(this);
-        $(document).ready(function (){ self.trigger("validate"); });
-    },
-    
-    keyup: "validate",
-    blur: "validate",
-    
-    "validate": function (){
+    $("#password_confirm").bind('run', function (){
+        this.trigger("validate");
+    }).bind("keyup", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
-        
+
         var password_confirm = $.trim(self.val());
         if (password_confirm != $.trim($("#password").val()))
         {
@@ -54,5 +48,5 @@ $("#password_confirm").evently({
         {
             fstat.trigger("ok");
         }
-    }
+    }).trigger("run");
 });

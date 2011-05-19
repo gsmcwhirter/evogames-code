@@ -1,13 +1,11 @@
-$("#join_type").evently({
-    _init: function (){
-        var self = $(this);
-        $(function (){self.trigger("validate");});
-    },
-
-    change: "validate",
-    blur: "validate",
-
-    "validate": function (){
+$(function (){
+    $("#join_type").bind('run', function (){
+        this.trigger("validate");
+    }).bind("change", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
 
@@ -21,6 +19,5 @@ $("#join_type").evently({
         {
             fstat.trigger("ok");
         }
-
-    }
+    });
 });

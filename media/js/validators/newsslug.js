@@ -1,48 +1,48 @@
-$("#slug").evently({
-    _init: function (){
-        var self = $(this);
-        $$(self).autoslug = true;
-        $$(self).last_autoslug = "";
-        
-        self.trigger("fetch_slugs", [function (slugs){
+$(function (){
+    var slug_cache;
+    var autoslug = false;
+    var last_autoslug = "";
+
+    $("#slug").bind('run', function (){
+        var self = this;
+        this.trigger("fetch-slugs", [function (){
+            slug_cache = slugs;
             self.trigger("validate");
         }]);
-    },
-    
-    "keyup": "validate",
-    "blur": "validate",
-    
-    "validate": function (){
+        this.trigger("validate");
+    }).bind("keyup", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
         var self = $(this);
-        
+        var fstat = self.parent().find(".field-status").first();
+
         function slug_exists(slug){
-            if(!$$(self).slug_cache)
+            if(!slug_cache)
             {
                 return true;
             }
-            
-            if ($.inArray($.trim(slug).toLowerCase(), $$(self).slug_cache) >= 0)
+
+            if ($.inArray($.trim(slug).toLowerCase(), slug_cache) >= 0)
             {
                 return true;
             }
-            
+
             return false;
         }
-        
+
         function slug_cache_loaded(){
-            return $$(self).slug_cache ? true : false;
+            return slug_cache ? true : false;
         }
-        
-        var slug_chars = "abcdefghijklmnopqrstuvwxyz0123456789- ";
-        
+
         var slug = $.trim(self.val());
-        var fstat = self.parent().find(".field-status").first();
-        
-        if ($$(self).autoslug && slug != $$(self).last_autoslug)
+
+        if (autoslug && slug != last_autoslug)
         {
-            $$(self).autoslug = false;
+            autoslug = false;
         }
-        
+
         if (slug.length < 1)
         {
             fstat.trigger("bad", ["Must be at least 1 character long."]);
@@ -63,29 +63,22 @@ $("#slug").evently({
         {
             fstat.trigger("ok");
         }
-    },
-    
-    "autoslug": function (e, newslug){
-        var self = $(this);
-        if ($$(self).autoslug)
-        {
-            $$(self).last_autoslug = newslug;
-            self.val(newslug);
-        }
-    },
-    
-    "fetch_slugs": function (e, callback, force){
-        var self = $(this);
-        if (!$$(self).slug_cache || force)
+    }).bind("fetch-slugs", function (e, callback, force){
+        if (!slug_cache || force)
         {
             $.get("/api/slugs.json", function (data){
-                $$(self).slug_cache = _.map(data, function (item){return item.toLowerCase();});
-                callback($$(self).slug_cache);
+                var slugs = _.map(data, function (item){return item.toLowerCase();});
+                callback(slugs);
             });
         }
         else
         {
-            callback($$(self).slug_cache);
+            callback(slug_cache);
         }
-    }
+    }).bind("autoslug", function (e, newslug){
+        if (autoslug){
+            last_autoslug = newslug;
+            $(this).val(newslug);
+        }
+    }).trigger("run");
 });

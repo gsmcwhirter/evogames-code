@@ -17,10 +17,10 @@ form(method="post", accept-charset="utf-8")
         | &#32;Cancel
 
 script(type="text/javascript")
-    $("button.cancel").evently({
-        click: function (){
+    $(function(){
+        $("button.cancel").bind('click', function (){
             window.location = "/group/invite/#{group.code}";
 
             return false;
-        }
+        });
     });

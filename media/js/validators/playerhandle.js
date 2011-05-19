@@ -1,37 +1,38 @@
-$("#handle").evently({
-    _init: function (){
-        var self = $(this);
-        
-        self.trigger("fetch_users", [function (users){
+$(function (){
+    var user_cache;
+
+    $("#handle").bind('run', function (){
+        var self = this;
+        this.trigger("fetch-users", [function (users){
+            user_cache = users;
             self.trigger("validate");
         }]);
-    },
-    
-    keyup: "validate",
-    blur: "validate",
-    
-    "validate": function (){
+    }).bind("keyup", function (){
+        this.trigger("validate");
+    }).bind("blur", function (){
+        this.trigger("validate");
+    }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
-        
+
         function user_exists(name){
-            if(!$$(self).user_cache)
+            if(!user_cache)
             {
                 return true;
             }
-            
-            if ($.inArray($.trim(name).toLowerCase(), $$(self).user_cache) >= 0)
+
+            if ($.inArray($.trim(name).toLowerCase(), user_cache) >= 0)
             {
                 return true;
             }
-            
+
             return false;
         }
-        
+
         function user_cache_loaded(){
-            return $$(self).user_cache ? true : false;
+            return user_cache ? true : false;
         }
-        
+
         var handle = $.trim(self.val());
         if (handle.length < 3)
         {
@@ -52,20 +53,17 @@ $("#handle").evently({
         {
             fstat.trigger("ok");
         }
-    },
-    
-    "fetch_users": function (e, callback, force){
-        var self = $(this);
-        if (!$$(self).user_cache || force)
+    }).bind("fetch-users", function (e, callback, force){
+        if (!user_cache || force)
         {
             $.get("/api/users.json", function (data){
-                $$(self).user_cache = _.map(data, function (item){return item.toLowerCase();}); 
-                callback($$(self).user_cache);
+                var users = _.map(data, function (item){return item.toLowerCase();});
+                callback(users);
             });
         }
         else
         {
-            callback($$(self).user_cache);
+            callback(user_cache);
         }
-    }
+    }).trigger("run");
 });
