@@ -1,24 +1,13 @@
 #breadcrumbs
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
-  
-#group-profile
-  - if (group.logo)
-    img.logo(src=group.logo, alt="Group Logo")
 
-  h1= group.name
+h1= group.name+" Member Controls"
 
-  - if (editable)
-    p.small
-      a(href="/group/controls/"+group.code) Manage Group
-
-  p.small
-    a(href="/group/profile/"+group.code) View Full Profile
-
-  h2 Member List
-  ul.grid3
-    - each member in (group.members || [])
-      - if (member.approved)
-        li
-          a(href="/player/profile/"+encodeURI(member.alias)+"@"+encodeURI(member.handle))
-            span.alias= member.alias
-            span.handle= "@"+member.handle
+ul.group-members-list
+  - each member in members
+    li
+      span.alias= member.alias
+      span.handle= "@"+member.handle
+      a.action.remove(href="#") remove
+      a.action(href="/group/"+group.code+"/controls/members/"+encodeURI(member.alias)+"@"+encodeURI(member.handle)) privileges
+  li

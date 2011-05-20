@@ -9,7 +9,7 @@
 
   - if (editable)
     p.small
-      a(href="/group/controls/"+group.code) Manage Group
+      a(href="/group/"+group.code+"/controls") Manage Group
 
   h2 About
   != gdescription
@@ -41,12 +41,21 @@
       - if (player && (group.join_type == "approval" || group.join_type == "open"))
         span.small
           |  (
-          a(href="/group/join/"+group.code) join group
+          a(href="/group/"+group.code+"/join") join group
           |  )
-      br
-      span.small
-        a(href="/group/profile/"+group.code+"/members") view member list
-      
+      - if (member_count > 0)
+        br
+        span.small
+          a.member-toggle(href="#!/members")
+            span.verb view
+            |  member list
+        ul.grid3#members(style="display: none;")
+          - each member in (group.members || [])
+            - if (member.approved)
+              li
+                a(href="/player/profile/"+encodeURI(member.alias)+"@"+encodeURI(member.handle))
+                  span.alias= member.alias
+                  span.handle= "@"+member.handle
 
   h2 Events
   ul.profile
@@ -59,3 +68,5 @@
   h2 Ladders
   ul.profile
     li
+
+script(type="text/javascript", src="/js/group_profile.js")

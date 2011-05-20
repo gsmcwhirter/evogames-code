@@ -1,39 +1,20 @@
 #breadcrumbs
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
-  
-h1 Player Groups
 
-h2 Group Memberships
-- each key in member_group_keys
-  h3
-    span.alias= member_groups[key][0].value.alias
-    span.handle= "@"+player.handle
-  ul.member-groups.admin
-    - each group in member_groups[key]
-      li
-        a(href="/group/profile/"+group.doc.code)= group.doc.name
-        - if (group.value.approved)
-          a.action(href="/group/leave/"+group.doc.code+"/"+group.value.alias) leave group
-        - else
-          span(style="margin-left: 1em;") (pending)
-          a.action(href="/group/leave/"+group.doc.code+"/"+group.value.alias) cancel request
-    li.last
-      a(href="#") Join new group...
-
-- if (invited_groups.length)
-  h2 Group Invitations
-  ul.invited-groups.admin
-    -each group in invited_groups
-      li
-        a(href="/group/profile/"+group.doc.code)= group.doc.name
-        a.action(href="/group/invite/"+group.doc.code+"/decline") decline
-        a.action(href="/group/join/"+group.doc.code) join
+h1 Manage Groups
 
 h2 Owned Groups
 ul.owned-groups.admin
-  - each group in owned_groups
+  - each group in ogroups
     li
-      a(href="/group/profile/"+group.code)= group.name
-      a.action(href="/group/controls/"+group.code) manage
+      a(href="/group/"+group.code+"/profile")= group.name
+      a.action(href="/group/"+group.code+"/controls") manage
   li.last
     a(href="/group/create") Create new group...
+
+h2 Admin Groups
+ul.owned-groups.admin
+  - each group in agroups
+    li
+      a(href="/group/"+group.code+"/profile")= group.name
+      a.action(href="/group/"+group.code+"/controls") manage

@@ -297,6 +297,7 @@ strong, .bold {font-weight:bold;}
 .center {text-align:center;}
 .small {font-size:85%;}
 .tooltip {background-color:#000;border:1px solid #fff;padding:10px 15px;width:200px;display:none;color:#fff;text-align:left;font-size:12px;z-index:700;-moz-box-shadow:0 0 10px #000;-webkit-box-shadow:0 0 10px #000;}
+.modal {background-color:#fff;display:none;width:350px;padding:15px;text-align:left;border:2px solid #333;opacity:0.8;-moz-border-radius:6px;-webkit-border-radius:6px;-moz-box-shadow:0 0 50px #ccc;-webkit-box-shadow:0 0 50px #ccc;}
 .menu-outer .ui-icon {width:16px;height:16px;background-image:url(../images/jquery-ui/ui-icons_cccccc_256x240.png);}
 .menu-outer .ui-icon-triangle-1-n {background-position:0 -16px;}
 .menu-outer .ui-icon-triangle-1-s {background-position:-64px -16px;}
@@ -364,7 +365,7 @@ strong, .bold {font-weight:bold;}
 #main fieldset textarea {height:20em;}
 #main fieldset button, #main fieldset a.button {border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 #main fieldset a.button {color:#565656;}
-#main fieldset a.button:hover {color:#369;}
+#main fieldset a.button:hover {color:#369;text-decoration:none;}
 #main fieldset a.button.negative, #main fieldset a.button.negative:hover {color:#D12F19;}
 #main fieldset a.button.positive, #main fieldset a.button.positive:hover {color:#529214;}
 #main fieldset .field-status {display:inline-block;width:30px;height:26px;vertical-align:top;margin-top:6px;margin-left:1em;border:1px solid #ccc;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}

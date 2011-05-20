@@ -15,13 +15,11 @@ $(function (){
         }
 
         this.bind('run', function (){
-            this.log("H-1");
             this.$element("a.set-default").bind('click', clickSetDefault);
             this.$element("a.remove").bind('click', clickRemove);
         });
 
         this.bind('set-default', function (e, data){
-            this.log("H1");
 
             var target = data.target;
             var self = this.$element("#aliases");
@@ -38,14 +36,12 @@ $(function (){
         });
 
         this.bind('save-default', function (e, data){
-            this.log("H0");
 
             this.log(this);
             
             var target = $(data.target);
 
             if (!$(".default", target).length){
-                this.log("H0.5");
                 var alias = $.trim($(".alias", target).html());
                 $.ajax({
                     type: 'put',
@@ -55,13 +51,11 @@ $(function (){
                     success: function (data, textStatus){
                         if (data.ok)
                         {
-                            _app.log("H0.6");
                             $("#flash").trigger("info", ['Set default alias successfully.']);
                             _app.trigger("set-default", {target: target});
                         }
                         else
                         {
-                            _app.log("H0.7")
                             $("#flash").trigger('error', ['Default alias not set: '+data.error]);
                         }
                     },

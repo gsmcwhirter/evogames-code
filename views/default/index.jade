@@ -25,7 +25,7 @@ h1 Welcome!
   ul.recent-groups.fp-block
     - each group in groups
       li
-        a(href="/group/profile/"+group.code)= group.name
+        a(href="/group/"+group.code+"/profile")= group.name
         span.date.short= date(group.created_at)
 
 .right-col

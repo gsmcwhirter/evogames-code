@@ -1,0 +1,68 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+  
+h1 Manage Memberships
+
+div#memberships
+  h2 Group Memberships
+  - each key in member_group_keys
+    h3
+      span.alias= member_groups[key][0].value.alias
+      span.handle= "@"+player.handle
+    ul.member-groups.admin
+      - each group in member_groups[key]
+        li(title=group.value.alias + " in "+group.doc.code)
+          a(href="/group/"+group.doc.code+"/profile")= group.doc.name
+          - if (group.value.approved)
+            a.action(href="#!/leave/"+group.doc.code+"/"+group.value.alias, rel=group.doc.name) leave group
+          - else
+            span(style="margin-left: 1em;") (pending)
+            a.action(href="#!/leave/"+group.doc.code+"/"+group.value.alias, rel=group.doc.name) cancel request
+      li.last
+        a(href="#") Join new group...
+
+  - if (invited_groups.length)
+    h2 Group Invitations
+    ul.invited-groups.admin
+      -each group in invited_groups
+        li(title=group.doc.code)
+          a(href="/group/"+group.doc.code+"/profile")= group.doc.name
+          a.action(href="#!/decline/"+group.doc.code, rel=group.doc.name) decline
+          a.action(href="/group/"+group.doc.code+"/join") join
+      li.last
+
+  div.modal#decline-modal
+    form#decline-form(method="post", accept-charset="utf-8", action="#!/decline")
+      fieldset
+        input(type="hidden", name="csrf", value=csrf)
+        .form-line
+          | Are you sure you want to decline this invitation to join
+          span.club-name
+          | ?
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Decline Invitation
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+  div.modal#leave-modal
+    form#leave-form(method="post", accept-charset="utf-8", action="#!/leave")
+      fieldset
+        input(type="hidden", name="csrf", value=csrf)
+        .form-line
+          | Are you sure you want to remove
+          span.alias
+          |  from
+          span.club-name
+          | ?
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Remove Alias
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+script(type="text/javascript", src="/js/memberships.js")

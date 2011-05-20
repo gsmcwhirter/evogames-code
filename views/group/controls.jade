@@ -1,18 +1,31 @@
-#breadcrumbs
-  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+- if (typeof is_full != "undefined" && is_full)
+  #breadcrumbs
+    != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
 
-h1 Manage Groups
+  h1= "Manage "+group.name
+- else
+  h3= group.name
 
 ul.grid
   li
-    a(href="/group/create") Create New Group
+    a(href="/group/"+group.code+"/controls/edit") Group Information
     br
-    | Start your own group.
+    | Edit the group name, description, website, etc.
+  li
+    a(href="/group/"+group.code+"/controls/requests") Membership Requests
+    br
+    | Approve or deny membership requests.
+  li
+    a(href="/group/"+group.code+"/controls/members") Current Members
+    br
+    | Edit group member status.
+  li
+    a(href="/group/"+group.code+"/controls/invites") Invitations
+    br
+    | Invite new members to your group.
 
-h2 Owned Groups
-- each group in ogroups
-  != partial("group_controls", {layout: false, collection: [group], as: 'group'})
-
-h2 Admin Groups
-- each group in agroups
-  != partial("group_controls", {layout: false, collection: [group], as: 'group'})
+ul.grid
+  li
+    a(href="/group/"+group.code+"/profile") View Profile
+    br
+    | View the group profile.
