@@ -1,0 +1,15 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1 Group Search
+form(method="get", accept-charset="utf-8")
+  fieldset
+    .form-line
+      label(for="query") Search Term
+      br
+      input#query.text(type="text", name="query", value=query)
+    .form-line
+      button.button(type="submit") Search
+
+- if (results && results.length)
+  = JSON.stringify(results)
