@@ -3,10 +3,44 @@
 
 h1= group.name+" Invitations"
 
-ul.group-members-list
-  - each invite in invites
+#invite-controls
+  ul.group-members-list
+    - each invite in invites
+      li(title=invite.handle)
+        span.handle.only= "@"+invite.handle
+        a.action.withdraw(href="#!/withdraw/"+invite.handle) withdraw
     li
-      span.handle.only= "@"+invite.handle
-      a.action.withdraw(href="#") withdraw
-  li
-    a(href="#") Invite a new player...
+      a(href="#!/add") Invite a new player...
+
+  div.modal#withdraw-modal
+    form#withdraw-form(method="post", accept-charset="utf-8", action="#!/")
+      fieldset
+        input(type="hidden", name="csrf", value=csrf)
+        .form-line
+          | Are you sure you want to withdraw the group invitation to
+          span.handle
+          | ?
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Withdraw Invitation
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+  div.modal#add-modal
+    form#add-form(method="post", accept-charset="utf-8", action="#!/add")
+      fieldset
+        input(type="hidden", name="csrf", value=csrf)
+        .form-line
+          label(for="handle") Player Handle
+          input#handle.text(type="text", name="handle")
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Invite Player
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+script(type="text/javascript", src="/js/group_invites.js")

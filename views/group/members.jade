@@ -3,11 +3,31 @@
 
 h1= group.name+" Member Controls"
 
-ul.group-members-list
-  - each member in members
+#member-controls
+  ul.group-members-list
+    - each member in members
+      li(title=member.alias+"@"+member.handle)
+        span.alias= member.alias
+        span.handle= "@"+member.handle
+        a.action.remove(href="#!/remove/"+member.alias+"/"+member.handle) remove
+        a.action(href="/group/"+group.code+"/controls/members/"+encodeURI(member.alias)+"@"+encodeURI(member.handle)) privileges
     li
-      span.alias= member.alias
-      span.handle= "@"+member.handle
-      a.action.remove(href="#") remove
-      a.action(href="/group/"+group.code+"/controls/members/"+encodeURI(member.alias)+"@"+encodeURI(member.handle)) privileges
-  li
+
+  div.modal#remove-modal
+    form#remove-form(method="post", accept-charset="utf-8", action="#!/")
+      fieldset
+        input(type="hidden", name="csrf", value=csrf)
+        .form-line
+          | Are you sure you want to remove
+          span.alias
+          span.handle
+          |  from the group?
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Remove Member
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+script(type="text/javascript", src="/js/group_members.js")

@@ -1,0 +1,45 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1
+  | Privileges for
+  span.alias= member.alias
+  span.handle= "@"+member.handle
+
+#privilege-controls
+  form(method="post", accept-charset="utf-8")
+    fieldset
+      input(type="hidden", name="csrf", value=csrf)
+      .form-line
+        input#admin-edit(type="checkbox", name="admin-edit", value="1", checked=member.privs.edit)
+        | &#32;
+        label(for="admin-edit") Edit Group Information
+      .form-line
+        input#admin-members(type="checkbox", name="admin-members", value="1", checked=member.privs.members)
+        | &#32;
+        label(for="admin-members") Edit Member Privileges and Remove Members
+      .form-line
+        input#admin-requests(type="checkbox", name="admin-requests", value="1", checked=member.privs.requests)
+        | &#32;
+        label(for="admin-requests") Approve and Deny Membership Requests
+      .form-line
+        input#admin-invites(type="checkbox", name="admin-invites", value="1", checked=member.privs.invites)
+        | &#32;
+        label(for="admin-invites") Issue and Withdraw Membership Invitations
+      .form-line
+        button.button.positive(type="submit")
+          img(src="/css/icons/tick.png", alt="")
+          | Save Privileges
+        span.link-sep
+        button.button.negative.cancel(type="button")
+          img(src="/css/icons/cross.png", alt="")
+          | Cancel
+
+script(type="text/javascript")
+    $(function (){
+        $("button.cancel").bind('click', function (){
+            window.location = "/group/#{group.code}/controls/members";
+
+            return false;
+        });
+    });

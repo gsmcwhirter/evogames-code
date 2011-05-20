@@ -3,11 +3,35 @@
 
 h1= group.name+" Membership Requests"
 
-ul.group-members-list
-  - each request in pending_requests
+#request-controls
+  ul.group-members-list
+    - each request in pending_requests
+      li(title=request.alias+"@"+request.handle)
+        span.alias= request.alias
+        span.handle= "@"+request.handle
+        a.action.deny(href="#!/deny/"+request.alias+"/"+request.handle) deny
+        a.action.approve(href="#!/approve/"+request.alias+"/"+request.handle) approve
     li
-      span.alias= request.alias
-      span.handle= "@"+request.handle
-      a.action.deny(href="#") deny
-      a.action.approve(href="#") approve
-  li
+
+  div.modal#action-modal
+    form#action-form(method="post", accept-charset="utf-8", action="#!/")
+      fieldset
+        input(type="hidden", name="csrf", value=csrf)
+        .form-line
+          | Are you sure you want to
+          span.verb
+          |  the membership request from
+          span.alias
+          span.handle
+          | ?
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Yes,
+            span.verb
+            |  request
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;No, cancel
+
+script(type="text/javascript", src="/js/group_requests.js")

@@ -8,21 +8,24 @@ require('./lib/base/mixins');
     
 var config = JSON.parse(fs.readFileSync(__dirname + '/config.live.json', 'utf8'));
 
-var server = express.createServer(
-    express.profiler(),
-    express.logger(),
-    express.responseTime(),
-    express.cookieParser(),
-    express.session({fingerprint: base.connectionFingerprint, secret: config.session_secret}),
-    express.bodyParser(),
-    base.middleware.csrf.check,
-    base.middleware.determineLogin(),
-    base.middleware.prepareMenus()
-);
+var server = express.createServer();
 
 base.configureServer(server);
 
+server.configure('development', function (){
+    this.use(express.profiler());
+    this.use(express.logger());
+});
+
 server.configure(function (){
+    this.use(express.responseTime());
+    this.use(express.cookieParser());
+    this.use(express.session({fingerprint: base.connectionFingerprint, secret: config.session_secret}));
+    this.use(express.bodyParser());
+    this.use(base.middleware.csrf.check);
+    this.use(base.middleware.determineLogin());
+    this.use(base.middleware.prepareMenus());
+
     var couchdb = new base.couchdb(config.couchdb);
     var iapi = new API(couchdb);
     var smtp = new SMTP(config.smtp);
@@ -53,7 +56,6 @@ server.configure(function (){
     this.use('/news', require('./lib/news'));
     this.use('/api', require('./lib/api'));
     this.use('/game', require('./lib/game'));
-    //this.use('/issues', require('./lib/issues'));
 
     this.use(base.middleware.nice404());
 });
