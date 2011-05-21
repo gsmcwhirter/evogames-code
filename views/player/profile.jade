@@ -27,13 +27,15 @@
                 span.alias= oalias
                 span.handle= "@"+pplayer.handle
 
-    - if (ogroups.length)
-      li
-        span.label Groups Owned
-        ul
-          - each group in ogroups
-            li
-              a(href="/group/"+encodeURI(group.code)+"/profile")= group.name
+      - if (ogroups.length)
+        li
+          span.label Groups Owned
+          br
+          span.small Groups owned are only shown to the profile owner and system administrators.
+          ul
+            - each group in ogroups
+              li
+                a(href="/group/"+encodeURI(group.code)+"/profile")= group.name
 
     - if (mgroups.length)
       li
