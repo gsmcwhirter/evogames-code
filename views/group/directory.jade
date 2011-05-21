@@ -1,0 +1,21 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1 Group Directory
+
+ul#directory-nav
+  - each letter in letters
+    li(id="nav-"+letter)
+      a(href="#!/"+letter)= letter[0].toUpperCase() + letter.slice(1)
+
+#group-directory
+  - groups.forEach(function (grouping, index){
+    ul.group-directory(id="grouping-"+letters[index])
+      - each group in grouping
+        li
+          a(href="/group/"+group.code+"/profile")= group.name
+          |  (#{group.code})
+      li
+  - })
+
+script(type="text/javascript", src="/js/group_directory.js")

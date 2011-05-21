@@ -370,7 +370,8 @@ strong,
     ul.member-groups,
     ul.owned-groups,
     ul.invited-groups,
-    ul.group-members-list {
+    ul.group-members-list,
+    ul.group-directory {
         .action {
             float: right;
             margin-left: 1em;
@@ -381,9 +382,20 @@ strong,
     ul.member-groups.admin,
     ul.owned-groups.admin,
     ul.invited-groups.admin,
-    ul.group-members-list {
+    ul.group-members-list,
+    ul.group-directory {
         li {
             border-top: 1px dotted #666;
+            padding: 0.5em 0;
+        }
+    }
+
+    ul.group-directory {
+        display: none;
+        padding: 0;
+
+        li {
+            padding: 0.5em 0;
         }
     }
 
@@ -410,7 +422,25 @@ strong,
         }
         
     }
-    
+
+    ul#directory-nav {
+        display: block;
+        overflow: auto;
+        border-bottom: 1px solid #666;
+        padding: 0;
+
+        li {
+            display: block;
+            float: left;
+            margin: 0 5px;
+        }
+
+        li.selected {
+            background-color: #ccc;
+            border: 1px solid #888;
+        }
+    }
+
     #flash{
         .info, .error{
             padding: 5px 20px;
