@@ -14,23 +14,29 @@ function (doc){
 
     if (doc.type == "player"){
         var hkey1, akey1;
-        var hkey2, akey2;
-
+        var hkeylen, akeylen;
+        var i, j;
         var split;
 
         split = doc.handle.split('');
         hkey1 = makeKey(split);
-        hkey2 = makeKey(split).reverse();
+        hkeylen = hkey1.length;
 
         (doc.aliases || []).forEach(function (alias){
-            emit(hkey1, {source: "handle", order: "asc", handle: doc.handle, alias: alias});
-            emit(hkey2, {source: "handle", order: "desc", handle: doc.handle, alias: alias});
-
+            for (i = 0; i < hkeylen; i++){ //staring index
+                for (j = 3; j <= hkeylen - i; j++){ //length, min 3
+                    emit(hkey1.slice(2*i, 2*(i+j) - 1), {source: "handle", order: "asc", handle: doc.handle, alias: alias});
+                }
+            }
+            
             split = alias.split('');
             akey1 = makeKey(split);
-            akey2 = makeKey(split).reverse();
-            emit(akey1, {source: "alias", order: "asc", handle: doc.handle, alias: alias});
-            emit(akey2, {source: "alias", order: "desc", handle: doc.handle, alias: alias});
+            akeylen = akey1.length;
+            for (i = 0; i < akeylen; i++){ //starting index
+                for (j = 3; j < akeylen - i; j++){ //length, min 3
+                    emit(akey1.slice(2*i, 2*(i+j) - 1), {source: "alias", order: "asc", handle: doc.handle, alias: alias});
+                }
+            }
         });
     }
 }

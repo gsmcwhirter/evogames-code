@@ -14,21 +14,30 @@ function (doc){
 
     if (doc.type == "group"){
         var nkey1, ckey1;
-        var nkey2, ckey2;
+        var nkeylen, ckeylen;
+        var i, j;
         var split;
 
         split = doc.name.split('');
 
         nkey1 = makeKey(split);
-        nkey2 = makeKey(split).reverse();
-        emit(nkey1, {source: "name", order: "asc", name: doc.name, code: doc.code});
-        emit(nkey2, {source: "name", order: "desc", name: doc.name, code: doc.code});
+        nkeylen = (nkey1.length + 1) / 2;
+        for (i = 0; i < nkeylen; i++){ //starting index
+            for (j = 3; j <= nkeylen - i; j++){ //length, min 3
+                emit(nkey1.slice(2*i, 2*(i+j) - 1), {source: "name", order: "asc", name: doc.name, code: doc.code});
+            }
+        }
+        
 
         split = doc.code.split('');
 
         ckey1 = makeKey(split);
-        ckey2 = makeKey(split).reverse();
-        emit(ckey1, {source: "code", order: "asc", name: doc.name, code: doc.code});
-        emit(ckey2, {source: "code", order: "desc", name: doc.name, code: doc.code});
+        ckeylen = (ckey1.length + 1) / 2;
+        for (i = 0; i < ckeylen; i++){ //starting index
+            for (j = 3; j <= ckeylen - i; j++){ //length, min 3
+                emit(ckey1.slice(2*i, 2*(i+j) - 1), {source: "code", order: "asc", name: doc.name, code: doc.code});
+            }
+        }
+        
     }
 }
