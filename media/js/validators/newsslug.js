@@ -5,7 +5,7 @@ $(function (){
 
     $("#slug").bind('run', function (){
         var self = $(this);
-        self.trigger("fetch-slugs", [function (){
+        self.trigger("fetch-slugs", [function (slugs){
             slug_cache = slugs;
             self.trigger("validate");
         }]);
