@@ -32,9 +32,8 @@
       ul
         - each owner in owners
           li
-            a(href="/player/profile/"+encodeURI(owner.aliases[0])+"@"+encodeURI(owner.handle))
-              span.alias= owner.aliases[0]
-              span.handle= "@"+owner.handle
+            a(href="/player/profile/@"+encodeURI(owner.handle))
+              span.handle.only= "@"+owner.handle
 
     li
       span.label= "Members: "+ member_count

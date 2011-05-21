@@ -60,7 +60,7 @@ $(function (){
                         }
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown){
-                        $("#flash").trigger('error', 'Request error');
+                        $("#flash").trigger('error', ['Request error']);
                     }
                 });
             }
@@ -92,7 +92,7 @@ $(function (){
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown){
-                    $("#flash").trigger('error', 'Request error');
+                    $("#flash").trigger('error', ['Request error']);
                 }
             });
         });
@@ -130,33 +130,38 @@ $(function (){
 
         this.post("#!/add", function (context){
             var self = this;
-            
-            $.ajax({
-                type: 'put',
-                url: '/player/controls/aliases/add',
-                data: $.param({alias: this.params.alias}),
-                dataType: 'json',
-                processData: false,
-                success: function (data, textStatus){
-                    if (data.ok){
-                        $("#flash").trigger('info', ['Alias added successfully.']);
-                        if (data.message != "alias exists"){
-                            _app.trigger('add', {alias: data.alias});
+            var alias = $.trim(this.params.alias);
+
+            if (alias){
+                $.ajax({
+                    type: 'put',
+                    url: '/player/controls/aliases/add',
+                    data: {alias: alias},
+                    dataType: 'json',
+                    processData: false,
+                    success: function (data, textStatus){
+                        if (data.ok){
+                            $("#flash").trigger('info', ['Alias added successfully.']);
+                            if (data.message != "alias exists"){
+                                _app.trigger('add', {alias: data.alias});
+                            }
+
+                            _app.trigger("hide-form");
+                            self.redirect("#!/");
                         }
-
-                        _app.trigger("hide-form");
-                        self.redirect("#!/");
+                        else {
+                            $("#flash").trigger('error', ['Alias not added: '+data.error]);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown){
+                        $("#flash").trigger('error', ['Request error']);
                     }
-                    else {
-                        $("#flash").trigger('error', ['Alias not added: '+data.error]);
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown){
-                    $("#flash").trigger('error', ['Request error']);
-                }
-            });
+                });
+            }
+            else {
+                $("#flash").trigger('error', ['You must provide an alias.']);
+            }
 
-            //return false;
         });
 
         this.get("#!/cancel", function (){

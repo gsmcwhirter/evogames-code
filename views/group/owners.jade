@@ -1,0 +1,60 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1= group.name+" Owners"
+
+h2 Owner List
+ul.group-owners
+  - each owner in owners
+    - if (owner._id == player._id)
+      li(title="me")
+        a(href="/player/profile/@"+owner.handle)
+          span.handle.only= "@"+owner.handle
+    - else
+      li
+        a(href="/player/profile/@"+owner.handle)
+          span.handle.only= "@"+owner.handle
+
+h2 Actions
+ul.grid#group-owners
+  li
+    a(href="#!/add") Add Owner
+    br
+    | Add a new owner to the group.
+  li
+    a(href="#!/resign") Resign Ownership
+    br
+    | Resign your ownership of the group.
+
+  div.modal#resign-modal
+    form#resign-form(method="post", accept-charset="utf-8", action="#!/resign")
+      fieldset
+        input(type="hidden", name="csrf", value=csrf)
+        .form-line
+          | Are you sure you want to resign your ownership of the group?
+          |  You cannot undo this action.
+          |  (This will fail if you are the only group owner.)
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Resign Ownership
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+  div.modal#add-modal
+    form#add-form(method="post", accept-charset="utf-8", action="#!/add")
+      fieldset
+        input(type="hidden", name="csrf", value=csrf)
+        .form-line
+          label(for="handle") Player Handle
+          input#handle.text(type="text", name="handle")
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Add Group Owner
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+script(type="text/javascript", src="/js/group_owners.js")

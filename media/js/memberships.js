@@ -69,7 +69,7 @@ $(function (){
                     self.redirect("#!/cancel");
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown){
-                    $("#flash").trigger('error', 'Request error');
+                    $("#flash").trigger('error', ['Request error']);
                     self.redirect("#!/cancel");
                 }
             });
@@ -117,7 +117,7 @@ $(function (){
                     self.redirect("#!/cancel");
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown){
-                    $("#flash").trigger('error', 'Request error');
+                    $("#flash").trigger('error', ['Request error']);
                     self.redirect("#!/cancel");
                 }
             });

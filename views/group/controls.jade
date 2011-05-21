@@ -1,10 +1,7 @@
-- if (typeof is_full != "undefined" && is_full)
-  #breadcrumbs
-    != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
 
-  h1= "Manage "+group.name
-- else
-  h3= group.name
+h1= "Manage "+group.name
 
 ul.grid
   li
@@ -23,6 +20,11 @@ ul.grid
     a(href="/group/"+group.code+"/controls/invites") Invitations
     br
     | Invite new members to your group.
+  - if (is_owner)
+    li
+      a(href="/group/"+group.code+"/controls/owners") Owners
+      br
+      | Add new owners or resign your ownership.
 
 ul.grid
   li

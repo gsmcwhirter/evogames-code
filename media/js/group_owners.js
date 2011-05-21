@@ -1,8 +1,8 @@
 $(function (){
-    var invites = $.sammy("#invite-controls", function (){
+    var owners = $.sammy("#group-owners", function (){
 
         this.bind('run', function (){
-            $("#withdraw-modal, #add-modal").overlay({
+            $("#add-modal, #resign-modal").overlay({
                 mask: {
                     color: '#ccc',
                     loadSpeed: 200,
@@ -25,39 +25,29 @@ $(function (){
 
         this.get('', noop);
         this.get("#!/", noop);
-        this.post("#!/", noop);
 
         this.get("#!/cancel", function (){
-            $("#withdraw-modal, #add-modal").trigger("close-overlay");
-            $(".modal form").attr('action', '#!/');
+            $("#resign-modal, #add-modal").trigger("close-overlay");
 
             this.redirect("#!/");
         });
 
-        this.get("#!/withdraw", function (){
-            this.redirect("#!/");
-        });
-
-        this.get("#!/withdraw/:handle", function (){
+        this.get("#!/resign", function (){
             //show confirmation form
-            var handle = this.params.handle;
-            $("#withdraw-modal .handle").text(handle);
-            $("#withdraw-modal form").attr('action', '#!/withdraw/'+handle);
-            $("#withdraw-modal").trigger("open-overlay");
+            $("#resign-modal").trigger("open-overlay");
         });
 
-        this.post("#!/withdraw/:handle", function (){
-            var handle = this.params.handle;
+        this.post("#!/resign", function (){
             var self = this;
 
             $.ajax({
                 type: 'delete',
-                url: "invites/@"+handle,
+                url: "owners/resign",
                 dataType: 'json',
                 success: function (data, textStatus){
                     if (data.ok)
                     {
-                        $(".group-members-list li[title="+handle+"]").remove();
+                        $(".group-owners li[title=me]").remove();
                         $("#flash").trigger("info", [data.info]);
                     }
                     else
@@ -72,7 +62,6 @@ $(function (){
                     self.redirect("#!/cancel");
                 }
             });
-            
         });
 
         this.get("#!/add", function (){
@@ -81,19 +70,20 @@ $(function (){
         });
 
         this.post("#!/add", function (){
-            var handle = $.trim($("#add-modal input[name=handle]").val());
+            //var handle = $("#add-modal input[name=handle]").val();
+            var handle = $.trim(this.params.handle);
             var self = this;
 
             if (handle){
                 $.ajax({
                     type: 'put',
-                    url: "invites/add",
+                    url: "owners/add",
                     data: {handle: handle},
                     dataType: 'json',
                     success: function (data, textStatus){
                         if (data.ok)
                         {
-                            $("ul.group-members-list").prepend("<li title='"+handle+"'><span class='handle only'>@"+handle+"</span><a class='action withdraw' href='#!/withdraw/"+handle+"'>withdraw</a></li>");
+                            $("ul.group-members-list").prepend("<li title='"+handle+"'><span class='handle only'>@"+handle+"</span></li>");
                             $("#flash").trigger("info", [data.info]);
                         }
                         else
@@ -108,7 +98,7 @@ $(function (){
                         self.redirect("#!/cancel");
                     }
                 });
-              }
+            }
             else {
                 $("#flash").trigger('error', ['You must provide a handle.']);
                 this.redirect("#!/cancel");
@@ -116,5 +106,5 @@ $(function (){
         });
     });
 
-    invites.run();
+    owners.run();
 });
