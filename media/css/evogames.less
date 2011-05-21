@@ -386,6 +386,30 @@ strong,
             border-top: 1px dotted #666;
         }
     }
+
+    ul.search-results {
+        /* Duplicating fieldset */
+        display: block;
+        background-color: @lightbase;
+        border: 1px solid @medborder;
+        padding: 1.4em;
+        margin-bottom: 1.5em;
+
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+
+        li {
+            padding: 0.5em 0;
+            border-top: 1px dotted #666;
+
+            .source {
+                float: right;
+                font-size: 85%;
+            }
+        }
+        
+    }
     
     #flash{
         .info, .error{
@@ -509,7 +533,7 @@ strong,
 	
     fieldset {
         background-color: @lightbase;
-        border-color: 1px solid @medborder;
+        border: 1px solid @medborder;
 
         border-radius: 10px;
         -webkit-border-radius: 10px;

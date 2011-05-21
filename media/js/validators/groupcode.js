@@ -36,9 +36,9 @@ $(function (){
 
         var re = new RegExp("^[a-zA-Z0-9\\-_\\[\\]]*$");
         var code = $.trim(self.val());
-        if (code.length == 0)
+        if (code.length < 3)
         {
-            fstat.trigger("bad", ["Must not be empty."]);
+            fstat.trigger("bad", ["Must be at least 3 characters long."]);
         }
         else if (!code.match(re))
         {

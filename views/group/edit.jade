@@ -13,6 +13,8 @@ form(method="post", accept-charset="utf-8")
           - each msg in messages["name"]
             li!= "Name " + msg
       input#name.title(type="text", name="name", value=data.name)
+      span.field-status
+        span &nbsp;
     .form-line
       label(for="website") Website
       br
@@ -50,7 +52,7 @@ form(method="post", accept-charset="utf-8")
       label(for="description") Description
       span.small
         |  (
-        a(href="http://daringfireball.net/projects/markdown/syntax") markdown syntax
+        a(href="http://daringfireball.net/projects/markdown/syntax", rel="blank") markdown syntax
         |  )
       br
       - if (messages["description"] && messages["description"].length)
@@ -70,6 +72,7 @@ form(method="post", accept-charset="utf-8")
 script(type="text/javascript",src="/js/validators/website.js")
 script(type="text/javascript",src="/js/validators/logo.js")
 script(type="text/javascript",src="/js/validators/groupjointype.js")
+script(type="text/javascript",src="/js/validators/groupname.js")
 script(type="text/javascript")
     $(function(){
         $("button.cancel").bind('click', function (){

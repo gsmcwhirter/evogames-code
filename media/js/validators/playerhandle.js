@@ -35,6 +35,8 @@ $(function (){
         }
 
         var handle = $.trim(self.val());
+        var re = /[@/\s]/;
+
         if (handle.length < 3)
         {
             fstat.trigger("bad", ["Must be at least 3 characters long."]);
@@ -49,6 +51,9 @@ $(function (){
             {
                 fstat.trigger("bad", ["Must be unique."]);
             }
+        }
+        else if (handle.match(re)){
+            fstat.trigger("bad", ["Contains invalid characters."]);
         }
         else
         {

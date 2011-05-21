@@ -5,11 +5,24 @@ h1 Group Search
 form(method="get", accept-charset="utf-8")
   fieldset
     .form-line
+      | This search service matches only beginning and ending segments of group
+      |  names and codes. Search terms must be at least 3 characters long.
+    .form-line
       label(for="query") Search Term
       br
       input#query.text(type="text", name="query", value=query)
     .form-line
       button.button(type="submit") Search
 
-- if (results && results.length)
-  = JSON.stringify(results)
+- if (results)
+  h2 Search Results
+  ul.search-results
+    - if (results.length == 0)
+      li
+        | No search results were found for your query.
+    - each result in results
+      li
+        a(href="/group/"+result.code+"/profile")= result.name
+        |  (#{result.code})
+        span.source Source: #{result.source}
+    li

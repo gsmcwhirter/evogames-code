@@ -332,6 +332,9 @@ strong, .bold {font-weight:bold;}
 #main ul.fp-block {margin-bottom:1.5em;}
 #main ul.member-groups .action, #main ul.owned-groups .action, #main ul.invited-groups .action, #main ul.group-members-list .action {float:right;margin-left:1em;font-size:85%;}
 #main ul.member-groups.admin li, #main ul.owned-groups.admin li, #main ul.invited-groups.admin li, #main ul.group-members-list li {border-top:1px dotted #666;}
+#main ul.search-results {display:block;background-color:#ffffff;border:1px solid #888888;padding:1.4em;margin-bottom:1.5em;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
+#main ul.search-results li {padding:0.5em 0;border-top:1px dotted #666;}
+#main ul.search-results li .source {float:right;font-size:85%;}
 #main #flash .info, #main #flash .error {padding:5px 20px;margin-bottom:5px;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 #main #flash .info .x, #main #flash .error .x {float:right;font-weight:bold;cursor:pointer;opacity:0.5;}
 #main #alias-add-form {display:none;}
@@ -359,7 +362,7 @@ strong, .bold {font-weight:bold;}
 #main .article .edits li {float:right;clear:right;}
 #main .article .tagline {font-size:85%;border-bottom:1px dotted #aaa;padding-bottom:3px;margin-bottom:5px;}
 #main .content-admin {float:right;font-size:85%;}
-#main fieldset {background-color:#ffffff;border-color:1px solid #888888;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
+#main fieldset {background-color:#ffffff;border:1px solid #888888;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
 #main fieldset .form-line {overflow:auto;margin-bottom:.5em;}
 #main fieldset input[type=text], #main fieldset input[type=password], #main fieldset input[type=email], #main fieldset input[type=url], #main fieldset input[type=number], #main fieldset input[type=date], #main fieldset input[type=datetime], #main fieldset input[type=month], #main fieldset input[type=week], #main fieldset input[type=time], #main fieldset input[type=search], #main fieldset input[type=color], #main fieldset select, #main fieldset textarea {width:75%;margin:0.5em 0px;padding:5px;}
 #main fieldset textarea {height:20em;}

@@ -13,6 +13,8 @@ form(method="post", accept-charset="utf-8")
           - each msg in messages["name"]
             li!= "Name " + msg
       input#name.title(type="text", name="name", value=data.name)
+      span.field-status
+        span &nbsp;
     .form-line
       label(for="code") Group Code
       br
@@ -27,7 +29,7 @@ form(method="post", accept-charset="utf-8")
       label(for="description") Description
       span.small
         |  (
-        a(href="http://daringfireball.net/projects/markdown/syntax") markdown syntax
+        a(href="http://daringfireball.net/projects/markdown/syntax", rel="blank") markdown syntax
         |  )
       br
       - if (messages["description"] && messages["description"].length)
@@ -41,3 +43,4 @@ form(method="post", accept-charset="utf-8")
         | &#32;Create Group
 
 script(type="text/javascript",src="/js/validators/groupcode.js")
+script(type="text/javascript",src="/js/validators/groupname.js")

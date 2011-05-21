@@ -1,5 +1,5 @@
 function (doc){
-    function makeKey(letter_array){
+    function makeKey(letter_array, only_alphanum){
         var new_array = [];
         
         for (var i = 0; i < letter_array.length; i++){
@@ -13,17 +13,22 @@ function (doc){
     }
 
     if (doc.type == "group"){
-        var key1;
-        var key2
+        var nkey1, ckey1;
+        var nkey2, ckey2;
+        var split;
 
-        key1 = makeKey(doc.name.split(''));
-        key2 = makeKey(doc.name.split('')).reverse();
-        emit(key1, {source: "name", order: "asc"});
-        emit(key2, {source: "name", order: "desc"});
+        split = doc.name.split('');
 
-        key1 = makeKey(doc.code.split(''));
-        key2 = makeKey(doc.code.split('')).reverse();
-        emit(key1, {source: "code", order: "asc"});
-        emit(key2, {source: "code", order: "desc"});
+        nkey1 = makeKey(split);
+        nkey2 = makeKey(split).reverse();
+        emit(nkey1, {source: "name", order: "asc", name: doc.name, code: doc.code});
+        emit(nkey2, {source: "name", order: "desc", name: doc.name, code: doc.code});
+
+        split = doc.code.split('');
+
+        ckey1 = makeKey(split);
+        ckey2 = makeKey(split).reverse();
+        emit(ckey1, {source: "code", order: "asc", name: doc.name, code: doc.code});
+        emit(ckey2, {source: "code", order: "desc", name: doc.name, code: doc.code});
     }
 }

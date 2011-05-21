@@ -13,19 +13,24 @@ function (doc){
     }
 
     if (doc.type == "player"){
-        var key1;
-        var key2;
+        var hkey1, akey1;
+        var hkey2, akey2;
 
-        key1 = makeKey(doc.handle.split(''));
-        key2 = makeKey(doc.handle.split('')).reverse();
-        emit(key1, {source: "handle", order: "asc"});
-        emit(key2, {source: "handle", order: "desc"});
+        var split;
+
+        split = doc.handle.split('');
+        hkey1 = makeKey(split);
+        hkey2 = makeKey(split).reverse();
 
         (doc.aliases || []).forEach(function (alias){
-            key1 = makeKey(alias.split(''));
-            key2 = makeKey(alias.split('')).reverse();
-            emit(key1, {source: "alias", order: "asc"});
-            emit(key2, {source: "alias", order: "desc"});
+            emit(hkey1, {source: "handle", order: "asc", handle: doc.handle, alias: alias});
+            emit(hkey2, {source: "handle", order: "desc", handle: doc.handle, alias: alias});
+
+            split = alias.split('');
+            akey1 = makeKey(split);
+            akey2 = makeKey(split).reverse();
+            emit(akey1, {source: "alias", order: "asc", handle: doc.handle, alias: alias});
+            emit(akey2, {source: "alias", order: "desc", handle: doc.handle, alias: alias});
         });
     }
 }
