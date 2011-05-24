@@ -1,5 +1,5 @@
 function (doc){
     if (doc.type == "game"){
-        emit([doc.name.toLowerCase(), doc.name], 1);
+        emit([doc.name.toLowerCase(), doc.name], {name: doc.name, code: doc.code});
     }
 }

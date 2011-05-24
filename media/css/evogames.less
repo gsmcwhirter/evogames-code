@@ -166,11 +166,11 @@ strong,
     -webkit-box-shadow: 0 0 50px #ccc;
 }
 
-.menu-outer{
-    .ui-icon { width: 16px; height: 16px; background-image: url(../images/jquery-ui/ui-icons_cccccc_256x240.png); }
-    .ui-icon-triangle-1-n { background-position: 0 -16px; }
-    .ui-icon-triangle-1-s { background-position: -64px -16px; }
-	
+.ui-icon { width: 16px; height: 16px; background-image: url(../images/jquery-ui/ui-icons_cccccc_256x240.png); }
+.ui-icon-triangle-1-n { background-position: 0 -16px; }
+.ui-icon-triangle-1-s { background-position: -64px -16px; }
+
+.menu-outer{	
     .menu-header{
         font-weight: bold;
         
@@ -438,6 +438,21 @@ strong,
         li.selected {
             background-color: #ccc;
             border: 1px solid #888;
+        }
+    }
+
+    li.genre-link {
+        font-weight: bold;
+        border-top: 1px dotted #666;
+        margin-bottom: 1em;
+
+        .clickable{
+            cursor: pointer;
+        }
+
+        .icon{
+            display: block;
+            float: left;
         }
     }
 

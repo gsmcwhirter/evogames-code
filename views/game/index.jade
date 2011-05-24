@@ -1,0 +1,28 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1 Game Directory
+
+ul#directory-nav
+  li#nav-by-genre
+    a(href="#!/by-genre", rel="by-genre") Games by Genre
+  li#nav-by-name
+    a(href="#!/by-name", rel="by-name") Games by Name
+
+ul#by-genre
+  - each genre in games_bygenre
+    li.genre-link
+      span.clickable
+        span.icon
+        = genre.genre+" Games"
+      ul.game-list
+        - each game in genre.games
+          li
+            a(href="/game/"+game.code)= game.name
+
+ul#by-name
+  - each game in games_byname
+    li
+      a(href="/game/"+game.code)= game.name
+
+script(type="text/javascript", src="/js/game_directory.js")
