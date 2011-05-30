@@ -54,7 +54,7 @@ $(function (){
                 type: 'delete',
                 url: "invites/@"+handle,
                 dataType: 'json',
-                success: function (data, textStatus){
+                success: function (data){
                     if (data.ok)
                     {
                         $(".group-members-list li[title="+handle+"]").remove();
@@ -67,7 +67,7 @@ $(function (){
 
                     self.redirect("#!/cancel");
                 },
-                error: function (XMLHttpRequest, textStatus, errorThrown){
+                error: function (){
                     $("#flash").trigger('error', ['Request error']);
                     self.redirect("#!/cancel");
                 }
@@ -90,7 +90,7 @@ $(function (){
                     url: "invites/add",
                     data: {handle: handle},
                     dataType: 'json',
-                    success: function (data, textStatus){
+                    success: function (data){
                         if (data.ok)
                         {
                             $("ul.group-members-list").prepend("<li title='"+handle+"'><span class='handle only'>@"+handle+"</span><a class='action withdraw' href='#!/withdraw/"+handle+"'>withdraw</a></li>");
@@ -103,7 +103,7 @@ $(function (){
 
                         self.redirect("#!/cancel");
                     },
-                    error: function (XMLHttpRequest, textStatus, errorThrown){
+                    error: function (){
                         $("#flash").trigger('error', ['Request error']);
                         self.redirect("#!/cancel");
                     }

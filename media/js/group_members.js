@@ -57,7 +57,7 @@ $(function (){
                 type: 'delete',
                 url: "members/"+alias+"@"+handle+"/remove",
                 dataType: 'json',
-                success: function (data, textStatus){
+                success: function (data){
                     if (data.ok)
                     {
                         $(".group-members-list li[title="+alias+"@"+handle+"]").remove();
@@ -70,7 +70,7 @@ $(function (){
 
                     self.redirect("#!/cancel");
                 },
-                error: function (XMLHttpRequest, textStatus, errorThrown){
+                error: function (){
                     $("#flash").trigger('error', ['Request error']);
                     self.redirect("#!/cancel");
                 }

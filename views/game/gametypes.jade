@@ -17,11 +17,12 @@ h1= game.name+" Game Types"
 
     div.modal#delete-modal
       h2 Delete Game Type
-      form#delete-form(method="post", accept-charset="utf-8", action="#!/")
+      form#delete-form(method="post", accept-charset="utf-8", action="#!/delete")
         fieldset
           .form-line
-            | Are you sure you want to delete the game type?
-            |  This could break existing stats.
+            | Are you sure you want to delete the game type
+            span.gametype-name
+            | ? This should not break existing stats.
           .form-line
             button.button.positive(type="submit")
               img(src="/css/icons/tick.png", alt="")

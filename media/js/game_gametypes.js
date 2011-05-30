@@ -10,12 +10,12 @@ $(function (){
        }
 
         function _edit_gametype(){
-            console.log("edit_gametype");
             $(this).parents(".gametype").first().trigger("start-edit");
         }
 
         function _delete_gametype(){
-            console.log("delete_gametype");
+            $("#delete-modal .gametype-name").text($(this).parents(".display").first().find(".gtname").text());
+            $("#delete-modal").trigger("open-overlay");
         }
 
         function _cancel_edit(){
@@ -64,15 +64,12 @@ $(function (){
             }).bind("commit-edit", function (event, obj, objstr){
                 var self = $(this);
 
-                console.log("commit-edit");
-                console.log(objstr);
-
-                $(".display .gtname", self).text(obj.name);
+                $(".display .gtname", self).text(obj.gtdata.name);
                 $(".marshal", self).text(objstr);
                 self.trigger("cancel-edit");
             }).bind("filldata", function (event, data){
                 var self = $(this);
-                $("input[name=gtname]").val(data.name);
+                $("input[name=gtname]", self).val(data.name);
                 data.stats.forEach(function (stat, index){
                     $(".edit-form", self).trigger("new-stat");
                     $("ul.stats li", self).eq(index).find("input[name=name]").val(stat.name).trigger("keyup");
@@ -191,7 +188,7 @@ $(function (){
                 }
             });
             
-            var origname = this.json($.trim($(".marshal", self).text()) || "{}").origname || false;
+            var origname = this.json($.trim($(".marshal", theli).text()) || "{}").origname || false;
 
             var gt = {origname: origname, gtdata: obj};
 
@@ -210,6 +207,37 @@ $(function (){
                         $("#flash").trigger('error', [data.error]);
                     }
 
+                },
+                error: function (){
+                    $("#flash").trigger('error', ['Request error']);
+                }
+            });
+        });
+
+        this.post("#!/delete", function (){
+            var self = $(this.target);
+            var gtname = $.trim($(".gametype-name", self).text());
+
+            $.ajax({
+                type: 'delete',
+                url: 'gametypes/'+gtname,
+                dataType: 'json',
+                success: function (data){
+                    if (data.ok){
+                        $("#flash").trigger('info', [data.info])
+
+                        $("#gametypes li.gametype").each(function (i,o){
+                            o = $(o);
+                            if ($.trim($(".display .gtname", o).text()) == gtname){
+                                o.remove();
+                            }
+                        });
+                    }
+                    else {
+                        $("#flash").trigger('error', [data.error]);
+                    }
+
+                    $("#delete-modal").trigger("close-overlay");
                 },
                 error: function (){
                     $("#flash").trigger('error', ['Request error']);

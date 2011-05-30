@@ -44,7 +44,7 @@ $(function (){
                 type: 'delete',
                 url: "owners/resign",
                 dataType: 'json',
-                success: function (data, textStatus){
+                success: function (data){
                     if (data.ok)
                     {
                         $(".group-owners li[title=me]").remove();
@@ -57,7 +57,7 @@ $(function (){
 
                     self.redirect("#!/cancel");
                 },
-                error: function (XMLHttpRequest, textStatus, errorThrown){
+                error: function (){
                     $("#flash").trigger('error', ['Request error']);
                     self.redirect("#!/cancel");
                 }

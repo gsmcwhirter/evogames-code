@@ -55,7 +55,7 @@ $(function (){
                 type: 'delete',
                 url: '/group/'+code+"/decline",
                 dataType: 'json',
-                success: function (data, textStatus){
+                success: function (data){
                     if (data.ok)
                     {
                         $(".invited-groups li[title="+code+"]").first().remove();
@@ -68,7 +68,7 @@ $(function (){
 
                     self.redirect("#!/cancel");
                 },
-                error: function (XMLHttpRequest, textStatus, errorThrown){
+                error: function (){
                     $("#flash").trigger('error', ['Request error']);
                     self.redirect("#!/cancel");
                 }
@@ -103,7 +103,7 @@ $(function (){
                 type: 'delete',
                 url: '/group/'+code+"/leave/"+alias,
                 dataType: 'json',
-                success: function (data, textStatus){
+                success: function (data){
                     if (data.ok)
                     {
                         $(".member-groups li[title="+alias+" in "+code+"]").remove();
@@ -116,7 +116,7 @@ $(function (){
 
                     self.redirect("#!/cancel");
                 },
-                error: function (XMLHttpRequest, textStatus, errorThrown){
+                error: function (){
                     $("#flash").trigger('error', ['Request error']);
                     self.redirect("#!/cancel");
                 }

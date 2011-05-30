@@ -48,7 +48,7 @@ $(function (){
                     url: '/player/controls/aliases/default',
                     data: {alias: alias},
                     dataType: 'json',
-                    success: function (data, textStatus){
+                    success: function (data){
                         if (data.ok)
                         {
                             $("#flash").trigger("info", ['Set default alias successfully.']);
@@ -59,7 +59,7 @@ $(function (){
                             $("#flash").trigger('error', ['Default alias not set: '+data.error]);
                         }
                     },
-                    error: function (XMLHttpRequest, textStatus, errorThrown){
+                    error: function (){
                         $("#flash").trigger('error', ['Request error']);
                     }
                 });
@@ -80,7 +80,7 @@ $(function (){
             $.ajax({
                 type: 'delete',
                 url: '/player/controls/aliases/remove/'+alias,
-                success: function (data, textStatus){
+                success: function (data){
                     if (data.ok){
                         $("#flash").trigger('info', ['Alias removed successfully.']);
                         target.remove();
@@ -91,7 +91,7 @@ $(function (){
                         $("#flash").trigger('error', ['Alias not removed: '+data.error]);
                     }
                 },
-                error: function (XMLHttpRequest, textStatus, errorThrown){
+                error: function (){
                     $("#flash").trigger('error', ['Request error']);
                 }
             });
@@ -139,7 +139,7 @@ $(function (){
                     data: {alias: alias},
                     dataType: 'json',
                     processData: false,
-                    success: function (data, textStatus){
+                    success: function (data){
                         if (data.ok){
                             $("#flash").trigger('info', ['Alias added successfully.']);
                             if (data.message != "alias exists"){
@@ -153,7 +153,7 @@ $(function (){
                             $("#flash").trigger('error', ['Alias not added: '+data.error]);
                         }
                     },
-                    error: function (XMLHttpRequest, textStatus, errorThrown){
+                    error: function (){
                         $("#flash").trigger('error', ['Request error']);
                     }
                 });
