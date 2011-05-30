@@ -297,7 +297,8 @@ strong, .bold {font-weight:bold;}
 .center {text-align:center;}
 .small {font-size:85%;}
 .tooltip {background-color:#000;border:1px solid #fff;padding:10px 15px;width:200px;display:none;color:#fff;text-align:left;font-size:12px;z-index:700;-moz-box-shadow:0 0 10px #000;-webkit-box-shadow:0 0 10px #000;}
-.modal {background-color:#fff;display:none;width:350px;padding:15px;text-align:left;border:2px solid #333;opacity:0.8;-moz-border-radius:6px;-webkit-border-radius:6px;-moz-box-shadow:0 0 50px #ccc;-webkit-box-shadow:0 0 50px #ccc;}
+.modal {background-color:#fff;display:none;width:350px;padding:15px;text-align:left;border:2px solid #333;opacity:1.0;-moz-border-radius:6px;-webkit-border-radius:6px;-moz-box-shadow:0 0 50px #ccc;-webkit-box-shadow:0 0 50px #ccc;}
+.modal.big {width:590px;}
 .ui-icon {width:16px;height:16px;background-image:url(../images/jquery-ui/ui-icons_cccccc_256x240.png);}
 .ui-icon-triangle-1-n {background-position:0 -16px;}
 .ui-icon-triangle-1-s {background-position:-64px -16px;}
@@ -340,6 +341,11 @@ strong, .bold {font-weight:bold;}
 #main ul#directory-nav {display:block;overflow:auto;border-bottom:1px solid #666;padding:0;}
 #main ul#directory-nav li {display:block;float:left;margin:0 5px;}
 #main ul#directory-nav li.selected {background-color:#ccc;border:1px solid #888;}
+#main .marshal {display:none;}
+#main ul.stats input[type=text], #main ul.weights input[type=text], #main ul.stats input[type=password], #main ul.weights input[type=password], #main ul.stats input[type=email], #main ul.weights input[type=email], #main ul.stats input[type=url], #main ul.weights input[type=url], #main ul.stats input[type=number], #main ul.weights input[type=number], #main ul.stats input[type=date], #main ul.weights input[type=date], #main ul.stats input[type=datetime], #main ul.weights input[type=datetime], #main ul.stats input[type=month], #main ul.weights input[type=month], #main ul.stats input[type=week], #main ul.weights input[type=week], #main ul.stats input[type=time], #main ul.weights input[type=time], #main ul.stats input[type=search], #main ul.weights input[type=search], #main ul.stats input[type=color], #main ul.weights input[type=color], #main ul.stats select, #main ul.weights select, #main ul.stats textarea, #main ul.weights textarea {width:30%;margin-right:5px;}
+#main ul.stats .delete-stat, #main ul.weights .delete-stat {float:right;margin-top:12px;}
+#main ul.stats li, #main ul.weights li {border-bottom:1px dotted #666;}
+#main ul.stats li.add, #main ul.weights li.add {padding:5px 0;border-bottom:none;}
 #main li.genre-link {font-weight:bold;border-top:1px dotted #666;margin-bottom:1em;}
 #main li.genre-link .clickable {cursor:pointer;}
 #main li.genre-link .icon {display:block;float:left;}
@@ -372,7 +378,8 @@ strong, .bold {font-weight:bold;}
 #main .content-admin {float:right;font-size:85%;}
 #main fieldset {background-color:#ffffff;border:1px solid #888888;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
 #main fieldset .form-line {overflow:auto;margin-bottom:.5em;}
-#main fieldset input[type=text], #main fieldset input[type=password], #main fieldset input[type=email], #main fieldset input[type=url], #main fieldset input[type=number], #main fieldset input[type=date], #main fieldset input[type=datetime], #main fieldset input[type=month], #main fieldset input[type=week], #main fieldset input[type=time], #main fieldset input[type=search], #main fieldset input[type=color], #main fieldset select, #main fieldset textarea {width:75%;margin:0.5em 0px;padding:5px;}
+#main fieldset label.inline {display:inline;}
+#main fieldset input[type=text], #main fieldset input[type=password], #main fieldset input[type=email], #main fieldset input[type=url], #main fieldset input[type=number], #main fieldset input[type=date], #main fieldset input[type=datetime], #main fieldset input[type=month], #main fieldset input[type=week], #main fieldset input[type=time], #main fieldset input[type=search], #main fieldset input[type=color], #main fieldset select, #main fieldset textarea, #main fieldset input[type=text].full, #main fieldset input[type=password].full, #main fieldset input[type=email].full, #main fieldset input[type=url].full, #main fieldset input[type=number].full, #main fieldset input[type=date].full, #main fieldset input[type=datetime].full, #main fieldset input[type=month].full, #main fieldset input[type=week].full, #main fieldset input[type=time].full, #main fieldset input[type=search].full, #main fieldset input[type=color].full, #main fieldset select.full, #main fieldset textarea.full {width:75%;margin:0.5em 0px;padding:5px;}
 #main fieldset textarea {height:20em;}
 #main fieldset button, #main fieldset a.button {border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 #main fieldset a.button {color:#565656;}

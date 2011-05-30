@@ -159,11 +159,15 @@ strong,
     text-align: left;
     border:2px solid #333;
 
-    opacity:0.8;
+    opacity: 1.0;
     -moz-border-radius:6px;
     -webkit-border-radius:6px;
     -moz-box-shadow: 0 0 50px #ccc;
     -webkit-box-shadow: 0 0 50px #ccc;
+}
+
+.modal.big {
+    width: 590px;
 }
 
 .ui-icon { width: 16px; height: 16px; background-image: url(../images/jquery-ui/ui-icons_cccccc_256x240.png); }
@@ -441,6 +445,42 @@ strong,
         }
     }
 
+    .marshal { display: none; }
+
+    ul.stats, ul.weights {
+        input[type=text],
+        input[type=password],
+        input[type=email],
+        input[type=url],
+        input[type=number],
+        input[type=date],
+        input[type=datetime],
+        input[type=month],
+        input[type=week],
+        input[type=time],
+        input[type=search],
+        input[type=color],
+        select,
+        textarea {
+            width: 30%;
+            margin-right: 5px;
+        }
+
+        .delete-stat {
+            float: right;
+            margin-top: 12px;
+        }
+
+        li {
+            border-bottom: 1px dotted #666;
+        }
+
+        li.add {
+            padding: 5px 0;
+            border-bottom: none;
+        }
+    }
+
     li.genre-link {
         font-weight: bold;
         border-top: 1px dotted #666;
@@ -590,6 +630,10 @@ strong,
             margin-bottom: .5em;
         }
 
+        label.inline {
+            display: inline;
+        }
+
         input[type=text],
         input[type=password],
         input[type=email],
@@ -603,7 +647,21 @@ strong,
         input[type=search],
         input[type=color],
         select,
-        textarea
+        textarea,
+        input[type=text].full,
+        input[type=password].full,
+        input[type=email].full,
+        input[type=url].full,
+        input[type=number].full,
+        input[type=date].full,
+        input[type=datetime].full,
+        input[type=month].full,
+        input[type=week].full,
+        input[type=time].full,
+        input[type=search].full,
+        input[type=color].full,
+        select.full,
+        textarea.full
         {
             width: 75%;
             margin: 0.5em 0px;

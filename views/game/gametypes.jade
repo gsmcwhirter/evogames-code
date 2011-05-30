@@ -1,0 +1,88 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1= game.name+" Game Types"
+#gametypes
+  ul
+    - each gametype in (game.gametypes || [])
+      li.gametype
+        .display
+          span.gtname= gametype.name
+          a.action.delete-gametype(href="#!/") delete
+          a.action.edit-gametype(href="#!/") edit
+        .marshal= JSON.stringify(gametype)
+        .form(style='display: none;')
+    li.add-gametype-li
+      fieldset
+        a.button.add-gametype(href="#!/") add new game type
+
+    div.modal#delete-modal
+      h2 Delete Game Type
+      form#delete-form(method="post", accept-charset="utf-8", action="#!/")
+        fieldset
+          .form-line
+            | Are you sure you want to delete the game type?
+            |  This could break existing stats.
+          .form-line
+            button.button.positive(type="submit")
+              img(src="/css/icons/tick.png", alt="")
+              | &nbsp;Delete Gametype
+            a.button.negative.cancel(href="#!/cancel")
+              img(src="/css/icons/cross.png", alt="")
+              | &nbsp;Cancel
+    
+
+  div(style="display: none;")
+    form#form-template.edit-form(method="post", accept-charset="utf-8", action="#!/edit")
+      fieldset
+        .form-line
+          label(for="gtname") Game Type Name
+          input#gtname.text(type="text", name="gtname")
+        .form-line
+          label Stats
+          ul.stats
+            li.add
+              a.add-stat(href="#!/") add new stat
+        .form-line
+          label Rating Weights
+          ul.weights
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &nbsp;Save Game Type
+          a.button.negative.cancel-edit
+            img(src="/css/icons/cross.png", alt="")
+            | &nbsp;Cancel
+
+    ul
+      li.gametype#gametype-template
+        .display
+          span.gtname
+          a.action.delete-gametype(href="#!/") delete
+          a.action-edit-gametype(href="#!/") edit
+        .marshal
+        .form(style="display: none;")
+      li#stattype-template
+        a.delete-stat(href="#!/") delete
+        label.inline Name:
+        | &nbsp;
+        input(type="text", name="name")
+        | &nbsp;
+        label.inline Type:
+        | &nbsp;
+        select(name="type", size="1")
+          option(value="integer") Integer
+          option(value="float") Float
+          option(value="enum") Choise
+          option(value="string") String
+          option(value="formula") Derived by Formula
+        br.hideable
+        label.inline.extra-label.hideable(style="display: none;")
+        | &nbsp;
+        input.full.hideable(type="text", name="extra")
+      li#weight-template
+        label.inline (unnamed)
+        | &nbsp;
+        input(type="text", name="weight", value="1")
+
+script(type="text/javascript", src="/js/game_gametypes.js")

@@ -13,9 +13,9 @@ h1= group.name+" Invitations"
       a(href="#!/add") Invite a new player...
 
   div.modal#withdraw-modal
+    h2 Withdraw Invitation
     form#withdraw-form(method="post", accept-charset="utf-8", action="#!/")
       fieldset
-        input(type="hidden", name="csrf", value=csrf)
         .form-line
           | Are you sure you want to withdraw the group invitation to
           span.handle
@@ -29,9 +29,9 @@ h1= group.name+" Invitations"
             | &#32;Cancel
 
   div.modal#add-modal
+    h2 Add Invitation
     form#add-form(method="post", accept-charset="utf-8", action="#!/add")
       fieldset
-        input(type="hidden", name="csrf", value=csrf)
         .form-line
           label(for="handle") Player Handle
           input#handle.text(type="text", name="handle")

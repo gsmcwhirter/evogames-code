@@ -32,9 +32,9 @@ div#memberships
       li.last
 
   div.modal#decline-modal
+    h2 Decline Group Invitation
     form#decline-form(method="post", accept-charset="utf-8", action="#!/")
       fieldset
-        input(type="hidden", name="csrf", value=csrf)
         .form-line
           | Are you sure you want to decline this invitation to join
           span.club-name
@@ -48,9 +48,9 @@ div#memberships
             | &#32;Cancel
 
   div.modal#leave-modal
+    h2 Leave Group
     form#leave-form(method="post", accept-charset="utf-8", action="#!/")
       fieldset
-        input(type="hidden", name="csrf", value=csrf)
         .form-line
           | Are you sure you want to remove
           span.alias

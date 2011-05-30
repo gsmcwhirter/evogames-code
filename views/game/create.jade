@@ -1,0 +1,57 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+  
+h1 Add New Game
+form(method="post", accept-charset="utf-8")
+  fieldset
+    input(type="hidden", name="csrf", value=csrf)
+    .form-line
+      label(for="name") Game Name
+      br
+      - if (messages["name"] && messages["name"].length)
+        ul.field-error
+          - each msg in messages["name"]
+            li!= "Name " + msg
+      input#name.title(type="text", name="name", value=data.name)
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="code") Game Code
+      br
+      - if (messages["code"] && messages["code"].length)
+        ul.field-error
+          - each msg in messages["code"]
+            li!= "Code " + msg
+      input#code.text(type="text", name="code", value=data.code)
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="genres") Genres
+      br
+      - if (messages["genres"] && messages["genres"].length)
+        ul.field-error
+          - each msg in messages["genres"]
+            li!= "Genres " + msg
+      input#genres.text(type="text", name="genres", value=data["genres"] ? data["genres"].join(", ") : "")
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="description") Description
+      span.small
+        |  (
+        a(href="http://daringfireball.net/projects/markdown/syntax", rel="blank") markdown syntax
+        |  )
+      br
+      - if (messages["description"] && messages["description"].length)
+        ul.field-error
+          - each msg in messages["description"]
+            li!= "Description " + msg
+      textarea#description(name="description")= data.description || ""
+    .form-line
+      button.button.positive(type="submit")
+        img(src="/css/icons/tick.png",alt="")
+        | &#32;Create Game
+
+script(type="text/javascript",src="/js/validators/gamecode.js")
+script(type="text/javascript",src="/js/validators/gamename.js")
+script(type="text/javascript",src="/js/validators/gamegenres.js")

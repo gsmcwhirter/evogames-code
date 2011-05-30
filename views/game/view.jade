@@ -1,0 +1,33 @@
+#breadcrumbs
+  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+h1= game.name
+
+- if (editable)
+  p
+    a(href="/game/"+game.code+"/edit") Edit Game Information
+    br
+    a(href="/game/"+game.code+"/gametypes") Edit Game Types
+
+h2 Description
+!= game.description
+
+.left-col
+  h2 Current Events
+  ul.fp-block
+
+  h2 Current Tournaments
+  ul.fp-block
+
+  h2 Current Ladders
+  ul.fp-block
+
+.right-col
+  h2 Future Events
+  ul.fp-block
+
+  h2 Future Tournaments
+  ul.fp-block
+
+  h2 Future Ladders
+  ul.fp-block

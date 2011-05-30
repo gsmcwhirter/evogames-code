@@ -14,9 +14,9 @@ h1= group.name+" Member Controls"
     li
 
   div.modal#remove-modal
+    h2 Remove Group Member
     form#remove-form(method="post", accept-charset="utf-8", action="#!/")
       fieldset
-        input(type="hidden", name="csrf", value=csrf)
         .form-line
           | Are you sure you want to remove
           span.alias

@@ -141,7 +141,7 @@ $(function (){
                 self.trigger("expand", [true]);
             }
         });
-    });
+    }).trigger("run");
 });
 
 $(function (){

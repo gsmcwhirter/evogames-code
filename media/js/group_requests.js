@@ -50,6 +50,7 @@ $(function (){
                 $("#action-modal .alias").text(alias);
                 $("#action-modal .handle").text("@"+handle);
                 $("#action-modal .verb").text(verb);
+                $("#action-modal .verb.header").text(verb.substring(0, 1).toUpperCase()+verb.substring(1));
                 $("#action-modal form").attr('action', '#!/'+verb+'/'+alias+"/"+handle);
                 $("#action-modal").trigger("open-overlay");
             };

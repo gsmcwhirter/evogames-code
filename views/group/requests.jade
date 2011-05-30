@@ -14,9 +14,11 @@ h1= group.name+" Membership Requests"
     li
 
   div.modal#action-modal
+    h2
+      span.verb.header
+      |  Membership Request
     form#action-form(method="post", accept-charset="utf-8", action="#!/")
       fieldset
-        input(type="hidden", name="csrf", value=csrf)
         .form-line
           | Are you sure you want to
           span.verb
