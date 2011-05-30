@@ -1,6 +1,6 @@
 function (doc){
     if (doc.type == "group")
     {
-        emit([doc.code.toLowerCase(), doc.code], 1);
+        emit(doc.code.toLowerCase(), {code: doc.code, name: doc.name});
     }
 }

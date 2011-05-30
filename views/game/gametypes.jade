@@ -83,6 +83,6 @@ h1= game.name+" Game Types"
       li#weight-template
         label.inline (unnamed)
         | &nbsp;
-        input(type="text", name="weight", value="1")
+        input(type="number", step="0.05", name="weight", value="1")
 
 script(type="text/javascript", src="/js/game_gametypes.js")

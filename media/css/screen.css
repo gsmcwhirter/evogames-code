@@ -332,7 +332,7 @@ strong, .bold {font-weight:bold;}
 #main ul.recent-articles, #main ul.recent-members, #main ul.recent-groups, #main ul.current-events, #main ul.current-tournaments, #main ul.current-ladders {margin:0;padding:0;}
 #main ul.recent-articles .date, #main ul.recent-members .date, #main ul.recent-groups .date, #main ul.current-events .date, #main ul.current-tournaments .date, #main ul.current-ladders .date {float:right;}
 #main ul.fp-block {margin-bottom:1.5em;}
-#main #directory-nav, #main #group-directory {clear:both;}
+#main #directory-nav, #main #group-directory, #main #by-genre, #main #by-name {clear:both;}
 #main ul.member-groups .action, #main ul.owned-groups .action, #main ul.invited-groups .action, #main ul.group-members-list .action, #main ul.group-directory .action {float:right;margin-left:1em;font-size:85%;}
 #main ul.member-groups.admin li, #main ul.owned-groups.admin li, #main ul.invited-groups.admin li, #main ul.group-members-list li, #main ul.group-directory li {border-top:1px dotted #666;padding:0.5em 0;}
 #main ul.group-directory {display:none;padding:0;}

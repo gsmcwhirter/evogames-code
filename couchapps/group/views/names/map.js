@@ -5,7 +5,7 @@ function (doc){
             emit([0, doc.name.toLowerCase()], 1);
         }
         else {
-            emit([0, doc.name.toLowerCase()], 1);
+            emit([1, doc.name.toLowerCase()], 1);
         }
     }
 }
