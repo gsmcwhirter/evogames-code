@@ -5,6 +5,8 @@ h1 Game Directory
 
 div
   input#search.search(type="search", placeholder="Search")
+  - if (player.is_sysop || (player.permissions || []).indexOf("game admin") > -1)
+    a.small(href="/game/create") Add a Game
 
 ul#directory-nav
   li#nav-by-genre

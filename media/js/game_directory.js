@@ -7,6 +7,7 @@ $(function (){
         function show_default(){
             $("#directory-nav").show();
             $("#by-genre, #by-name").hide();
+            $("#by-genre li, #by-name li").show();
         }
 
         function do_search(){
