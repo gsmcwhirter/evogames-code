@@ -43,7 +43,9 @@ html
           
           #menu.sidebar-div
             h3 Navigation
-            != partial('menu', {collection: menus(menu_list), as: 'menu'})
+            - each menu in menu_list
+              != partial('menus/'+menu)
+            != partial('menus/main')
           
           #about.sidebar-div
             h3 About #{system.name}

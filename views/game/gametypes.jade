@@ -10,11 +10,10 @@ h1= game.name+" Game Types"
           span.gtname= gametype.name
           a.action.delete-gametype(href="#!/") delete
           a.action.edit-gametype(href="#!/") edit
-        .marshal= JSON.stringify(gametype)
+        .marshal= JSON.stringify({origname: gametype.name, gtdata: gametype})
         .form(style='display: none;')
     li.add-gametype-li
-      fieldset
-        a.button.add-gametype(href="#!/") add new game type
+      a.add-gametype(href="#!/") add new game type
 
     div.modal#delete-modal
       h2 Delete Game Type
@@ -59,7 +58,7 @@ h1= game.name+" Game Types"
         .display
           span.gtname
           a.action.delete-gametype(href="#!/") delete
-          a.action-edit-gametype(href="#!/") edit
+          a.action.edit-gametype(href="#!/") edit
         .marshal
         .form(style="display: none;")
       li#stattype-template

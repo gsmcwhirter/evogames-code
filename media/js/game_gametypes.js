@@ -11,6 +11,7 @@ $(function (){
 
         function _edit_gametype(){
             console.log("edit_gametype");
+            $(this).parents(".gametype").first().trigger("start-edit");
         }
 
         function _delete_gametype(){
@@ -24,8 +25,8 @@ $(function (){
         function _new_stat(){
             var self = $(this);
 
-            $("ul.stats li.add", self).before($("#stattype-template").clone(true));
-            $("ul.weights", self).append($("#weight-template").clone(true));
+            $("ul.stats li.add", self).before($("#stattype-template").clone(true).attr('id',''));
+            $("ul.weights", self).append($("#weight-template").clone(true).attr('id',''));
             $("ul.stats li select[name=type]").trigger("change");
         }
 
@@ -50,15 +51,7 @@ $(function (){
 
             $("li.gametype").bind("start-edit", function (){
                 var self = $(this);
-                $(".form", self).empty().append($("#form-template").clone(true).attr("id",""));
-                var datastr = $.trim($(".marshal", self).text());
-                var obj;
-                if (datastr){
-                    obj = _app.json(datastr);
-                    self.trigger("filldata", obj);
-                }
-                $(".display", self).hide();
-                $(".form", self).show();
+                _app.trigger("start-edit-gametype", {target: self});
             }).bind("cancel-edit", function (){
                 var self = $(this);
                 $(".form", self).empty();
@@ -68,13 +61,15 @@ $(function (){
                 else {
                     self.remove();
                 }
-            }).bind("commit-edit", function (event, objstr){
+            }).bind("commit-edit", function (event, obj, objstr){
                 var self = $(this);
 
                 console.log("commit-edit");
                 console.log(objstr);
 
+                $(".display .gtname", self).text(obj.name);
                 $(".marshal", self).text(objstr);
+                self.trigger("cancel-edit");
             }).bind("filldata", function (event, data){
                 var self = $(this);
                 $("input[name=gtname]").val(data.name);
@@ -83,7 +78,7 @@ $(function (){
                     $("ul.stats li", self).eq(index).find("input[name=name]").val(stat.name).trigger("keyup");
                     $("ul.stats li", self).eq(index).find("select[name=type]").val(stat.valtype).trigger("change");
                     $("ul.stats li", self).eq(index).find("input[name=extra]").val(stat.valdata);
-                    $("ul.weights li", self).eq(index).find("input[name=weight]").val(data.rating[index].weight);
+                    $("ul.weights li", self).eq(index).find("input[name=weight]").val(stat.ratingweight);
                 });
             });
 
@@ -143,6 +138,20 @@ $(function (){
             });
         });
 
+        this.bind('start-edit-gametype', function (e, data){
+            var self = data.target;
+
+            $(".form", self).empty().append($("#form-template").clone(true).attr("id",""));
+            var datastr = $.trim($(".marshal", self).text());
+            var obj;
+            if (datastr){
+                obj = this.json(datastr).gtdata;
+                self.trigger("filldata", obj);
+            }
+            $(".display", self).hide();
+            $(".form", self).show();
+        });
+
         function noop(){}
 
         this.get('', noop);
@@ -156,42 +165,56 @@ $(function (){
         });
 
         this.post("#!/edit", function (){
+            var me = this;
             var self = $(this.target);
             var theli = self.parents(".gametype").first();
 
             var obj = {};
             obj.name = $("input[name=gtname]", self).val();
             obj.stats = [];
-            obj.rating = [];
 
             var stat;
-            var rate;
-            var sname;
-            $("ul.stats li", self).each(function (o, i){
-                stat = new Object();
-                rate = new Object();
+            $("ul.stats li", self).each(function (i, o){
+                stat = {};
                 o = $(o);
                 if (!o.hasClass('add')){
-                    sname = $("input[name=name]", o).val();
-                    stat.name = sname;
+                    stat.name = $("input[name=name]", o).val();
                     stat.valtype = $("select[name=type]", o).val();
 
-                    if (stat.type == "enum" || stat.type == "formula"){
+                    if (stat.valtype == "enum" || stat.valtype == "formula"){
                         stat.valdata = $("input[name=extra]", o).val();
                     }
 
-                    rate.name = sname;
-                    rate.weight = $("ul.weights li", theli).eq(i).find("input[name=weight]").val();
+                    stat.ratingweight = parseFloat($("ul.weights li", theli).eq(i).find("input[name=weight]").val());
 
                     obj.stats.push(stat);
-                    obj.rating.push(rate);
                 }
             });
+            
+            var origname = this.json($.trim($(".marshal", self).text()) || "{}").origname || false;
 
-            console.log("editing!");
-            console.log(obj);
+            var gt = {origname: origname, gtdata: obj};
 
-            theli.trigger("commit-edit", [this.json(obj)]);
+            $.ajax({
+                type: 'put',
+                url: 'gametypes/save',
+                data: gt,
+                dataType: 'json',
+                success: function (data){
+                    if (data.ok){
+                        $("#flash").trigger('info', [data.info])
+                        gt.origname = gt.gtdata.name;
+                        theli.trigger("commit-edit", [gt, me.json(gt)]);
+                    }
+                    else {
+                        $("#flash").trigger('error', [data.error]);
+                    }
+
+                },
+                error: function (){
+                    $("#flash").trigger('error', ['Request error']);
+                }
+            });
         });
 
     });

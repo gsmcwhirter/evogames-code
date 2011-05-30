@@ -46,7 +46,11 @@ html
               |  that you have reached this in error, please send an e-mail
               |  to 
               a(href="mailto:"+system.error_email)= system.error_email  
-          
+
+          #menu.sidebar-div
+            h3 Navigation
+            != partial('menus/main')
+
           #about.sidebar-div
             h3 About #{system.name}
             != partial('description')

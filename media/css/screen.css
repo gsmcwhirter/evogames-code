@@ -341,11 +341,13 @@ strong, .bold {font-weight:bold;}
 #main ul#directory-nav {display:block;overflow:auto;border-bottom:1px solid #666;padding:0;}
 #main ul#directory-nav li {display:block;float:left;margin:0 5px;}
 #main ul#directory-nav li.selected {background-color:#ccc;border:1px solid #888;}
-#main .marshal {display:none;}
-#main ul.stats input[type=text], #main ul.weights input[type=text], #main ul.stats input[type=password], #main ul.weights input[type=password], #main ul.stats input[type=email], #main ul.weights input[type=email], #main ul.stats input[type=url], #main ul.weights input[type=url], #main ul.stats input[type=number], #main ul.weights input[type=number], #main ul.stats input[type=date], #main ul.weights input[type=date], #main ul.stats input[type=datetime], #main ul.weights input[type=datetime], #main ul.stats input[type=month], #main ul.weights input[type=month], #main ul.stats input[type=week], #main ul.weights input[type=week], #main ul.stats input[type=time], #main ul.weights input[type=time], #main ul.stats input[type=search], #main ul.weights input[type=search], #main ul.stats input[type=color], #main ul.weights input[type=color], #main ul.stats select, #main ul.weights select, #main ul.stats textarea, #main ul.weights textarea {width:30%;margin-right:5px;}
-#main ul.stats .delete-stat, #main ul.weights .delete-stat {float:right;margin-top:12px;}
-#main ul.stats li, #main ul.weights li {border-bottom:1px dotted #666;}
-#main ul.stats li.add, #main ul.weights li.add {padding:5px 0;border-bottom:none;}
+#main .gametype .display {display:block;background-color:#ffffff;border:1px solid #888888;padding:1.4em;margin-bottom:1.5em;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
+#main .gametype .display .action {float:right;margin-left:1em;}
+#main .gametype .marshal {display:none;}
+#main .gametype ul.stats input[type=text], #main .gametype ul.weights input[type=text], #main .gametype ul.stats input[type=password], #main .gametype ul.weights input[type=password], #main .gametype ul.stats input[type=email], #main .gametype ul.weights input[type=email], #main .gametype ul.stats input[type=url], #main .gametype ul.weights input[type=url], #main .gametype ul.stats input[type=number], #main .gametype ul.weights input[type=number], #main .gametype ul.stats input[type=date], #main .gametype ul.weights input[type=date], #main .gametype ul.stats input[type=datetime], #main .gametype ul.weights input[type=datetime], #main .gametype ul.stats input[type=month], #main .gametype ul.weights input[type=month], #main .gametype ul.stats input[type=week], #main .gametype ul.weights input[type=week], #main .gametype ul.stats input[type=time], #main .gametype ul.weights input[type=time], #main .gametype ul.stats input[type=search], #main .gametype ul.weights input[type=search], #main .gametype ul.stats input[type=color], #main .gametype ul.weights input[type=color], #main .gametype ul.stats select, #main .gametype ul.weights select, #main .gametype ul.stats textarea, #main .gametype ul.weights textarea {width:30%;margin-right:5px;}
+#main .gametype ul.stats .delete-stat, #main .gametype ul.weights .delete-stat {float:right;margin-top:12px;}
+#main .gametype ul.stats li, #main .gametype ul.weights li {border-bottom:1px dotted #666;}
+#main .gametype ul.stats li.add, #main .gametype ul.weights li.add {padding:5px 0;border-bottom:none;}
 #main li.genre-link {font-weight:bold;border-top:1px dotted #666;margin-bottom:1em;}
 #main li.genre-link .clickable {cursor:pointer;}
 #main li.genre-link .icon {display:block;float:left;}

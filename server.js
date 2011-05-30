@@ -24,7 +24,6 @@ server.configure(function (){
     this.use(express.bodyParser());
     this.use(base.middleware.csrf.check);
     this.use(base.middleware.determineLogin());
-    this.use(base.middleware.prepareMenus());
 
     var couchdb = new base.couchdb(config.couchdb);
     var iapi = new API(couchdb);

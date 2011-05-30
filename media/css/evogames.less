@@ -445,39 +445,58 @@ strong,
         }
     }
 
-    .marshal { display: none; }
+    .gametype {
+        .display {
+            display: block;
+            background-color: @lightbase;
+            border: 1px solid @medborder;
+            padding: 1.4em;
+            margin-bottom: 1.5em;
 
-    ul.stats, ul.weights {
-        input[type=text],
-        input[type=password],
-        input[type=email],
-        input[type=url],
-        input[type=number],
-        input[type=date],
-        input[type=datetime],
-        input[type=month],
-        input[type=week],
-        input[type=time],
-        input[type=search],
-        input[type=color],
-        select,
-        textarea {
-            width: 30%;
-            margin-right: 5px;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+
+            .action {
+                float: right;
+                margin-left: 1em;
+            }
         }
 
-        .delete-stat {
-            float: right;
-            margin-top: 12px;
-        }
+        .marshal { display: none; }
 
-        li {
-            border-bottom: 1px dotted #666;
-        }
+        ul.stats, ul.weights {
+            input[type=text],
+            input[type=password],
+            input[type=email],
+            input[type=url],
+            input[type=number],
+            input[type=date],
+            input[type=datetime],
+            input[type=month],
+            input[type=week],
+            input[type=time],
+            input[type=search],
+            input[type=color],
+            select,
+            textarea {
+                width: 30%;
+                margin-right: 5px;
+            }
 
-        li.add {
-            padding: 5px 0;
-            border-bottom: none;
+            .delete-stat {
+                float: right;
+                margin-top: 12px;
+            }
+
+            li {
+                border-bottom: 1px dotted #666;
+            }
+
+            li.add {
+                padding: 5px 0;
+                border-bottom: none;
+            }
         }
     }
 

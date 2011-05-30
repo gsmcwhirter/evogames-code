@@ -80,7 +80,7 @@ $(function (){
                     url: "owners/add",
                     data: {handle: handle},
                     dataType: 'json',
-                    success: function (data, textStatus){
+                    success: function (data){
                         if (data.ok)
                         {
                             $("ul.group-members-list").prepend("<li title='"+handle+"'><span class='handle only'>@"+handle+"</span></li>");
@@ -93,7 +93,7 @@ $(function (){
 
                         self.redirect("#!/cancel");
                     },
-                    error: function (XMLHttpRequest, textStatus, errorThrown){
+                    error: function (){
                         $("#flash").trigger('error', ['Request error']);
                         self.redirect("#!/cancel");
                     }
