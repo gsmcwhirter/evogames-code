@@ -228,6 +228,7 @@ $(function (){
 
                         $("#gametypes li.gametype").each(function (i,o){
                             o = $(o);
+                            
                             if ($.trim($(".display .gtname", o).text()) == gtname){
                                 o.remove();
                             }
