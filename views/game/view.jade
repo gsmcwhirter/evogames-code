@@ -4,13 +4,11 @@
 h1= game.name
 
 - if (editable)
-  p
-    a(href="/game/"+game.code+"/edit") Edit Game Information
-    br
-    a(href="/game/"+game.code+"/gametypes") Edit Game Types
-
-h2 Description
-!= game.description
+  ul.grid
+    li
+      a(href="/game/"+game.code+"/edit") Edit Game Information
+    li
+      a(href="/game/"+game.code+"/gametypes") Edit Game Types
 
 ul.grid3
   li
@@ -19,6 +17,9 @@ ul.grid3
     a(href="/game/"+game.code+"/tournament") Tournaments
   li
     a(href="/game/"+game.code+"/ladder") Ladders
+
+h2 Description
+!= game.description
 
 .left-col
   h2 Current Events
