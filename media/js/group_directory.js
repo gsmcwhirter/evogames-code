@@ -15,7 +15,7 @@ $(function (){
                 var text = a.text();
 
                 if ($("#grouping-"+grouping+" li").length < 2){
-                    a.replaceWith("<span>"+text+"</span>");
+                    a.replaceWith("<span class='small'>"+text+"</span>");
                 }
             });
         }
