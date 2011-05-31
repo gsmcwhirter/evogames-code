@@ -12,6 +12,20 @@ h1= game.name
 h2 Description
 != game.description
 
+ul.grid3
+  li
+    a(href="/game/"+game.code+"/event") Events
+    br
+    | View and Manage Events
+  li
+    a(href="/game/"+game.code+"/tournament") Tournaments
+    br
+    | View and Manage Tournaments
+  li
+    a(href="/game/"+game.code+"/ladder") Ladders
+    br
+    | View and Manage Ladders
+
 .left-col
   h2 Current Events
   ul.fp-block

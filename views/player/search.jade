@@ -1,7 +1,8 @@
 #breadcrumbs
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
 
-h1 Player Search
+!= partial('header', {title: "Player Search"})
+
 form(method="get", accept-charset="utf-8")
   fieldset
     .form-line
@@ -21,7 +22,7 @@ form(method="get", accept-charset="utf-8")
         | No search results were found for your query.
     - each result in results
       li
-        a(href="/player/profile/"+result.alias+"@"+result.handle)
+        a(href="/player/"+result.alias+"@"+result.handle)
           span.alias= result.alias
           span.handle= "@"+result.handle
         span.source Source: #{result.source}

@@ -1,9 +1,8 @@
 #breadcrumbs
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
 
-.content-admin
-  a(href="/news/post") New Article
-h1 #{title}
+!= partial('header', {title: title})
+
 .article-list
   != partial('article', {collection: articles, as: 'article'})
 

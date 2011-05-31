@@ -1,5 +1,7 @@
 #breadcrumbs
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
+!= partial('header', {title: false})
   
 #player-profile
   img.avatar(src=avatar(pplayer, 160))
@@ -23,7 +25,7 @@
         ul
           - each oalias in pplayer.aliases
             li
-              a(href="/player/profile/"+encodeURI(oalias)+"@"+encodeURI(pplayer.handle))
+              a(href="/player/"+encodeURI(oalias)+"@"+encodeURI(pplayer.handle))
                 span.alias= oalias
                 span.handle= "@"+pplayer.handle
 

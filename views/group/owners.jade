@@ -8,11 +8,11 @@ ul.group-owners
   - each owner in owners
     - if (owner._id == player._id)
       li(title="me")
-        a(href="/player/profile/@"+owner.handle)
+        a(href="/player/@"+owner.handle)
           span.handle.only= "@"+owner.handle
     - else
       li
-        a(href="/player/profile/@"+owner.handle)
+        a(href="/player/@"+owner.handle)
           span.handle.only= "@"+owner.handle
 
 h2 Actions

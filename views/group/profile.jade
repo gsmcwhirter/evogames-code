@@ -32,7 +32,7 @@
       ul
         - each owner in owners
           li
-            a(href="/player/profile/@"+encodeURI(owner.handle))
+            a(href="/player/@"+encodeURI(owner.handle))
               span.handle.only= "@"+owner.handle
 
     li
@@ -48,11 +48,11 @@
           a.member-toggle(href="#!/members")
             span.verb view
             |  member list
-        ul.grid3#members(style="display: none;")
+        ul.grid3.notopline#members(style="display: none;")
           - each member in (group.members || [])
             - if (member.approved)
               li
-                a(href="/player/profile/"+encodeURI(member.alias)+"@"+encodeURI(member.handle))
+                a(href="/player/"+encodeURI(member.alias)+"@"+encodeURI(member.handle))
                   span.alias= member.alias
                   span.handle= "@"+member.handle
 

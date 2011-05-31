@@ -1,0 +1,30 @@
+- if (player.is_sysop || (player.permissions || []).indexOf("post news") > -1)
+  ul.grid3.menu
+    li
+      a(href="/news") Recent News
+      br
+      | View recent articles.
+    li
+      a(href="/news/tag") Tag Cloud
+      br
+      | View article tags.
+    li
+      a(href="/news/drafts") Draft List
+      br
+      | View drafts.
+
+  .content-admin
+    a(href="/news/post") New Article
+
+- else
+  ul.grid.menu
+    li
+      a(href="/news") Recent News
+      br
+      | View recently published articles.
+    li
+      a(href="/news/tag") Tag Cloud
+      br
+      | View article tags.
+
+h1= title

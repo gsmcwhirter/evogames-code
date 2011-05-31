@@ -27,7 +27,7 @@ ul#by-genre
 
 ul#by-name
   - each game in games_byname
-    li
+    li.name-link
       a(href="/game/"+game.code)= game.name
 
 script(type="text/javascript", src="/js/game_directory.js")

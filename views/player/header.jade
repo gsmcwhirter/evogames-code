@@ -1,18 +1,9 @@
-#breadcrumbs
-  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
-
-h1 Player Services
-
 ul.grid
   li
     a(href="/player/search") Player Search
     br
     | Search for players by handle or alias.
   - if (player)
-    li
-      a(href="/player/profile") Player Profiles
-      br
-      | View your profile.
     li
       a(href="/player/controls") Control Panel
       br
@@ -22,3 +13,6 @@ ul.grid
       a(href="/player/register") Registration
       br
       | Register yourself as a player.
+
+- if (title)
+  h1= title

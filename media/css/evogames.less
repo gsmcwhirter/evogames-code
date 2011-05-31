@@ -318,8 +318,10 @@ strong,
         }
     }
     
-    ul.grid
+    ul.grid,
+    ul.grid3
     {
+        margin-right: 0;
         display: block;
         overflow: auto;
         padding: 0;
@@ -329,26 +331,33 @@ strong,
             margin: 5px 10px;
             padding: 3px 0;
             float: left;
-            width: 45%;
             border-top: 1px solid #222;
             border-bottom: 1px dotted #666;
         }
     }
 
+    ul.grid {
+        li {
+            width: 46%;
+        }
+    }
+
     ul.grid3
     {
-        display: block;
-        overflow: auto;
-        padding: 0;
-
         li {
-            display: block;
-            margin: 5px 10px;
-            padding: 3px 0;
-            float: left;
-            width: 28%;
-            border-bottom: 1px dotted #666;
+            width: 29%;
         }
+    }
+
+    ul.grid3.notopline {
+        li {
+            border-top: none;
+        }
+    }
+
+    ul.grid.menu,
+    ul.grid3.menu {
+        margin-bottom: 0.5em;
     }
 
     ul.profile {
@@ -391,6 +400,31 @@ strong,
     #by-genre,
     #by-name {
         clear: both;
+    }
+
+    #by-genre,
+    #by-name {
+        li {
+            font-weight: bold;
+            border-top: 1px dotted #666;
+
+            .clickable{
+                cursor: pointer;
+            }
+
+            .icon{
+                display: block;
+                float: left;
+            }
+        }
+
+        li.name-link {
+            padding: 0.5em 0;
+        }
+
+        li.genre-link {
+            margin-bottom: 1em;
+        }
     }
 
     ul.member-groups,
@@ -540,21 +574,6 @@ strong,
         }
     }
 
-    li.genre-link {
-        font-weight: bold;
-        border-top: 1px dotted #666;
-        margin-bottom: 1em;
-
-        .clickable{
-            cursor: pointer;
-        }
-
-        .icon{
-            display: block;
-            float: left;
-        }
-    }
-
     #flash{
         .info, .error{
             padding: 5px 20px;
@@ -627,7 +646,7 @@ strong,
         border-bottom: 1px dotted #666;
         margin-bottom: 10px;
 
-        h1 {
+        h2 {
             margin-bottom: 0.1em;
             a, a:link, a:active {
                 font-weight: normal;
@@ -640,7 +659,7 @@ strong,
             }
         }
 
-        h2 {
+        h3 {
             margin-top: 0.1em;
         }
 

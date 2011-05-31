@@ -1,7 +1,7 @@
 #breadcrumbs
   != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
   
-h1 News Tag Cloud
+!= partial('header', {title: "Tag Cloud"})
 p(style="width: 50%;")
   - each tag in tags
     a(href="/news/tag/"+tag.tag, style="font-size: "+tag.size+"%;")= tag.tag

@@ -1,9 +1,10 @@
 - if (typeof full != "undefined" && full)
   #breadcrumbs
     != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+  != partial('header', {title: "View Article"})
 
 .article
-  h1
+  h2
     a(href="/news/"+article.slug)= article.subject
   - if (player.is_sysop || (player.permissions || []).indexOf("post news") > -1)
     .editline
