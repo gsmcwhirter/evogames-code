@@ -51,9 +51,9 @@ $(function (){
         {
             fstat.trigger("bad", ["Must be at most 50 characters long."]);
         }
-        else if (!slug.match(new RegExp("^[a-z0-9\\-]*$")))
+        else if (!slug.match(new RegExp("^[a-z0-9\\-_]*$")))
         {
-            fstat.trigger("bad", ["Must contain only lowercase letters, numbers, and hyphens."]);
+            fstat.trigger("bad", ["Must contain only lowercase letters, numbers, hyphens, and underscores."]);
         }
         else if (slug_exists(slug) && slug != $("#saved-slug").val())
         {

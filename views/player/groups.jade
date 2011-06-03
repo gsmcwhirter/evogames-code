@@ -7,7 +7,7 @@ h2 Owned Groups
 ul.owned-groups.admin
   - each group in ogroups
     li
-      a(href="/group/"+group.code+"/profile")= group.name
+      a(href="/group/"+group.code)= group.name
       a.action(href="/group/"+group.code+"/controls") manage
   li.last
     a(href="/group/create") Create new group...
@@ -16,6 +16,6 @@ h2 Admin Groups
 ul.owned-groups.admin
   - each group in agroups
     li
-      a(href="/group/"+group.code+"/profile")= group.name
+      a(href="/group/"+group.code)= group.name
       a.action(href="/group/"+group.code+"/controls") manage
   li

@@ -64,19 +64,33 @@ $(function (){
         var self = $(this);
         bindings($("div", self)).trigger("bind-xs").trigger("delayhighlight");
     }).bind("info", function (e, msg){
-        var self = $(this)
-        var newdiv = $("<div class='info'><span><strong>Info:</strong> "+msg+"</span></div>");
-        bindings(newdiv);
-        self.append(newdiv);
-        newdiv.trigger("bind-xs");
-        newdiv.trigger("delayhighlight");
+        var self = $(this);
+        if ($.isArray(msg)){
+            msg.forEach(function (m){
+                self.trigger("info", [m]);
+            });
+        }
+        else {
+            var newdiv = $("<div class='info'><span><strong>Info:</strong> "+msg+"</span></div>");
+            bindings(newdiv);
+            self.append(newdiv);
+            newdiv.trigger("bind-xs");
+            newdiv.trigger("delayhighlight");
+        }
     }).bind("error", function (e, msg){
         var self = $(this);
-        var newdiv = $("<div class='error'><span><strong>Error:</strong> "+msg+"</span></div>");
-        bindings(newdiv);
-        self.append(newdiv);
-        newdiv.trigger("bind-xs");
-        newdiv.trigger("delayhighlight");
+        if ($.isArray(msg)){
+            msg.forEach(function (m){
+                self.trigger("info", [m]);
+            });
+        }
+        else {
+            var newdiv = $("<div class='error'><span><strong>Error:</strong> "+msg+"</span></div>");
+            bindings(newdiv);
+            self.append(newdiv);
+            newdiv.trigger("bind-xs");
+            newdiv.trigger("delayhighlight");
+        }
     }).trigger("run");
 });
 

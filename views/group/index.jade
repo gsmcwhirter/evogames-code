@@ -18,7 +18,7 @@ ul#directory-nav
     ul.group-directory(id="grouping-"+letters[index])
       - each group in grouping
         li
-          a(href="/group/"+group.code+"/profile")= group.name
+          a(href="/group/"+group.code)= group.name
           | &#32;
           span.code (#{group.code})
       li

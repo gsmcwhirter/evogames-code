@@ -7,26 +7,26 @@ div#memberships
   h2 Group Memberships
   - each key in member_group_keys
     h3
-      span.alias= member_groups[key][0].value.alias
+      span.alias= member_group_key_aliases[key]
       span.handle= "@"+player.handle
     ul.member-groups.admin
       - each group in member_groups[key]
         li(title=group.value.alias + " in "+group.doc.code)
-          a(href="/group/"+group.doc.code+"/profile")= group.doc.name
+          a(href="/group/"+group.doc.code)= group.doc.name
           - if (group.value.approved)
             a.action(href="#!/leave/"+group.doc.code+"/"+group.value.alias, rel=group.doc.name) leave group
           - else
             span(style="margin-left: 1em;") (pending)
             a.action(href="#!/leave/"+group.doc.code+"/"+group.value.alias, rel=group.doc.name) cancel request
       li.last
-        a(href="#") Join new group...
+        a(href="/group") Find new group...
 
   - if (invited_groups.length)
     h2 Group Invitations
     ul.invited-groups.admin
       -each group in invited_groups
         li(title=group.doc.code)
-          a(href="/group/"+group.doc.code+"/profile")= group.doc.name
+          a(href="/group/"+group.doc.code)= group.doc.name
           a.action(href="#!/decline/"+group.doc.code, rel=group.doc.name) decline
           a.action(href="/group/"+group.doc.code+"/join") join
       li.last

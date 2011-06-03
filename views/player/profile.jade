@@ -37,7 +37,7 @@
           ul
             - each group in ogroups
               li
-                a(href="/group/"+encodeURI(group.code)+"/profile")= group.name
+                a(href="/group/"+encodeURI(group.code))= group.name
 
     - if (mgroups.length)
       li
@@ -45,7 +45,7 @@
         ul
           - each group in mgroups
             li
-              a(href="/group/"+encodeURI(group.code)+"/profile")= group.name
+              a(href="/group/"+encodeURI(group.code))= group.name
 
   h2 Events
   ul.profile

@@ -10,7 +10,7 @@ $(function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
 
-        var slug_chars = "abcdefghijklmnopqrstuvwxyz0123456789- ";
+        var slug_chars = "abcdefghijklmnopqrstuvwxyz0123456789-_ ";
 
         function sub_to_slug(sub){
             sub = _(sub.toLowerCase().split("")).select(function (item){ return slug_chars.indexOf(item) > -1; });

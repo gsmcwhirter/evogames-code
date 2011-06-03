@@ -70,7 +70,6 @@ $(function (){
         });
 
         this.post("#!/add", function (){
-            //var handle = $("#add-modal input[name=handle]").val();
             var handle = $.trim(this.params.handle);
             var self = this;
 
@@ -83,7 +82,7 @@ $(function (){
                     success: function (data){
                         if (data.ok)
                         {
-                            $("ul.group-members-list").prepend("<li title='"+handle+"'><span class='handle only'>@"+handle+"</span></li>");
+                            $("ul.group-owners").prepend("<li><a href='/player/@"+handle+"'><span class='handle only'>@"+handle+"</span></a></li>");
                             $("#flash").trigger("info", [data.info]);
                         }
                         else

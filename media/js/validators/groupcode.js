@@ -34,8 +34,11 @@ $(function (){
             return code_cache ? true : false;
         }
 
-        var re = new RegExp("^[a-zA-Z0-9\\-_\\[\\]]*$");
+        var re = new RegExp("^[a-zA-Z0-9\\-_]*$");
         var code = $.trim(self.val());
+        code = code.replace(/\s{2,}/g, " ");
+        self.val(code);
+        
         if (code.length < 3)
         {
             fstat.trigger("bad", ["Must be at least 3 characters long."]);

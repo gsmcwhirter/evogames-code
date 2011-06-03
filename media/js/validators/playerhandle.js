@@ -35,7 +35,7 @@ $(function (){
         }
 
         var handle = $.trim(self.val());
-        var re = /[@/\s]/;
+        var re = /^[a-zA-Z0-9\\-_]*$/;
 
         if (handle.length < 3)
         {
@@ -52,7 +52,7 @@ $(function (){
                 fstat.trigger("bad", ["Must be unique."]);
             }
         }
-        else if (handle.match(re)){
+        else if (!handle.match(re)){
             fstat.trigger("bad", ["Contains invalid characters."]);
         }
         else

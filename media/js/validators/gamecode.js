@@ -34,7 +34,7 @@ $(function (){
             return code_cache ? true : false;
         }
 
-        var re = new RegExp("^[a-zA-Z0-9\\-_\\[\\]]*$");
+        var re = new RegExp("^[a-zA-Z0-9\\-_]*$");
         var code = $.trim(self.val());
         if (code.length < 2)
         {
