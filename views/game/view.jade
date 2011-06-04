@@ -1,6 +1,3 @@
-#breadcrumbs
-  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
-
 h1= game.name
 
 - if (editable)
@@ -20,40 +17,3 @@ ul.grid3
 
 h2 Description
 != game.description
-
-.left-col
-  h2 Current Events
-  ul.fp-block
-
-    li
-      a(href="/game/"+game.code+"/event") View All Events
-
-  h2 Current Tournaments
-  ul.fp-block
-
-    li
-      a(href="/game/"+game.code+"/tournament") View All Tournaments
-
-  h2 Current Ladders
-  ul.fp-block
-
-    li
-      a(href="/game/"+game.code+"/ladder") View All Ladders
-
-.right-col
-  h2 Future Events
-  ul.fp-block
-
-    li
-      a(href="/game/"+game.code+"/event") View All Events
-  h2 Future Tournaments
-  ul.fp-block
-
-    li
-      a(href="/game/"+game.code+"/tournament") View All Tournaments
-
-  h2 Future Ladders
-  ul.fp-block
-
-    li
-      a(href="/game/"+game.code+"/ladder") View All Ladders

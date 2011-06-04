@@ -62,7 +62,7 @@ $(function (){
     }).bind("fetch-codes", function (e, callback, force){
         if (!code_cache || force)
         {
-            $.get("/api/game_codes.json", function (data){
+            $.get("/api/games/codes.json", function (data){
                 callback(data);
             });
         }

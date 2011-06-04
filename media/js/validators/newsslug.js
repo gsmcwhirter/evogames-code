@@ -14,6 +14,8 @@ $(function (){
         $(this).trigger("validate");
     }).bind("blur", function (){
         $(this).trigger("validate");
+    }).bind("change", function (){
+        $(this).trigger("validate");
     }).bind("validate", function (){
         var self = $(this);
         var fstat = self.parent().find(".field-status").first();
@@ -66,7 +68,7 @@ $(function (){
     }).bind("fetch-slugs", function (e, callback, force){
         if (!slug_cache || force)
         {
-            $.get("/api/slugs.json", function (data){
+            $.get("/api/news/slugs.json", function (data){
                 var slugs = _.map(data, function (item){return item.toLowerCase();});
                 callback(slugs);
             });
@@ -79,6 +81,7 @@ $(function (){
         if (autoslug){
             last_autoslug = newslug;
             $(this).val(newslug);
+            $(this).trigger("validate");
         }
     });
 

@@ -35,6 +35,10 @@ html
           #flash
             != partial('flash_info', {collection: flash('info') || [], as: 'msg'})
             != partial('flash_error', {collection: flash('error') || [], as: 'msg'})
+
+          #breadcrumbs
+            != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
+
           != body
         
         #sidebar

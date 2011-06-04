@@ -62,7 +62,7 @@ $(function (){
     }).bind("fetch-emails", function (e, callback, force){
         if (!email_cache || force)
         {
-            $.get("/api/emails.json", function (data){
+            $.get("/api/players/emails.json", function (data){
                 callback(data);
             });
         }

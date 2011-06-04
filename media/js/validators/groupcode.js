@@ -65,7 +65,7 @@ $(function (){
     }).bind("fetch-codes", function (e, callback, force){
         if (!code_cache || force)
         {
-            $.get("/api/group_codes.json", function (data){
+            $.get("/api/groups/codes.json", function (data){
                 callback(data);
             });
         }

@@ -1,6 +1,3 @@
-#breadcrumbs
-  != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
-
 h1
   | Privileges for
   span.alias= member.alias
@@ -26,6 +23,10 @@ h1
         input#admin-invites(type="checkbox", name="admin-invites", value="1", checked=member.privs.invites)
         | &#32;
         label(for="admin-invites") Issue and Withdraw Membership Invitations
+      .form-line
+        input#admin-events(type="checkbox", name="admin-events", value="1", checked=member.privs.events)
+        | &#32;
+        label(for="admin-events") Register for Events
       .form-line
         button.button.positive(type="submit")
           img(src="/css/icons/tick.png", alt="")

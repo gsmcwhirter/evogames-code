@@ -62,7 +62,7 @@ $(function (){
     }).bind("fetch-users", function (e, callback, force){
         if (!user_cache || force)
         {
-            $.get("/api/users.json", function (data){
+            $.get("/api/players/handles.json", function (data){
                 var users = _.map(data, function (item){return item.toLowerCase();});
                 callback(users);
             });

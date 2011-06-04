@@ -1,0 +1,30 @@
+h1= game.name+" Events"
+
+div
+  input#search.search(type="search", placeholder="Search")
+  - if (player)
+    a(href="/game/"+game.code+"/event/create") Create an Event
+
+ul#directory-nav
+  li#nav-current-events
+    a(href="#!/current-events", rel="current-events") Current Events
+  li#nav-future-events
+    a(href="#!/future-events", rel="future-events") Future Events
+  li
+    a(href="/game/"+game.code+"/event/history") Past Events
+
+#current-events
+  h2 Current Events
+  ul
+    - each event in current_events
+      li
+        a(href="/game/"+game.code+"/event/"+event.slug)= event.name
+
+#future-events
+  h2 Future Events
+  ul
+    - each event in future_events
+      li
+        a(href="/game/"+game.code+"/event/"+event.slug)= event.name
+
+script(type="text/javascript", src="/js/event_directory.js")
