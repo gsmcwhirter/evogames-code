@@ -27,7 +27,7 @@ $(function (){
                 else {
                     $("#gtform").slideUp(_speed);
                 }
-            });
+            }).trigger("change");
 
             this.trigger("start-edit-gametype", {target: $("#gtform")});
 
