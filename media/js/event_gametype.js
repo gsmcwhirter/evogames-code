@@ -2,7 +2,6 @@ $(function (){
     var gametypes = $.sammy("#gtform", function (){
         var _speed = 200;
         this.use("JSON");
-        var _app = this;
 
         function _statname_change(){
            var index = $(this).parents("li").first().index();
@@ -19,9 +18,40 @@ $(function (){
         }
 
         this.bind('run', function (){
+            var _app = this;
+
+            $("form").bind("submit", function (){
+                var self = $(this);
+
+                var obj = {};
+                obj.stats = [];
+
+                var stat;
+                $("ul.stats li", self).each(function (i, o){
+                    stat = {};
+                    o = $(o);
+                    if (!o.hasClass('add')){
+                        stat.name = $("input[name=name]", o).val();
+                        stat.valtype = $("select[name=type]", o).val();
+
+                        if (stat.valtype == "enum" || stat.valtype == "formula"){
+                            stat.valdata = $("input[name=extra]", o).val();
+                        }
+
+                        stat.ratingweight = parseFloat($("ul.weights li", self).eq(i).find("input[name=weight]").val());
+
+                        obj.stats.push(stat);
+                    }
+                });
+
+                $("input[name=marshal]").val(_app.json(obj));
+
+                return true;
+            });
+
             $("#gametype_name").bind("change", function (){
                 var self = $(this);
-                if (self.val() == "other"){
+                if (self.val() == "custom"){
                     $("#gtform").slideDown(_speed);
                 }
                 else {
@@ -89,7 +119,7 @@ $(function (){
         this.bind('start-edit-gametype', function (e, data){
             var self = data.target;
 
-            var datastr = $.trim($(".marshal", self).text());
+            var datastr = $.trim($("input[name=marshal]", self).val());
             var obj;
             if (datastr){
                 obj = this.json(datastr);

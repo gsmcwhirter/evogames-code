@@ -1,5 +1,5 @@
 function (doc){
     if (doc.type == "event"){
-        emit([doc.game_id, doc.startdate, -1 * (new Date(doc.enddate)).getTime()], {event: doc, _id: doc.gameid});
+        emit([doc.gameid, -1 * (new Date(doc.startdate)).getTime(), doc.enddate], {event: doc, _id: doc.gameid});
     }
 }

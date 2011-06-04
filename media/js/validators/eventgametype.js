@@ -35,7 +35,7 @@ $(function (){
         }
 
         var gametype = self.val();
-        if (!gametype_exists(gametype) && gametype != "other")
+        if (!gametype_exists(gametype) && gametype != "custom")
         {
             fstat.trigger("bad", ["Must either be an existing gametype or \"Custom\"."]);
         }

@@ -404,6 +404,7 @@ strong, .bold {font-weight:bold;}
 #main fieldset ul.field-error {color:#f00;margin:0;margin-bottom:2px;}
 #main fieldset ul.field-error li {color:#f00;}
 #main fieldset.narrow-fields input[type=text], #main fieldset.narrow-fields input[type=password], #main fieldset.narrow-fields input[type=email], #main fieldset.narrow-fields input[type=url], #main fieldset.narrow-fields input[type=number], #main fieldset.narrow-fields input[type=date], #main fieldset.narrow-fields input[type=datetime], #main fieldset.narrow-fields input[type=month], #main fieldset.narrow-fields input[type=week], #main fieldset.narrow-fields input[type=time], #main fieldset.narrow-fields input[type=search], #main fieldset.narrow-fields input[type=color], #main fieldset.narrow-fields select, #main fieldset.narrow-fields textarea {width:50%;}
+#main input[type=text].narrow, #main input[type=password].narrow, #main input[type=email].narrow, #main input[type=url].narrow, #main input[type=number].narrow, #main input[type=date].narrow, #main input[type=datetime].narrow, #main input[type=month].narrow, #main input[type=week].narrow, #main input[type=time].narrow, #main input[type=search].narrow, #main input[type=color].narrow, #main select.narrow, #main textarea.narrow {width:35%;}
 #main ul.form-error {color:#f00;margin-bottom:2px;padding:10px;border:2px solid #800;background-color:#ddd;display:block;font-weight:bold;}
 #main ul.form-error li {color:#f00;}
 #main #new-ticket-form {display:none;}

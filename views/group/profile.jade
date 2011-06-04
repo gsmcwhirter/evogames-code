@@ -1,12 +1,17 @@
+- if (editable || (player && (group.join_type == "approval" || group.join_type == "open")))
+  ul.grid
+    - if (editable)
+      li
+        a(href="/group/"+group.code+"/controls") Manage Group
+    - if (player && (group.join_type == "approval" || group.join_type == "open"))
+      li
+        a(href="/group/"+group.code+"/join") Join Group
+
 #group-profile
   - if (group.logo)
     img.logo(src=group.logo, alt="Group Logo")
 
   h1= group.name
-
-  - if (editable)
-    p.small
-      a(href="/group/"+group.code+"/controls") Manage Group
 
   h2 About
   != gdescription
@@ -34,11 +39,6 @@
 
     li
       span.label= "Members: "+ member_count
-      - if (player && (group.join_type == "approval" || group.join_type == "open"))
-        span.small
-          |  (
-          a(href="/group/"+group.code+"/join") join group
-          |  )
       - if (member_count > 0)
         br
         span.small

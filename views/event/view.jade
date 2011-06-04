@@ -1,0 +1,79 @@
+#event-profile
+  h1= event.name
+  h3= game.name
+
+  ul.grid3
+    li
+      a(href="/game/"+game.code+"/event/"+event.slug+"/stats") Event Statistics
+    li
+      a(href="/game/"+game.code+"/event/"+event.slug+"/matches") Event Matches
+    - if (is_participant)
+      li
+        a(href="/game/"+game.code+"/event/"+event.slug+"/matches/submit") Submit a Match
+    - if (is_registerable)
+      li
+        a(href="/game/"+game.code+"/event/"+event.slug+"/register") Event Registration
+    - if (is_admin)
+      li
+        a(href="/game/"+game.code+"/event/"+event.slug+"/controls") Event Controls
+
+  h2 Description
+  != event.description
+
+  h2 Rules
+  != event.rules
+
+  h2 Event Information
+  ul.profile
+    li
+      span.label Event Type:
+      - if (event.event_type == "player_register")
+        |  Individual Registration
+      - if (event.event_type == "group_register")
+        |  Group Registration
+    li
+      span.label Gametype:
+      = " "+event.gametype_name
+    li
+      span.label Start Date:
+      - if (event.startdate)
+        = datetime(event.startdate)
+      - else
+        |  (not yet determined)
+    li
+      span.label End Date:
+      - if (event.enddate)
+        = datetime(event.enddate)
+      - else
+        |  (not yet determined)
+    li
+      span.label Event Admins:
+      ul.grid3
+        li
+          a(href="/player/@"+event.creator)
+            span.handle.only= "@"+event.creator
+        - each admin in (event.admins || [])
+          li
+            a(href="/player/@"+admin)
+              span.handle.only= "@"+admin
+    li
+      span.label Registrations: #{registration_count}
+      - if (registration_count > 0)
+        br
+        span.small
+          a.registration-toggle(href="#!/registrations")
+            span.verb view
+            |  registration list
+        ul.grid3.notopline#registrations(style="display: none;")
+          - each registration in (group.registrations || [])
+            - if (registration.approved)
+              - if (registration.type == "player")
+                li
+                  a(href="/player/"+encodeURI(registration.name_or_alias)+"@"+encodeURI(registration.code_or_handle))
+                    span.alias= registration.name_or_alias
+                    span.handle= "@"+registration.code_or_handle
+              - else
+                li
+                  a(href="/group/"+encodeURI(registration.code_or_handle))= registration.name_or_alias
+
+script(type="text/javascript", src="/js/event_profile.js")

@@ -1,4 +1,4 @@
-h1 Add New Event
+h1= "Edit "+event.name
 h2= game.name
 form(method="post", accept-charset="utf-8")
   fieldset
@@ -21,18 +21,7 @@ form(method="post", accept-charset="utf-8")
           - each msg in messages["slug"]
             li!= "Slug " + msg
       input#slug.text(type="text", name="slug", value=data.slug)
-      span.field-status
-        span &nbsp;
-    .form-line
-      label(for="event_type") Event Type
-      br
-      - if (messages["event_type"] && messages["event_type"].length)
-        ul.field-error
-          - each msg in messages["event_type"]
-            li!= "Event type " + msg
-      select#event_type.text(size="1", name="event_type")
-        option(value="group_register", selected=data.event_type == "group_register") Group Registration
-        option(value="player_register", selected=data.event_type == "player_register") Player Registration
+      input#saved-slug(type="hidden", name="saved_slug", value=event.slug)
       span.field-status
         span &nbsp;
     .form-line
@@ -68,9 +57,64 @@ form(method="post", accept-charset="utf-8")
       ul.weights
 
     .form-line
+      label(for="description") Description
+      span.small
+        |  (
+        a(href="http://daringfireball.net/projects/markdown/syntax", rel="blank") markdown syntax
+        |  )
+      br
+      - if (messages["description"] && messages["description"].length)
+        ul.field-error
+          - each msg in messages["description"]
+            li!= "Description " + msg
+      textarea#description(name="description")= data.description || ""
+    .form-line
+      label(for="rules") Rules
+      span.small
+        |  (
+        a(href="http://daringfireball.net/projects/markdown/syntax", rel="blank") markdown syntax
+        |  )
+      br
+      - if (messages["rules"] && messages["rules"].length)
+        ul.field-error
+          - each msg in messages["rules"]
+            li!= "Rules " + msg
+      textarea#rules(name="rules")= data.rules || ""
+    - if (!event.startdate || event.startdate > (new Date()).toISOString())
+      .form-line
+        label Start Date (your time zone)
+        span.small
+          |  (enter a date and time, the word "now", or leave blank)
+        br
+        - if (messages["startdate"] && messages["startdate"].length)
+          ul.field-error
+            - each msg in messages["startdate"]
+              li!= "Start date " + msg
+        input#startdate_date.text.narrow(type="date", name="startdate_date", value=data.startdate ? date(data.startdate, "Y-m-d") : "")
+        input#startdate_time.text.narrow(type="time", name="startdate_time", value=data.startdate ? time(data.startdate, "H:i:s") : "")
+        span.field-status
+          span &nbsp;
+    - if (!event.enddate || event.enddate > (new Date()).toISOString())
+      .form-line
+        label(for="enddate") End Date (your time zone)
+        span.small
+          |  (enter a date and time, the word "now", or leave blank)
+        br
+        - if (messages["enddate"] && messages["enddate"].length)
+          ul.field-error
+            - each msg in messages["enddate"]
+              li!= "End date " + msg
+        input#enddate_date.text.narrow(type="date", name="enddate_date", value=data.enddate ? date(data.enddate, "Y-m-d") : "")
+        input#enddate_time.text.narrow(type="time", name="enddate_time", value=data.enddate ? time(data.enddate, "H:i:s") : "")
+        span.field-status
+          span &nbsp;
+    .form-line
       button.button.positive(type="submit")
         img(src="/css/icons/tick.png",alt="")
-        | &#32;Create Event
+        | &#32;Save Event
+      a.button.negative(href="#!/back")
+        img(src="/css/icons/cross.png",alt="")
+        | &#32;Cancel
 
 ul(style="display: none;")
   li#stattype-template
@@ -98,10 +142,15 @@ ul(style="display: none;")
 
 script(type="text/javascript")
     var GAME_CODE = "#{game.code}";
+
+    $("a[href=#!/back]").bind('click', function (){
+        window.location = "/game/#{game.code}/event/#{event.slug}/controls";
+    });
+
 script(type="text/javascript",src="/js/validators/eventslug.js")
 script(type="text/javascript",src="/js/validators/eventname.js")
-script(type="text/javascript",src="/js/validators/eventtype.js")
 script(type="text/javascript",src="/js/validators/eventgametype.js")
 script(type="text/javascript",src="/js/validators/eventminteams.js")
+script(type="text/javascript",src="/js/validators/eventdates.js")
 
 script(type="text/javascript",src="/js/event_gametype.js")

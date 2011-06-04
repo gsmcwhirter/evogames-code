@@ -1,5 +1,5 @@
 $(function (){
-    $("#name").bind('run', function (){
+    $("#event_name").bind('run', function (){
         $(this).trigger("validate");
         return false;
     }).bind("keyup", function (){
@@ -30,5 +30,5 @@ $(function (){
         }
     });
 
-    validators.run("#name");
+    validators.run("#event_name");
 });

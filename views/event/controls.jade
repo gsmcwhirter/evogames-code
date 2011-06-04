@@ -1,0 +1,38 @@
+h1= "Manage "+event.name
+
+ul.grid
+  li
+    a(href="/game/"+game.code+"/event/"+event.slug+"/controls/edit") Event Information
+    br
+    | Edit the event name, description, etc.
+  li
+    a(href="/game/"+game.code+"/event/"+event.slug+"/controls/requests") Registration Requests
+    br
+    | Approve or deny event registrations.
+  li
+    a(href="/game/"+game.code+"/event/"+event.slug+"/controls/registrations") Current Registrations
+    br
+    | Edit current event registrations.
+  li
+    a(href="/game/"+game.code+"/event/"+event.slug+"/controls/invites") Invitations
+    br
+    | Invite new participants to your event.
+  li
+    a(href="/game/"+game.code+"/event/"+event.slug+"/controls/disputes") Disputes
+    br
+    | Review event disputes.
+  - if (is_creator)
+    li
+      a(href="/game/"+game.code+"/event/"+event.slug+"/controls/admins") Event Admins
+      br
+      | Manage event admins.
+    li
+      a(href="#!/") Delete Event
+      br
+      | Cancel your event.
+
+ul.grid
+  li
+    a(href="/game/"+game.code+"/event/"+event.slug) View Profile
+    br
+    | View the event profile.
