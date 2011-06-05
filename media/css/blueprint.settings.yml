@@ -9,9 +9,10 @@ evogames:
   semantic_classes:
     "#container": ".container"
     "#noscript": ".span-24, .last"
-    "#header": ".span-24, .last"
+    "#superheader": ".span-24, .last"
+    "#header-menu": ".span-15, .prepend-1, .append-1, .pull-6, .last"
+    "#player-info": ".span-6, .push-17, .last"
     "#container2": ".span-24, .last"
-    "#main": ".span-15, .prepend-1, .append-1"
-    "#sidebar": ".span-6, .append-1, .last"
+    "#main": ".span-22, .prepend-1, .append-1, .last"
     "#footer": ".span-22, .prepend-1, .append-1, .last"
     "#subfooter": ".span-24, .last"

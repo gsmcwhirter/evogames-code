@@ -98,63 +98,19 @@ $(function (){
     $("#menu").bind('run', function (){
         var self = $(this);
 
-        $(".menu-header .icon", self).bind("up-arrow", function (){
-            $(this).removeClass("ui-icon-triangle-1-s").addClass("ui-icon-triangle-1-n");
-        }).bind("down-arrow", function (){
-            $(this).removeClass("ui-icon-triangle-1-n").addClass("ui-icon-triangle-1-s");
-        }).addClass("ui-icon");
-
-        $(".menu-inner>li>.menu-item[title]", self).bind('set-tooltip', function (){
+        $("ul>li>.menu-item[title]", self).bind('set-tooltip', function (){
             $(this).tooltip({
-                position: "center right",
-                offset: [0, 2],
+                position: "bottom left",
+                offset: [2, 230],
                 effect: "slide",
                 opacity: 1.0,
-                direction: 'right',
+                direction: 'down',
                 bounce: false,
                 slideOffset: 2
             });
         }).trigger("set-tooltip");
 
-        $(".menu-outer", self).bind("collapse", function (e, instant){
-            var self = $(this)
-            self.removeClass("expand").addClass("collapse");
-            if (instant){
-                $(".menu-inner", self).hide();
-            }
-            else{
-                $(".menu-inner", self).slideUp(500);
-            }
-            $(".menu-header .icon", self).trigger("down-arrow");
-        }).bind("expand", function (e, instant){
-            var self = $(this);
-            self.removeClass("collapse").addClass("expand");
-            if (instant){
-                $(".menu-inner", self).show();
-            }
-            else {
-                $(".menu-inner", self).slideDown(500);
-            }
-            $(".menu-header .icon", self).trigger("up-arrow");
-        }).each(function (){
-            var self = $(this);
-            if (self.hasClass("collapse")){
-                $(".menu-header .clickable", self).toggle(
-                    function (){self.trigger("expand");},
-                    function (){self.trigger("collapse");}
-                );
-
-                self.trigger("collapse", [true]);
-            }
-            else if (self.hasClass("expand")) {
-                $(".menu-header .clickable", self).toggle(
-                    function (){self.trigger("collapse");},
-                    function (){self.trigger("expand");}
-                );
-
-                self.trigger("expand", [true]);
-            }
-        });
+        
     }).trigger("run");
 });
 

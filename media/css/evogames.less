@@ -174,34 +174,6 @@ strong,
 .ui-icon-triangle-1-n { background-position: 0 -16px; }
 .ui-icon-triangle-1-s { background-position: -64px -16px; }
 
-.menu-outer{	
-    .menu-header{
-        font-weight: bold;
-        
-        .clickable{
-            cursor: pointer;
-        }
-        
-        .icon{
-            display: block;
-            float: left;
-            margin-top: 4px;
-        }
-    }
-    
-    ul.menu-inner>li{
-        width: auto;
-
-        .menu-bullet{
-            margin-right: 5px;
-        }
-        .menu-item{
-            padding-right: 10px;
-        }
-    }
-    
-}
-
 #container {
     margin: 0 auto;
     text-align: left;
@@ -216,33 +188,94 @@ strong,
         color: @link_color * 1.5;
         text-decoration: underline;
     }
-}
 
-#header {
-    a, a:link, a:active, a:hover {
-        color: #000;
-        text-decoration: none;
+    #superheader {
+        font-family: sans-serif;
+        font-size: 108%;
+        line-height: 1.6em;
+
+        padding: 1em 0;
+
+        -moz-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+        -webkit-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+
+        background-color: @lightbase;
+
+        border: 1px solid #ccc;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        -moz-border-top-left-radius: 0;
+        -moz-border-top-right-radius: 0;
+        -webkit-border-top-left-radius: 0;
+        -webkit-border-top-right-radius: 0;
+
+        border-top: none;
     }
-    
-    h1 {
-        font-family: 'FontinSansSmallCaps', sans-serif;
-        text-shadow: #000 1px 1px 5px;
-        font-size: 74px;
-        line-height: 1em;
-        color: #aaa;
-        padding: 0;
-        margin: 15px 0 5px;
+
+    #player-info
+    {
+        overflow: auto;
+
+        img.avatar
+        {
+            float: left;
+            margin-right: 10px;
+            max-width: 64px;
+            max-height: 64px;
+        }
     }
-    
-    .tagline {
-        font-family: 'RalewayThin', sans-serif;
-        color: #ccc;
-        text-shadow: #000 1px 1px 3px;
-        margin: 5px 0 20px;
-        font-weight: bold;
-        font-size: 197%;
-        line-height: 1em;
-        padding: 0;
+
+    #menu {
+        font-size: 108%;
+        overflow: auto;
+        ul {
+            padding-left: 0;
+            li {
+                display: block;
+                float: left;
+
+                .menu-bullet {
+                    padding-right: 5px;
+                }
+
+                .menu-item{
+                    padding-right: 2em;
+                }
+            }
+        }
+    }
+
+    #header {
+        a, a:link, a:active, a:hover {
+            color: #000;
+            text-decoration: none;
+        }
+
+        h1 {
+            font-family: 'FontinSansSmallCaps', sans-serif;
+            text-shadow: #aaa 1px 1px 5px;
+            /*font-size: 74px;*/
+            font-size: 60px;
+            line-height: 1em;
+            color: @link_color; /*aaa;*/
+            padding: 0;
+            margin: 0 0 5px;
+        }
+
+        .tagline {
+            font-family: 'RalewayThin', sans-serif;
+            color: #444;
+            text-shadow: #ddd 1px 1px 3px;
+            margin: 5px 0;
+            font-weight: bold;
+            font-size: 100%;
+            line-height: 1em;
+            padding: 0 2em;
+        }
     }
 }
 
@@ -250,6 +283,7 @@ strong,
     overflow: auto;
     padding: 10px 0;
     margin-bottom: 20px;
+    margin-top: 20px;
     
     -moz-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
@@ -886,45 +920,6 @@ strong,
     
     p {
         padding: 5px;
-    }
-}
-
-#sidebar {
-    
-    font-family: sans-serif;
-    font-size: 108%;
-    line-height: 1.6em;
-    
-    h3 {
-        font-family: 'FontinSansSmallCaps', sans-serif;
-        font-size: 138.5%;
-        font-weight: bold;
-        line-height: 1em;
-        border-bottom: 1px solid #aaa;
-        margin-bottom: 0;
-    }
-    
-    ul {
-        padding: 0 0 0 20px;
-        margin: 0;
-    }
-    
-    #player-info
-    {
-        overflow: auto;
-        
-        img.avatar
-        {
-            float: left;
-            margin-right: 10px;
-            max-width: 64px;
-            max-height: 64px;
-        }
-    }
-    
-    .sidebar-div
-    {
-        margin-top: 20px;
     }
 }
 

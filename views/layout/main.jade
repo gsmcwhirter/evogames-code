@@ -25,10 +25,18 @@ html
   body
     #container
       != partial('noscript')
-      #header
-        a(href="/")
-          h1= system.name
-          .tagline Event, tournament, and ladder statistics done right.
+      #superheader
+        #player-info
+          != partial('statusbox', {object: player, as: 'player'})
+        #header-menu
+          #header
+            a(href="/")
+              h1= system.name
+              .tagline Event, tournament, and ladder statistics done right.
+          #menu
+            != partial('menus/main')
+        
+      
           
       #container2
         #main
@@ -40,20 +48,6 @@ html
             != partial('breadcrumbs', {collection: crumbs, as: 'crumb'})
 
           != body
-        
-        #sidebar
-          #player-info.sidebar-div
-            != partial('statusbox', {object: player, as: 'player'})
-          
-          #menu.sidebar-div
-            h3 Navigation
-            - each menu in menu_list
-              != partial('menus/'+menu)
-            != partial('menus/main')
-          
-          #about.sidebar-div
-            h3 About #{system.name}
-            != partial('description')
             
         != partial('footer')
       #subfooter &nbsp;
