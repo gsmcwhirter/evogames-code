@@ -10,7 +10,7 @@ form(method="post", accept-charset="utf-8")
         ul.field-error
           - each msg in messages["name"]
             li!= "Event name " + msg
-      input#event_name.title(type="text", name="event_name", value=data.name)
+      input#event_name.title(type="text", name="event_name", value=data.event_name)
       span.field-status
         span &nbsp;
     .form-line
@@ -58,7 +58,7 @@ form(method="post", accept-charset="utf-8")
         option(value="custom", selected=data.gametype_name == "custom") Custom...
       span.field-status
         span &nbsp;
-    .form-line#gtform(style= data.gtname == "other" ? "" : "display: none;")
+    .form-line#gtform(style= data.gametype_name == "other" ? "" : "display: none;")
       input.marshal(type="hidden", name="marshal", value=JSON.stringify(data.marshal))
       label Stats
       ul.stats

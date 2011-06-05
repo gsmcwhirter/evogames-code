@@ -67,12 +67,12 @@
         ul.grid3.notopline#registrations(style="display: none;")
           - each registration in (group.registrations || [])
             - if (registration.approved)
-              - if (registration.type == "player")
+              - if (registration.type == "player" && event.event_type == "player_register")
                 li
                   a(href="/player/"+encodeURI(registration.name_or_alias)+"@"+encodeURI(registration.code_or_handle))
                     span.alias= registration.name_or_alias
                     span.handle= "@"+registration.code_or_handle
-              - else
+              - if (registration.type == "group" && event.event_type == "group_register")
                 li
                   a(href="/group/"+encodeURI(registration.code_or_handle))= registration.name_or_alias
 

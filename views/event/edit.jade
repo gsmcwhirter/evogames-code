@@ -25,6 +25,31 @@ form(method="post", accept-charset="utf-8")
       span.field-status
         span &nbsp;
     .form-line
+      label(for="event_type") Event Type
+      br
+      - if (messages["event_type"] && messages["event_type"].length)
+        ul.field-error
+          - each msg in messages["event_type"]
+            li!= "Event type " + msg
+      select#event_type.text(size="1", name="event_type")
+        option(value="group_register", selected=data.event_type == "group_register") Group Registration
+        option(value="player_register", selected=data.event_type == "player_register") Player Registration
+      span.field-status
+        span &nbsp;
+    .form-line
+      label(for="register_type") Registration Type
+      br
+      - if (messages["register_type"] && messages["register_type"].length)
+        ul.field-error
+          - each msg in messages["register_type"]
+            li!= "Registration type " + msg
+      select#register_type.text(size="1", name="register_type")
+        option(value="open", selected=data.register_type == "open") Open
+        option(value="request", selected=data.register_type == "request") Request
+        option(value="invite", selected=data.register_type == "invite") Invite Only
+      span.field-status
+        span &nbsp;
+    .form-line
       label(for="minTeams") Minimum Number of Teams
       br
       - if (messages["minTeams"] && messages["minTeams"].length)
@@ -47,7 +72,7 @@ form(method="post", accept-charset="utf-8")
         option(value="custom", selected=data.gametype_name == "custom") Custom...
       span.field-status
         span &nbsp;
-    .form-line#gtform(style= data.gtname == "other" ? "" : "display: none;")
+    .form-line#gtform(style= data.gametype_name == "other" ? "" : "display: none;")
       input.marshal(type="hidden", name="marshal", value=JSON.stringify(data.marshal))
       label Stats
       ul.stats
@@ -90,8 +115,8 @@ form(method="post", accept-charset="utf-8")
           ul.field-error
             - each msg in messages["startdate"]
               li!= "Start date " + msg
-        input#startdate_date.text.narrow(type="date", name="startdate_date", value=data.startdate ? date(data.startdate, "Y-m-d") : "")
-        input#startdate_time.text.narrow(type="time", name="startdate_time", value=data.startdate ? time(data.startdate, "H:i:s") : "")
+        input#startdate_date.text.narrow(type="date", name="startdate_date", value=data.startdate_date)
+        input#startdate_time.text.narrow(type="time", name="startdate_time", value=data.startdate_time)
         span.field-status
           span &nbsp;
     - if (!event.enddate || event.enddate > (new Date()).toISOString())
@@ -104,8 +129,8 @@ form(method="post", accept-charset="utf-8")
           ul.field-error
             - each msg in messages["enddate"]
               li!= "End date " + msg
-        input#enddate_date.text.narrow(type="date", name="enddate_date", value=data.enddate ? date(data.enddate, "Y-m-d") : "")
-        input#enddate_time.text.narrow(type="time", name="enddate_time", value=data.enddate ? time(data.enddate, "H:i:s") : "")
+        input#enddate_date.text.narrow(type="date", name="enddate_date", value=data.enddate_date)
+        input#enddate_time.text.narrow(type="time", name="enddate_time", value=data.enddate_time)
         span.field-status
           span &nbsp;
     .form-line
@@ -149,6 +174,8 @@ script(type="text/javascript")
 
 script(type="text/javascript",src="/js/validators/eventslug.js")
 script(type="text/javascript",src="/js/validators/eventname.js")
+script(type="text/javascript",src="/js/validators/eventtype.js")
+script(type="text/javascript",src="/js/validators/eventregistertype.js")
 script(type="text/javascript",src="/js/validators/eventgametype.js")
 script(type="text/javascript",src="/js/validators/eventminteams.js")
 script(type="text/javascript",src="/js/validators/eventdates.js")
