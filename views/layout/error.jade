@@ -25,10 +25,14 @@ html
   body
     #container
       != partial('noscript')
-      #header
-        a(href="/")
-          h1= system.name
-          .tagline Event, tournament, and ladder statistics done right.
+      #superheader
+        #header-menu
+          #header
+            a(href="/")
+              h1= system.name
+              .tagline Event, tournament, and ladder statistics done right.
+          #menu
+            != partial('menus/main')
           
       #container2
         #main
