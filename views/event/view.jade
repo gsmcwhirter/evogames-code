@@ -37,13 +37,13 @@
     li
       span.label Start Date:
       - if (event.startdate)
-        = datetime(event.startdate)
+        = " "+datetime(event.startdate)
       - else
         |  (not yet determined)
     li
       span.label End Date:
       - if (event.enddate)
-        = datetime(event.enddate)
+        = " "+datetime(event.enddate)
       - else
         |  (not yet determined)
     li
