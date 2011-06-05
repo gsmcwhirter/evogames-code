@@ -1,0 +1,35 @@
+h1= event.name+" Registration Controls"
+
+#registration-controls
+  ul.group-members-list
+    - each regis in registrations
+      - if (event.event_type == "player_register")
+        li(title=(regis.name_or_alias+"@"+regis.code_or_handle).toLowerCase())
+          span.alias= regis.name_or_alias
+          span.handle= "@"+regis.code_or_handle
+          a.action.remove(href="#!/remove/player/"+regis.name_or_alias+"/"+regis.code_or_handle) remove
+      - else
+        li(title=regis.code_or_handle.toLowerCase())
+          = request.name_or_alias + " ("+request.code_or_handle+")"
+          a.action.remove(href="#!/remove/group/"+regis.code_or_handle) remove
+    li
+
+  div.modal#remove-modal
+    h2 Cancel Registration
+    form#remove-form(method="post", accept-charset="utf-8", action="#!/")
+      fieldset
+        .form-line
+          | Are you sure you want to cancel the registration of
+          span.alias
+          span.handle
+          span.code
+          | ?
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Yes, Cancel
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;No, Don't Cancel
+
+script(type="text/javascript", src="/js/event_registrations.js")

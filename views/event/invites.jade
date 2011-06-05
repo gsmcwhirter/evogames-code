@@ -1,0 +1,51 @@
+h1= event.name+" Invitations"
+
+#invite-controls
+  ul.group-members-list
+    - each invite in invites
+      li(title=invite.id)
+        - if (event.event_type == "player_register")
+          span.handle.only.id-name= "@"+invite.name_or_handle
+        - else
+          span.id-name= invite.name_or_handle
+        a.action.withdraw(href="#!/withdraw/"+invite.id) withdraw
+    li
+      a(href="#!/add") Invite a new participant...
+
+  div.modal#withdraw-modal
+    h2 Withdraw Invitation
+    form#withdraw-form(method="post", accept-charset="utf-8", action="#!/")
+      fieldset
+        .form-line
+          | Are you sure you want to withdraw the event invitation to
+          span.handle.only
+          span.name
+          | ?
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Withdraw Invitation
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+  div.modal#add-modal
+    h2 Add Invitation
+    form#add-form(method="post", accept-charset="utf-8", action="#!/add")
+      fieldset
+        .form-line
+          label(for="code_or_handle")
+            - if (event.event_type == "player_register")
+              | Player Handle
+            - else
+              | Group Code
+          input#code_or_handle.text(type="text", name="code_or_handle")
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Invite Participant
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+script(type="text/javascript", src="/js/event_invites.js")

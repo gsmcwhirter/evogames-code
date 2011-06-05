@@ -1,0 +1,43 @@
+h1= event.name+" Event Admins"
+
+#admin-controls
+  ul.group-members-list
+    - each admin in admins
+      li(title=admin)
+        span.handle.only= "@"+admin
+        a.action.withdraw(href="#!/withdraw/"+admin) remove
+    li
+      a(href="#!/add") Add a new event admin...
+
+  div.modal#withdraw-modal
+    h2 Remove Event Admin
+    form#withdraw-form(method="post", accept-charset="utf-8", action="#!/")
+      fieldset
+        .form-line
+          | Are you sure you want to remove
+          span.handle.only
+          |  as an event admin?
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Remove
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+  div.modal#add-modal
+    h2 Add Event Admin
+    form#add-form(method="post", accept-charset="utf-8", action="#!/add")
+      fieldset
+        .form-line
+          label(for="handle") Player Handle
+          input#handle.text(type="text", name="handle")
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Add Event Admin
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+script(type="text/javascript", src="/js/event_admins.js")

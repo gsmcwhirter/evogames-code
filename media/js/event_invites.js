@@ -38,26 +38,35 @@ $(function (){
             this.redirect("#!/");
         });
 
-        this.get("#!/withdraw/:handle", function (){
+        this.get("#!/withdraw/:id", function (){
             //show confirmation form
-            var handle = this.params.handle;
-            $("#withdraw-modal .handle").text(handle);
-            $("#withdraw-modal form").attr('action', '#!/withdraw/'+handle);
+            var id = this.params.id;
+            var idnamediv = $("li[title="+id+"] .id-name");
+            if (idnamediv.hasClass("handle")){
+                $("#withdraw-modal .handle").text(idnamediv.text());
+                $("#withdraw-modal .name").empty();
+            }
+            else {
+                $("#withdraw-modal .handle").empty();
+                $("#withdraw-modal .name").text(idnamediv.text());
+            }
+            
+            $("#withdraw-modal form").attr('action', '#!/withdraw/'+id);
             $("#withdraw-modal").trigger("open-overlay");
         });
 
-        this.post("#!/withdraw/:handle", function (){
-            var handle = this.params.handle;
+        this.post("#!/withdraw/:id", function (){
+            var id = this.params.id;
             var self = this;
 
             $.ajax({
                 type: 'delete',
-                url: "invites/@"+handle,
+                url: "invites/"+id,
                 dataType: 'json',
                 success: function (data){
                     if (data.ok)
                     {
-                        $(".group-members-list li[title="+handle+"]").remove();
+                        $(".group-members-list li[title="+id+"]").remove();
                         $("#flash").trigger("info", [data.info]);
                     }
                     else
@@ -72,28 +81,39 @@ $(function (){
                     self.redirect("#!/cancel");
                 }
             });
-            
+
         });
 
         this.get("#!/add", function (){
-            $("#add-modal input[name=handle]").val("");
+            $("#add-modal input[name=code_or_handle]").val("");
             $("#add-modal").trigger("open-overlay");
         });
 
         this.post("#!/add", function (){
-            var handle = $.trim($("#add-modal input[name=handle]").val());
+            var code_or_handle = $.trim($("#add-modal input[name=code_or_handle]").val());
             var self = this;
 
-            if (handle){
+            if (code_or_handle){
                 $.ajax({
                     type: 'put',
                     url: "invites/add",
-                    data: {handle: handle},
+                    data: {code_or_handle: code_or_handle},
                     dataType: 'json',
                     success: function (data){
+                        console.log("once");
                         if (data.ok)
                         {
-                            $("ul.group-members-list").prepend("<li title='"+handle+"'><span class='handle only'>@"+handle+"</span><a class='action withdraw' href='#!/withdraw/"+handle+"'>withdraw</a></li>");
+                            var newli = $("<li title='"+data.id+"' />");
+                            if (data.type == "player"){
+                                newli.append("<span class='handle only id-name'>@"+data.name_or_handle+"</span>");
+                            }
+                            else {
+                                newli.append("<span class='id-name'>"+data.name_or_handle+"</span>");
+                            }
+
+                            newli.append("<a class='action withdraw' href='#!/withdraw/"+data.id+"'>withdraw</a>")
+
+                            $("ul.group-members-list").prepend(newli);
                             $("#flash").trigger("info", [data.info]);
                         }
                         else
@@ -110,7 +130,7 @@ $(function (){
                 });
               }
             else {
-                $("#flash").trigger('error', ['You must provide a handle.']);
+                $("#flash").trigger('error', ['You must provide a participant identifier.']);
                 this.redirect("#!/cancel");
             }
         });

@@ -1,0 +1,43 @@
+h1= event.name+" Registration Requests"
+
+#request-controls
+  ul.group-members-list
+    - each request in requests
+      - if (event.event_type == "player_register")
+        li(title=(request.name_or_alias+"@"+request.code_or_handle).toLowerCase())
+          span.alias= request.alias
+          span.handle= "@"+request.handle
+          a.action.deny(href="#!/deny/player/"+request.name_or_alias+"/"+request.code_or_handle) deny
+          a.action.approve(href="#!/approve/player/"+request.name_or_alias+"/"+request.code_or_handle) approve
+      - else
+        li(title=request.code_or_handle.toLowerCase())
+          = request.name_or_alias + " ("+request.code_or_handle+")"
+          a.action.deny(href="#!/deny/group/"+request.code_or_handle) deny
+          a.action.approve(href="#!/approve/group/"+request.code_or_handle) approve
+    li
+
+  div.modal#action-modal
+    h2
+      span.verb.header
+      |  Registration Request
+    form#action-form(method="post", accept-charset="utf-8", action="#!/")
+      fieldset
+        .form-line
+          | Are you sure you want to
+          span.verb
+          |  the registraion request from
+          span.alias
+          span.handle
+          span.code
+          | ?
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Yes,
+            span.verb
+            |  request
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;No, cancel
+
+script(type="text/javascript", src="/js/event_requests.js")

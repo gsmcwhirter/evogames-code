@@ -1,5 +1,5 @@
 $(function (){
-    var invites = $.sammy("#invite-controls", function (){
+    var admins = $.sammy("#admin-controls", function (){
 
         this.bind('run', function (){
             $("#withdraw-modal, #add-modal").overlay({
@@ -52,7 +52,7 @@ $(function (){
 
             $.ajax({
                 type: 'delete',
-                url: "invites/@"+handle,
+                url: "admins/@"+handle,
                 dataType: 'json',
                 success: function (data){
                     if (data.ok)
@@ -72,7 +72,7 @@ $(function (){
                     self.redirect("#!/cancel");
                 }
             });
-            
+
         });
 
         this.get("#!/add", function (){
@@ -87,13 +87,13 @@ $(function (){
             if (handle){
                 $.ajax({
                     type: 'put',
-                    url: "invites/add",
+                    url: "admins/add",
                     data: {handle: handle},
                     dataType: 'json',
                     success: function (data){
                         if (data.ok)
                         {
-                            $("ul.group-members-list").prepend("<li title='"+handle+"'><span class='handle only'>@"+handle+"</span><a class='action withdraw' href='#!/withdraw/"+handle+"'>withdraw</a></li>");
+                            $("ul.group-members-list").prepend("<li title='"+handle+"'><span class='handle only'>@"+handle+"</span><a class='action withdraw' href='#!/withdraw/"+handle+"'>remove</a></li>");
                             $("#flash").trigger("info", [data.info]);
                         }
                         else
@@ -116,5 +116,5 @@ $(function (){
         });
     });
 
-    invites.run();
+    admins.run();
 });

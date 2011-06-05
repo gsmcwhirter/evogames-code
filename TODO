@@ -1,3 +1,5 @@
 - Redis w/ connect-redis for session store instead of MemoryStore
 
 - Sysop admin for player permissions
+- Player event invitation responses
+- Group event invitation responses
