@@ -5,8 +5,8 @@ h1= event.name+" Registration Requests"
     - each request in requests
       - if (event.event_type == "player_register")
         li(title=(request.name_or_alias+"@"+request.code_or_handle).toLowerCase())
-          span.alias= request.alias
-          span.handle= "@"+request.handle
+          span.alias= request.name_or_alias
+          span.handle= "@"+request.code_or_handle
           a.action.deny(href="#!/deny/player/"+request.name_or_alias+"/"+request.code_or_handle) deny
           a.action.approve(href="#!/approve/player/"+request.name_or_alias+"/"+request.code_or_handle) approve
       - else

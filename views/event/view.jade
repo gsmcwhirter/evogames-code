@@ -32,6 +32,14 @@
       - if (event.event_type == "group_register")
         |  Group Registration
     li
+      span.label Registration Type:
+      - if (event.register_type == "open")
+        |  Open
+      - if (event.register_type == "request")
+        |  Request Approval
+      - if (event.register_type == "invite")
+        |  Invite Only
+    li
       span.label Gametype:
       = " "+event.gametype_name
     li
@@ -65,7 +73,7 @@
             span.verb view
             |  registration list
         ul.grid3.notopline#registrations(style="display: none;")
-          - each registration in (group.registrations || [])
+          - each registration in (event.registrations || [])
             - if (registration.approved)
               - if (registration.type == "player" && event.event_type == "player_register")
                 li

@@ -10,7 +10,7 @@ h1= event.name+" Registration Controls"
           a.action.remove(href="#!/remove/player/"+regis.name_or_alias+"/"+regis.code_or_handle) remove
       - else
         li(title=regis.code_or_handle.toLowerCase())
-          = request.name_or_alias + " ("+request.code_or_handle+")"
+          = regis.name_or_alias + " ("+regis.code_or_handle+")"
           a.action.remove(href="#!/remove/group/"+regis.code_or_handle) remove
     li
 

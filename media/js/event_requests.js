@@ -91,7 +91,7 @@ $(function (){
                 if (type == "player"){
                     identifier = alias+"@"+handle;
                 }
-                else if (type == "code") {
+                else if (type == "group") {
                     identifier = code;
                 }
                 _url += type+"-"+identifier.toLowerCase();

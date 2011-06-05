@@ -1,0 +1,19 @@
+h1 Manage Events
+
+h2 Current Events
+ul.owned-groups.admin
+  - each event in current_events
+    li
+      a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
+      span= " ("+event.game.code.toUpperCase()+")"
+      a.action(href="/game/"+event.game.code+"/event/"+event.event.slug+"/controls") manage
+  li
+
+h2 Future Events
+ul.owned-groups.admin
+  - each event in future_events
+    li
+      a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
+      span= " ("+event.game.code.toUpperCase()+")"
+      a.action(href="/game/"+event.game.code+"/event/"+event.event.slug+"/controls") manage
+  li

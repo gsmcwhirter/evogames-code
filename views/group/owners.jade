@@ -3,14 +3,14 @@ h1= group.name+" Owners"
 h2 Owner List
 ul.group-owners
   - each owner in owners
-    - if (owner._id == player._id)
+    - if (owner.toLowerCase() == player.handle.toLowerCase())
       li(title="me")
-        a(href="/player/@"+owner.handle)
-          span.handle.only= "@"+owner.handle
+        a(href="/player/@"+owner)
+          span.handle.only= "@"+owner
     - else
       li
-        a(href="/player/@"+owner.handle)
-          span.handle.only= "@"+owner.handle
+        a(href="/player/@"+owner)
+          span.handle.only= "@"+owner
 
 h2 Actions
 ul.grid#group-owners

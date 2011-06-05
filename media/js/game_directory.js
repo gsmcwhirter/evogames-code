@@ -63,11 +63,11 @@ $(function (){
             }).each(function (){
                 var self = $(this);
                 $(".clickable", self).toggle(
-                    function (){self.trigger("expand");},
-                    function (){self.trigger("collapse");}
+                    function (){self.trigger("collapse");},
+                    function (){self.trigger("expand");}
                 );
 
-                self.trigger("collapse", [true]);
+                self.trigger("expand", [true]);
             });
 
             $("#search").bind("keyup", do_search);

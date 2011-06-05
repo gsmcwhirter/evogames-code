@@ -84,7 +84,7 @@ $(function (){
                 if (type == "player"){
                     identifier = alias+"@"+handle;
                 }
-                else if (type == "code") {
+                else if (type == "group") {
                     identifier = code;
                 }
                 _url += type+"-"+identifier.toLowerCase();
@@ -96,7 +96,7 @@ $(function (){
                     success: function (data){
                         if (data.ok)
                         {
-                            $(".group-members-list li[title="+identifier+"]").remove();
+                            $(".group-members-list li[title="+identifier.toLowerCase()+"]").remove();
                             $("#flash").trigger("info", [data.info]);
                         }
                         else

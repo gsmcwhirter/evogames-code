@@ -1,0 +1,30 @@
+h1 Manage Event Invitations
+
+div#invitations
+  h2 Event Invitations
+  ul.invited-groups.admin
+    -each invite in invitations
+      li(title=invite.event.slug)
+        a(href="/game/"+invite.game.code+"/event/"+invite.event.slug)= invite.event.name
+        span= " ("+invite.game.code.toUpperCase()+")"
+        a.action(href="#!/decline/"+invite.game.code+"/"+invite.event.slug+"/"+group._id, rel=invite.event.name) decline
+        a.action(href="/game/"+invite.game.code+"/event/"+invite.event.slug+"/register") register
+    li.last
+
+  div.modal#decline-modal
+    h2 Decline Event Invitation
+    form#decline-form(method="post", accept-charset="utf-8", action="#!/")
+      fieldset
+        .form-line
+          | Are you sure you want to decline the invitation to register for
+          span.name
+          | ?
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Decline Invitation
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
+
+script(type="text/javascript", src="/js/group_einvites.js")

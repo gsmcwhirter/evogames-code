@@ -1,0 +1,29 @@
+h1= "Register for "+event.name
+h3= game.name
+
+form(method="post", accept-charset="utf-8")
+  fieldset
+    input(type="hidden", name="csrf", value=csrf)
+    .form-line
+      label(for="registrant") Register As
+      br
+      select#registrant.text(size="1", name="registrant")
+        - each opt in register_options
+          option(value=opt.value)= opt.text
+    .form-line
+      button.button.positive(type="submit")
+        img(src="/css/icons/tick.png", alt="")
+        | Register
+      span.link-sep
+      button.button.negative.cancel(type="button")
+        img(src="/css/icons/cross.png", alt="")
+        | Cancel
+
+script(type="text/javascript")
+    $(function(){
+        $("button.cancel").bind('click', function (){
+            window.location = "/game/#{game.code}/event/#{event.slug}";
+
+            return false;
+        });
+    });
