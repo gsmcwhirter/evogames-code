@@ -30,7 +30,10 @@ h1 Welcome!
 .right-col
   h2 Current Events
   ul.current-events.fp-block
-    li
+    - each event in current_events
+      li
+        a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
+        span.date.short= event.game.code.toUpperCase()
 
   h2 Current Tournaments
   ul.current-tournaments.fp-block
