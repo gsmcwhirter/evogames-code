@@ -26,6 +26,7 @@ html
     #container
       != partial('noscript')
       #superheader
+        #player-info
         #header-menu
           #header
             a(href="/")
@@ -40,24 +41,13 @@ html
             != partial('flash_info', {collection: flash('info') || [], as: 'msg'})
             != partial('flash_error', {collection: flash('error') || [], as: 'msg'})
           != body
-        
-        #sidebar
-          .sidebar-div
-            h3 Oops!
-            p
-              | We're sorry, but you have encountered an error. Details of
-              |  exactly what type are available on the left. If you believe
-              |  that you have reached this in error, please send an e-mail
-              |  to 
-              a(href="mailto:"+system.error_email)= system.error_email  
 
-          #menu.sidebar-div
-            h3 Navigation
-            != partial('menus/main')
-
-          #about.sidebar-div
-            h3 About #{system.name}
-            != partial('description')
+          h3 Oops!
+          p
+            | We're sorry, but you have encountered an error. If you believe
+            |  that you have reached this in error, please send an e-mail
+            |  to
+            a(href="mailto:"+system.error_email)= system.error_email
             
         != partial('footer')
       #subfooter &nbsp;
