@@ -89,7 +89,7 @@ $(function (){
         }
         else if (email_confirm == '')
         {
-            fstat.trigger("maybe", ["Must not be empty."]);
+            fstat.trigger("bad", ["Must not be empty."]);
         }
         else
         {

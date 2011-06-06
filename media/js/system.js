@@ -1,8 +1,9 @@
-var validators = {
+validators = {
     _ready: false,
     _validators: [],
     run: function (){
         if (arguments.length > 0){
+            console.log(arguments);
             var argarray = [];
             for (var k in arguments){
                 if (arguments[k] instanceof Array){
