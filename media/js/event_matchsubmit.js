@@ -5,6 +5,7 @@ $(function (){
 
         var _autochange_data;
         var _gametype;
+        var _min_teams = 1;
 
         this.bind("run", function (){
             $("ul.teams").bind("add-team", function (){
@@ -13,6 +14,21 @@ $(function (){
                 newTeam.trigger("add-player");
                 newTeam.appendTo(self);
                 newTeam.trigger("update-team-rank", [$("li.team", self).length]);
+
+                self.trigger("update-team-nums");
+            }).bind("check-minimum", function (){
+                var self = $(this);
+                var cteams = $("li.team", self).length;
+                if (cteams < _min_teams){
+                    for (var i = 0, ct = _min_teams - cteams; i < ct; i++){
+                        self.trigger("add-team");
+                    }
+                }
+                else {
+                    self.trigger("update-team-nums");
+                }
+            }).bind("update-team-nums", function (){
+                var self = $(this);
 
                 $("li.team", self).each(function (i,o){
                     $(o).trigger("update-team-num", [i + 1]);
@@ -27,6 +43,9 @@ $(function (){
                 $(".team-number", $(this)).text(newnum);
             }).bind("update-team-rank", function (e, newnum){
                 $("input[name=rank]", $(this)).val(newnum);
+            }).bind("remove", function (){
+                $(this).remove();
+                $("ul.teams").trigger("check-minimum");
             });
 
             $("tr.player").bind("calc-stats", function (){
@@ -83,12 +102,12 @@ $(function (){
             });
 
             $("a.add-player").bind("click", function (){
-                $(this).parents("li.team").first().trigger("add-player");
+                $(this).parents("li.team:first").trigger("add-player");
                 return false;
             });
 
             $("a.remove-team").bind("click", function (){
-                alert("Not implemented.");
+                $(this).parents("li.team:first").trigger("remove");
             });
 
             $("a.remove-player").bind("click", function (){
@@ -150,19 +169,13 @@ $(function (){
 
             var mteams;
             if (typeof MIN_TEAMS != "undefined"){
-                mteams = MIN_TEAMS;
+                _min_teams = MIN_TEAMS;
             }
             else {
                 this.log("MIN_TEAMS undefined");
-                mteams = 1;
             }
 
-            var cteams = $("ul.teams li.team").length;
-            if (cteams < mteams){
-                for (var i = 0, ct = mteams - cteams; i < ct; i++){
-                    $("ul.teams").trigger("add-team");
-                }
-            }
+            $("ul.teams").trigger("check-minimum");
 
             $("ul.teams li.team").each(function (i, o){
                 o = $(o);
