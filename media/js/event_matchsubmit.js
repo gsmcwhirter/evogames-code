@@ -190,6 +190,7 @@ $(function (){
             var acdt = $.trim($(".autochange_data").text());
             if (acdt){
                 _autochange_data = this.json(acdt);
+                console.log(_autochange_data);
             }
             else {
                 this.log("AUTOCHANGE_DATA undefined");
