@@ -3,15 +3,17 @@ h1= game.name+" Event History"
 div
   input#search.search(type="search", placeholder="Search")
   - if (player)
-    a(href="/game/"+game.code+"/event/create") Create an Event
+    ul.grid3(style="margin-bottom: 1em;")
+      li
+        a(href="/game/"+game.code+"/event/create") Create an Event
 
 ul#directory-nav
   li
-    a(href="/game/"+game.code+"/event#!/current-events") Current Events
+    a.small(href="/game/"+game.code+"/event#!/current-events") Current Events
   li
-    a(href="/game/"+game.code+"/event#!/future-events", rel="future-events") Future Events
+    a.small(href="/game/"+game.code+"/event#!/future-events", rel="future-events") Future Events
   li.selected
-    a(href="/game/"+game.code+"/event/history") Past Events
+    a.small(href="/game/"+game.code+"/event/history") Past Events
 
 #past-events
   h2 Past Events

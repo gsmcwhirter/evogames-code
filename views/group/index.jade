@@ -3,7 +3,9 @@ h1 Groups Directory
 div
   input#search.search(type="search", placeholder="Search")
   - if (player)
-    a(href="/group/create") Create a Group
+    ul.grid3(style="margin-bottom: 1em;")
+      li
+        a(href="/group/create") Create a Group
 
 ul#directory-nav
   - each letter in letters

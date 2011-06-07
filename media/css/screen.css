@@ -295,7 +295,7 @@ ol ol ol, ol ol ol > li, ol.roman, ol.roman > li {list-style-type:lower-roman;}
 ol ol ol ol, ol ol ol ol > li, ol.alpha, ol.alpha > li {list-style-type:lower-alpha;}
 strong, .bold {font-weight:bold;}
 .center {text-align:center;}
-.small {font-size:85%;}
+.small {font-size:85%;margin-bottom:0;}
 .tooltip {background-color:#000;border:1px solid #fff;padding:10px 15px;width:200px;display:none;color:#fff;text-align:left;font-size:12px;z-index:700;-moz-box-shadow:0 0 10px #000;-webkit-box-shadow:0 0 10px #000;}
 .modal {background-color:#fff;display:none;width:350px;padding:15px;text-align:left;border:2px solid #333;opacity:1.0;-moz-border-radius:6px;-webkit-border-radius:6px;-moz-box-shadow:0 0 50px #ccc;-webkit-box-shadow:0 0 50px #ccc;}
 .modal.big {width:590px;}
@@ -341,7 +341,7 @@ strong, .bold {font-weight:bold;}
 #main #by-genre li .clickable, #main #by-name li .clickable {cursor:pointer;}
 #main #by-genre li .icon, #main #by-name li .icon {display:block;float:left;}
 #main #by-genre li.name-link, #main #by-name li.name-link {padding:0.5em 0;}
-#main #by-genre li.genre-link, #main #by-name li.genre-link {margin-bottom:1em;}
+#main #by-genre li.genre-link, #main #by-name li.genre-link {margin-bottom:1em;border-top:1px solid #222;}
 #main ul.member-groups .action, #main ul.owned-groups .action, #main ul.invited-groups .action, #main ul.group-members-list .action, #main ul.group-directory .action {float:right;margin-left:1em;font-size:85%;}
 #main ul.member-groups.admin li, #main ul.owned-groups.admin li, #main ul.invited-groups.admin li, #main ul.group-members-list li, #main ul.group-directory li {border-top:1px dotted #666;padding:0.5em 0;}
 #main ul.group-directory {display:none;padding:0;}
@@ -350,8 +350,8 @@ strong, .bold {font-weight:bold;}
 #main ul.search-results li {padding:0.5em 0;border-top:1px dotted #666;}
 #main ul.search-results li .source {float:right;font-size:85%;}
 #main ul#directory-nav {display:block;overflow:auto;border-bottom:1px solid #666;padding:0;}
-#main ul#directory-nav li {display:block;float:left;margin:0 5px;}
-#main ul#directory-nav li.selected {background-color:#ccc;border:1px solid #888;}
+#main ul#directory-nav li {display:block;float:left;margin:0 5px;border-top:2px solid transparent;}
+#main ul#directory-nav li.selected {border-top:2px solid #888;}
 #main .gametype .display, #main #gtform .display {display:block;background-color:#ffffff;border:1px solid #888888;padding:1.4em;margin-bottom:1.5em;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
 #main .gametype .display .action, #main #gtform .display .action {float:right;margin-left:1em;}
 #main .gametype .marshal, #main #gtform .marshal {display:none;}
@@ -419,6 +419,9 @@ strong, .bold {font-weight:bold;}
 .position {font-weight:bold;font-variant:small-caps;}
 .position.sysop {color:#f00;}
 .position.staff {color:#0f0;}
+.fright {float:right;}
+.cboth {clear:both;}
+.template {display:none;}
 @font-face {font-family:'FontinSansSmallCaps';src:url('../fonts/fontin_sans_sc_45b-webfont.eot');src:local('☺'), url('../fonts/fontin_sans_sc_45b-webfont.woff') format('woff'), url('../fonts/fontin_sans_sc_45b-webfont.ttf') format('truetype'), url('../fonts/fontin_sans_sc_45b-webfont.svg#webfontFZcdVJKv') format('svg');font-weight:normal;font-style:normal;}
 @font-face {font-family:'RalewayThin';src:url('../fonts/raleway_thin-webfont.eot');src:local('☺'), url('../fonts/raleway_thin-webfont.woff') format('woff'), url('../fonts/raleway_thin-webfont.ttf') format('truetype'), url('../fonts/raleway_thin-webfont.svg#webfontsVpRIgRb') format('svg');font-weight:normal;font-style:normal;}
 

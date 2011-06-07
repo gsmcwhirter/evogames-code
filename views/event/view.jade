@@ -7,7 +7,7 @@
       a(href="/game/"+game.code+"/event/"+event.slug+"/stats") Event Statistics
     li
       a(href="/game/"+game.code+"/event/"+event.slug+"/matches") Event Matches
-    - if (is_participant)
+    - if (is_participant && event.startdate && event.startdate <= (new Date()).toISOString())
       li
         a(href="/game/"+game.code+"/event/"+event.slug+"/matches/submit") Submit a Match
     - if (is_registerable)
@@ -41,7 +41,7 @@
         |  Invite Only
     li
       span.label Gametype:
-      = " "+event.gametype_name
+      = " "+event.gametype.name
     li
       span.label Start Date:
       - if (event.startdate)

@@ -134,6 +134,7 @@ strong,
 
 .small {
     font-size: 85%;
+    margin-bottom: 0;
 }
 
 .tooltip {
@@ -458,6 +459,7 @@ strong,
 
         li.genre-link {
             margin-bottom: 1em;
+            border-top: 1px solid #222;
         }
     }
 
@@ -527,11 +529,13 @@ strong,
             display: block;
             float: left;
             margin: 0 5px;
+            border-top: 2px solid transparent;
         }
 
         li.selected {
-            background-color: #ccc;
-            border: 1px solid #888;
+            /*background-color: #ccc;
+            border: 1px solid #888;*/
+            border-top: 2px solid #888;
         }
     }
 
@@ -959,6 +963,18 @@ strong,
 .position.staff
 {
     color: #0f0;
+}
+
+.fright {
+    float: right;
+}
+
+.cboth {
+    clear: both;
+}
+
+.template {
+    display: none;
 }
 
 @font-face {

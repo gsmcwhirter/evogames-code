@@ -1,15 +1,17 @@
 h1 Game Directory
 
-div
+div.cboth
   input#search.search(type="search", placeholder="Search")
   - if (player.is_sysop || (player.permissions || []).indexOf("game admin") > -1)
-    a.small(href="/game/create") Add a Game
+    ul.grid3(style="margin-bottom: 1em;")
+      li
+        a(href="/game/create") Add a Game
 
 ul#directory-nav
   li#nav-by-genre
-    a(href="#!/by-genre", rel="by-genre") Games by Genre
+    a.small(href="#!/by-genre", rel="by-genre") Games by Genre
   li#nav-by-name
-    a(href="#!/by-name", rel="by-name") Games by Name
+    a.small(href="#!/by-name", rel="by-name") Games by Name
 
 ul#by-genre
   - each genre in games_bygenre
@@ -19,12 +21,13 @@ ul#by-genre
         = genre.genre+" Games"
       ul.game-list
         - each game in genre.games
-          li
+          li.name-link
             a(href="/game/"+game.code)= game.name
-
+        li
 ul#by-name
   - each game in games_byname
     li.name-link
       a(href="/game/"+game.code)= game.name
+  li
 
 script(type="text/javascript", src="/js/game_directory.js")
