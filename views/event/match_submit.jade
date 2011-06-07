@@ -2,65 +2,96 @@ h1 #{event.name} Match Submission
 h3= game.name
 
 #match-submission
-  .marshal
-    - if (data.marshal)
-      = JSON.stringify(data.marshal)
-  a.add-team(href="#!/") Add a Team
-  ul.teams
-    - for (var i = 1, ct = event.minTeams; i <= ct; i++)
-      li.team
-        h4.name Team #{i}
-        span.rank
-          label Rank:
-          input.rank(type="number", name="rank", value=i, step=1, min=1)
-        a.small.remove-team(href="#!/") remove team
-        a.small.add-player(href="#!/") add player
-        table.players
-          thead
-            tr
-              - if (event.event_type == "group_register")
-                th Group
-                th Player
-              - else
-                th Handle
-                th Alias
-              th Rating
-              - each stat in event.gametype.stats
-                th(class=stat.type)= stat.name[0].toUpperCase() + stat.name.substring(1)
-              th
-          tbody
+  form(method="post", action="#!/submit", accept-charset="utf-8")
+    fieldset.match-form
+      .form-line
+        .marshal
+          - if (data.marshal)
+            = JSON.stringify(data.marshal)
+        a.small.fright.add-team(href="#!/") Add a Team
+        ul.teams.cboth
+      .form-line
+        button.button.positive(type="submit")
+          img(src="/css/icons/tick.png",alt="")
+          | &#32;Submit Match
+        a.button.negative(href="/game/"+game.code+"/event/"+event.slug)
+          img(src="/css/icons/cross.png",alt="")
+          | &#32;Cancel
 
+  ul.teams-template.template
+    li.team
+      h3.name
+        | Team
+        span.team-number
+      span.rank
+        label Rank:
+        | &#32;
+        input.narrow.rank(type="number", name="rank", step=1, min=1)
+      a.small.fright.remove-team(href="#!/") remove team
+      a.small.fright.add-player(href="#!/") add player
 
-  table.template
+      table.players
+        thead
+          tr
+            - if (event.event_type == "group_register")
+              th(style="width: 20%;") Group
+              th(style="width: 20%;") Player
+            - else
+              th(style="width: 20%;") Handle
+              th(style="width: 20%;") Alias
+            - var width = Math.round(58. / (event.gametype.stats.length + 1), 2)
+            th(style="width: "+width+"%;") Rating
+            - each stat in event.gametype.stats
+              th(class=stat.type, style="width: "+width+"%;")= stat.name[0].toUpperCase() + stat.name.substring(1)
+            th.action(style="width: 2em;")
+        tbody
+
+  table.player-template.template
     tbody
-      tr
+      tr.player
         - if (event.event_type == "group_register")
           td
-            select.group.text(name="groupcode", size="1")
-
+            select.sel1(name="groupcode", size="1")
+              option(value=" ") select...
+              - each group in registered_groups
+                option(value=group.code)= group.name+" ("+group.code+")"
           td
-            select.player.text(name="player", size="1")
-
+            select.sel2(name="player", size="1")
+              option(value=" ") select...
+              - each player in registered_players
+                option(value=player)= player
         - else
           td
-            select.handle.text(name="handle", size="1")
-
+            select.sel1(name="handle", size="1")
+              option(value=" ") select...
+              - each handle in registered_handles
+                option(value=handle)= handle
           td
-            select.alias.text(name="alias", size="1")
-
-          td
-            span.rating
+            select.sel2(name="alias", size="1")
+              option(value=" ") select...
+              - each alias in registered_aliases
+                option(value=alias)= alias
+        td
+          span.rating
         - each stat in event.gametype.stats
           td
-            - if (stat.type == "integer")
-              input.text(type="number", step="1", name=stat.name)
-            - if (stat.type == "float")
-              input.text(type="number", step="0.01", name=stat.name)
-            - if (stat.type == "string")
-              input.text(type="text", name=stat.name)
-            - if (stat.type == "enum")
-              select.text(size="1", name=stat.name)
-            - if (stat.type == "formula")
-              span.value(title=stat.name)
-        td
-          a.remove-player(href="#!/") remove
+            - if (stat.valtype == "integer")
+              input.stat-input(type="number", step="1", name=stat.name)
+            - if (stat.valtype == "float")
+              input.stat-input(type="number", step="0.01", name=stat.name)
+            - if (stat.valtype == "string")
+              input.stat-input(type="text", name=stat.name)
+            - if (stat.valtype == "enum")
+              select.stat-input(size="1", name=stat.name)
+            - if (stat.valtype == "formula")
+              span.stat-value(title=stat.name)
+        td.action
+          a.x.remove-player(href="#!/") X
+
+.autochange_data.template= JSON.stringify(autochange_data)
+.gametype_data.template= JSON.stringify(event.gametype)
+script(type="text/javascript")
+    var MIN_TEAMS = #{event.minTeams};
+
+script(type="text/javascript", src="/js/client_math_lexer.js")
+script(type="text/javascript", src="/js/event_matchsubmit.js")

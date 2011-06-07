@@ -44,6 +44,8 @@ $(function (){
                     }
                 });
 
+                console.log(obj);
+
                 $("input[name=marshal]").val(_app.json(obj));
 
                 return true;
@@ -58,8 +60,6 @@ $(function (){
                     $("#gtform").slideUp(_speed);
                 }
             }).trigger("change");
-
-            this.trigger("start-edit-gametype", {target: $("#gtform")});
 
             $("#gtform").bind("filldata", function (event, data){
                 var self = $(this);
@@ -114,6 +114,8 @@ $(function (){
             $("#gtform a.add-stat").bind('click', function (){
                 $(this).parents("#gtform").trigger("new-stat");
             });
+
+            this.trigger("start-edit-gametype", {target: $("#gtform")});
         });
 
         this.bind('start-edit-gametype', function (e, data){
@@ -123,6 +125,9 @@ $(function (){
             var obj;
             if (datastr){
                 obj = this.json(datastr);
+
+                console.log(obj);
+
                 self.trigger("filldata", obj);
             }
         });

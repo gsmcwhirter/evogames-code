@@ -73,7 +73,7 @@ form(method="post", accept-charset="utf-8")
       span.field-status
         span &nbsp;
     .form-line#gtform(style= data.gametype_name == "other" ? "" : "display: none;")
-      input.marshal(type="hidden", name="marshal", value=JSON.stringify(data.marshal))
+      input.marshal(type="hidden", name="marshal", value=data.marshal)
       label Stats
       ul.stats
         li.add

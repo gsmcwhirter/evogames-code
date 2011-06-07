@@ -10,17 +10,21 @@ ul.grid
     br
     | Approve or deny membership requests.
   li
-    a(href="/group/"+group.code+"/controls/invites") Membership Invitations
-    br
-    | Invite new members to your group.
-  li
     a(href="/group/"+group.code+"/controls/members") Current Members
     br
     | Edit group member status.
   li
+    a(href="/group/"+group.code+"/controls/invites") Membership Invitations
+    br
+    | Invite new members to your group.
+  li
+    a(href="/group/"+group.code+"/controls/eregistrations") Event Registrations
+    br
+    | View group events, tournaments, and ladders.
+  li
     a(href="/group/"+group.code+"/controls/einvites") Event Invitations
     br
-    | Respond to event invitations.
+    | Respond to event, tournament, and ladder invitations.
   - if (is_owner)
     li
       a(href="/group/"+group.code+"/controls/owners") Owners

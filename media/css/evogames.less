@@ -137,6 +137,40 @@ strong,
     margin-bottom: 0;
 }
 
+table {
+    border-collapse: separate;
+    border-spacing: 1px;
+    background-color: #fff;
+
+    th, td, caption {
+        padding: 4px 7px;
+    }
+
+    thead th {
+        background-color: #eee;
+        border-top: 2px solid #000;
+        border-bottom: 1px solid #888;
+    }
+
+    tbody {
+
+        tr td {
+            background-color: #fff;
+            border-bottom: 1px solid #aaa;
+        }
+
+        tr:nth-child(even) td,
+        tr.even td {
+            background-color: #eee;
+        }
+    }
+
+    tfoot tr td {
+        border-bottom: 2px solid #000;
+    }
+
+}
+
 .tooltip {
     background-color:#000;
     border:1px solid #fff;
@@ -612,6 +646,13 @@ strong,
         }
     }
 
+    ul.teams {
+        li {
+            border-top: 1px dotted #666;
+            padding: 0.5em 0;
+        }
+    }
+
     #flash{
         .info, .error{
             padding: 5px 20px;
@@ -872,6 +913,55 @@ strong,
         textarea
         {
             width: 50%;
+        }
+    }
+
+    fieldset.match-form {
+        a.fright {
+            margin-left: 2em;
+            vertical-align: middle;
+        }
+
+        th.action,
+        td.action {
+            width: 2em;
+            text-align: center;
+        }
+
+        input[type=text],
+        input[type=password],
+        input[type=email],
+        input[type=url],
+        input[type=number],
+        input[type=date],
+        input[type=datetime],
+        input[type=month],
+        input[type=week],
+        input[type=time],
+        input[type=search],
+        input[type=color],
+        select,
+        textarea
+        {
+            width: 100%;
+        }
+
+        input[type=text].narrow,
+        input[type=password].narrow,
+        input[type=email].narrow,
+        input[type=url].narrow,
+        input[type=number].narrow,
+        input[type=date].narrow,
+        input[type=datetime].narrow,
+        input[type=month].narrow,
+        input[type=week].narrow,
+        input[type=time].narrow,
+        input[type=search].narrow,
+        input[type=color].narrow,
+        select.narrow,
+        textarea.narrow
+        {
+            width: 10%;
         }
     }
 

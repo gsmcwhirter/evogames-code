@@ -1,0 +1,36 @@
+h1 Event Registrations
+
+div#registrations
+  h2 Approved
+  h3 Current
+  ul.invited-groups.admin
+    -each event in approved_registrations.current
+      li(title=event.event.slug)
+        a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
+        span= " ("+event.game.code.toUpperCase()+")"
+    li.last
+
+  h3 Future
+  ul.invited-groups.admin
+    -each event in approved_registrations.future
+      li(title=event.event.slug)
+        a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
+        span= " ("+event.game.code.toUpperCase()+")"
+    li.last
+
+  h2 Pending
+  h3 Current
+  ul.invited-groups.admin
+    -each event in pending_registrations.current
+      li(title=event.event.slug)
+        a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
+        span= " ("+event.game.code.toUpperCase()+")"
+    li.last
+
+  h3 Future
+  ul.invited-groups.admin
+    -each event in pending_registrations.future
+      li(title=event.event.slug)
+        a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
+        span= " ("+event.game.code.toUpperCase()+")"
+    li.last

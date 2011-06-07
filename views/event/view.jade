@@ -7,12 +7,12 @@
       a(href="/game/"+game.code+"/event/"+event.slug+"/stats") Event Statistics
     li
       a(href="/game/"+game.code+"/event/"+event.slug+"/matches") Event Matches
-    - if (is_participant && event.startdate && event.startdate <= (new Date()).toISOString())
-      li
-        a(href="/game/"+game.code+"/event/"+event.slug+"/matches/submit") Submit a Match
     - if (is_registerable)
       li
         a(href="/game/"+game.code+"/event/"+event.slug+"/register") Event Registration
+    - if (is_participant && event.startdate && event.startdate <= (new Date()).toISOString())
+      li
+        a(href="/game/"+game.code+"/event/"+event.slug+"/matches/submit") Submit a Match
     - if (is_admin)
       li
         a(href="/game/"+game.code+"/event/"+event.slug+"/controls") Event Controls

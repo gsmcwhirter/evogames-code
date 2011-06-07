@@ -1,3 +1,6 @@
 - Redis w/ connect-redis for session store instead of MemoryStore
 
 - Sysop admin for player permissions
+
+Event Edit
+- Proper errors on gametype problems
