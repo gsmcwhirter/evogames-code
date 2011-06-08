@@ -83,6 +83,8 @@ h3= game.name
               input.stat-input(type="text", name=stat.name)
             - if (stat.valtype == "enum")
               select.stat-input(size="1", name=stat.name)
+                - each opt in stat.valdata.split(",").map(function (opt){return opt.trim();})
+                  option(value=opt)= opt
             - if (stat.valtype == "formula")
               span.stat-value(title=stat.name)
         td.action

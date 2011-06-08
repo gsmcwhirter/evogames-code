@@ -59,7 +59,10 @@ $(function (){
                     var statname = o.attr("name");
                     if (!stats[statname]){
                         var val;
-                        if (o.attr("type") == "number"){
+                        if (_gametype.statdefs[statname.toLowerCase()].valtype == "integer"){
+                            val = parseInt(o.val()) || 0;
+                        }
+                        else if (_gametype.statdefs[statname.toLowerCase()].valtype == "float"){
                             val = parseFloat(o.val()) || 0;
                         }
                         else {
@@ -190,7 +193,6 @@ $(function (){
             var acdt = $.trim($(".autochange_data").text());
             if (acdt){
                 _autochange_data = this.json(acdt);
-                console.log(_autochange_data);
             }
             else {
                 this.log("AUTOCHANGE_DATA undefined");
@@ -203,7 +205,12 @@ $(function (){
                 _gametype.statdefs = {};
                 (_gametype.stats || []).forEach(function (stat){
                     _gametype.statdefs[stat.name.toLowerCase()] = stat;
-                    _gametype.statdefs[stat.name.toLowerCase()].statfunc = mathlexer.parseStringRep(stat.valformula);
+                    if (stat.valtype == "formula"){
+                        _gametype.statdefs[stat.name.toLowerCase()].statfunc = mathlexer.parseStringRep(stat.valformula);
+                    }
+                    else if (stat.valtype == "enum"){
+                        _gametype.statdefs[stat.name.toLowerCase()].enum_list = _(stat.valdata.split(",")).map(function (opt){return $.trim(opt);});
+                    }
                 });
 
                 _gametype.ratingfunc = mathlexer.parseStringRep(_gametype.ratingformula);
@@ -221,6 +228,179 @@ $(function (){
         this.get("#!/", noop);
 
         this.post("#!/submit", function (){
+            var _app = this;
+
+            //generate the teams object
+            var teams = [];            
+            $("ul.teams li.team").each(function (i,o){
+                var teamli = $(o);
+                var team = {};
+
+                team.rank = parseInt($("input[name=rank]", teamli).val());
+                team.players = [];
+                $("table.players tr.player", teamli).each(function (i,o){
+                    var playerrow = $(o);
+                    var player = {};
+
+                    if ($("select[name=groupcode]", playerrow).length){
+                        player.groupcode = $.trim($("select[name=groupcode]", playerrow).val());
+                    }
+
+                    if ($("select[name=player]", playerrow).length){
+                        var playertext = $("select[name=player]", playerrow).val();
+                        var atindex = $.inArray("@", playertext.split(''));
+
+                        if (atindex > -1){
+                            player.alias = $.trim(playertext.substring(0, atindex));
+                            player.handle = $.trim(playertext.substring(atindex + 1));
+                        }
+                    }
+
+                    if ($("select[name=handle]", playerrow).length){
+                        player.handle = $.trim($("select[name=handle]", playerrow).val());
+                    }
+
+                    if ($("select[name=alias]", playerrow).length){
+                        player.alias = $.trim($("select[name=alias]", playerrow).val());
+                    }
+
+                    player.stats = {};
+
+                    _gametype.stats.forEach(function (stat){
+                        player.stats[stat.name] = $("input[name="+stat.name+"], select[name="+stat.name+"]", playerrow).first().val();
+
+                        if (_gametype.statdefs[stat.name.toLowerCase()].valtype == "integer"){
+                            player.stats[stat.name] = parseInt(player.stats[stat.name]) || 0;
+                        }
+                        else if (_gametype.statdefs[stat.name.toLowerCase()].valtype == "float"){
+                            player.stats[stat.name] = parseFloat(player.stats[stat.name]) || 0.;
+                        }
+                    });
+
+                    _gametype.stats.forEach(function (stat){
+                        if (stat.valtype == "formula"){
+                            player.stats[stat.name] = _gametype.statdefs[stat.name.toLowerCase()].statfunc(player.stats);
+                        }
+                    });
+
+                    team.players.push(player);
+                });
+
+                teams.push(team);
+            });
+
+            var handles_seen = [];
+            var groups_seen = {};
+            var uses_groups = false;
+            var errors = [];
+
+            teams.forEach(function (team, tindex){
+                team.players.forEach(function (player){
+                    var msg;
+
+                    //group codes can't appear on different teams
+                    if (!uses_groups && player.groupcode) {
+                        uses_groups = true;
+                    }
+                    
+                    if (uses_groups && !player.groupcode){
+                        msg = "All players must have a group listed.";
+                        if ($.inArray(msg, errors) == -1){
+                            errors.push(msg);
+                        }
+                    }
+                    else if (uses_groups){
+                        if (typeof groups_seen[player.groupcode.toLowerCase()] != "undefined"){
+                            if (_(groups_seen[player.groupcode.toLowerCase()]).filter(function (teami){return teami != tindex;}).length > 0){
+                                msg = "Players in the same group may not be on different teams.";
+                                if ($.inArray(msg, errors) == -1){
+                                    errors.push(msg);
+                                }
+                            }
+
+                            groups_seen[player.groupcode.toLowerCase()].push(tindex);
+                        }
+                        else {
+                            groups_seen[player.groupcode.toLowerCase()] = [tindex];
+                        }
+                    }
+
+                    //a handle can't appear twice
+                    if ($.inArray(player.handle.toLowerCase(), handles_seen) > -1){
+                        msg = "The same player cannot be listed more than once.";
+                        if ($.inArray(msg, errors) == -1){
+                            errors.push(msg);
+                        }
+                    }
+                    else {
+                        handles_seen.push(player.handle.toLowerCase());
+                    }
+
+                    //handles and aliases all defined
+                    player.handle = $.trim(player.handle);
+                    player.alias = $.trim(player.alias);
+
+                    if (!player.handle){
+                        msg = "All players must have a handle listed.";
+                        if ($.inArray(msg, errors) == -1){
+                            errors.push(msg);
+                        }
+                    }
+
+                    if (!player.alias){
+                        msg = "All players must have an alias listed.";
+                        if ($.inArray(msg, errors) == -1){
+                            errors.push(msg);
+                        }
+                    }
+
+                    //enums are valid
+                    for (var statname in player.stats){
+                        if (_gametype.statdefs[statname.toLowerCase()].valtype == "enum"){
+                            var stat = player.stats[statname];
+                            if ($.inArray(stat, _gametype.statdefs[statname.toLowerCase()].enum_list) == -1){
+                                msg = "Choices must be made from the provided lists.";
+                                if ($.inArray(msg, errors) == -1){
+                                    errors.push(msg);
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+
+            //minimum number of teams
+            if (teams.length < _min_teams){
+                errors.push("You must have at least "+_min_teams+" teams.");
+            }
+
+            if (errors.length == 0){
+                this.log(teams);
+                $.ajax({
+                    type: 'put',
+                    url: "submit",
+                    data: {teams: teams},
+                    dataType: 'json',
+                    success: function (data){
+                        if (data.ok)
+                        {
+                            _app.redirect(data.redir_url);
+                        }
+                        else
+                        {
+                            $("#flash").trigger('error', [data.error]);
+                        }
+                    },
+                    error: function (){
+                        $("#flash").trigger('error', ['Request error']);
+                    }
+                });
+            }
+            else {
+                errors.forEach(function (error){
+                    $("#flash").trigger("error", [error]);
+                });
+            }
 
         });
     });

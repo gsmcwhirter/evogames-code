@@ -11,4 +11,10 @@ function (newDoc, oldDoc, cdbuser){
         }
     }
 
+    if (newDoc.type == "event-match"){
+        require(unchanged("created_at", newDoc, oldDoc), 'You may not change the creation timestamp.');
+        require(unchanged("type", newDoc, oldDoc), 'You may not change the document type.');
+        require(unchanged("submitted_by", newDoc, oldDoc), 'You may not change the match submitter.');
+    }
+
 }
