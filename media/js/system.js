@@ -82,7 +82,7 @@ $(function (){
         var self = $(this);
         if ($.isArray(msg)){
             msg.forEach(function (m){
-                self.trigger("info", [m]);
+                self.trigger("error", [m]);
             });
         }
         else {

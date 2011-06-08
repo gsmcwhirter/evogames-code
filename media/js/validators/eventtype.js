@@ -20,6 +20,13 @@ $(function (){
         {
             fstat.trigger("ok");
         }
+
+        if (typ == "group_register"){
+            $(".allow_same_group_opponents_line").show();
+        }
+        else {
+            $(".allow_same_group_opponents_line").hide();
+        }
     });
 
     validators.run("#event_type");

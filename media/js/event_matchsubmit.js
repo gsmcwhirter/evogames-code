@@ -309,7 +309,7 @@ $(function (){
                             errors.push(msg);
                         }
                     }
-                    else if (uses_groups){
+                    /*else if (uses_groups){
                         if (typeof groups_seen[player.groupcode.toLowerCase()] != "undefined"){
                             if (_(groups_seen[player.groupcode.toLowerCase()]).filter(function (teami){return teami != tindex;}).length > 0){
                                 msg = "Players in the same group may not be on different teams.";
@@ -323,7 +323,7 @@ $(function (){
                         else {
                             groups_seen[player.groupcode.toLowerCase()] = [tindex];
                         }
-                    }
+                    }*/
 
                     //a handle can't appear twice
                     if ($.inArray(player.handle.toLowerCase(), handles_seen) > -1){

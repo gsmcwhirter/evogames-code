@@ -36,6 +36,16 @@ form(method="post", accept-charset="utf-8")
         option(value="player_register", selected=data.event_type == "player_register") Player Registration
       span.field-status
         span &nbsp;
+    .form-line.allow_same_group_opponents_line
+      label(for="allow_same_group_opponents") Allow Same Group Opponents?
+      br
+      - if (messages["allow_same_group_opponents"] && messages["allow_same_group_opponents"].length)
+        ul.field-error
+          - each msg in messages["allow_same_group_opponents"]
+            li!= "Allowing same group opponents " + msg
+      select#allow_same_group_opponents.text(size="1", name="allow_same_group_opponents")
+        option(value="yes", selected=data.allow_same_group_opponents) Yes
+        option(value="no", selected=!data.allow_same_group_opponents) No
     .form-line
       label(for="register_type") Registration Type
       br
