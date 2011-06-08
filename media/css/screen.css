@@ -366,6 +366,11 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main .gametype ul.stats .delete-stat, #main #gtform ul.stats .delete-stat, #main .gametype ul.weights .delete-stat, #main #gtform ul.weights .delete-stat {float:right;margin-top:12px;}
 #main .gametype ul.stats li, #main #gtform ul.stats li, #main .gametype ul.weights li, #main #gtform ul.weights li {border-bottom:1px dotted #666;}
 #main .gametype ul.stats li.add, #main #gtform ul.stats li.add, #main .gametype ul.weights li.add, #main #gtform ul.weights li.add {padding:5px 0;border-bottom:none;}
+#main .match-display {display:block;background-color:#ffffff;border:1px solid #888888;padding:1.4em;margin-bottom:1.5em;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
+#main .match-display .record {font-weight:bold;}
+#main .match-display h4 {float:left;}
+#main .match-display .submitted-by {float:right;font-size:85%;overflow:auto;}
+#main ul.teams {clear:both;margin-bottom:0;}
 #main ul.teams li {border-top:1px dotted #666;padding:0.5em 0;}
 #main #flash .info, #main #flash .error {padding:5px 20px;margin-bottom:5px;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 #main #flash .info .x, #main #flash .error .x {float:right;font-weight:bold;cursor:pointer;opacity:0.5;}

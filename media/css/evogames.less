@@ -646,7 +646,36 @@ table {
         }
     }
 
+    .match-display {
+        /* Duplicating fieldset */
+        display: block;
+        background-color: @lightbase;
+        border: 1px solid @medborder;
+        padding: 1.4em;
+        margin-bottom: 1.5em;
+
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+
+        .record {
+            font-weight: bold;
+        }
+
+        h4 {
+            float: left;
+        }
+
+        .submitted-by {
+            float: right;
+            font-size: 85%;
+            overflow: auto;
+        }
+    }
+
     ul.teams {
+        clear: both;
+        margin-bottom: 0;
         li {
             border-top: 1px dotted #666;
             padding: 0.5em 0;
