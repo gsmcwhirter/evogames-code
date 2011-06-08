@@ -1,0 +1,11 @@
+h1= event.name+" Recent Matches"
+h3= game.name+", "+event.gametype.name.toUpperCase()
+
+!= partial('match', {collection: matches, as: "match", event: event, game: game})
+
+- if (nextpage)
+  .pagination
+    a.next(href="/game/"+game.code+"/event/"+event.slug+"/matches?nextpage="+nextpage+"&limit="+limit) older &raquo;
+
+script(type="text/javascript", src="/js/client_math_lexer.js")
+script(type="text/javascript", src="/js/event_matchsummary.js")
