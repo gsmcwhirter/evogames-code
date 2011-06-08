@@ -1,0 +1,11 @@
+h1= game.name+" Recent Matches"
+
+- each match in matches
+  != partial('match', {match: match.match, event: match.event, game: game, show_header: true})
+
+- if (nextpage)
+  .pagination
+    a.next(href="/game/"+game.code+"/event/matches?nextpage="+nextpage+"&limit="+limit) older &raquo;
+
+script(type="text/javascript", src="/js/client_math_lexer.js")
+script(type="text/javascript", src="/js/event_matchsummary.js")

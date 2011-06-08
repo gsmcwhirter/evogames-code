@@ -1,0 +1,18 @@
+- if (typeof alias != "undefined")
+  != partial('header', {title: false})
+  h1
+    span.alias= alias
+    span.handle= "@"+pplayer.handle
+  h2 Recent Event Matches
+- else
+  h1 Recent Event Matches
+
+- each match in matches
+  != partial('event/match', {match: match.match, event: match.event, game: match.game, show_header: true, show_gameheader: true})
+
+- if (nextpage)
+  .pagination
+    a.next(href=self+"?nextpage="+nextpage+"&limit="+limit) older &raquo;
+
+script(type="text/javascript", src="/js/client_math_lexer.js")
+script(type="text/javascript", src="/js/event_matchsummary.js")

@@ -1,7 +1,12 @@
 .match-display
   - if (typeof show_header != "undefined" && show_header)
-    h2= event.name
-    h3= game.name+", "+event.gametype.name.toUpperCase()
+    a(href="/game/"+game.code+"/event/"+event.slug)
+      h2
+        = event.name
+        - if (typeof show_gameheader != "undefined" && show_gameheader)
+          |  (
+          = game.code.toUpperCase()
+          |  )
   a(href="/game/"+game.code+"/event/"+event.slug+"/matches/"+match._id.substring(12))
     h4= "Match ID: "+match._id.substring(12)
   .submitted-by
