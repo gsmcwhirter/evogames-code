@@ -388,7 +388,7 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main .left-col, #main .right-col {width:42%;margin:5px 0px;padding:3px 0;float:left;}
 #main .left-col {margin-right:40px;}
 #main .article {overflow:auto;border-top:1px solid #000;border-bottom:1px dotted #666;margin-bottom:10px;}
-#main .article h2 {margin-bottom:0.1em;}
+#main .article h2 {padding-top:0.5em;margin-bottom:0.1em;}
 #main .article h2 a, #main .article h2 a:link, #main .article h2 a:active {font-weight:normal;color:#000;}
 #main .article h2 a:hover {color:#444;font-weight:normal;text-decoration:none;}
 #main .article h3 {margin-top:0.1em;}
