@@ -40,11 +40,24 @@ h3= game.name+", "+event.gametype.name.toUpperCase()
               th(style="width: 20%;") Handle
               th(style="width: 20%;") Alias
             - var width = Math.floor(58. / (event.gametype.stats.length + 1) * 100) / 100
-            th(style="width: "+width+"%;") Rating
+            th.rating-head(style="width: "+width+"%;") Rating
             - each stat in event.gametype.stats
-              th(class=stat.valtype, style="width: "+width+"%;")= stat.name[0].toUpperCase() + stat.name.substring(1)
+              th(class="stat-head "+stat.valtype, style="width: "+width+"%;", title=stat.name)= stat.name[0].toUpperCase() + stat.name.substring(1)
             th.action(style="width: 2em;")
         tbody
+        tfoot
+            td(colspan="2")
+              span.record
+                | Record:&#32;
+                span.wins
+                |  -
+                span.losses
+                |  -
+                span.ties
+            td
+            - each stat in event.gametype.stats
+              td
+            td
 
   table.player-template.template
     tbody

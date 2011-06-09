@@ -30,7 +30,7 @@
               - var width = Math.round(68. / (event.gametype.stats.length + 1), 2)
               th.rating-head(style="width: "+width+"%;") Rating
               - each stat in event.gametype.stats
-                th(class="stat-head "+stat.valtype, style="width: "+width+"%;", title=stat.name)= stat.name[0].toUpperCase() + stat.name.substring(1)
+                th(class="stat-head "+stat.valtype, style="width: "+width+"%;", title=stat.name)= stat.name
           tbody
             - each player in team.players
               tr.player
@@ -51,22 +51,29 @@
                 - each stat in event.gametype.stats
                   td(style="width: "+width+"%;")
                     - if (stat.valtype == "integer" || stat.valtype == "float" || stat.valtype == "formula")
-                      = Math.round(player.stats[stat.name] * 100) / 100
+                      = Math.round(player.stats[stat.name.toLowerCase()] * 100) / 100
                     - else
-                      = player.stats[stat.name]
+                      = player.stats[stat.name.toLowerCase()]
           tfoot
             tr
               - if (event.event_type == "group_register")
-                td(style="width: 30%;", colspan="2")
+                td(colspan="2")
                   span.record
                     | Record:&#32;
-                    = team.wins+"-"+team.losses+"-"+team.ties
+                    span.wins= team.wins
+                    |  -
+                    span.losses= team.losses
+                    |  -
+                    span.ties= team.ties
               - else
-                td(style="width: 30%;")
+                td
                   span.record
                     | Record:&#32;
-                    = team.wins+"-"+team.losses+"-"+team.ties
-              - var width = Math.round(68. / (event.gametype.stats.length + 1), 2)
-              td(style="width: "+width+"%;")
+                    span.wins= team.wins
+                    | -
+                    span.losses= team.losses
+                    | -
+                    span.ties= team.ties
+              td
               - each stat in event.gametype.stats
-                td(style="width: "+width+"%;")
+                td

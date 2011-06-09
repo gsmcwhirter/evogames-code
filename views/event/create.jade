@@ -66,7 +66,18 @@ form(method="post", accept-charset="utf-8")
           a.add-stat(href="#!/") add new stat
       label Rating Weights
       ul.weights
-
+        li
+          input(type="number", step="0.05", name="weight", value="1")
+          | &nbsp;
+          label.inline Wins
+        li
+          input(type="number", step="0.05", name="weight", value="1")
+          | &nbsp;
+          label.inline Losses
+        li
+          input(type="number", step="0.05", name="weight", value="1")
+          | &nbsp;
+          label.inline Ties
     .form-line
       button.button.positive(type="submit")
         img(src="/css/icons/tick.png",alt="")
@@ -84,7 +95,7 @@ ul(style="display: none;")
     select(name="type", size="1")
       option(value="integer") Integer
       option(value="float") Float
-      option(value="enum") Choise
+      option(value="enum") Choice
       option(value="string") String
       option(value="formula") Derived by Formula
     br.hideable
@@ -92,9 +103,10 @@ ul(style="display: none;")
     | &nbsp;
     input.full.hideable(type="text", name="extra")
   li#weight-template
-    label.inline (unnamed)
-    | &nbsp;
     input(type="number", step="0.05", name="weight", value="1")
+    | &nbsp;
+    label.inline (unnamed)
+
 
 script(type="text/javascript")
     var GAME_CODE = "#{game.code}";

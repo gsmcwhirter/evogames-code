@@ -40,7 +40,13 @@ $(function(){
                 }
             });
 
-            var stats = {};
+            var wltcell = team.find("table.players tfoot td:first");
+            
+            var stats = {
+                wins: parseInt(wltcell.find(".record .wins").text()),
+                losses: parseInt(wltcell.find(".record .losses").text()),
+                ties: parseInt(wltcell.find(".record .ties").text())
+            };
             var tfoot_tds = team.find("table.players tfoot tr td");
             var player_trs = team.find("table.players tbody tr.player");
 
@@ -50,20 +56,22 @@ $(function(){
             }
 
             _(proclist).filter(function (proc){return proc.type == "number"}).forEach(function (proc){
-                stats[proc.name] = 0;
+                var lstatname = proc.name.toLowerCase();
+                stats[lstatname] = 0;
 
                 player_trs.each(function (i, row){
                     row = $(row);
-                    stats[proc.name] += parseInt(row.find("td").eq(proc.index).text());
+                    stats[lstatname] += parseInt(row.find("td").eq(proc.index).text());
                 });
 
-                tfoot_tds.eq(proc.index - mod).text(stats[proc.name]);
+                tfoot_tds.eq(proc.index - mod).text(stats[lstatname]);
             });
 
             _(proclist).filter(function (proc){return proc.type == "formula"}).forEach(function (proc){
-                stats[proc.name] = _gametype.statdefs[proc.name.toLowerCase()].statfunc(stats);
+                var lstatname = proc.name.toLowerCase();
+                stats[lstatname] = _gametype.statdefs[lstatname].statfunc(stats);
 
-                tfoot_tds.eq(proc.index - mod).text(Math.round(stats[proc.name] * 100) / 100);
+                tfoot_tds.eq(proc.index - mod).text(Math.round(stats[lstatname] * 100) / 100);
             });
 
             _(proclist).filter(function (proc){return proc.type == "rating"}).forEach(function (proc){

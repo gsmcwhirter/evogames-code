@@ -33,6 +33,36 @@ $(function (){
                 $("li.team", self).each(function (i,o){
                     $(o).trigger("update-team-num", [i + 1]);
                 });
+
+                self.trigger("calc-wlt");
+            }).bind("calc-wlt", function (){
+                var self = $(this);
+
+                var rankings = _.uniq(_.map(self.find("li.team"), function (team){return $(team).find("input[name=rank]").val()}));
+
+                var rank_wl = {};
+
+                rankings.forEach(function (rank){
+                    rank_wl["rank-"+rank] = {
+                        wins: _.filter(rankings, function (rank2){return parseInt(rank2) > parseInt(rank)}).length,
+                        losses: _.filter(rankings, function (rank2){return parseInt(rank2) < parseInt(rank)}).length
+                    }
+                });
+
+
+                self.find("li.team").each(function (i, team){
+                    team = $(team);
+
+                    var rank = team.find("input[name=rank]").val();
+                    var wltcell = team.find("table.players tfoot td:first");
+
+                    wltcell.find(".record .wins").text(rank_wl["rank-"+rank].wins);
+                    wltcell.find(".record .losses").text(rank_wl["rank-"+rank].losses);
+                    wltcell.find(".record .ties").text(rankings.length - rank_wl["rank-"+rank].wins - rank_wl["rank-"+rank].losses - 1);
+
+                    team.trigger("calc-summary");
+                });
+
             });
 
             $("li.team").bind("add-player", function (){
@@ -45,18 +75,86 @@ $(function (){
                 $("input[name=rank]", $(this)).val(newnum);
             }).bind("remove", function (){
                 $(this).remove();
-                $("ul.teams").trigger("check-minimum");
+                $("ul.teams").trigger("calc-wlt").trigger("check-minimum");
+            }).bind("calc-summary", function (){
+                var team = $(this);
+                var proclist = [];
+
+                team.find("table.players thead th").each(function (i,o){
+                    o = $(o);
+                    var proc = {};
+                    proc.index = i;
+                    proc.name = o.attr("title");
+
+                    if (o.hasClass("stat-head") && (o.hasClass("integer") || o.hasClass("float"))){
+                        proc.type = "number";
+                        proclist.push(proc);
+                    }
+                    else if (o.hasClass("stat-head") && o.hasClass("formula")){
+                        proc.type = "formula";
+                        proclist.push(proc);
+                    }
+                    else if (o.hasClass("rating-head")){
+                        proc.type = "rating";
+                        proclist.push(proc);
+                    }
+                });
+
+                var wltcell = team.find("table.players tfoot td:first");
+
+                var stats = {
+                    wins: parseInt(wltcell.find(".record .wins").text()),
+                    losses: parseInt(wltcell.find(".record .losses").text()),
+                    ties: parseInt(wltcell.find(".record .ties").text())
+                };
+                
+                var tfoot_tds = team.find("table.players tfoot tr td");
+                var player_trs = team.find("table.players tbody tr.player");
+
+                var mod = 0;
+                if (tfoot_tds.eq(0).attr("colspan") == "2"){
+                    mod = 1;
+                }
+
+                _(proclist).filter(function (proc){return proc.type == "number"}).forEach(function (proc){
+                    var lstatname = proc.name.toLowerCase();
+                    stats[lstatname] = 0;
+
+                    player_trs.each(function (i, row){
+                        row = $(row);
+                        stats[lstatname] += parseInt(row.find("td").eq(proc.index).find("input").val() || 0);
+                    });
+
+                    tfoot_tds.eq(proc.index - mod).text(stats[lstatname]);
+                });
+
+                _(proclist).filter(function (proc){return proc.type == "formula"}).forEach(function (proc){
+                    var lstatname = proc.name.toLowerCase();
+                    stats[lstatname] = _gametype.statdefs[lstatname].statfunc(stats);
+
+                    tfoot_tds.eq(proc.index - mod).text(Math.round(stats[lstatname] * 100) / 100);
+                });
+
+                _(proclist).filter(function (proc){return proc.type == "rating"}).forEach(function (proc){
+                    tfoot_tds.eq(proc.index - mod).text(Math.round(_gametype.ratingfunc(stats) * 100) / 100);
+                });
             });
 
             $("tr.player").bind("calc-stats", function (){
                 var player = $(this);
 
-                var stats = {};
+                var wltcell = player.parents("table.players:first").find("tfoot td:first");
+
+                var stats = {
+                    wins: parseInt(wltcell.find(".record .wins").text()),
+                    losses: parseInt(wltcell.find(".record .losses").text()),
+                    ties: parseInt(wltcell.find(".record .ties").text())
+                };
 
                 player.find("td .stat-input").each(function (i, o){
                     o = $(o);
 
-                    var statname = o.attr("name");
+                    var statname = $.trim(o.attr("name")).toLowerCase();
                     if (!stats[statname]){
                         var val;
                         if (_gametype.statdefs[statname.toLowerCase()].valtype == "integer"){
@@ -78,10 +176,10 @@ $(function (){
                 
                 player.find("td .stat-value").each(function (i, o){
                     o = $(o);
-                    var statname = o.attr("title");
+                    var statname = $.trim(o.attr("title")).toLowerCase();
 
-                    if (_gametype.statdefs[statname.toLowerCase()]){
-                        var result = _gametype.statdefs[statname.toLowerCase()].statfunc(stats);
+                    if (_gametype.statdefs[statname]){
+                        var result = _gametype.statdefs[statname].statfunc(stats);
                         if (typeof result != "undefined"){
                             o.text(Math.round(result * 100) / 100);
                         }
@@ -97,6 +195,8 @@ $(function (){
                 var rating = _gametype.ratingfunc(stats);
 
                 player.find(".rating").text(Math.round(rating * 100) / 100);
+
+                player.parents("li.team:first").trigger("calc-summary");
             });
 
             $("a.add-team").bind("click", function (){
@@ -170,7 +270,37 @@ $(function (){
                             .bind("keyup", _stat_input_change)
                             .bind("blur", _stat_input_change);
 
-            var mteams;
+            function _rank_change(){
+                $(this).parents("ul.teams:first").trigger("calc-wlt");
+            }
+
+            $("input[name=rank]").bind("click", _rank_change)
+                                 .bind("keyup", _rank_change)
+                                 .bind("blur", _rank_change)
+                                 .bind("change", _rank_change);
+
+
+            var gtt = $.trim($(".gametype_data").text());
+            if (gtt){
+                _gametype = this.json(gtt);
+
+                _gametype.statdefs = {};
+                (_gametype.stats || []).forEach(function (stat){
+                    _gametype.statdefs[stat.name.toLowerCase()] = stat;
+                    if (stat.valtype == "formula"){
+                        _gametype.statdefs[stat.name.toLowerCase()].statfunc = mathlexer.parseStringRep(stat.valformula);
+                    }
+                    else if (stat.valtype == "enum"){
+                        _gametype.statdefs[stat.name.toLowerCase()].enum_list = _(stat.valdata.split(",")).map(function (opt){return $.trim(opt);});
+                    }
+                });
+
+                _gametype.ratingfunc = mathlexer.parseStringRep(_gametype.ratingformula);
+            }
+            else {
+                this.log("GAMETYPE undefined");
+            }
+
             if (typeof MIN_TEAMS != "undefined"){
                 _min_teams = MIN_TEAMS;
             }
@@ -196,27 +326,6 @@ $(function (){
             }
             else {
                 this.log("AUTOCHANGE_DATA undefined");
-            }
-
-            var gtt = $.trim($(".gametype_data").text());
-            if (gtt){
-                _gametype = this.json(gtt);
-
-                _gametype.statdefs = {};
-                (_gametype.stats || []).forEach(function (stat){
-                    _gametype.statdefs[stat.name.toLowerCase()] = stat;
-                    if (stat.valtype == "formula"){
-                        _gametype.statdefs[stat.name.toLowerCase()].statfunc = mathlexer.parseStringRep(stat.valformula);
-                    }
-                    else if (stat.valtype == "enum"){
-                        _gametype.statdefs[stat.name.toLowerCase()].enum_list = _(stat.valdata.split(",")).map(function (opt){return $.trim(opt);});
-                    }
-                });
-
-                _gametype.ratingfunc = mathlexer.parseStringRep(_gametype.ratingformula);
-            }
-            else {
-                this.log("GAMETYPE undefined");
             }
 
             $("tr.player").trigger("calc-stats");
@@ -266,20 +375,32 @@ $(function (){
 
                     player.stats = {};
 
-                    _gametype.stats.forEach(function (stat){
-                        player.stats[stat.name] = $("input[name="+stat.name+"], select[name="+stat.name+"]", playerrow).first().val();
+                    var wltcell = playerrow.parents("table.players:first").find("tfoot td:first");
 
-                        if (_gametype.statdefs[stat.name.toLowerCase()].valtype == "integer"){
-                            player.stats[stat.name] = parseInt(player.stats[stat.name]) || 0;
+                    var tmpstats =  {
+                        wins: parseInt(wltcell.find(".record .wins").text()),
+                        losses: parseInt(wltcell.find(".record .losses").text()),
+                        ties: parseInt(wltcell.find(".record .ties").text())
+                    };
+
+                    _gametype.stats.forEach(function (stat){
+                        var lstatname = stat.name.toLowerCase();
+                        player.stats[lstatname] = $("input[name="+stat.name+"], select[name="+stat.name+"]", playerrow).first().val();
+
+                        if (_gametype.statdefs[lstatname].valtype == "integer"){
+                            player.stats[lstatname] = parseInt(player.stats[lstatname]) || 0;
                         }
-                        else if (_gametype.statdefs[stat.name.toLowerCase()].valtype == "float"){
-                            player.stats[stat.name] = parseFloat(player.stats[stat.name]) || 0.;
+                        else if (_gametype.statdefs[lstatname].valtype == "float"){
+                            player.stats[lstatname] = parseFloat(player.stats[lstatname]) || 0.;
                         }
+
+                        tmpstats[lstatname] = player.stats[lstatname];
                     });
 
                     _gametype.stats.forEach(function (stat){
                         if (stat.valtype == "formula"){
-                            player.stats[stat.name] = _gametype.statdefs[stat.name.toLowerCase()].statfunc(player.stats);
+                            var lstatname = stat.name.toLowerCase();
+                            player.stats[lstatname] = _gametype.statdefs[lstatname].statfunc(tmpstats);
                         }
                     });
 

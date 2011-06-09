@@ -6,7 +6,7 @@ $(function (){
         function _statname_change(){
            var index = $(this).parents("li").first().index();
            var modal = $(this).parents("#gtform").first();
-           $("ul.weights", modal).find("li").eq(index).trigger("name-change", [$(this).val()]);
+           $("ul.weights", modal).find("li").eq(index + 3).trigger("name-change", [$(this).val()]);
        }
 
         function _new_stat(){
@@ -24,6 +24,12 @@ $(function (){
                 var self = $(this);
 
                 var obj = {};
+                obj.wltweights = {
+                    wins: parseFloat($("ul.weights li", self).eq(0).find("input[name=weight]").val()),
+                    losses: parseFloat($("ul.weights li", self).eq(1).find("input[name=weight]").val()),
+                    ties: parseFloat($("ul.weights li", self).eq(2).find("input[name=weight]").val())
+                };
+
                 obj.stats = [];
 
                 var stat;
@@ -31,20 +37,18 @@ $(function (){
                     stat = {};
                     o = $(o);
                     if (!o.hasClass('add')){
-                        stat.name = $("input[name=name]", o).val();
+                        stat.name = $.trim($("input[name=name]", o).val());
                         stat.valtype = $("select[name=type]", o).val();
 
                         if (stat.valtype == "enum" || stat.valtype == "formula"){
                             stat.valdata = $("input[name=extra]", o).val();
                         }
 
-                        stat.ratingweight = parseFloat($("ul.weights li", self).eq(i).find("input[name=weight]").val());
+                        stat.ratingweight = parseFloat($("ul.weights li", self).eq(i+3).find("input[name=weight]").val());
 
                         obj.stats.push(stat);
                     }
                 });
-
-                console.log(obj);
 
                 $("input[name=marshal]").val(_app.json(obj));
 
@@ -63,13 +67,24 @@ $(function (){
 
             $("#gtform").bind("filldata", function (event, data){
                 var self = $(this);
-                $("input[name=gtname]", self).val(data.name);
+
+                if (data.wltweights){
+                    $("ul.weights li", self).eq(0).find("input[name=weight]").val(data.wltweights.wins);
+                    $("ul.weights li", self).eq(1).find("input[name=weight]").val(data.wltweights.losses);
+                    $("ul.weights li", self).eq(2).find("input[name=weight]").val(data.wltweights.ties);
+                }
+                else {
+                    $("ul.weights li", self).eq(0).find("input[name=weight]").val(0);
+                    $("ul.weights li", self).eq(1).find("input[name=weight]").val(0);
+                    $("ul.weights li", self).eq(2).find("input[name=weight]").val(0);
+                }
+
                 data.stats.forEach(function (stat, index){
                     self.trigger("new-stat");
                     $("ul.stats li", self).eq(index).find("input[name=name]").val(stat.name).trigger("keyup");
                     $("ul.stats li", self).eq(index).find("select[name=type]").val(stat.valtype).trigger("change");
                     $("ul.stats li", self).eq(index).find("input[name=extra]").val(stat.valdata);
-                    $("ul.weights li", self).eq(index).find("input[name=weight]").val(stat.ratingweight);
+                    $("ul.weights li", self).eq(index + 3).find("input[name=weight]").val(stat.ratingweight);
                 });
             }).bind("new-stat", _new_stat);
 
@@ -103,7 +118,7 @@ $(function (){
                 }
             }).bind("remove", function (){
                 var index = $(this).index();
-                $(this).parents("#gtform").first().find("ul.weights").find("li").eq(index).remove();
+                $(this).parents("#gtform").first().find("ul.weights").find("li").eq(index + 3).remove();
                 $(this).remove();
             }).find("input[name=name]").bind("keyup", _statname_change).bind("change", _statname_change).bind("blur", _statname_change);
 
