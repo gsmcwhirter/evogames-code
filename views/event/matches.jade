@@ -1,6 +1,11 @@
 h1= event.name+" Recent Matches"
 h3= game.name+", "+event.gametype.name.toUpperCase()
 
+- if (event_is_current)
+  ul.grid
+    li
+      a(href="/game/"+game.code+"/event/"+event.slug+"/matches/submit") Submit a Match
+
 - if (matches.length == 0)
   p (no recent matches are available)
 

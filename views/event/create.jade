@@ -59,6 +59,10 @@ form(method="post", accept-charset="utf-8")
       span.field-status
         span &nbsp;
     .form-line#gtform(style= data.gametype_name == "other" ? "" : "display: none;")
+      - if (messages["marshal"] && messages["marshal"].length)
+        ul.field-error
+          - each msg in messages["marshal"]
+            li!= msg
       input.marshal(type="hidden", name="marshal", value=JSON.stringify(data.marshal))
       label Stats
       ul.stats

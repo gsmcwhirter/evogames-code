@@ -1,9 +1,8 @@
 h1= "Manage "+event.name
 
-- var now_string = (new Date()).toISOString();
 #event-controls
   ul.grid
-    - if (!event.enddate || event.enddate >= now_string)
+    - if (!is_ended)
       li
         a(href="/game/"+game.code+"/event/"+event.slug+"/controls/edit") Event Information
         br

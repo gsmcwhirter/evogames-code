@@ -10,7 +10,7 @@
     - if (is_registerable)
       li
         a(href="/game/"+game.code+"/event/"+event.slug+"/register") Event Registration
-    - if (is_participant && event.startdate && event.startdate <= (new Date()).toISOString())
+    - if (is_participant && event_is_current)
       li
         a(href="/game/"+game.code+"/event/"+event.slug+"/matches/submit") Submit a Match
     - if (is_admin)

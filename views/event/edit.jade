@@ -83,6 +83,10 @@ form(method="post", accept-charset="utf-8")
       span.field-status
         span &nbsp;
     .form-line#gtform(style= data.gametype_name == "other" ? "" : "display: none;")
+      - if (messages["marshal"] && messages["marshal"].length)
+        ul.field-error
+          - each msg in messages["marshal"]
+            li!= msg
       input.marshal(type="hidden", name="marshal", value=data.marshal)
       label Stats
       ul.stats
@@ -126,7 +130,7 @@ form(method="post", accept-charset="utf-8")
           - each msg in messages["rules"]
             li!= "Rules " + msg
       textarea#rules(name="rules")= data.rules || ""
-    - if (!event.startdate || event.startdate > (new Date()).toISOString())
+    - if (!is_started)
       .form-line
         label Start Date (your time zone)
         span.small
@@ -140,7 +144,7 @@ form(method="post", accept-charset="utf-8")
         input#startdate_time.text.narrow(type="time", name="startdate_time", value=data.startdate_time)
         span.field-status
           span &nbsp;
-    - if (!event.enddate || event.enddate > (new Date()).toISOString())
+    - if (!is_ended)
       .form-line
         label(for="enddate") End Date (your time zone)
         span.small

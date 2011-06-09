@@ -1,6 +1,11 @@
 h1= event.name+" Match"
 h3= game.name+", "+event.gametype.name.toUpperCase()
 
+- if (event_is_current)
+  ul.grid
+    li
+      a(href="/game/"+game.code+"/event/"+event.slug+"/matches/submit") Submit a Match
+
 != partial('match', {match: match, event: event, game: game})
 
 script(type="text/javascript", src="/js/client_math_lexer.js")
