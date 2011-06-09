@@ -7,12 +7,15 @@
 - else
   h1 Recent Event Matches
 
+- if (matches.length == 0)
+  p (no recent matches are available)
+
 - each match in matches
   != partial('event/match', {match: match.match, event: match.event, game: match.game, show_header: true, show_gameheader: true})
 
 - if (nextpage)
   .pagination
-    a.next(href=self+"?nextpage="+nextpage+"&limit="+limit) older &raquo;
+    a.next(href=self_url+"?nextpage="+nextpage+"&limit="+limit) older &raquo;
 
 script(type="text/javascript", src="/js/client_math_lexer.js")
 script(type="text/javascript", src="/js/event_matchsummary.js")
