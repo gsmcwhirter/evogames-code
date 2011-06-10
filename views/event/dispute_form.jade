@@ -1,0 +1,35 @@
+h1= event.name+" Match Disputes"
+h3= game.name+", "+event.gametype.name.toUpperCase()
+
+!= partial('match', {match: match, event: event, game: game, show_disputes: true})
+
+form(method="post", accept-charset="utf-8")
+  fieldset
+    input(type="hidden", name="csrf", value=csrf)
+    .form-line
+      label(for="creation_note") Dispute Information
+      span.small
+        |  (
+        a(href="http://daringfireball.net/projects/markdown/syntax", rel="blank") markdown syntax
+        |  )
+      br
+      - if (messages["creation_note"] && messages["creation_note"].length)
+        ul.field-error
+          - each msg in messages["creation_note"]
+            li!= "Dispute information " + msg
+      textarea#creation_note(name="creation_note")= data.creation_note || ""
+    .form-line
+      button.button.positive(type="submit")
+        img(src="/css/icons/tick.png",alt="")
+        | &#32;Submit Dispute
+      a.button.negative(href="/game/"+game.code+"/event/"+event.slug+"/matches/"+match._id.substring(12))
+        img(src="/css/icons/cross.png",alt="")
+        | &#32;Cancel
+
+//ul.disputes.solo
+//  != partial('dispute', {collection: (match.pending_disputes || []), as: 'dispute', match: match, event: event, game: game})
+//  != partial('dispute', {collection: (match.resolved_disputes || []), as: 'dispute', match: match, event: event, game: game})
+//  li
+
+script(type="text/javascript", src="/js/client_math_lexer.js")
+script(type="text/javascript", src="/js/event_matchsummary.js")

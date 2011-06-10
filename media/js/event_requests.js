@@ -86,7 +86,11 @@ $(function (){
                 var code = this.params.code;
                 var self = this;
 
-                var _url = "requests/"+verb+"/";
+                var _url = verb+"/";
+                if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                    _url = "requests/"+_url;
+                }
+
                 var identifier;
                 if (type == "player"){
                     identifier = alias+"@"+handle;

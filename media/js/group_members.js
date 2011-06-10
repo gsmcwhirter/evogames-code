@@ -53,9 +53,14 @@ $(function (){
             var alias = this.params.alias;
             var self = this;
 
+            var url = alias+"@"+handle+"/remove";
+            if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                url = "members/"+url;
+            }
+
             $.ajax({
                 type: 'delete',
-                url: "members/"+alias+"@"+handle+"/remove",
+                url: url,
                 dataType: 'json',
                 success: function (data){
                     if (data.ok)

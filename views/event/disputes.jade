@@ -1,0 +1,24 @@
+h1 List Pending Disputes
+
+#disputes
+  form(method="post", action="#!/toggle", accept-charset="utf-8")
+    fieldset
+      .form-line
+        label(for="disputes_closed") Dispute Policy
+        br
+        select#disputes_closed.text.narrow(name="disputes_closed", style="float: left;", size="1")
+          option(value="no", selected=!event.disputes_closed) Allow Disputes
+          option(value="yes", selected=event.disputes_closed) Prevent Disputes
+        span.link-sep(style="float: left") &nbsp;
+        button.button.positive(type="submit")
+          img(src="/css/icons/tick.png",alt="")
+          | &#32;Change Dispute Policy
+
+  - each match in disputes
+    != partial('match', {match: match, event: event, game: game, show_disputes: true, show_actions: true})
+
+  != partial('dispute_actions')
+
+script(type="text/javascript", src="/js/client_math_lexer.js")
+script(type="text/javascript", src="/js/event_matchsummary.js")
+script(type="text/javascript", src="/js/event_disputeactions.js")

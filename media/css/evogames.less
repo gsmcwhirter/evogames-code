@@ -137,6 +137,14 @@ strong,
     margin-bottom: 0;
 }
 
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
 table {
     border-collapse: separate;
     border-spacing: 1px;
@@ -657,7 +665,11 @@ table {
         border-radius: 10px;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
+    }
 
+    .match-display,
+    #match-submission,
+    #match-edit {
         .record {
             font-weight: bold;
         }
@@ -666,11 +678,52 @@ table {
             float: left;
         }
 
-        .submitted-by {
+        .submitted-by,
+        .dispute-info {
             float: right;
             font-size: 85%;
             overflow: auto;
         }
+
+        .dispute-info {
+            clear: right;
+        }
+    }
+
+    ul.disputes {
+
+        li {
+            border-top: 1px dotted #666;
+        }
+
+        .actions {
+            float: right;
+            font-size: 85%;
+        }
+
+        .note {
+            margin: 0;
+            margin-left: 2em;
+            border-left: 1px solid #888;
+            padding-left: 1em;
+
+            p {
+                margin-bottom: 0.5em;
+            }
+        }
+    }
+
+    ul.disputes.solo {
+        /* Duplicating fieldset */
+        display: block;
+        background-color: @lightbase;
+        border: 1px solid @medborder;
+        padding: 1.4em;
+        margin-bottom: 1.5em;
+
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
     }
 
     ul.teams {
@@ -946,12 +999,7 @@ table {
         }
     }
 
-    fieldset.match-form {
-        a.fright {
-            margin-left: 2em;
-            vertical-align: middle;
-        }
-
+    fieldset.match-form table {
         th.action,
         td.action {
             width: 2em;
@@ -974,6 +1022,13 @@ table {
         textarea
         {
             width: 100%;
+        }
+    }
+
+    fieldset.match-form {
+        a.fright {
+            margin-left: 2em;
+            vertical-align: middle;
         }
 
         input[type=text].narrow,

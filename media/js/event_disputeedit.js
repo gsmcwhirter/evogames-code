@@ -1,11 +1,33 @@
 $(function (){
-    var matchsub = $.sammy("#match-submission", function (){
+    var matchedit = $.sammy("#match-edit", function (){
 
         this.use("JSON");
 
         var _autochange_data;
         var _gametype;
         var _min_teams = 1;
+
+        this.bind('loaddata', function (){
+            var datat = $.trim($(".marshal").text());
+            var data = this.json(datat);
+
+            var teamul = $("ul.teams");
+            teamul.empty();
+
+            data.teams.forEach(function (team){
+                teamul.trigger("add-team");
+                var teamli = teamul.find("li.team:last");
+                teamli.trigger("update-team-rank", [team.rank]);
+
+                var p1 = team.players.shift();
+                teamli.find("tr.player:last").trigger("update-data", [p1]);
+
+                team.players.forEach(function (player){
+                    teamli.trigger("add-player");
+                    teamli.find("tr.player:last").trigger("update-data", [player]);
+                });
+            });
+        });
 
         this.bind("run", function (){
             $("ul.teams").bind("add-team", function (){
@@ -197,6 +219,29 @@ $(function (){
                 player.find(".rating").text(Math.round(rating * 100) / 100);
 
                 player.parents("li.team:first").trigger("calc-summary");
+            }).bind("update-data", function (e, player){
+                var self = $(this);
+
+                if (player.groupcode){
+                    self.find("select[name=groupcode]").val(player.groupcode);
+                    self.find("select[name=player]").val(player.alias+"@"+player.handle);
+                }
+                else {
+                    self.find("select[name=alias]").val(player.alias);
+                    self.find("select[name=handle]").val(player.handle);
+                }
+
+                for (var lstatname in player.stats){
+                    if (lstatname == "wins" || lstatname == "losses" || lstatname == "ties" || lstatname == "rating"){
+                        continue;
+                    }
+                    else {
+                        var statname = _gametype.statdefs[lstatname].name;
+                        self.find("input[name="+statname+"], select[name="+statname+"]").val(player.stats[lstatname]);
+                    }
+                }
+
+                self.trigger("calc-stats");
             });
 
             $("a.add-team").bind("click", function (){
@@ -301,6 +346,8 @@ $(function (){
                 this.log("GAMETYPE undefined");
             }
 
+            this.trigger("loaddata");
+
             if (typeof MIN_TEAMS != "undefined"){
                 _min_teams = MIN_TEAMS;
             }
@@ -336,8 +383,10 @@ $(function (){
         this.get('', noop);
         this.get("#!/", noop);
 
-        this.post("#!/submit", function (){
+        this.post("#!/submit/:disputeid", function (){
             var _app = this;
+            var disputeid = this.params.disputeid;
+            var resnote = $("textarea[name=resolution_note]").val();
 
             //generate the teams object
             var teams = [];            
@@ -496,15 +545,16 @@ $(function (){
             }
 
             if (errors.length == 0){
+
                 var url = "";
                 if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
-                    url = "submit";
+                    url = "edit";
                 }
 
                 $.ajax({
                     type: 'put',
-                    url: "submit",
-                    data: {teams: teams},
+                    url: url,
+                    data: {teams: teams, disputeid: disputeid, resolution_note: resnote},
                     dataType: 'json',
                     success: function (data){
                         if (data.ok)
@@ -530,5 +580,5 @@ $(function (){
         });
     });
 
-    matchsub.run();
+    matchedit.run();
 });

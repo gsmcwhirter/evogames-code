@@ -34,6 +34,8 @@ html
           #menu
             != partial('menus/main')
         #player-info
+          - if (typeof player != "undefined")
+            != partial('statusbox', {player: player})
           
       #container2
         #main

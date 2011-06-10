@@ -1,4 +1,4 @@
-.match-display
+.match-display(title=match._id.substring(12))
   - if (typeof show_header != "undefined" && show_header)
     a(href="/game/"+game.code+"/event/"+event.slug)
       h2
@@ -7,13 +7,26 @@
           |  (
           = game.code.toUpperCase()
           |  )
-  a(href="/game/"+game.code+"/event/"+event.slug+"/matches/"+match._id.substring(12))
-    h4= "Match ID: "+match._id.substring(12)
+  - var permalink;
+  - if (typeof show_disputes == "undefined" || !show_disputes)
+    - permalink = "/game/"+game.code+"/event/"+event.slug+"/matches/"+match._id.substring(12)
+  - else
+    - permalink = "/game/"+game.code+"/event/"+event.slug+"/controls/disputes/"+match._id.substring(12)
+  a(href=permalink)
+    h4
+      = "Match ID: "
+      span.match-id= match._id.substring(12)
   .submitted-by
-    | Submitted by:&#32;
+    | Submitted by
     span.handle.only= "@"+match.submitted_by
     |  on
     = datetime(match.created_at)
+  .dispute-info
+    - if (match.pending_disputes && match.pending_disputes.length)
+      span.red.bold Disputed
+    - if (match.is_disputable && !event.disputes_closed)
+      span.link-sep
+      a.dispute-link(href="/game/"+game.code+"/event/"+event.slug+"/matches/"+match._id.substring(12)+"/dispute") Dispute Match
   .gametype.template= JSON.stringify(event.gametype);
   ul.teams
     - each team, tindex in match.teams
@@ -77,3 +90,8 @@
               td
               - each stat in event.gametype.stats
                 td
+  - if (typeof show_disputes != "undefined" && show_disputes)
+    ul.disputes
+      != partial('dispute', {collection: (match.pending_disputes || []), as: 'dispute', match: match, event: event, game: game, show_actions: (typeof show_actions != "undefined") ? show_actions : false})
+      != partial('dispute', {collection: (match.resolved_disputes || []), as: 'dispute', match: match, event: event, game: game})
+      li

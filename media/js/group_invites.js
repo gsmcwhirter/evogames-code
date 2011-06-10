@@ -50,9 +50,14 @@ $(function (){
             var handle = this.params.handle;
             var self = this;
 
+            var url = "@"+handle;
+            if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                url = "invites/"+url;
+            }
+
             $.ajax({
                 type: 'delete',
-                url: "invites/@"+handle,
+                url: url,
                 dataType: 'json',
                 success: function (data){
                     if (data.ok)
@@ -85,9 +90,14 @@ $(function (){
             var self = this;
 
             if (handle){
+                var url = "add";
+                if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                    url = "invites/"+url;
+                }
+
                 $.ajax({
                     type: 'put',
-                    url: "invites/add",
+                    url: url,
                     data: {handle: handle},
                     dataType: 'json',
                     success: function (data){

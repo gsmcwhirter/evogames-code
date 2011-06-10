@@ -1,0 +1,34 @@
+li.dispute(title=dispute.id)
+  .dispinfo
+    | Disputed by
+    span.handle.only= "@"+dispute.created_by
+    |  on
+    = datetime(dispute.created_at)
+    span.link-sep
+    span.small (#{dispute.id})
+  .note
+    != dispute.creation_note
+    div &nbsp;
+  - if (dispute.is_pending)
+    .status
+      | Status:
+      span.status-text.red Pending
+      - if (typeof show_actions != "undefined" && show_actions)
+        .actions
+          a(href="/game/"+game.code+"/event/"+event.slug+"/controls/disputes/"+match._id.substring(12)+"/edit?dispute_id="+dispute.id) Edit Match
+          span.link-sep
+          a(href="#!/delete/"+match._id.substring(12)) Delete Match
+          span.link-sep
+          a(href="#!/resolve/"+match._id.substring(12)+"/"+dispute.id) Mark as Resolved
+  - else
+    .status
+      | Status:
+      span.status-text.green Resolved
+    .dispinfo
+      | Resolved by
+      span.handle.only= "@"+dispute.resolved_by
+      |  on
+      = datetime(dispute.resolved_at)
+    .note
+      != dispute.resolution_note
+      div &nbsp;

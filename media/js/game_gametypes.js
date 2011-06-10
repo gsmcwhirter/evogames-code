@@ -211,9 +211,14 @@ $(function (){
 
             var gt = {origname: origname, gtdata: obj};
 
+            var url = "save";
+            if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                url = "gametypes/"+url;
+            }
+
             $.ajax({
                 type: 'put',
-                url: 'gametypes/save',
+                url: url,
                 data: gt,
                 dataType: 'json',
                 success: function (data){
@@ -237,9 +242,14 @@ $(function (){
             var self = $(this.target);
             var gtname = $.trim($(".gametype-name", self).text());
 
+            var url = gtname;
+            if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                url = "gametypes/"+url;
+            }
+
             $.ajax({
                 type: 'delete',
-                url: 'gametypes/'+gtname,
+                url: url,
                 dataType: 'json',
                 success: function (data){
                     if (data.ok){

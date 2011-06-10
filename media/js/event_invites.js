@@ -59,9 +59,14 @@ $(function (){
             var id = this.params.id;
             var self = this;
 
+            var url = id;
+            if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                url = "invites/"+url;
+            }
+
             $.ajax({
                 type: 'delete',
-                url: "invites/"+id,
+                url: url,
                 dataType: 'json',
                 success: function (data){
                     if (data.ok)
@@ -94,13 +99,17 @@ $(function (){
             var self = this;
 
             if (code_or_handle){
+                var url = "add";
+                if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                    url = "invites/"+url;
+                }
+
                 $.ajax({
                     type: 'put',
-                    url: "invites/add",
+                    url: url,
                     data: {code_or_handle: code_or_handle},
                     dataType: 'json',
                     success: function (data){
-                        console.log("once");
                         if (data.ok)
                         {
                             var newli = $("<li title='"+data.id+"' />");

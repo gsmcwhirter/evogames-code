@@ -28,7 +28,7 @@ h1= "Manage "+event.name
         a(href="/game/"+game.code+"/event/"+event.slug+"/controls/admins") Event Admins
         br
         | Manage event admins.
-      - if (!event.startdate || event.startdate >= now_string)
+      - if (!is_started)
         li
           a(href="#!/remove") Cancel Event
           br

@@ -1,17 +1,45 @@
-h1 #{event.name} Match Submission 
-h3= game.name+", "+event.gametype.name.toUpperCase()
+h1 #{event.name} Disputed Match Editing
 
-#match-submission
-  form(method="post", action="#!/submit", accept-charset="utf-8")
+#match-edit
+  form(method="post", action="#!/submit/"+dispute_id, accept-charset="utf-8")
     fieldset.match-form
       .form-line
-        a.small.fright.add-team(href="#!/") Add a Team
+        a(href="/game/"+game.code+"/event/"+event.slug+"/controls/disputes/"+match._id.substring(12))
+          h4
+            = "Match ID: "
+            span.match-id= match._id.substring(12)
+        .submitted-by
+          | Submitted by
+          span.handle.only= "@"+match.submitted_by
+          |  on
+          = datetime(match.created_at)
+        div.cboth
+          a.small.fright.add-team(href="#!/") Add a Team
+        .marshal.template
+          - if (data.marshal)
+            = JSON.stringify(data.marshal)
         ul.teams.cboth
+
+      .form-line
+        label Dispute Information
+        ul.disputes
+          != partial('dispute', {collection: (match.pending_disputes || []), as: 'dispute', match: match, event: event, game: game, show_actions: (typeof show_actions != "undefined") ? show_actions : false})
+          != partial('dispute', {collection: (match.resolved_disputes || []), as: 'dispute', match: match, event: event, game: game})
+          li
+
+      .form-line
+        label(for="resolution_note") Resolution Information
+          span.small
+            |  (
+            a(href="http://daringfireball.net/projects/markdown/syntax", rel="blank") markdown syntax
+            |  )
+          br
+          textarea#resolution_note(name="resolution_note")
       .form-line
         button.button.positive(type="submit")
           img(src="/css/icons/tick.png",alt="")
-          | &#32;Submit Match
-        a.button.negative(href="/game/"+game.code+"/event/"+event.slug)
+          | &#32;Save Changes and Resolve Dispute
+        a.button.negative(href="/game/"+game.code+"/event/"+event.slug+"/controls/disputes/"+match._id.substring(12))
           img(src="/css/icons/cross.png",alt="")
           | &#32;Cancel
 
@@ -106,4 +134,4 @@ script(type="text/javascript")
     var MIN_TEAMS = #{event.minTeams};
 
 script(type="text/javascript", src="/js/client_math_lexer.js")
-script(type="text/javascript", src="/js/event_matchsubmit.js")
+script(type="text/javascript", src="/js/event_disputeedit.js")

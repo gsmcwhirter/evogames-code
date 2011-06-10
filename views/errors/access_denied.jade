@@ -1,2 +1,6 @@
 h1 Access Denied
-p You do not have sufficient permissions to access the requested page.
+p
+  - if (_error.message)
+    != _error.message
+  - else
+    | You do not have sufficient permissions to access the requested page.

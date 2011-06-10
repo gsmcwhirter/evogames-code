@@ -1,0 +1,41 @@
+div.modal#delete-modal
+  h2 Delete Match
+  form#delete-form(method="post", accept-charset="utf-8", action="#!/")
+    fieldset
+      .form-line
+        | Are you sure you want to delete the match
+        span.matchid
+        | ?
+      .form-line
+        button.button.positive(type="submit")
+          img(src="/css/icons/tick.png", alt="")
+          | &#32;Delete Match
+        a.button.negative.cancel(href="#!/cancel")
+          img(src="/css/icons/cross.png", alt="")
+          | &#32;Cancel
+
+div.modal.big#resolve-modal
+  h2 Resolve Dispute
+  form#resolve-form(method="post", accept-charset="utf-8", action="#!/")
+    fieldset
+      .form-line
+        | Are you sure you want to resolve dispute
+        span.disputeid
+        |  of the match
+        span.matchid
+        | ?
+      .form-line
+        label(for="resolution_note") Resolution Information
+        span.small
+          |  (
+          a(href="http://daringfireball.net/projects/markdown/syntax", rel="blank") markdown syntax
+          |  )
+        br
+        textarea#resolution_note(name="resolution_note")
+      .form-line
+        button.button.positive(type="submit")
+          img(src="/css/icons/tick.png", alt="")
+          | &#32;Resolve Dispute
+        a.button.negative.cancel(href="#!/cancel")
+          img(src="/css/icons/cross.png", alt="")
+          | &#32;Cancel

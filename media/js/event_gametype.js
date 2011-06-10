@@ -141,8 +141,6 @@ $(function (){
             if (datastr){
                 obj = this.json(datastr);
 
-                console.log(obj);
-
                 self.trigger("filldata", obj);
             }
         });

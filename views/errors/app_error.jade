@@ -1,5 +1,8 @@
 h1 Error 500: Internal System Error
 p
-  | An error has occurred trying to process your request:
+  - if (_error.message)
+    != _error.message
+  - else
+    | An error has occurred trying to process your request:
 
-pre= error.stack || error || "An unknown error occurred."
+pre= _error.stack || _error || "An unknown error occurred."

@@ -41,9 +41,14 @@ $(function (){
         this.post("#!/remove", function (){
             var self = this;
 
+            var url = "delete";
+            if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                url = "controls/"+url;
+            }
+
             $.ajax({
                 type: 'delete',
-                url: "controls/delete",
+                url: url,
                 dataType: 'json',
                 success: function (data){
                     if (data.ok)

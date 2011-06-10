@@ -296,6 +296,8 @@ ol ol ol ol, ol ol ol ol > li, ol.alpha, ol.alpha > li {list-style-type:lower-al
 strong, .bold {font-weight:bold;}
 .center {text-align:center;}
 .small {font-size:85%;margin-bottom:0;}
+.red {color:red;}
+.green {color:green;}
 table {border-collapse:separate;border-spacing:1px;background-color:#fff;}
 table th, table td, table caption {padding:4px 7px;}
 table thead th {background-color:#eee;border-top:2px solid #000;border-bottom:1px solid #888;}
@@ -367,9 +369,15 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main .gametype ul.stats li, #main #gtform ul.stats li, #main .gametype ul.weights li, #main #gtform ul.weights li {border-bottom:1px dotted #666;}
 #main .gametype ul.stats li.add, #main #gtform ul.stats li.add, #main .gametype ul.weights li.add, #main #gtform ul.weights li.add {padding:5px 0;border-bottom:none;}
 #main .match-display {display:block;background-color:#ffffff;border:1px solid #888888;padding:1.4em;margin-bottom:1.5em;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
-#main .match-display .record {font-weight:bold;}
-#main .match-display h4 {float:left;}
-#main .match-display .submitted-by {float:right;font-size:85%;overflow:auto;}
+#main .match-display .record, #main #match-submission .record, #main #match-edit .record {font-weight:bold;}
+#main .match-display h4, #main #match-submission h4, #main #match-edit h4 {float:left;}
+#main .match-display .submitted-by, #main #match-submission .submitted-by, #main #match-edit .submitted-by, #main .match-display .dispute-info, #main #match-submission .dispute-info, #main #match-edit .dispute-info {float:right;font-size:85%;overflow:auto;}
+#main .match-display .dispute-info, #main #match-submission .dispute-info, #main #match-edit .dispute-info {clear:right;}
+#main ul.disputes li {border-top:1px dotted #666;}
+#main ul.disputes .actions {float:right;font-size:85%;}
+#main ul.disputes .note {margin:0;margin-left:2em;border-left:1px solid #888;padding-left:1em;}
+#main ul.disputes .note p {margin-bottom:0.5em;}
+#main ul.disputes.solo {display:block;background-color:#ffffff;border:1px solid #888888;padding:1.4em;margin-bottom:1.5em;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
 #main ul.teams {clear:both;margin-bottom:0;}
 #main ul.teams li {border-top:1px dotted #666;padding:0.5em 0;}
 #main #flash .info, #main #flash .error {padding:5px 20px;margin-bottom:5px;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
@@ -418,9 +426,9 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main fieldset ul.field-error {color:#f00;margin:0;margin-bottom:2px;}
 #main fieldset ul.field-error li {color:#f00;}
 #main fieldset.narrow-fields input[type=text], #main fieldset.narrow-fields input[type=password], #main fieldset.narrow-fields input[type=email], #main fieldset.narrow-fields input[type=url], #main fieldset.narrow-fields input[type=number], #main fieldset.narrow-fields input[type=date], #main fieldset.narrow-fields input[type=datetime], #main fieldset.narrow-fields input[type=month], #main fieldset.narrow-fields input[type=week], #main fieldset.narrow-fields input[type=time], #main fieldset.narrow-fields input[type=search], #main fieldset.narrow-fields input[type=color], #main fieldset.narrow-fields select, #main fieldset.narrow-fields textarea {width:50%;}
+#main fieldset.match-form table th.action, #main fieldset.match-form table td.action {width:2em;text-align:center;}
+#main fieldset.match-form table input[type=text], #main fieldset.match-form table input[type=password], #main fieldset.match-form table input[type=email], #main fieldset.match-form table input[type=url], #main fieldset.match-form table input[type=number], #main fieldset.match-form table input[type=date], #main fieldset.match-form table input[type=datetime], #main fieldset.match-form table input[type=month], #main fieldset.match-form table input[type=week], #main fieldset.match-form table input[type=time], #main fieldset.match-form table input[type=search], #main fieldset.match-form table input[type=color], #main fieldset.match-form table select, #main fieldset.match-form table textarea {width:100%;}
 #main fieldset.match-form a.fright {margin-left:2em;vertical-align:middle;}
-#main fieldset.match-form th.action, #main fieldset.match-form td.action {width:2em;text-align:center;}
-#main fieldset.match-form input[type=text], #main fieldset.match-form input[type=password], #main fieldset.match-form input[type=email], #main fieldset.match-form input[type=url], #main fieldset.match-form input[type=number], #main fieldset.match-form input[type=date], #main fieldset.match-form input[type=datetime], #main fieldset.match-form input[type=month], #main fieldset.match-form input[type=week], #main fieldset.match-form input[type=time], #main fieldset.match-form input[type=search], #main fieldset.match-form input[type=color], #main fieldset.match-form select, #main fieldset.match-form textarea {width:100%;}
 #main fieldset.match-form input[type=text].narrow, #main fieldset.match-form input[type=password].narrow, #main fieldset.match-form input[type=email].narrow, #main fieldset.match-form input[type=url].narrow, #main fieldset.match-form input[type=number].narrow, #main fieldset.match-form input[type=date].narrow, #main fieldset.match-form input[type=datetime].narrow, #main fieldset.match-form input[type=month].narrow, #main fieldset.match-form input[type=week].narrow, #main fieldset.match-form input[type=time].narrow, #main fieldset.match-form input[type=search].narrow, #main fieldset.match-form input[type=color].narrow, #main fieldset.match-form select.narrow, #main fieldset.match-form textarea.narrow {width:10%;}
 #main input[type=text].narrow, #main input[type=password].narrow, #main input[type=email].narrow, #main input[type=url].narrow, #main input[type=number].narrow, #main input[type=date].narrow, #main input[type=datetime].narrow, #main input[type=month].narrow, #main input[type=week].narrow, #main input[type=time].narrow, #main input[type=search].narrow, #main input[type=color].narrow, #main select.narrow, #main textarea.narrow {width:35%;}
 #main ul.form-error {color:#f00;margin-bottom:2px;padding:10px;border:2px solid #800;background-color:#ddd;display:block;font-weight:bold;}

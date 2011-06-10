@@ -79,7 +79,11 @@ $(function (){
                 var code = this.params.code;
                 var self = this;
 
-                var _url = "registrations/remove/";
+                var _url = "remove/";
+                if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                    _url = "registrations/"+_url;
+                }
+
                 var identifier;
                 if (type == "player"){
                     identifier = alias+"@"+handle;

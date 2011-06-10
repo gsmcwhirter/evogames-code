@@ -40,9 +40,14 @@ $(function (){
         this.post("#!/resign", function (){
             var self = this;
 
+            var url = "resign";
+            if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                url = "owners/"+url;
+            }
+
             $.ajax({
                 type: 'delete',
-                url: "owners/resign",
+                url: url,
                 dataType: 'json',
                 success: function (data){
                     if (data.ok)
@@ -74,9 +79,14 @@ $(function (){
             var self = this;
 
             if (handle){
+                var url = "add";
+                if (window.location.pathname.substring(window.location.pathname.length - 1) != "/"){
+                    url = "owners/"+url;
+                }
+
                 $.ajax({
                     type: 'put',
-                    url: "owners/add",
+                    url: url,
                     data: {handle: handle},
                     dataType: 'json',
                     success: function (data){

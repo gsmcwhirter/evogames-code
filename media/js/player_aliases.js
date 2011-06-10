@@ -36,8 +36,6 @@ $(function (){
         });
 
         this.bind('save-default', function (e, data){
-
-            this.log(this);
             
             var target = $(data.target);
 
