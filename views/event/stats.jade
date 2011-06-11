@@ -15,7 +15,8 @@ h3= game.name+", "+event.gametype.name.toUpperCase()
           th(style="width: 20%;")
             .clickable Player
         - else
-          th(style="width: 30%;") Player
+          th(style="width: 30%;")
+            .clickable Player
         th.number.rating-head(style="width: "+width+"%;")
           .clickable Rating
         th.number.stat-head.integer(style="width: "+width+"%;", title="wins")
