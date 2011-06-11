@@ -23,15 +23,7 @@ python setup.py develop #sudo
 cd ..
 #git clone http://github.com/isaacs/npm.git
 curl http://npmjs.org/install.sh | sh #sudo sh
-#npm install expresso #sudo
-#npm install express #sudo #includes connect
-#npm install ejs #sudo
-#npm install jade #sudo
-#npm install underscore #sudo
-#npm install less #sudo
-#npm install recatpcha #sudo
-#npm install zoneinfo #sudo
-npm install express expresso ejs jade less recaptcha underscore zoneinfo #in source directory for the site
+npm install express ejs jade less recaptcha underscore zoneinfo math-lexer #in source directory for the site
 curl -o discount-1.6.8.tar.gz http://download.github.com/Orc-discount-v1.6.8-0-gc673eaa.tar.gz
 tar xzf discount-1.6.8.tar.gz
 cd Orc-discount-0abaf53
@@ -40,6 +32,16 @@ cd Orc-discount-0abaf53
 make
 make install #sudo
 npm install markdown
+
+#SETUP REDIS
+curl -O http://redis.googlecode.com/files/redis-2.2.9.tar.gz
+tar xzf redis-2.2.9.tar.gz
+cd redis-2.2.9/src
+make 32bit
+make ARCH="-m32" PREFIX=/usr/local install #sudo
+useradd -r redis #sudo
+cd ../..
+npm install hiredis connect-redis #in source directory for the site
 
 #SETUP NODE DAEMON (optional -- for production/proxy usage)
 #apt-get install nginx #sudo #get this configured independently
@@ -51,6 +53,9 @@ cp EvoGames.monit /etc/monit/conf.d/ #sudo
 cp couchdb.monit /etc/monit/conf.d/ #sudo
 cp EvoGames.nginx /etc/nginx/sites-available #sudo
 ln -s ../sites-available/EvoGames.nginx /etc/nginx/sites-enabled/
+cp Redis.conf /etc/init/
+mkdir /etc/redis
+cp redis/redis.conf /etc/redis/
 cd ..
 
 #SSL SETUP (optional -- generates self-signed ssl certificate)

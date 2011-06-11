@@ -2,7 +2,8 @@ var express = require('express'),
     base = require('./lib/base'),
     SMTP = require('./lib/smtp'),
     API = require('./lib/api/internal'),
-    fs = require('fs');
+    fs = require('fs'),
+    RedisStore = require('connect-redis')(express);
 
 require('./lib/base/mixins');
     
@@ -20,7 +21,7 @@ server.configure('development', function (){
 server.configure(function (){
     this.use(express.responseTime());
     this.use(express.cookieParser());
-    this.use(express.session({fingerprint: base.connectionFingerprint, secret: config.session_secret}));
+    this.use(express.session({store: new RedisStore, fingerprint: base.connectionFingerprint, secret: config.session_secret}));
     this.use(express.bodyParser());
     this.use(base.middleware.csrf.check);
     this.use(base.middleware.determineLogin());
