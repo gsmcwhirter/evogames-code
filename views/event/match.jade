@@ -40,31 +40,30 @@
                 th(style="width: 20%;") Player
               - else
                 th(style="width: 30%;") Player
-              - var width = Math.round(68. / (event.gametype.stats.length + 1), 2)
-              th.rating-head(style="width: "+width+"%;") Rating
+              - var width = Math.floor(70. / (event.gametype.stats.length + 1) * 100) / 100
+              th.number.rating-head(style="width: "+width+"%;") Rating
               - each stat in event.gametype.stats
-                th(class="stat-head "+stat.valtype, style="width: "+width+"%;", title=stat.name)= stat.name
+                th.number(class="stat-head "+stat.valtype, style="width: "+width+"%;", title=stat.name)= stat.name
           tbody
             - each player in team.players
               tr.player
                 - if (event.event_type == "group_register")
-                  td(style="width: 10%;")
+                  td
                     a(href="/group/"+player.groupcode)= player.groupcode
-                  td(style="width: 20%;")
+                  td
                     a(href="/player/"+player.alias+"@"+player.handle)
                       span.alias= player.alias
                       span.handle= "@"+player.handle
                 - else
-                  td(style="width: 30%;")
+                  td
                     a(href="/player/"+player.alias+"@"+player.handle)
                       span.alias= player.alias
                       span.handle= "@"+player.handle
-                - var width = Math.floor(70. / (event.gametype.stats.length + 1) * 100) / 100
-                td(style="width: "+width+"%;")= Math.round(player.rating * 100) / 100
+                td.number= player.rating.toFixed(2)
                 - each stat in event.gametype.stats
-                  td(style="width: "+width+"%;")
-                    - if (stat.valtype == "integer" || stat.valtype == "float" || stat.valtype == "formula")
-                      = Math.round(player.stats[stat.name.toLowerCase()] * 100) / 100
+                  td.number
+                    - if (stat.valtype == "float" || stat.valtype == "formula")
+                      = player.stats[stat.name.toLowerCase()].toFixed(2)
                     - else
                       = player.stats[stat.name.toLowerCase()]
           tfoot
@@ -87,9 +86,9 @@
                     span.losses= team.losses
                     | -
                     span.ties= team.ties
-              td
+              td.number
               - each stat in event.gametype.stats
-                td
+                td.number
   - if (typeof show_disputes != "undefined" && show_disputes)
     ul.disputes
       != partial('dispute', {collection: (match.pending_disputes || []), as: 'dispute', match: match, event: event, game: game, show_actions: (typeof show_actions != "undefined") ? show_actions : false})

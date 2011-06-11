@@ -132,11 +132,11 @@ $(function (){
                     var lstatname = proc.name.toLowerCase();
                     stats[lstatname] = _gametype.statdefs[lstatname].statfunc(stats);
 
-                    tfoot_tds.eq(proc.index - mod).text(Math.round(stats[lstatname] * 100) / 100);
+                    tfoot_tds.eq(proc.index - mod).text(stats[lstatname].toFixed(2));
                 });
 
                 _(proclist).filter(function (proc){return proc.type == "rating"}).forEach(function (proc){
-                    tfoot_tds.eq(proc.index - mod).text(Math.round(_gametype.ratingfunc(stats) * 100) / 100);
+                    tfoot_tds.eq(proc.index - mod).text(_gametype.ratingfunc(stats).toFixed(2));
                 });
             });
 
@@ -181,7 +181,7 @@ $(function (){
                     if (_gametype.statdefs[statname]){
                         var result = _gametype.statdefs[statname].statfunc(stats);
                         if (typeof result != "undefined"){
-                            o.text(Math.round(result * 100) / 100);
+                            o.text(result.toFixed(2));
                         }
                         else {
                             o.text("")
@@ -194,7 +194,7 @@ $(function (){
 
                 var rating = _gametype.ratingfunc(stats);
 
-                player.find(".rating").text(Math.round(rating * 100) / 100);
+                player.find(".rating").text(rating.toFixed(2));
 
                 player.parents("li.team:first").trigger("calc-summary");
             });

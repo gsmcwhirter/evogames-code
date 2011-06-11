@@ -1,0 +1,80 @@
+h1= event.name+" Statistics"
+h3= game.name+", "+event.gametype.name.toUpperCase()
+
+#statistics.stats-display
+  .gametype.template= JSON.stringify(event.gametype)
+  table
+    thead
+      tr
+        - var width = Math.floor(65. / (relevant_stats.length + 6) * 100) / 100
+        th.number(style="width: 5%;")
+          .clickable Rank
+        - if (event.event_type == "group_register")
+          th(style="width: 10%;")
+            .clickable Group
+          th(style="width: 20%;")
+            .clickable Player
+        - else
+          th(style="width: 30%;") Player
+        th.number.rating-head(style="width: "+width+"%;")
+          .clickable Rating
+        th.number.stat-head.integer(style="width: "+width+"%;", title="wins")
+          .clickable Wins
+        th.number.stat-head.integer(style="width: "+width+"%;", title="losses")
+          .clickable Losses
+        th.number.stat-head.integer(style="width: "+width+"%;", title="ties")
+          .clickable Ties
+        th.number.winpct-head(style="width: "+width+"%;")
+          .clickable WinPct
+        - each stat in relevant_stats
+          th.number(class="stat-head "+stat.valtype, style="width: "+width+"%;", title=stat.name)
+            .clickable= stat.name
+    tbody
+      - each player in players
+        tr
+          td.number= player["0rank"]
+          - if (event.event_type == "group_register")
+            td
+              a(href="/group/"+player.groupcode)= player.groupcode
+            td
+              a(href="/player/"+player.alias+"@"+player.handle)
+                span.alias= player.alias
+                span.handle= "@"+player.handle
+          - else
+            td
+              a(href="/player/"+player.alias+"@"+player.handle)
+                span.alias= player.alias
+                span.handle= "@"+player.handle
+          td.number= player.rating.toFixed(2)
+          td.number= player.wins
+          td.number= player.losses
+          td.number= player.ties
+          td.number= player.winpct.toFixed(3)
+          - each stat in relevant_stats
+            td.number
+              - if (stat.valtype == "float" || stat.valtype == "formula")
+                = player[stat.name.toLowerCase()].toFixed(2)
+              - else
+                = player[stat.name.toLowerCase()]
+
+    tfoot
+      tr
+        - if (event.event_type == "group_register")
+          td(colspan="3", style="text-align: right;")
+            .record
+              | Event Totals:
+        - else
+          td(colspan="2", style="text-align: right;")
+            .record
+              | Event Totals:
+        td.number
+        td.number
+        td.number
+        td.number
+        td.number
+        - each stat in relevant_stats
+          td.number
+
+script(type="text/javascript", src="/js/jquery/tablesorter.js")
+script(type="text/javascript", src="/js/client_math_lexer.js")
+script(type="text/javascript", src="/js/event_statsummary.js")

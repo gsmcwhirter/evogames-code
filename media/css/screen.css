@@ -333,10 +333,10 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main .search {float:right;border:1px solid #888;padding:2px 10px;margin-bottom:0.5em;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;width:30%;font-size:77%;font-weight:normal;}
 #main #player-profile img.avatar, #main #group-profile img.avatar, #main #player-profile img.logo, #main #group-profile img.logo {display:block;float:right;margin-left:1em;margin-bottom:1em;max-width:160px;max-height:160px;}
 #main ul.grid, #main ul.grid3 {margin-right:0;display:block;overflow:auto;padding:0;}
-#main ul.grid li, #main ul.grid3 li {display:block;margin:5px 10px;padding:3px 0;float:left;border-top:1px solid #222;border-bottom:1px dotted #666;}
-#main ul.grid li {width:46%;}
-#main ul.grid3 li {width:29%;}
-#main ul.grid3.notopline li {border-top:none;}
+#main ul.grid > li, #main ul.grid3 > li {display:block;margin:5px 10px;padding:3px 0;float:left;border-top:1px solid #222;border-bottom:1px dotted #666;}
+#main ul.grid > li {width:46%;}
+#main ul.grid3 > li {width:29%;}
+#main ul.grid3.notopline > li {border-top:none;}
 #main ul.grid.menu, #main ul.grid3.menu {margin-bottom:0.5em;}
 #main ul.profile {display:block;margin:0;padding:0;margin-bottom:1.5em;}
 #main ul.profile li {display:block;margin:2px 5px;padding:3px 0;}
@@ -345,8 +345,8 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main ul.recent-articles .date, #main ul.recent-members .date, #main ul.recent-groups .date, #main ul.current-events .date, #main ul.current-tournaments .date, #main ul.current-ladders .date {float:right;}
 #main ul.fp-block {margin-bottom:1.5em;}
 #main #directory-nav, #main #group-directory, #main #by-genre, #main #by-name {clear:both;}
+#main .clickable {cursor:pointer;}
 #main #by-genre li, #main #by-name li {font-weight:bold;border-top:1px dotted #666;}
-#main #by-genre li .clickable, #main #by-name li .clickable {cursor:pointer;}
 #main #by-genre li .icon, #main #by-name li .icon {display:block;float:left;}
 #main #by-genre li.name-link, #main #by-name li.name-link {padding:0.5em 0;}
 #main #by-genre li.genre-link, #main #by-name li.genre-link {margin-bottom:1em;border-top:1px solid #222;}
@@ -368,7 +368,8 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main .gametype ul.stats .delete-stat, #main #gtform ul.stats .delete-stat, #main .gametype ul.weights .delete-stat, #main #gtform ul.weights .delete-stat {float:right;margin-top:12px;}
 #main .gametype ul.stats li, #main #gtform ul.stats li, #main .gametype ul.weights li, #main #gtform ul.weights li {border-bottom:1px dotted #666;}
 #main .gametype ul.stats li.add, #main #gtform ul.stats li.add, #main .gametype ul.weights li.add, #main #gtform ul.weights li.add {padding:5px 0;border-bottom:none;}
-#main .match-display {display:block;background-color:#ffffff;border:1px solid #888888;padding:1.4em;margin-bottom:1.5em;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
+#main .match-display, #main .stats-display {display:block;background-color:#ffffff;border:1px solid #888888;padding:1.4em;margin-bottom:1.5em;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
+#main .match-display td.number, #main .stats-display td.number, #main .match-display th.number, #main .stats-display th.number {text-align:right;}
 #main .match-display .record, #main #match-submission .record, #main #match-edit .record {font-weight:bold;}
 #main .match-display h4, #main #match-submission h4, #main #match-edit h4 {float:left;}
 #main .match-display .submitted-by, #main #match-submission .submitted-by, #main #match-edit .submitted-by, #main .match-display .dispute-info, #main #match-submission .dispute-info, #main #match-edit .dispute-info {float:right;font-size:85%;overflow:auto;}

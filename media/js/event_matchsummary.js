@@ -71,11 +71,11 @@ $(function(){
                 var lstatname = proc.name.toLowerCase();
                 stats[lstatname] = _gametype.statdefs[lstatname].statfunc(stats);
 
-                tfoot_tds.eq(proc.index - mod).text(Math.round(stats[lstatname] * 100) / 100);
+                tfoot_tds.eq(proc.index - mod).text(stats[lstatname].toFixed(2));
             });
 
             _(proclist).filter(function (proc){return proc.type == "rating"}).forEach(function (proc){
-                tfoot_tds.eq(proc.index - mod).text(Math.round(_gametype.ratingfunc(stats) * 100) / 100);
+                tfoot_tds.eq(proc.index - mod).text(_gametype.ratingfunc(stats).toFixed(2));
             });
         });
 

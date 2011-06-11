@@ -403,7 +403,7 @@ table {
         overflow: auto;
         padding: 0;
 
-        li {
+        >li {
             display: block;
             margin: 5px 10px;
             padding: 3px 0;
@@ -414,20 +414,20 @@ table {
     }
 
     ul.grid {
-        li {
+        >li {
             width: 46%;
         }
     }
 
     ul.grid3
     {
-        li {
+        >li {
             width: 29%;
         }
     }
 
     ul.grid3.notopline {
-        li {
+        >li {
             border-top: none;
         }
     }
@@ -479,15 +479,15 @@ table {
         clear: both;
     }
 
+    .clickable{
+        cursor: pointer;
+    }
+
     #by-genre,
     #by-name {
         li {
             font-weight: bold;
             border-top: 1px dotted #666;
-
-            .clickable{
-                cursor: pointer;
-            }
 
             .icon{
                 display: block;
@@ -654,7 +654,8 @@ table {
         }
     }
 
-    .match-display {
+    .match-display,
+    .stats-display {
         /* Duplicating fieldset */
         display: block;
         background-color: @lightbase;
@@ -665,6 +666,11 @@ table {
         border-radius: 10px;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
+
+        td.number,
+        th.number {
+            text-align: right;
+        }
     }
 
     .match-display,
