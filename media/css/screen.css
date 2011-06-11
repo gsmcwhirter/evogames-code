@@ -400,6 +400,7 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main .date {font-size:85%;color:#666;}
 #main .left-col, #main .right-col {width:46%;margin:5px 0px;padding:3px 0;float:left;}
 #main .left-col {margin-right:40px;}
+#main .question {margin-left:2em;}
 #main .question h4 {padding-top:0.5em;margin-bottom:0.1em;}
 #main .question h4 a, #main .question h4 a:link, #main .question h4 a:active {font-weight:normal;color:#000;}
 #main .question h4 a:hover {color:#444;font-weight:normal;text-decoration:none;}
