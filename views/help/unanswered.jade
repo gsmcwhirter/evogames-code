@@ -1,0 +1,10 @@
+h1 Help: Unanswered Questions
+
+!= partial('header')
+
+#help
+  != partial('question', {collection: questions, as: 'question'})
+
+  != partial('question_delete')
+
+script(type="text/javascript", src="/js/help_index.js")

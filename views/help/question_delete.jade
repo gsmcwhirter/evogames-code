@@ -1,0 +1,17 @@
+div.modal#delete-modal
+  h2 Delete Question
+  form#delete-form(method="post", accept-charset="utf-8", action="#!/")
+    fieldset
+      .form-line
+        | Are you sure you want to delete the question
+        span.question-text
+        | ?
+      .form-line
+        button.button.positive(type="submit")
+          img(src="/css/icons/tick.png", alt="")
+          | &#32;Delete Question
+        a.button.negative.cancel(href="#!/cancel")
+          img(src="/css/icons/cross.png", alt="")
+          | &#32;Cancel
+
+script(type="text/javascript", src="/js/help_deletequestion.js")

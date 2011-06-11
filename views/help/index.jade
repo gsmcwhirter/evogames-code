@@ -1,0 +1,14 @@
+h1 Help
+
+!= partial('header')
+
+#help
+  - each tag in tags
+    a(id="#!/"+tag.tag.toLowerCase())
+      h3= tag.tag
+      .question-list
+        != partial('question', {collection: tag.questions, as: 'question'})
+
+!= partial('question_delete')
+
+script(type="text/javascript", src="/js/help_index.js")

@@ -21,4 +21,8 @@
   - if (article.edits && article.edits.length)
     ul.edits
       - each edit in article.edits
-        li Edited by #{edit.name} on #{datetime(edit.date)}
+        li 
+          | Edited by
+          span.handle.only= edit.name
+          |  on
+          = datetime(edit.date)

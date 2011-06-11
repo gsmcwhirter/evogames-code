@@ -1,0 +1,24 @@
+h1 Help: Ask a Question
+form(method="post", accept-charset="utf-8")
+  fieldset
+    input(type="hidden", name="csrf", value=csrf)
+    .form-line
+      label(for="question") Question
+      br
+      - if (messages["question"] && messages["question"].length)
+        ul.field-error
+          - each msg in messages["question"]
+            li!= "Question " + msg
+      input#question.title(type="text", name="question", value=data["question"])
+      span.field-status
+        span &nbsp;
+    .form-line
+      button.button.positive(type="submit")
+        img(src="/css/icons/tick.png",alt="")
+        | &#32;Submit Question
+      span.link-sep
+      a.button.negative(href="/help")
+        img(src="/css/icons/cross.png",alt="")
+        | &#32;Cancel
+
+script(type="text/javascript",src="/js/validators/helpquestion.js")

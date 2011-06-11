@@ -55,6 +55,7 @@ server.configure(function (){
     this.use('/news', require('./lib/news'));
     this.use('/api', require('./lib/api'));
     this.use('/game', require('./lib/game'));
+    this.use("/help", require('./lib/help'));
 
     this.use(base.middleware.nice404());
 });

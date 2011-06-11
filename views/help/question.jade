@@ -1,0 +1,65 @@
+- if (typeof full != "undefined" && full)
+  h1 Help: View Question
+
+  != partial('header')
+
+  #help
+    .question(title=question._id)
+      h4
+        a.qname(href="/help/"+question.slug)= question.question
+      .qdata
+        .editline
+          - if (player.is_sysop || (player.permissions || []).indexOf("answer help") > -1)
+            a(href="/help/id/"+question._id+"/edit") edit
+            span.link-sep
+            a(href="#!/delete/"+question._id) delete
+        .byline
+          span.date Answered on: #{datetime(question.status.date)}
+        .tagline
+          | Tags:
+          - each tag in (question.tags || [])
+            a(href="/help/#!/"+tag)= tag
+            span.link-sep
+        .body.markdown
+          != question.question_answer || "<p>(no answer)</p>"
+        - if (question.edits && question.edits.length)
+          ul.edits
+            - each edit in question.edits
+              li
+                | Edited by
+                span.handle.only= edit.name
+                |  on
+                = datetime(edit.date)
+
+    != partial('question_delete')
+
+- else
+  .question(title=question._id)
+    h4
+      a.clickable.qname= question.question
+    .qdata
+      .editline
+        - if (question.slug)
+          a(href="/help/"+question.slug) permalink
+          span.link-sep
+        - if (player.is_sysop || (player.permissions || []).indexOf("answer help") > -1)
+          a(href="/help/id/"+question._id+"/edit") edit
+          span.link-sep
+          a(href="#!/delete/"+question._id) delete
+      .byline
+        span.date Answered on: #{datetime(question.status.date)}
+      .tagline
+        | Tags:
+        - each tag in (question.tags || [])
+          a(href="/help/#!/"+tag)= tag
+          span.link-sep
+      .body.markdown
+        != question.question_answer || "<p>(no answer)</p>"
+      - if (question.edits && question.edits.length)
+        ul.edits
+          - each edit in question.edits
+            li
+              | Edited by
+              span.handle.only= edit.name
+              |  on
+              = datetime(edit.date)

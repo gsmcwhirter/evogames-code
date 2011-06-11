@@ -1,0 +1,7 @@
+- if (player)
+  ul.grid
+    li
+      a(href="/help/ask") Ask a Question
+    - if (player.is_sysop || (player.permissions || []).indexOf("answer help") > -1)
+      li
+        a(href="/help/unanswered") Unanswered Questions
