@@ -31,7 +31,10 @@ h1 Welcome!
     - each event in current_events
       li
         a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
-        span.date.short= event.game.code.toUpperCase()
+        span.date.short
+          = event.game.code.toUpperCase()
+          span.link-sep
+          = event.event.gametype.name.toUpperCase()
 
   h2 Current Tournaments
   ul.current-tournaments.fp-block

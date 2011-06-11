@@ -394,7 +394,7 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main #breadcrumbs .crumb, #main #breadcrumbs .crumb-sep {float:left;}
 #main #breadcrumbs .crumb-sep {margin:0 5px;}
 #main .date {font-size:85%;color:#666;}
-#main .left-col, #main .right-col {width:42%;margin:5px 0px;padding:3px 0;float:left;}
+#main .left-col, #main .right-col {width:46%;margin:5px 0px;padding:3px 0;float:left;}
 #main .left-col {margin-right:40px;}
 #main .article {overflow:auto;border-top:1px solid #000;border-bottom:1px dotted #666;margin-bottom:10px;}
 #main .article h2 {padding-top:0.5em;margin-bottom:0.1em;}

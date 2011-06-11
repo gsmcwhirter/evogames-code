@@ -2,8 +2,10 @@ h1= game.name+" Event History"
 
 div
   input#search.search(type="search", placeholder="Search")
-  - if (player)
-    ul.grid3(style="margin-bottom: 1em;")
+  ul.grid3(style="margin-bottom: 1em;")
+    li
+      a(href="/game/"+game.code+"/event/matches") Recent Matches
+    - if (player)
       li
         a(href="/game/"+game.code+"/event/create") Create an Event
 
