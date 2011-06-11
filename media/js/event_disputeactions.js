@@ -130,7 +130,7 @@ $(function (){
                         disputeli.find(".status span.status-text").removeClass("red").addClass("green").text("Resolved");
                         disputeli.find(".status .actions").remove();
                         disputeli.append("<div class='dispinfo'>Resolved by <span class='handle only'>@"+data.handle+"</span> on "+data.datetime+"</div>")
-                                 .append("<div class='note'>"+data.note+"<div>&nbsp;</div></div>");
+                                 .append("<div class='note markdown'>"+data.note+"<div>&nbsp;</div></div>");
                     }
                     else
                     {

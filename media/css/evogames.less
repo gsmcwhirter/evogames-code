@@ -366,6 +366,30 @@ table {
         font-size: 153.9%;
     }
 
+    .markdown {
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        ul,
+        ul>li
+        {
+            list-style-type: circle;
+        }
+
+        ul ul,
+        ul ul>li
+        {
+            list-style-type: square;
+        }
+
+        ul ul ul,
+        ul ul ul>li
+        {
+            list-style-type: disc;
+        }
+    }
+
     .search {
         float: right;
         border: 1px solid #888;

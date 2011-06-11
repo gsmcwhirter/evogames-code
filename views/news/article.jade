@@ -16,7 +16,7 @@
     - each tag in article.tags
       a(href="/news/tag/"+tag)= tag
       span.link-sep
-  .body
+  .body.markdown
     != article.article_body
   - if (article.edits && article.edits.length)
     ul.edits

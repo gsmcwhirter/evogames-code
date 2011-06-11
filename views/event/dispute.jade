@@ -6,7 +6,7 @@ li.dispute(title=dispute.id)
     = datetime(dispute.created_at)
     span.link-sep
     span.small (#{dispute.id})
-  .note
+  .note.markdown
     != dispute.creation_note
     div &nbsp;
   - if (dispute.is_pending)
@@ -29,6 +29,6 @@ li.dispute(title=dispute.id)
       span.handle.only= "@"+dispute.resolved_by
       |  on
       = datetime(dispute.resolved_at)
-    .note
+    .note.markdown
       != dispute.resolution_note
       div &nbsp;
