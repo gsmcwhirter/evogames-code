@@ -1,6 +1,6 @@
 $(function (){
     var slug_cache;
-    var autoslug = true;
+    var autoslug = $("#saved_slug").val() == "";
     var last_autoslug = "";
 
     $("#slug").bind('run', function (){
