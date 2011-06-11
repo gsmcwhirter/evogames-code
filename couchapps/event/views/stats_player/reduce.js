@@ -13,7 +13,8 @@ function (keys, values, rereduce){
 
             newval.handle = value.handle;
             newval.alias = value.alias;
-            newval.groupcode = value.groupcode;
+            newval.gameid = value.gameid;
+            newval.gametype = value.gametype;
         }
     });
 

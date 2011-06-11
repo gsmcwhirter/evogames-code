@@ -1,0 +1,41 @@
+!= partial('header', {title: false})
+h1
+  span.alias= alias
+  span.handle= "@"+pplayer.handle
+h2 Event Statistics
+
+- each statrow in statrows
+  - var game = games[statrow.gameid]
+  - var gt = game.gametypes[statrow.gametype.toLowerCase()]
+  .stats-display
+    h3= game.name+", "+gt.name.toUpperCase()
+    .gametype.template= JSON.stringify(gametypes[statrow.gameid][statrow.gametype.toLowerCase()])
+    table
+      thead
+        tr
+          - var width = Math.floor(80. / (gt.relevant_stats.length + 6) * 100) / 100
+          th(style="width: 20%;") Player
+          th.number.rating-head(style="width: "+width+"%;") Rating
+          th.number.stat-head.integer(style="width: "+width+"%;", title="wins") Wins
+          th.number.stat-head.integer(style="width: "+width+"%;", title="losses") Losses
+          th.number.stat-head.integer(style="width: "+width+"%;", title="ties") Ties
+          th.number.winpct-head(style="width: "+width+"%;") WinPct
+          - each stat in gt.relevant_stats
+            th.number(class="stat-head "+stat.valtype, style="width: "+width+"%;", title=stat.name)= stat.name
+      tbody
+        tr
+          td
+            a(href="/player/"+alias+"@"+pplayer.handle)
+              span.alias= alias
+              span.handle= "@"+pplayer.handle
+          td.number= statrow.row.rating.toFixed(2)
+          td.number= statrow.row.wins
+          td.number= statrow.row.losses
+          td.number= statrow.row.ties
+          td.number= statrow.row.winpct.toFixed(3)
+          - each stat in gt.relevant_stats
+            td.number
+              - if (stat.valtype == "float" || stat.valtype == "formula")
+                = statrow.row[stat.name.toLowerCase()].toFixed(2)
+              - else
+                = statrow.row[stat.name.toLowerCase()]
