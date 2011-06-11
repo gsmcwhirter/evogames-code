@@ -404,7 +404,6 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main .question h4 {padding-top:0.5em;margin-bottom:0.1em;}
 #main .question h4 a, #main .question h4 a:link, #main .question h4 a:active {font-weight:normal;color:#000;}
 #main .question h4 a:hover {color:#444;font-weight:normal;text-decoration:none;}
-#main .article {border-top:1px solid #000;border-bottom:1px dotted #666;}
 #main .article, #main .question {overflow:auto;margin-bottom:10px;}
 #main .article h2, #main .question h2 {padding-top:0.5em;margin-bottom:0.1em;}
 #main .article h2 a, #main .question h2 a, #main .article h2 a:link, #main .question h2 a:link, #main .article h2 a:active, #main .question h2 a:active {font-weight:normal;color:#000;}
