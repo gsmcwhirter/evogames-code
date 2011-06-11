@@ -4,7 +4,7 @@ h1 Help
 
 #help
   - each tag in tags
-    a(id="#!/"+tag.tag.toLowerCase())
+    a(id="!/"+tag.tag.toLowerCase())
       h3= tag.tag
       .question-list
         != partial('question', {collection: tag.questions, as: 'question'})
