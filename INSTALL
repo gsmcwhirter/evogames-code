@@ -52,7 +52,7 @@ npm install hiredis connect-redis #in source directory for the site
 #apt-get install nginx #sudo #get this configured independently
 #apt-get install monit #sudo #get this configured independently
 cd conf
-cp EvoGames.conf /etc/init/ #sudo
+#cp EvoGames.conf /etc/init/ #sudo
 cp couchdb.conf /etc/init/ #sudo
 cp EvoGames.monit /etc/monit/conf.d/ #sudo
 cp couchdb.monit /etc/monit/conf.d/ #sudo
@@ -65,5 +65,8 @@ cd ..
 
 #SSL SETUP (optional -- generates self-signed ssl certificate)
 /usr/bin/openssl genrsa 1024 > /etc/ssl.key/server.key
-chmod go-rwx /etc/httpd/conf/ssl.key/server.key
-/usr/bin/openssl req -new -key /etc/ssl.key/server.key -x509 -days 365 -out /etc/ssl.crt/server.crt
+chmod go-rwx /etc/ssl.key/server.key
+/usr/bin/openssl req -new -key /etc/ssl.key/server.key -x509 -days 365 -out /etc/ssl.key/server.crt
+
+#RUN CLUSTER
+sudo -u node-dev NODE_ENV=production nohup node server.js &
