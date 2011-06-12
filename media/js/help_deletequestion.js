@@ -37,7 +37,7 @@ $(function (){
         this.get("#!/delete/:id", function (){
             //show confirmation form
             var id = this.params.id;
-            var qtext = $(".question[title="+id+"] h4 a").text();
+            var qtext = $(".question[title="+id+"] a h4").text();
             $("#delete-modal .question-text").text('"'+qtext+'"');
             $("#delete-modal form").attr('action', '#!/delete/'+id);
             $("#delete-modal").trigger("open-overlay");
