@@ -11,7 +11,7 @@ $(function (){
         var fstat = self.parent().find(".field-status").first();
 
         var name = $.trim(self.val());
-        var re = /[@/\s]/;
+        var re = /[@/\s:]/;
 
         if (name.length < 3)
         {

@@ -116,10 +116,6 @@ $(function (){
                         proc.type = "formula";
                         proclist.push(proc);
                     }
-                    else if (o.hasClass("rating-head")){
-                        proc.type = "rating";
-                        proclist.push(proc);
-                    }
                 });
 
                 var wltcell = team.find("table.players tfoot td:first");
@@ -127,7 +123,8 @@ $(function (){
                 var stats = {
                     wins: parseInt(wltcell.find(".record .wins").text()),
                     losses: parseInt(wltcell.find(".record .losses").text()),
-                    ties: parseInt(wltcell.find(".record .ties").text())
+                    ties: parseInt(wltcell.find(".record .ties").text()),
+                    games: 1
                 };
                 
                 var tfoot_tds = team.find("table.players tfoot tr td");
@@ -156,10 +153,6 @@ $(function (){
 
                     tfoot_tds.eq(proc.index - mod).text(stats[lstatname].toFixed(2));
                 });
-
-                _(proclist).filter(function (proc){return proc.type == "rating"}).forEach(function (proc){
-                    tfoot_tds.eq(proc.index - mod).text(_gametype.ratingfunc(stats).toFixed(2));
-                });
             });
 
             $("tr.player").bind("calc-stats", function (){
@@ -170,7 +163,8 @@ $(function (){
                 var stats = {
                     wins: parseInt(wltcell.find(".record .wins").text()),
                     losses: parseInt(wltcell.find(".record .losses").text()),
-                    ties: parseInt(wltcell.find(".record .ties").text())
+                    ties: parseInt(wltcell.find(".record .ties").text()),
+                    games: 1
                 };
 
                 player.find("td .stat-input").each(function (i, o){

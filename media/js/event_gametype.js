@@ -6,7 +6,7 @@ $(function (){
         function _statname_change(){
            var index = $(this).parents("li").first().index();
            var modal = $(this).parents("#gtform").first();
-           $("ul.weights", modal).find("li").eq(index + 3).trigger("name-change", [$(this).val()]);
+           $("ul.weights", modal).find("li").eq(index + 4).trigger("name-change", [$(this).val()]);
        }
 
         function _new_stat(){
@@ -25,9 +25,10 @@ $(function (){
 
                 var obj = {};
                 obj.wltweights = {
-                    wins: parseFloat($("ul.weights li", self).eq(0).find("input[name=weight]").val()),
-                    losses: parseFloat($("ul.weights li", self).eq(1).find("input[name=weight]").val()),
-                    ties: parseFloat($("ul.weights li", self).eq(2).find("input[name=weight]").val())
+                    games: parseFloat($("ul.weights li", self).eq(0).find("input[name=weight]").val()),
+                    wins: parseFloat($("ul.weights li", self).eq(1).find("input[name=weight]").val()),
+                    losses: parseFloat($("ul.weights li", self).eq(2).find("input[name=weight]").val()),
+                    ties: parseFloat($("ul.weights li", self).eq(3).find("input[name=weight]").val())
                 };
 
                 obj.stats = [];
@@ -44,7 +45,7 @@ $(function (){
                             stat.valdata = $("input[name=extra]", o).val();
                         }
 
-                        stat.ratingweight = parseFloat($("ul.weights li", self).eq(i+3).find("input[name=weight]").val());
+                        stat.ratingweight = parseFloat($("ul.weights li", self).eq(i+4).find("input[name=weight]").val());
 
                         obj.stats.push(stat);
                     }
@@ -69,14 +70,16 @@ $(function (){
                 var self = $(this);
 
                 if (data.wltweights){
-                    $("ul.weights li", self).eq(0).find("input[name=weight]").val(data.wltweights.wins);
-                    $("ul.weights li", self).eq(1).find("input[name=weight]").val(data.wltweights.losses);
-                    $("ul.weights li", self).eq(2).find("input[name=weight]").val(data.wltweights.ties);
+                    $("ul.weights li", self).eq(0).find("input[name=weight]").val(data.wltweights.games || 0);
+                    $("ul.weights li", self).eq(1).find("input[name=weight]").val(data.wltweights.wins);
+                    $("ul.weights li", self).eq(2).find("input[name=weight]").val(data.wltweights.losses);
+                    $("ul.weights li", self).eq(3).find("input[name=weight]").val(data.wltweights.ties);
                 }
                 else {
                     $("ul.weights li", self).eq(0).find("input[name=weight]").val(0);
                     $("ul.weights li", self).eq(1).find("input[name=weight]").val(0);
                     $("ul.weights li", self).eq(2).find("input[name=weight]").val(0);
+                    $("ul.weights li", self).eq(3).find("input[name=weight]").val(0);
                 }
 
                 data.stats.forEach(function (stat, index){
@@ -84,7 +87,7 @@ $(function (){
                     $("ul.stats li", self).eq(index).find("input[name=name]").val(stat.name).trigger("keyup");
                     $("ul.stats li", self).eq(index).find("select[name=type]").val(stat.valtype).trigger("change");
                     $("ul.stats li", self).eq(index).find("input[name=extra]").val(stat.valdata);
-                    $("ul.weights li", self).eq(index + 3).find("input[name=weight]").val(stat.ratingweight);
+                    $("ul.weights li", self).eq(index + 4).find("input[name=weight]").val(stat.ratingweight);
                 });
             }).bind("new-stat", _new_stat);
 
@@ -118,7 +121,7 @@ $(function (){
                 }
             }).bind("remove", function (){
                 var index = $(this).index();
-                $(this).parents("#gtform").first().find("ul.weights").find("li").eq(index + 3).remove();
+                $(this).parents("#gtform").first().find("ul.weights").find("li").eq(index + 4).remove();
                 $(this).remove();
             }).find("input[name=name]").bind("keyup", _statname_change).bind("change", _statname_change).bind("blur", _statname_change);
 

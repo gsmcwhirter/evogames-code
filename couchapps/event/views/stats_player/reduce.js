@@ -10,12 +10,13 @@ function (keys, values, rereduce){
                 if (!newval[statname]) newval[statname] = {};
                 newval[statname] += 1;
             }
-
-            newval.handle = value.handle;
-            newval.alias = value.alias;
-            newval.gameid = value.gameid;
-            newval.gametype = value.gametype;
         }
+
+        newval.handle = value.handle;
+        newval.alias = value.alias;
+        newval.gameid = value.gameid;
+        newval.gametype = value.gametype;
+        newval.games = (newval.games || 0) + (value.games || 0) + 1;
     });
 
     return newval;
