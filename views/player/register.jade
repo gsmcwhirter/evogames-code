@@ -45,6 +45,10 @@ form(method="post", accept-charset="utf-8")
         span &nbsp;
     .form-line
       label(for="handle") Handle
+      span.small
+        |  (
+        a(href="/help/handle-vs-alias", rel="blank") What is the difference between a handle and an alias?
+        |  )
       br
       - if (messages["handle"] && messages["handle"].length)
         ul.field-error
@@ -55,6 +59,10 @@ form(method="post", accept-charset="utf-8")
         span &nbsp;
     .form-line
       label(for="name") Alias
+      span.small
+        |  (
+        a(href="/help/handle-vs-alias", rel="blank") What is the difference between a handle and an alias?
+        |  )
       br
       - if (messages["name"] && messages["name"].length)
         ul.field-error
