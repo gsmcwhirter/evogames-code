@@ -14,13 +14,8 @@ var server = express.createServer();
 base.configureServer(server);
 
 var secure_session = true;
-var sys = require('util');
-
-sys.puts(process.env.NODE_ENV);
 
 server.configure('development', function (){
-    sys.puts("Development Block");
-
     this.use(express.profiler());
     this.use(express.logger());
 
@@ -28,12 +23,14 @@ server.configure('development', function (){
 });
 
 server.configure(function (){
-    
-    sys.puts(secure_session ? "Secure" : "Not Secure");
-
     this.use(express.responseTime());
     this.use(express.cookieParser());
-    this.use(express.session({store: new RedisStore, fingerprint: base.connectionFingerprint, secret: config.session_secret, cookie: { path: '/', httpOnly: true, maxAge: 14400000, secure: secure_session}}));
+    this.use(express.session({
+        store: new RedisStore,
+        fingerprint: base.connectionFingerprint,
+        secret: config.session_secret,
+        cookie: { path: '/', httpOnly: true, maxAge: 14400000, secure: secure_session}
+    }));
     this.use(express.bodyParser());
     this.use(base.middleware.csrf.check);
     this.use(base.middleware.determineLogin());
