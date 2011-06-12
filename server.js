@@ -23,6 +23,9 @@ server.configure('development', function (){
 });
 
 server.configure(function (){
+    var sys = require('util');
+    sys.puts(secure_session ? "Secure" : "Not Secure");
+
     this.use(express.responseTime());
     this.use(express.cookieParser());
     this.use(express.session({store: new RedisStore, fingerprint: base.connectionFingerprint, secret: config.session_secret, cookie: { path: '/', httpOnly: true, maxAge: 14400000, secure: secure_session}}));
