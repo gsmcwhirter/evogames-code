@@ -16,6 +16,8 @@ base.configureServer(server);
 var secure_session = true;
 var sys = require('util');
 
+sys.puts(process.env.NODE_ENV);
+
 server.configure('development', function (){
     sys.puts("Development Block");
 
