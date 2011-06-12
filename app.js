@@ -32,12 +32,12 @@ server.configure(function (){
         next();
     });
     this.use(trustReverseProxy({
-        proxyID: 'X-EvoGames-Proxy',
+        proxyID: 'x-evogames-proxy',
         trust: function (req){
-            return req.headers["X-EvoGames-Proxy"];
+            return req.headers["x-evogames-proxy"];
         },
         isSecure: function(req) {
-            return req.headers['X-Forwarded-Secure'] == 1;
+            return req.headers['x-forwarded-secure'] === "1";
         }
     }));
     this.use(express.cookieParser());
