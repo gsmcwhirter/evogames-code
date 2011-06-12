@@ -27,11 +27,6 @@ var sys = require("util");
 
 server.configure(function (){
     this.use(express.responseTime());
-    this.use(function (req, res, next){
-        sys.puts(sys.inspect(req.headers));
-
-        next();
-    });
     this.use(trustReverseProxy({
         proxyID: 'x-evogames-proxy',
         trust: function (req){
@@ -41,11 +36,6 @@ server.configure(function (){
             return req.headers['x-forwarded-secure'] === "1";
         }
     }));
-    this.use(function (req, res, next){
-        sys.puts(sys.inspect(req));
-
-        next();
-    });
     this.use(express.cookieParser());
     this.use(express.session({
         store: new RedisStore,
