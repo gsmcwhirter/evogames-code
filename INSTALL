@@ -34,12 +34,17 @@ make install #sudo
 npm install markdown
 
 #SETUP REDIS
+apt-get install libc6-dev-i386 gcc-multilib #sudo
 curl -O http://redis.googlecode.com/files/redis-2.2.9.tar.gz
 tar xzf redis-2.2.9.tar.gz
 cd redis-2.2.9/src
 make 32bit
 make ARCH="-m32" PREFIX=/usr/local install #sudo
 useradd -r redis #sudo
+touch /var/log/redis.log
+touch /var/log/redis.error.log
+mkdir /var/log/redis-dump
+chown -R redis:redis /var/log/redis*
 cd ../..
 npm install hiredis connect-redis #in source directory for the site
 
