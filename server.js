@@ -13,15 +13,19 @@ var server = express.createServer();
 
 base.configureServer(server);
 
+var secure_session = true;
+
 server.configure('development', function (){
     this.use(express.profiler());
     this.use(express.logger());
+
+    secure_session = false;
 });
 
 server.configure(function (){
     this.use(express.responseTime());
     this.use(express.cookieParser());
-    this.use(express.session({store: new RedisStore, fingerprint: base.connectionFingerprint, secret: config.session_secret, cookie: { path: '/', httpOnly: true, maxAge: 14400000}}));
+    this.use(express.session({store: new RedisStore, fingerprint: base.connectionFingerprint, secret: config.session_secret, cookie: { path: '/', httpOnly: true, maxAge: 14400000, secure: secure_session}}));
     this.use(express.bodyParser());
     this.use(base.middleware.csrf.check);
     this.use(base.middleware.determineLogin());
