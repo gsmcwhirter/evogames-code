@@ -3,7 +3,8 @@ var express = require('express'),
     SMTP = require('./lib/smtp'),
     API = require('./lib/api/internal'),
     fs = require('fs'),
-    RedisStore = require('connect-redis')(express);
+    RedisStore = require('connect-redis')(express),
+    trustReverseProxy = require('./lib/trustReverseProxy');
 
 require('./lib/base/mixins');
     
@@ -24,12 +25,18 @@ server.configure('development', function (){
 
 server.configure(function (){
     this.use(express.responseTime());
+    this.use(trustReverseProxy({
+        proxyID: 'X-EvoGames-Proxy',
+        isSecure: function(req) {
+            return req.headers['X-Forwarded-Scheme'] === 'https';
+        }
+    }));
     this.use(express.cookieParser());
     this.use(express.session({
         store: new RedisStore,
         fingerprint: base.connectionFingerprint,
         secret: config.session_secret,
-        cookie: { path: '/', httpOnly: true, maxAge: 14400000, secure: secure_session}
+        cookie: { path: '/', httpOnly: true, expires: false, secure: secure_session}
     }));
     this.use(express.bodyParser());
     this.use(base.middleware.csrf.check);
