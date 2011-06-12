@@ -27,8 +27,11 @@ server.configure(function (){
     this.use(express.responseTime());
     this.use(trustReverseProxy({
         proxyID: 'X-EvoGames-Proxy',
+        trust: function (req){
+            return req.headers["X-EvoGames-Proxy"];
+        },
         isSecure: function(req) {
-            return req.headers['X-Forwarded-Scheme'] === 'https';
+            return req.headers['X-Forwarded-Secure'] == 1;
         }
     }));
     this.use(express.cookieParser());
