@@ -14,8 +14,11 @@ var server = express.createServer();
 base.configureServer(server);
 
 var secure_session = true;
+var sys = require('util');
 
 server.configure('development', function (){
+    sys.puts("Development Block");
+
     this.use(express.profiler());
     this.use(express.logger());
 
@@ -23,7 +26,7 @@ server.configure('development', function (){
 });
 
 server.configure(function (){
-    var sys = require('util');
+    
     sys.puts(secure_session ? "Secure" : "Not Secure");
 
     this.use(express.responseTime());
