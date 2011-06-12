@@ -3,6 +3,7 @@ var express = require('express'),
     SMTP = require('./lib/smtp'),
     API = require('./lib/api/internal'),
     fs = require('fs'),
+    sys = require("util"),
     RedisStore = require('connect-redis')(express),
     trustReverseProxy = require('./lib/trustReverseProxy');
 
@@ -17,15 +18,16 @@ base.configureServer(server);
 var secure_session = true;
 
 server.configure('development', function (){
+    sys.puts("Starting in Development")
     this.use(express.profiler());
     this.use(express.logger());
 
     secure_session = false;
 });
 
-var sys = require("util");
-
 server.configure(function (){
+    sys.puts(secure_session ? "Using secure cookies" : "Using insecure cookies");
+
     this.use(express.responseTime());
     this.use(trustReverseProxy({
         proxyID: 'x-evogames-proxy',
