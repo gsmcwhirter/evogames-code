@@ -25,6 +25,12 @@ server.configure('development', function (){
 
 server.configure(function (){
     this.use(express.responseTime());
+    this.use(function (req, res, next){
+        var sys = require("util");
+        sys.puts(sys.inspect(req.headers));
+
+        next();
+    });
     this.use(trustReverseProxy({
         proxyID: 'X-EvoGames-Proxy',
         trust: function (req){
