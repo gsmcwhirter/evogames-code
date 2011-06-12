@@ -111,6 +111,14 @@ form(method="post", accept-charset="utf-8")
           | &nbsp;
           label.inline Ties
     .form-line
+      label(for="ranking_order") Ranking Order
+      br
+      - if (messages["ranking_order"] && messages["ranking_order"].length)
+        ul.field-error
+          - each msg in messages["ranking_order"]
+            li!= "Ranking order " + msg
+      input#ranking_order.text(type="text", name="ranking_order", value=data.ranking_order || "Rating, WinPct")
+    .form-line
       label(for="description") Description
       span.small
         |  (
