@@ -45,12 +45,6 @@ server.configure(function (){
         secret: config.session_secret,
         cookie: { path: '/', httpOnly: true, expires: false, secure: secure_session}
     }));
-    this.use(function (req, res, next){
-        sys.puts(sys.inspect(req.session));
-        sys.puts(sys.inspect(req.session.cookie));
-
-        next();
-    });
     this.use(express.bodyParser());
     this.use(base.middleware.csrf.check);
     this.use(base.middleware.determineLogin());
