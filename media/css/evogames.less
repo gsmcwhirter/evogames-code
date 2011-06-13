@@ -909,6 +909,54 @@ table {
 
     #messages {
         .pane {
+            display: block;
+            background-color: @lightbase;
+            border: 1px solid @medborder;
+            padding: 1.4em;
+            margin-bottom: 1.5em;
+
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+
+            fieldset {
+                border: none;
+                padding: 0;
+            }
+
+            .msginfo {
+                padding-bottom: 0.5em;
+                margin-bottom: 1em;
+                border-bottom: 1px dotted #666;
+                overflow: auto;
+
+                .line {
+                    margin-bottom: 0.25em;
+
+                    .label {
+                        font-style: italic;
+                        margin-right: 1em;
+                    }
+                }
+
+                .line.subject-line {
+                    font-size: 116%;
+                }
+
+                .actions {
+                    float: right;
+                    font-size: 85%;
+                }
+            }
+
+            .with-selected {
+                float: right;
+            }
+
+            .markdown {
+                clear: both;
+            }
+
             .nextpage {
                 font-size: 85%;
                 float: right;

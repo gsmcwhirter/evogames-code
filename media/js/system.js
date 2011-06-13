@@ -56,7 +56,15 @@ $(function (){
             $(">.x", self).bind('click', function (){
                 $(this).parent().remove();
             });
-        });
+        }).bind("mouseover", function (){
+            $(this).fadeTo("fast", 1.0);
+        }).bind("mouseout", function(){
+            $(this).fadeTo("slow", 0.5);
+        }).toggle(function (){
+                $(this).fadeTo("fast", 1.0);
+            }, function (){
+                $(this).fadeTo("slow", 0.5);
+            });
 
         return selector;
     }

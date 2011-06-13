@@ -13,6 +13,12 @@ h1 Messages
 
   #boxheader
   #inbox.pane
+    .with-selected
+      select(name="with_selected", size="1")
+        option(value="0") with selected...
+        option(value="unread") mark as unread
+        option(value="read") mark as read
+        option(value="delete") delete
     h4 Inbox
     table
       thead
@@ -20,9 +26,9 @@ h1 Messages
           th(style="width: 5%; text-align: center;")
           th Subject
           th From
-          th Date
+          th(style="width: 30%;") Date
           th(style="width: 5%; text-align: center;")
-            input(type="checkbox", name="check_all")
+            input(type="checkbox", name="check_all", value=1)
         tr
           td(colspan="5", style="border-bottom: 1px solid #aaa;")
             a.nextpage(href="") next page &raquo;
@@ -34,6 +40,10 @@ h1 Messages
             a.nextpage(href="") next page &raquo;
             a.prevpage(href="") &laquo; prev page
   #drafts.pane
+    .with-selected
+      select(name="with_selected", size="1")
+        option(value="0") with selected...
+        option(value="delete") delete
     h4 Drafts
     table
       thead
@@ -41,9 +51,9 @@ h1 Messages
           th(style="width: 5%; text-align: center;")
           th Subject
           th To
-          th Date
+          th(style="width: 30%;") Date
           th(style="width: 5%; text-align: center;")
-            input(type="checkbox", name="check_all")
+            input(type="checkbox", name="check_all", value=1)
         tr
           td(colspan="5", style="border-bottom: 1px solid #aaa;")
             a.nextpage(href="") next page &raquo;
@@ -60,26 +70,110 @@ h1 Messages
     table
       thead
         tr
-          th(style="width: 5%; text-align: center;")
           th Subject
           th To
-          th Date
-          th(style="width: 5%; text-align: center;")
-            input(type="checkbox", name="check_all")
+          th(style="width: 30%;") Date
         tr
-          td(colspan="5", style="border-bottom: 1px solid #aaa;")
+          td(colspan="3", style="border-bottom: 1px solid #aaa;")
             a.nextpage(href="") next page &raquo;
             a.prevpage(href="") &laquo; prev page
       tbody
       tfoot
         tr
-          td(colspan="5")
+          td(colspan="3")
             a.nextpage(href="") next page &raquo;
             a.prevpage(href="") &laquo; prev page
 
   #compose.pane
-    h4 Compose
+    div.loading(style="text-align: center;") Loading...
+    form(method="post", action="#!/", accept-charset="utf-8")
+      fieldset
+        h4 Compose Message
+        .form-line.to
+          label To
+          br
+          input#to.text(type="text", name="to")
+          br
+          a.clickable.add-cc.small Add Cc
+          span.link-sep
+          a.clickable.add-bcc.small Add Bcc
+        .form-line.cc
+          label Cc
+          br
+          input#cc.text(type="text", name="cc")
+        .form-line.bcc
+          label Bcc
+          br
+          input#bcc.text(type="text", name="bcc")
+        .form-line
+          label Subject
+          br
+          input#subject.title(type="text", name="subject")
+        .form-line
+          label Body
+          br
+          textarea#body(name="body")
+        .form-line
+          input(type="hidden", name="action")
+          button#send.button.positive(type="button")
+            img(src="/css/icons/tick.png",alt="")
+            | &#32;Send Message
+          button#save.button(type="button")
+            img(src="/css/icons/key.png",alt="")
+            | &#32;Save as Draft
+          a#close.button.negative(href="#!/close")
+            img(src="/css/icons/cross.png",alt="")
+            | &#32;Cancel
+          a#delete.button.negative(href="#!/")
+            img(src="/css/icons/cross.png",alt="")
+            | &#32;Delete Draft
 
   #view.pane
+    div.loading(style="text-align: center;") Loading...
+    div.content
+      h4 View Message
+      div.msginfo
+        .line.subject-line
+          span.label Subject:
+          span.subject
+        .line
+          span.label From:
+          span.from
+            a.handle-link(href="#!/")
+              span.handle.only
+            span.system EvoGames System
+        .line
+          span.label To:
+          span.to
+
+          .actions
+            a.close(href="#!/close") close
+            span.link-sep
+            a.reply(href="#!/") reply
+            span.link-sep
+            a.replyall(href="#!/") reply all
+            span.link-sep
+            a.forward(href="#!/") forward
+            span.link-sep
+            a.delete(href="#!/") delete
+
+        .line
+          span.label Cc:
+          span.cc
+      div.markdown
+
+  div.modal#delete-modal
+    h2 Delete Message
+    form#delete-form(method="post", accept-charset="utf-8", action="#!/")
+      fieldset
+        .form-line
+          | Are you sure you want to delete the indicated message(s)?
+        .form-line
+          button.button.positive(type="submit")
+            img(src="/css/icons/tick.png", alt="")
+            | &#32;Delete Message(s)
+          a.button.negative.cancel(href="#!/cancel")
+            img(src="/css/icons/cross.png", alt="")
+            | &#32;Cancel
 
 script(type="text/javascript", src="/js/messages.js")
