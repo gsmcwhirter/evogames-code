@@ -7,10 +7,13 @@
     span.alias= alias
     span.handle= "@"+pplayer.handle
 
-  - if (player && player.is_sysop)
+  - if (player)
     ul.grid3
       li
-        a(href="/player/@"+pplayer.handle+"/permissions") Edit Permissions
+        a(href="/messages/#!/compose/"+pplayer.handle) Send a Message
+      - if (player.is_sysop)
+        li
+          a(href="/player/@"+pplayer.handle+"/permissions") Edit Permissions
 
   h2 About
   ul.profile

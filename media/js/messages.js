@@ -575,7 +575,7 @@ $(function (){
             });
         });
 
-        this.get("#!/compose", function (){
+        function showCompose(){
             $("#directory-nav").trigger("highlight", ["compose"]);
             $(".pane").hide();
             var compdiv = $("#compose");
@@ -584,11 +584,17 @@ $(function (){
             compdiv.find("form").attr("action", "#!/compose").show();
 
             compdiv.find("#delete").hide();
-            
-            compdiv.find("input[name=action], input[name=to], input[name=cc], input[name=bcc], input[name=subject], textarea[name=body]").val('');
+
+            var to = this.params.to || "";
+
+            compdiv.find("input[name=to]").val(to);
+            compdiv.find("input[name=action], input[name=cc], input[name=bcc], input[name=subject], textarea[name=body]").val('');
             compdiv.find(".form-line.cc, .form-line.bcc").hide();
             compdiv.find("a.add-cc, a.add-bcc").show();
-        });
+        }
+
+        this.get("#!/compose", showCompose);
+        this.get("#!/compose/:to", showCompose);
 
         this.post("#!/compose", function (){
             var compdiv = $("#compose");
