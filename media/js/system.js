@@ -56,15 +56,15 @@ $(function (){
             $(">.x", self).bind('click', function (){
                 $(this).parent().remove();
             });
-        }).bind("mouseover", function (){
-            $(this).fadeTo("fast", 1.0);
-        }).bind("mouseout", function(){
-            $(this).fadeTo("slow", 0.5);
+        }).hover(function (){
+                $(this).fadeTo("fast", 1.0);
+            }, function(){
+                $(this).fadeTo("slow", 0.5);
         }).toggle(function (){
                 $(this).fadeTo("fast", 1.0);
             }, function (){
                 $(this).fadeTo("slow", 0.5);
-            });
+        });
 
         return selector;
     }
@@ -168,6 +168,26 @@ $(function (){
     validators.ready();
 });
 
+function checkNewCount(){
+    $.get("/messages/new", function (data){
+        var ct = 0;
+        if (!data.error){
+            ct = data.count || 0;
+        }
+
+        if (ct > 0){
+            $("#player-info span.new-messages").text("("+ct+" New)");
+        }
+        else {
+            $("#player-info span.new-messages").empty();
+        }
+    });
+}
+
 $(function (){
     $("a[rel=blank]").attr("target", "_blank");
+
+    checkNewCount();
+
+    setInterval("checkNewCount()", 5000);
 });
