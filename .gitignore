@@ -1,9 +1,7 @@
 *-cov
-config.live.json
 media/css/evogames.css
 media/css/readme.txt
 nbproject
-config.live.js
 node_modules
 nohup.out
-config.js
+config.live.js

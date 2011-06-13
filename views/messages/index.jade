@@ -1,0 +1,75 @@
+h1 Messages
+
+#messages
+  #boxheader
+  #inbox.pane
+    h4 Inbox
+    table
+      thead
+        tr
+          th(colspan="5")
+            a.nextpage(href="") next page &raquo;
+            a.prevpage(href="") &laquo; prev page
+        tr
+          th
+          th Subject
+          th From
+          th Date
+          th
+            input(type="checkbox", name="check_all")
+      tbody
+      tfoot
+        tr
+          td(colspan="5")
+            a.nextpage(href="") next page &raquo;
+            a.prevpage(href="") &laquo; prev page
+  #drafts.pane
+    h4 Drafts
+    table
+      thead
+        tr
+          th(colspan="5")
+            a.nextpage(href="") next page &raquo;
+            a.prevpage(href="") &laquo; prev page
+        tr
+          th
+          th Subject
+          th To
+          th Date
+          th
+            input(type="checkbox", name="check_all")
+      tbody
+      tfoot
+        tr
+          td(colspan="5")
+            a.nextpage(href="") next page &raquo;
+            a.prevpage(href="") &laquo; prev page
+
+  #outbox.pane
+    h4 Outbox
+    table
+      thead
+        tr
+          th(colspan="5")
+            a.nextpage(href="") next page &raquo;
+            a.prevpage(href="") &laquo; prev page
+        tr
+          th
+          th Subject
+          th To
+          th Date
+          th
+            input(type="checkbox", name="check_all")
+      tbody
+      tfoot
+        tr
+          td(colspan="5")
+            a.nextpage(href="") next page &raquo;
+            a.prevpage(href="") &laquo; prev page
+
+  #compose.pane
+    h4 Compose
+
+  #view.pane
+
+script(type="text/javascript", src="/js/messages.js")

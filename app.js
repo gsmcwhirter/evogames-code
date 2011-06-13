@@ -6,8 +6,6 @@ var express = require('express'),
     sys = require("util"),
     RedisStore = require('connect-redis')(express),
     trustReverseProxy = require('./lib/trustReverseProxy');
-
-require('./lib/base/mixins');
     
 var config = JSON.parse(fs.readFileSync(__dirname + '/config.live.json', 'utf8'));
 
@@ -65,7 +63,7 @@ server.configure(function (){
 });
 
 server.configure('development', function (){
-    this.use(express.static(__dirname + "/media"));
+    this.use(express["static"](__dirname + "/media"));
 });
 
 server.configure('production', function (){});
@@ -80,6 +78,7 @@ server.configure(function (){
     this.use('/api', require('./lib/api'));
     this.use('/game', require('./lib/game'));
     this.use("/help", require('./lib/help'));
+    this.use("/messages", require('./lib/messages'));
 
     this.use(base.middleware.nice404());
 });
