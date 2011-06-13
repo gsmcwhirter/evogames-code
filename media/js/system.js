@@ -189,5 +189,5 @@ $(function (){
 
     checkNewCount();
 
-    setInterval("checkNewCount()", 5000);
+    setInterval("checkNewCount()", 10000);
 });
