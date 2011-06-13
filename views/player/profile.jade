@@ -7,6 +7,11 @@
     span.alias= alias
     span.handle= "@"+pplayer.handle
 
+  - if (player && player.is_sysop)
+    ul.grid3
+      li
+        a(href="/player/@"+pplayer.handle+"/permissions") Edit Permissions
+
   h2 About
   ul.profile
     li

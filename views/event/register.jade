@@ -15,15 +15,7 @@ form(method="post", accept-charset="utf-8")
         img(src="/css/icons/tick.png", alt="")
         | Register
       span.link-sep
+      a.button.negative(href="/game/"+game.code+"/event/"+event.slug)
       button.button.negative.cancel(type="button")
         img(src="/css/icons/cross.png", alt="")
         | Cancel
-
-script(type="text/javascript")
-    $(function(){
-        $("button.cancel").bind('click', function (){
-            window.location = "/game/#{game.code}/event/#{event.slug}";
-
-            return false;
-        });
-    });

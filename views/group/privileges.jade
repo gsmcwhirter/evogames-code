@@ -32,15 +32,6 @@ h1
           img(src="/css/icons/tick.png", alt="")
           | Save Privileges
         span.link-sep
-        button.button.negative.cancel(type="button")
+        a.button.negative(href="/group/"+group.code+"/controls/members")
           img(src="/css/icons/cross.png", alt="")
           | Cancel
-
-script(type="text/javascript")
-    $(function (){
-        $("button.cancel").bind('click', function (){
-            window.location = "/group/#{group.code}/controls/members";
-
-            return false;
-        });
-    });

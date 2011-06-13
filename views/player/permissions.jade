@@ -1,0 +1,28 @@
+h1
+  | Permissions for
+  span.handle.only= "@"+pplayer.handle
+
+#privilege-controls
+  form(method="post", accept-charset="utf-8")
+    fieldset
+      input(type="hidden", name="csrf", value=csrf)
+      .form-line
+        input#post-news(type="checkbox", name="post-news", value="1", checked=pplayer.privs["post news"])
+        | &#32;
+        label(for="post-news") Post News Stories
+      .form-line
+        input#answer-help(type="checkbox", name="answer-help", value="1", checked=pplayer.privs["answer help"])
+        | &#32;
+        label(for="answer-help") Answer Help Questions
+      .form-line
+        input#game-admin(type="checkbox", name="game-admin", value="1", checked=pplayer.privs["game admin"])
+        | &#32;
+        label(for="game-admin") Administer Games
+      .form-line
+        button.button.positive(type="submit")
+          img(src="/css/icons/tick.png", alt="")
+          | Save Permissions
+        span.link-sep
+        a.button.negative(href="/player/@"+pplayer.handle)
+          img(src="/css/icons/cross.png", alt="")
+          | Cancel

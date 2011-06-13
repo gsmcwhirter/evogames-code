@@ -38,15 +38,9 @@ form(method="post", accept-charset="utf-8")
       button.button.positive(type="submit")
         img(src="/css/icons/tick.png",alt="")
         | &#32;Save Game
-      button.button.negative.cancel(type="button")
+      a.button.negative(href="/game/"+game.code)
         img(src="/css/icons/cross.png", alt="")
         | &#32;Cancel
 
 script(type="text/javascript",src="/js/validators/gamename.js")
 script(type="text/javascript",src="/js/validators/gamegenres.js")
-script(type="text/javascript")
-    $("button.cancel").bind("click", function (){
-        window.location = "/game/#{game.code}";
-
-        return false;
-    });
