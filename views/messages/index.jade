@@ -1,22 +1,32 @@
 h1 Messages
 
 #messages
+  ul#directory-nav
+    li#nav-inbox
+      a.small(href="#!/inbox") Inbox
+    li#nav-drafts
+      a.small(href="#!/drafts") Drafts
+    li#nav-outbox
+      a.small(href="#!/outbox") Outbox
+    li#nav-compose
+      a.small(href="#!/compose") Compose
+
   #boxheader
   #inbox.pane
     h4 Inbox
     table
       thead
         tr
-          th(colspan="5")
-            a.nextpage(href="") next page &raquo;
-            a.prevpage(href="") &laquo; prev page
-        tr
-          th
+          th(style="width: 5%; text-align: center;")
           th Subject
           th From
           th Date
-          th
+          th(style="width: 5%; text-align: center;")
             input(type="checkbox", name="check_all")
+        tr
+          td(colspan="5", style="border-bottom: 1px solid #aaa;")
+            a.nextpage(href="") next page &raquo;
+            a.prevpage(href="") &laquo; prev page
       tbody
       tfoot
         tr
@@ -28,16 +38,16 @@ h1 Messages
     table
       thead
         tr
-          th(colspan="5")
-            a.nextpage(href="") next page &raquo;
-            a.prevpage(href="") &laquo; prev page
-        tr
-          th
+          th(style="width: 5%; text-align: center;")
           th Subject
           th To
           th Date
-          th
+          th(style="width: 5%; text-align: center;")
             input(type="checkbox", name="check_all")
+        tr
+          td(colspan="5", style="border-bottom: 1px solid #aaa;")
+            a.nextpage(href="") next page &raquo;
+            a.prevpage(href="") &laquo; prev page
       tbody
       tfoot
         tr
@@ -50,16 +60,16 @@ h1 Messages
     table
       thead
         tr
-          th(colspan="5")
-            a.nextpage(href="") next page &raquo;
-            a.prevpage(href="") &laquo; prev page
-        tr
-          th
+          th(style="width: 5%; text-align: center;")
           th Subject
           th To
           th Date
-          th
+          th(style="width: 5%; text-align: center;")
             input(type="checkbox", name="check_all")
+        tr
+          td(colspan="5", style="border-bottom: 1px solid #aaa;")
+            a.nextpage(href="") next page &raquo;
+            a.prevpage(href="") &laquo; prev page
       tbody
       tfoot
         tr

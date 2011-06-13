@@ -415,6 +415,8 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main .article .edits, #main .question .edits {color:#666;font-size:77%;}
 #main .article .edits li, #main .question .edits li {float:right;clear:right;}
 #main .article .tagline, #main .question .tagline {font-size:85%;border-bottom:1px dotted #aaa;padding-bottom:3px;margin-bottom:5px;}
+#main #messages .pane .nextpage {font-size:85%;float:right;}
+#main #messages .pane .prevpage {font-size:85%;float:left;}
 #main .content-admin {float:right;font-size:85%;}
 #main fieldset {background-color:#ffffff;border:1px solid #888888;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
 #main fieldset .form-line {overflow:auto;margin-bottom:.5em;}

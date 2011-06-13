@@ -12,27 +12,52 @@ $(function (){
         };
 
         this.bind("run", function (){
+            $("#directory-nav").bind("highlight", function (e, target){
+                var self = $(this);
+                self.find("li.selected").removeClass("selected");
+                self.find("li#nav-"+target).addClass("selected");
+            });
+
             $(".pane").bind("loading", function (){
                 var self = $(this);
                 var tbody = self.find("table tbody");
                 tbody.find("tr").remove();
-                tbody.append("<tr class='loading'><td colspan='5' style='text-align: center;'><img src='' alt='Loading...'></td></tr>");
+                tbody.append("<tr class='loading'><td colspan='5' style='text-align: center;'>Loading...</td></tr>");
             }).bind("loaddata", function (e, messages){
                 var self = $(this);
+                var box = self.attr("id");
                 var tbody = self.find("table tbody");
                 tbody.empty();
 
-                (messages || []).forEach(function (message){
-                    var newrow = $("<tr><td></td><td></td><td></td><td></td><td></td></tr>");
+                if (messages && messages.length){
+                    messages.forEach(function (message){
+                        var newrow = $("<tr> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>");
 
-                    newrow.find("td").eq(0).append("");
-                    newrow.find("td").eq(1).append("");
-                    newrow.find("td").eq(2).append("");
-                    newrow.find("td").eq(3).append("");
-                    newrow.find("td").eq(4).append("");
+                        if (box == "inbox" && !message.is_read){
+                            newrow.find("td").eq(0).append("");
+                        }
+                        else {
+                            newrow.find("td").eq(0).append("<span class='new'>New</span>");
+                        }
 
-                    tbody.append(newrow);
-                });
+                        newrow.find("td").eq(1).append("<a href='#!/"+(box == "drafts" ? "edit" : "view")+"/"+message._id+"'>"+message.subject+"</a>");
+
+                        if (box == "inbox"){
+                            newrow.find("td").eq(2).append("<a href=''><span class='handle only'>"+message.from+"</span></a>");
+                        }
+                        else {
+                            newrow.find("td").eq(2).append(_(message.to).map(function (rec){return rec.handle;}).join(", "));
+                        }
+
+                        newrow.find("td").eq(3).append(message.status.date);
+                        newrow.find("td").eq(4).append("<input type='checkbox' name='action' value='yes'>");
+
+                        tbody.append(newrow);
+                    });
+                }
+                else {
+                    tbody.append("<tr><td colspan='5' style='text-align: center;'>You have no messages in your "+box+".</td></tr>")
+                }
             }).bind("nextpage", function (e, nextpage){
                 var self = $(this);
                 var box = self.attr("id");
@@ -61,17 +86,21 @@ $(function (){
                 return function (){
                     var perpage = parseInt($("#perpage").val()) || 10;
                     var url = "/messages/"+box+"?limit="+perpage;
+                    var page;
+
                     if (this.params.page){
                         url += "&nextpage="+this.params.page;
+                        page = this.params.page;
                     }
 
                     $(".pane").hide();
+                    $("#directory-nav").trigger("highlight", [box]);
                     $("#"+box).show();
                     $("#"+box).trigger("loading");
                     $.get(url, function (data){
                         if (data.messages){
                             last_box = box;
-                            last_page = this.params.page || '';
+                            last_page = page || '';
 
                             var pane = $("#"+box);
 
@@ -118,9 +147,19 @@ $(function (){
         }
 
         this.get('', show_box('inbox'));
-        this.get('#!/inbox/:page?', show_box('inbox'));
-        this.get("#!/outbox/:page?", show_box('outbox'));
-        this.get("#!/drafts/:page?", show_box('drafts'));
+
+        this.get("#!/inbox", show_box('inbox'));
+        this.get('#!/inbox/:page', show_box('inbox'));
+
+        this.get("#!/outbox", show_box('outbox'));
+        this.get("#!/outbox/:page", show_box('outbox'));
+
+        this.get("#!/drafts", show_box('drafts'));
+        this.get("#!/drafts/:page", show_box('drafts'));
+
+        this.get("#!/close", function (){
+            this.redirect("#!/"+last_box+(last_page != "" ? "/"+last_page : ""));
+        });
 
         this.get("#!/view/:message_id", function (){
 
