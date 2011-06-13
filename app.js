@@ -5,9 +5,8 @@ var express = require('express'),
     fs = require('fs'),
     sys = require("util"),
     RedisStore = require('connect-redis')(express),
-    trustReverseProxy = require('./lib/trustReverseProxy');
-    
-var config = JSON.parse(fs.readFileSync(__dirname + '/config.live.json', 'utf8'));
+    trustReverseProxy = require('./lib/trustReverseProxy'),
+    config = require('./config.live');
 
 var server = express.createServer();
 
