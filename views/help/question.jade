@@ -19,7 +19,7 @@
     .tagline
       | Tags:
       - each tag in (question.tags || [])
-        a(href="/help/#!/"+tag)= tag
+        a(href="/help/#!/"+tag.toLowerCase())= tag
         span.link-sep
     .body.markdown
       != question.question_answer || "<p>(no answer)</p>"
