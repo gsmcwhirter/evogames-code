@@ -1,0 +1,7 @@
+Dear Event Admins,
+
+The group [<%= registration.name_or_alias %> (<%= registration.code_or_handle %>)](/group/<%= registration.code_or_handle %>)
+has requested to register for [<%= event.name %> (<%= event.gamecode.toUpperCase() %> <%= event.gametype.name.toUpperCase() %>)](/game/<%= event.gamecode %>/event/<%= event.slug %>).
+To approve or deny this request, please visit the [Registration Requests page](/game/<%= event.gamecode %>/event/<%= event.slug %>/controls/requests).
+
+\- <%= system.name %>

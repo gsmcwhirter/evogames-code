@@ -1,0 +1,7 @@
+Dear <%= registration.name_or_alias %>@<%= registration.code_or_handle %>,
+
+Your registration request for
+[<%= event.name %> (<%= event.gamecode.toUpperCase() %> <%= event.gametype.name.toUpperCase() %>)](/game/<%= event.gamecode %>/event/<%= event.slug %>)
+has been approved.
+
+\- <%= system.name %>

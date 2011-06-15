@@ -1,0 +1,7 @@
+Dear Event Admins,
+
+The player [<%= registration.name_or_alias %>@<%= registration.code_or_handle %>](/player/<%= registration.name_or_alias %>@<%= registration.code_or_handle %>)
+has registered for [<%= event.name %> (<%= event.gamecode.toUpperCase() %> <%= event.gametype.name.toUpperCase() %>)](/game/<%= event.gamecode %>/event/<%= event.slug %>).
+Registration administration actions are available on the [Current Registrations page](/game/<%= event.gamecode %>/event/<%= event.slug %>/controls/registrations).
+
+\- <%= system.name %>

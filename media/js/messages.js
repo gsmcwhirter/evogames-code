@@ -81,7 +81,13 @@ $(function (){
                             newrow.find("td").eq(1).append("<a href='#!/"+(box == "drafts" ? "edit" : "view")+"/"+message._id+"'>"+message.subject+"</a>");
 
                             if (box == "inbox"){
-                                newrow.find("td").eq(2).append("<a href='/player/@"+message.from+"'><span class='handle only'>@"+message.from+"</span></a>");
+                                if (message.from){
+                                    newrow.find("td").eq(2).append("<a href='/player/@"+message.from+"'><span class='handle only'>@"+message.from+"</span></a>");
+                                }
+                                else {
+                                    newrow.find("td").eq(2).append("<span class='system'>EvoGames System</span>")
+                                }
+                                
                             }
                             else {
                                 newrow.find("td").eq(2).append(_(message.to).map(formatRec).join(", "));

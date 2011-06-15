@@ -111,6 +111,10 @@ h1 Messages
           input#subject.title(type="text", name="subject")
         .form-line
           label Body
+          span.small
+            |  (
+            a(href="http://daringfireball.net/projects/markdown/syntax", rel="blank") markdown syntax
+            |  )
           br
           textarea#body(name="body")
         .form-line
@@ -141,7 +145,7 @@ h1 Messages
           span.from
             a.handle-link(href="#!/")
               span.handle.only
-            span.system EvoGames System
+            span.system #{system.name} System
         .line
           span.label To:
           span.to

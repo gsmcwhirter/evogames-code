@@ -1,0 +1,10 @@
+Dear Players and Event Admins,
+
+A dispute has been filed for match
+[<%= match._id %>](/game/<%= event.gamecode %>/event/<%= event.slug %>/matches/<%= match._id.substring(12) %>)
+in [<%= event.name %> (<%= event.gamecode.toUpperCase() %> <%= event.gametype.name.toUpperCase() %>)](/game/<%= event.gamecode %>/event/<%= event.slug %>).
+The reason given is:
+
+<%= dispute.creation_note %>
+
+\- <%= system.name %>
