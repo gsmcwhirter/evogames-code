@@ -1,7 +1,7 @@
 Dear Players,
 
 Match
-[<%= match._id %>](/game/<%= event.gamecode %>/event/<%= event.slug %>/matches/<%= match._id.substring(12) %>)
+[<%= match._id.substring(12) %>](/game/<%= event.gamecode %>/event/<%= event.slug %>/matches/<%= match._id.substring(12) %>)
 has been submitted for [<%= event.name %> (<%= event.gamecode.toUpperCase() %> <%= event.gametype.name.toUpperCase() %>)](/game/<%= event.gamecode %>/event/<%= event.slug %>)
 in which you are listed as a participant. If you did not participate in this match, or if the scores are incorrect, please
 [file a dispute](/game/<%= event.gamecode %>/event/<%= event.slug %>/matches/<%= match._id.substring(12) %>/dispute)
