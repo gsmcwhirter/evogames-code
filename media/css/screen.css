@@ -298,6 +298,7 @@ strong, .bold {font-weight:bold;}
 .small {font-size:85%;margin-bottom:0;}
 .red {color:red;}
 .green {color:green;}
+.system {color:green;font-weight:bold;font-style:italic;}
 table {border-collapse:separate;border-spacing:1px;background-color:#fff;}
 table th, table td, table caption {padding:4px 7px;}
 table thead th {background-color:#eee;border-top:2px solid #000;border-bottom:1px solid #888;}
