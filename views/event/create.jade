@@ -65,10 +65,18 @@ form(method="post", accept-charset="utf-8")
             li!= msg
       input.marshal(type="hidden", name="marshal", value=JSON.stringify(data.marshal))
       label Stats
+      span.small
+        |  (
+        a(href="/help/gametype-interface", rel="blank") Help?
+        |  )
       ul.stats
         li.add
           a.add-stat(href="#!/") add new stat
       label Rating Weights
+      span.small
+        |  (
+        a(href="/help/gametype-interface", rel="blank") Help?
+        |  )
       ul.weights
         li
           input(type="number", step="0.05", name="weight", value="1")
