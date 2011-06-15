@@ -38,11 +38,19 @@ h1= game.name+" Game Types"
           input#gtname.text(type="text", name="gtname")
         .form-line
           label Stats
+          span.small
+            |  (
+            a(href="/help/gametype-interface", rel="blank") Help?
+            |  )
           ul.stats
             li.add
               a.add-stat(href="#!/") add new stat
         .form-line
           label Rating Weights
+          span.small
+            |  (
+            a(href="/help/gametype-interface", rel="blank") Help?
+            |  )
           ul.weights
             li
               input(type="number", step="0.05", name="weight", value="1")
