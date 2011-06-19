@@ -84,9 +84,15 @@ $(function(){
                 proc.type = "formula";
                 proclist.push(proc);
             }
+            else if (o.hasClass("hidden-stat-head")){
+                proc.type = "hidden";
+                proclist.push(proc);
+            }
         });
 
-        var stats = {};
+        var stats = {
+            games: parseInt($("#total_games").text())
+        };
 
         var tfoot_tds = statsd.find("table tfoot tr td");
         var player_trs = statsd.find("table tbody tr");
@@ -96,13 +102,23 @@ $(function(){
             mod = 0;
         }
 
+        _(proclist).filter(function (proc){return proc.type == "hidden"}).forEach(function (proc){
+            var lstatname = proc.name.toLowerCase();
+            stats[lstatname] = 0;
+
+            player_trs.each(function (i, row){
+                row = $(row);
+                stats[lstatname] += parseFloat(row.find("td").eq(proc.index).text());
+            });
+        });
+
         _(proclist).filter(function (proc){return proc.type == "number"}).forEach(function (proc){
             var lstatname = proc.name.toLowerCase();
             stats[lstatname] = 0;
 
             player_trs.each(function (i, row){
                 row = $(row);
-                stats[lstatname] += parseInt(row.find("td").eq(proc.index).text());
+                stats[lstatname] += parseFloat(row.find("td").eq(proc.index).text());
             });
 
             tfoot_tds.eq(proc.index - mod).text(stats[lstatname]);

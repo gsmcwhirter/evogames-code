@@ -58,7 +58,7 @@ $(function(){
 
                 player_trs.each(function (i, row){
                     row = $(row);
-                    stats[lstatname] += parseInt(row.find("td").eq(proc.index).text());
+                    stats[lstatname] += parseFloat(row.find("td").eq(proc.index).text());
                 });
 
                 tfoot_tds.eq(proc.index - mod).text(stats[lstatname]);

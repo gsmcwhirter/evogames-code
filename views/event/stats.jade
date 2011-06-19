@@ -22,12 +22,12 @@
           .clickable Rating
         th.number.integer(style="width: "+width+"%;", title="games")
           .clickable Games
-        th.number.integer(style="width: "+width+"%;", title="wins")
+        th.number.integer.hidden-stat-head(style="width: "+width+"%;", title="wins")
           .clickable Wins
-        th.number.integer(style="width: "+width+"%;", title="losses")
+        th.number.integer.hidden-stat-head(style="width: "+width+"%;", title="losses")
           .clickable Losses
         - if (show_ties)
-          th.number.integer(style="width: "+width+"%;", title="ties")
+          th.number.integer.hidden-stat-head(style="width: "+width+"%;", title="ties")
             .clickable Ties
         th.number.winpct-head(style="width: "+width+"%;")
           .clickable WinPct
@@ -73,7 +73,7 @@
             span.link-sep
             = players.length+" players"
         td.number
-        td.number
+        td.number#total_games
             = total_matches
         td.number
         td.number
