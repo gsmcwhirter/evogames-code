@@ -8,8 +8,8 @@ li.gametype
         li
           span.label= stat.name+":"
           span.link-sep
-          - if (stat.valtype == "choice")
-            = stat.valtype
+          - if (stat.valtype == "enum")
+            span choice
             span.link-sep
             span from
             span.link-sep
@@ -17,7 +17,7 @@ li.gametype
           - else if (stat.valtype == "formula")
             span= "\\("+stat.latex+"\\)"
           - else
-            = stat.valtype
+            span= stat.valtype
 
     h5 Rating
     ul
