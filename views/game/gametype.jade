@@ -1,0 +1,27 @@
+li.gametype
+  .display
+    h3= gametype.name
+
+    h5 Statistics
+    ul.gt-stats-display
+      - each stat in gametype.stats
+        li
+          span.label= stat.name+":"
+          span.link-sep
+          - if (stat.valtype == "choice")
+            = stat.valtype
+            span.link-sep
+            span from
+            span.link-sep
+            span= stat.valdata
+          - else if (stat.valtype == "formula")
+            span= "\\("+stat.latex+"\\)"
+          - else
+            = stat.valtype
+
+    h5 Rating
+    ul
+      li
+        span.label Rating Formula:
+        span.link-sep
+        span= "\\("+gametype.ratingformula_latex+"\\)"

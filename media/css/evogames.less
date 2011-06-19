@@ -426,7 +426,8 @@ table {
     }
     
     ul.grid,
-    ul.grid3
+    ul.grid3,
+    ul.grid4
     {
         margin-right: 0;
         display: block;
@@ -462,8 +463,15 @@ table {
         }
     }
 
+    ul.grid4 {
+        >li {
+            width: 22%;
+        }
+    }
+
     ul.grid.menu,
-    ul.grid3.menu {
+    ul.grid3.menu,
+    ul.grid4.menu {
         margin-bottom: 0.5em;
     }
 
@@ -626,6 +634,16 @@ table {
             .action {
                 float: right;
                 margin-left: 1em;
+            }
+
+            span.label {
+                font-weight: bold;
+            }
+
+            ul.gt-stats-display{
+                >li {
+                    margin-bottom: 1em;
+                }
             }
         }
 

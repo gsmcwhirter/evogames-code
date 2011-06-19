@@ -1,0 +1,16 @@
+h1= game.name
+
+ul.grid4
+  li
+    a(href="/game/"+game.code+"/event") Events
+  li
+    a(href="/game/"+game.code+"/tournament") Tournaments
+  li
+    a(href="/game/"+game.code+"/ladder") Ladders
+  li
+    a(href="/game/"+game.code+"/gametypes") Game Types
+  - if (editable)
+    li
+      a(href="/game/"+game.code+"/edit") Edit Game Information
+    li
+      a(href="/game/"+game.code+"/gametypes/edit") Edit Game Types

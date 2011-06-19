@@ -1,17 +1,4 @@
-h1= game.name
-
-ul.grid3
-  li
-    a(href="/game/"+game.code+"/event") Events
-  li
-    a(href="/game/"+game.code+"/tournament") Tournaments
-  li
-    a(href="/game/"+game.code+"/ladder") Ladders
-  - if (editable)
-    li
-      a(href="/game/"+game.code+"/edit") Edit Game Information
-    li
-      a(href="/game/"+game.code+"/gametypes") Edit Game Types
+!= partial('header', {game: game, editable: editable})
 
 h2 Description
 .markdown

@@ -1,3 +1,6 @@
 [submodule "lib/smtp"]
 	path = lib/smtp
 	url = git://github.com/gsmcwhirter/node-smtp-client.git
+[submodule "media/js/mathjax"]
+	path = media/js/mathjax
+	url = git://github.com/mathjax/MathJax.git
