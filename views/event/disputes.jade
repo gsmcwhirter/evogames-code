@@ -15,7 +15,7 @@ h1 List Pending Disputes
           | &#32;Change Dispute Policy
 
   - each match in disputes
-    != partial('match', {match: match, event: event, game: game, show_disputes: true, show_actions: true})
+    != partial('match', {match: match, show_disputes: true, show_actions: true})
 
   != partial('dispute_actions')
 

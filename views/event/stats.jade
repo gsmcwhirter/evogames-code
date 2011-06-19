@@ -42,11 +42,15 @@
             td
               a(href="/group/"+player.groupcode)= player.groupcode
             td
+              img.tiny-avatar(src=(avatars[player.handle.toLowerCase()] || system.default_avatar), alt="")
+              span.link-sep
               a(href="/player/"+player.alias+"@"+player.handle)
                 span.alias= player.alias
                 span.handle= "@"+player.handle
           - else
             td(colspan="2")
+              img.tiny-avatar(src=(avatars[player.handle.toLowerCase()] || system.default_avatar), alt="")
+              span.link-sep
               a(href="/player/"+player.alias+"@"+player.handle)
                 span.alias= player.alias
                 span.handle= "@"+player.handle

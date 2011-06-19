@@ -331,6 +331,7 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main h1 {color:#222;font-size:182%;}
 #main h2 {padding-bottom:5px;line-height:1em;color:#444;font-size:167%;}
 #main h3 {color:#666;font-size:153.9%;}
+#main img.tiny-avatar {vertical-align:middle;}
 #main .markdown li {margin-bottom:0.5em;}
 #main .markdown ul, #main .markdown ul > li {list-style-type:circle;}
 #main .markdown ul ul, #main .markdown ul ul > li {list-style-type:square;}

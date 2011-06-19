@@ -4,7 +4,7 @@ h1= game.name+" Recent Matches"
   p (no recent matches are available)
 
 - each match in matches
-  != partial('match', {match: match.match, event: match.event, game: game, show_header: true})
+  != partial('match', {match: match.match, show_header: true})
 
 - if (nextpage)
   .pagination

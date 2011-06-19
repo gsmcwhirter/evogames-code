@@ -3,7 +3,7 @@
 - if (matches.length == 0)
   p (no recent matches are available)
 
-!= partial('match', {collection: matches, as: "match", event: event, game: game})
+!= partial('match', {collection: matches, as: "match"})
 
 - if (nextpage)
   .pagination
