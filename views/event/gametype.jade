@@ -1,0 +1,6 @@
+!= partial('header', {title:"Game Type"})
+
+ul
+  != partial('game/gametype', {gametype: event.gametype})
+
+script(type="text/javascript", src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML")

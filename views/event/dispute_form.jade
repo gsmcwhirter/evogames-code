@@ -1,5 +1,4 @@
-h1= event.name+" Match Disputes"
-h3= game.name+", "+event.gametype.name.toUpperCase()
+!= partial('header', {title:"Match Disputes"})
 
 != partial('match', {match: match, event: event, game: game, show_disputes: true})
 

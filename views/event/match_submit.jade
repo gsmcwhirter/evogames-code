@@ -1,5 +1,4 @@
-h1 #{event.name} Match Submission 
-h3= game.name+", "+event.gametype.name.toUpperCase()
+!= partial('header', {title:"Match Submission"})
 
 #match-submission
   form(method="post", action="#!/submit", accept-charset="utf-8")
