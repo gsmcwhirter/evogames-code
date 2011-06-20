@@ -256,7 +256,7 @@ $(function (){
                             }
                             
                             if (data.nextpage){
-                                pages_ord.push(data.nextpage);
+                                pages_ord[box].push(data.nextpage);
                             }
 
                             if (page_index > 0){

@@ -21,7 +21,7 @@ $(function (){
 
         this.bind('set-default', function (e, data){
 
-            var target = data.target;
+            var target = data ? data.target : false;
             var self = this.$element("#aliases");
 
             this.trigger('clear-default');
@@ -136,7 +136,6 @@ $(function (){
                     url: '/player/controls/aliases/add',
                     data: {alias: alias},
                     dataType: 'json',
-                    processData: false,
                     success: function (data){
                         if (data.ok){
                             $("#flash").trigger('info', ['Alias added successfully.']);
