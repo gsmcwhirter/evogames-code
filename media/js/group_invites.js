@@ -62,7 +62,7 @@ $(function (){
                 success: function (data){
                     if (data.ok)
                     {
-                        $(".group-members-list li[title="+handle+"]").remove();
+                        $(".group-members-list li#inviteli-"+handle).remove();
                         $("#flash").trigger("info", [data.info]);
                     }
                     else
@@ -103,7 +103,7 @@ $(function (){
                     success: function (data){
                         if (data.ok)
                         {
-                            $("ul.group-members-list").prepend("<li title='"+handle+"'><span class='handle only'>@"+handle+"</span><a class='action withdraw' href='#!/withdraw/"+handle+"'>withdraw</a></li>");
+                            $("ul.group-members-list").prepend("<li id='inviteli-"+handle+"'><span class='handle only'>@"+handle+"</span><a class='action withdraw' href='#!/withdraw/"+handle+"'>withdraw</a></li>");
                             $("#flash").trigger("info", [data.info]);
                         }
                         else

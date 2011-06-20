@@ -1,0 +1,37 @@
+- if (editable || (player && (group.join_type == "approval" || group.join_type == "open")))
+  ul.grid
+    - if (editable)
+      li
+        a(href="/group/"+group.code+"/controls") Manage Group
+    - if (player && (group.join_type == "approval" || group.join_type == "open"))
+      li
+        a(href="/group/"+group.code+"/join") Join Group
+
+#group-profile
+  - if (group.logo)
+    img.logo(src=group.logo, alt="Group Logo")
+
+  h1= group.name
+
+  h2 Event History
+  div#group-events
+    input.search(type="search", placeholder="Search")
+    ul.directory-nav
+      li.nav-current
+        a.small(href="/group/"+group.code+"#!/events/current", rel="current") Current Events
+      li.nav-future
+        a.small(href="/group/"+group.code+"#!/events/future", rel="future") Future Events
+      li.selected
+        a.small(href="/group/"+group.code+"/event-history") Past Events
+
+    #past-events
+      h3 Past Events
+      ul.group-directory
+        - each event in past_events
+          li
+            a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
+            span.fright.small
+              = event.game.code.toUpperCase()+" "+event.event.gametype.name.toUpperCase()
+        li
+
+script(type="text/javascript", src="/js/group_eventhistory.js")

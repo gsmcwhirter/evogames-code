@@ -5,7 +5,7 @@ div#registrations
   h3 Current
   ul.invited-groups.admin
     -each event in approved_registrations.current
-      li(title=event.event.slug)
+      li(id="eventli-"+event.event.slug)
         span.alias= event.alias
         span.handle= "@"+player.handle
         span.link-sep
@@ -16,7 +16,7 @@ div#registrations
   h3 Future
   ul.invited-groups.admin
     -each event in approved_registrations.future
-      li(title=event.event.slug)
+      li(id="eventli-"+event.event.slug)
         span.alias= event.alias
         span.handle= "@"+player.handle
         span.link-sep
@@ -28,7 +28,7 @@ div#registrations
   h3 Current
   ul.invited-groups.admin
     -each event in pending_registrations.current
-      li(title=event.event.slug)
+      li(id="eventli-"+event.event.slug)
         span.alias= event.alias
         span.handle= "@"+player.handle
         span.link-sep
@@ -39,7 +39,7 @@ div#registrations
   h3 Future
   ul.invited-groups.admin
     -each event in pending_registrations.future
-      li(title=event.event.slug)
+      li(id="eventli-"+event.event.slug)
         span.alias= event.alias
         span.handle= "@"+player.handle
         span.link-sep

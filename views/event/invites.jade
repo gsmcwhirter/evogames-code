@@ -3,7 +3,7 @@ h1= event.name+" Invitations"
 #invite-controls
   ul.group-members-list
     - each invite in invites
-      li(title=invite.id)
+      li(id="inviteli-"+invite.id)
         - if (event.event_type == "player_register")
           span.handle.only.id-name= "@"+invite.name_or_handle
         - else

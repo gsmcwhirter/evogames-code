@@ -3,7 +3,7 @@ h1= event.name+" Event Admins"
 #admin-controls
   ul.group-members-list
     - each admin in admins
-      li(title=admin)
+      li(id="adminli-"+admin)
         span.handle.only= "@"+admin
         a.action.withdraw(href="#!/withdraw/"+admin) remove
     li

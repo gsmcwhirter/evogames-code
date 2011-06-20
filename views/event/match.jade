@@ -1,4 +1,4 @@
-.match-display(title=match._id.substring(12))
+.match-display(id="matchdiv-"+match._id.substring(12))
   - if (typeof show_header != "undefined" && show_header)
     a(href="/game/"+game.code+"/event/"+event.slug)
       h2

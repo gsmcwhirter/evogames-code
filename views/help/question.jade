@@ -1,4 +1,4 @@
-.question(title=question._id)
+.question(id="questiondiv-"+question._id)
   - if (typeof full != "undefined" && full)
     a.qname(href=(question.slug ? "/help/"+question.slug : "/help/id/"+question._id))
       h4= question.question

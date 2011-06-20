@@ -86,7 +86,7 @@ $(function (){
                 vis.hide();
                 $("#"+data.grouping).show();
             }
-            if (vis.length){
+            else if (vis.length){
                 vis.slideUp(speed, function (){
                     $("#"+data.grouping).slideDown(speed);
                 });

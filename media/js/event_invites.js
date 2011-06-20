@@ -41,7 +41,7 @@ $(function (){
         this.get("#!/withdraw/:id", function (){
             //show confirmation form
             var id = this.params.id;
-            var idnamediv = $("li[title="+id+"] .id-name");
+            var idnamediv = $("li#inviteli-"+id+" .id-name");
             if (idnamediv.hasClass("handle")){
                 $("#withdraw-modal .handle").text(idnamediv.text());
                 $("#withdraw-modal .name").empty();
@@ -71,7 +71,7 @@ $(function (){
                 success: function (data){
                     if (data.ok)
                     {
-                        $(".group-members-list li[title="+id+"]").remove();
+                        $(".group-members-list li#inviteli-"+id).remove();
                         $("#flash").trigger("info", [data.info]);
                     }
                     else
@@ -112,7 +112,7 @@ $(function (){
                     success: function (data){
                         if (data.ok)
                         {
-                            var newli = $("<li title='"+data.id+"' />");
+                            var newli = $("<li id='inviteli-"+data.id+"' />");
                             if (data.type == "player"){
                                 newli.append("<span class='handle only id-name'>@"+data.name_or_handle+"</span>");
                             }

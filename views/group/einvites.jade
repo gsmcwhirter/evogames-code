@@ -4,7 +4,7 @@ div#invitations
   h2 Event Invitations
   ul.invited-groups.admin
     -each invite in invitations
-      li(title=invite.event.slug)
+      li(id="inviteli-"+invite.event.slug)
         a(href="/game/"+invite.game.code+"/event/"+invite.event.slug)= invite.event.name
         span= " ("+invite.game.code.toUpperCase()+")"
         a.action(href="#!/decline/"+invite.game.code+"/"+invite.event.slug+"/"+group._id, rel=invite.event.name) decline

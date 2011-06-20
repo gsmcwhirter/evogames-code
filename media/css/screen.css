@@ -364,9 +364,9 @@ table tfoot tr td {border-bottom:2px solid #000;}
 #main ul.search-results {display:block;background-color:#ffffff;border:1px solid #888888;padding:1.4em;margin-bottom:1.5em;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
 #main ul.search-results li {padding:0.5em 0;border-top:1px dotted #666;}
 #main ul.search-results li .source {float:right;font-size:85%;}
-#main ul#directory-nav {display:block;overflow:auto;border-bottom:1px solid #666;padding:0;}
-#main ul#directory-nav li {display:block;float:left;margin:0 5px;border-top:2px solid transparent;}
-#main ul#directory-nav li.selected {border-top:2px solid #888;}
+#main ul#directory-nav, #main ul.directory-nav {display:block;overflow:auto;border-bottom:1px solid #666;padding:0;}
+#main ul#directory-nav li, #main ul.directory-nav li {display:block;float:left;margin:0 5px;border-top:2px solid transparent;}
+#main ul#directory-nav li.selected, #main ul.directory-nav li.selected {border-top:2px solid #888;}
 #main .gametype .display, #main #gtform .display {display:block;background-color:#ffffff;border:1px solid #888888;padding:1.4em;margin-bottom:1.5em;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
 #main .gametype .display .action, #main #gtform .display .action {float:right;margin-left:1em;}
 #main .gametype .display span.label, #main #gtform .display span.label {font-weight:bold;}

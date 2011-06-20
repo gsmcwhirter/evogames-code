@@ -55,8 +55,35 @@
                   span.handle= "@"+member.handle
 
   h2 Events
-  ul.profile
-    li
+  div#group-events
+    input.search(type="search", placeholder="Search")
+    ul.directory-nav
+      li.nav-current
+        a.small(href="#!/events/current", rel="current") Current Events
+      li.nav-future
+        a.small(href="#!/events/future", rel="future") Future Events
+      li
+        a.small(href="/group/"+group.code+"/event-history") Past Events
+
+    .current.cboth
+      h3 Current Events
+      ul.group-directory
+        - each event in current_events
+          li
+            a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
+            span.fright.small
+              = event.game.code.toUpperCase()+" "+event.event.gametype.name.toUpperCase()
+        li
+
+    .future.cboth
+      h3 Future Events
+      ul.group-directory
+        - each event in future_events
+          li
+            a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.name
+            span.fright.small
+              = event.game.code.toUpperCase()+" "+event.event.gametype.name.toUpperCase()
+        li
 
   h2 Tournaments
   ul.profile
@@ -67,3 +94,4 @@
     li
 
 script(type="text/javascript", src="/js/group_profile.js")
+script(type="text/javascript", src="/js/group_events.js")

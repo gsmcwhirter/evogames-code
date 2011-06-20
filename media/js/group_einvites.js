@@ -62,7 +62,7 @@ $(function (){
                 success: function (data){
                     if (data.ok)
                     {
-                        $(".invited-groups li[title="+slug+"]").first().remove();
+                        $(".invited-groups li#inviteli-"+slug).first().remove();
                         $("#flash").trigger("info", [data.info]);
                     }
                     else

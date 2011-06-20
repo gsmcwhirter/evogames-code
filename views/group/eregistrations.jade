@@ -5,7 +5,7 @@ div#registrations
   h3 Current
   ul.invited-groups.admin
     -each event in approved_registrations.current
-      li(title=event.event.slug)
+      li(id="eventli-"+event.event.slug)
         a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
         span= " ("+event.game.code.toUpperCase()+")"
     li.last
@@ -13,7 +13,7 @@ div#registrations
   h3 Future
   ul.invited-groups.admin
     -each event in approved_registrations.future
-      li(title=event.event.slug)
+      li(id="eventli-"+event.event.slug)
         a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
         span= " ("+event.game.code.toUpperCase()+")"
     li.last
@@ -22,7 +22,7 @@ div#registrations
   h3 Current
   ul.invited-groups.admin
     -each event in pending_registrations.current
-      li(title=event.event.slug)
+      li(id="eventli-"+event.event.slug)
         a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
         span= " ("+event.game.code.toUpperCase()+")"
     li.last
@@ -30,7 +30,7 @@ div#registrations
   h3 Future
   ul.invited-groups.admin
     -each event in pending_registrations.future
-      li(title=event.event.slug)
+      li(id="eventli-"+event.event.slug)
         a(href="/game/"+event.game.code+"/event/"+event.event.slug)= event.event.name
         span= " ("+event.game.code.toUpperCase()+")"
     li.last

@@ -126,7 +126,7 @@ $(function (){
                     if (data.ok)
                     {
                         $("#flash").trigger("info", [data.info]);
-                        var disputeli = $(".match-display[title="+matchid+"] ul.disputes li[title="+disputeid+"]");
+                        var disputeli = $(".match-display#matchdiv-"+matchid+" ul.disputes li#disputeli-"+disputeid);
                         disputeli.find(".status span.status-text").removeClass("red").addClass("green").text("Resolved");
                         disputeli.find(".status .actions").remove();
                         disputeli.append("<div class='dispinfo'>Resolved by <span class='handle only'>@"+data.handle+"</span> on "+data.datetime+"</div>")

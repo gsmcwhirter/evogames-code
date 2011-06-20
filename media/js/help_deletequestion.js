@@ -37,7 +37,7 @@ $(function (){
         this.get("#!/delete/:id", function (){
             //show confirmation form
             var id = this.params.id;
-            var qtext = $(".question[title="+id+"] a h4").text();
+            var qtext = $(".question#questiondiv-"+id+" a h4").text();
             $("#delete-modal .question-text").text('"'+qtext+'"');
             $("#delete-modal form").attr('action', '#!/delete/'+id);
             $("#delete-modal").trigger("open-overlay");
@@ -54,7 +54,7 @@ $(function (){
                 success: function (data){
                     if (data.ok)
                     {
-                        $(".question[title="+id+"]").remove();
+                        $(".question#questiondiv-"+id).remove();
                         $("#flash").trigger("info", [data.info]);
                     }
                     else

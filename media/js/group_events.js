@@ -1,13 +1,14 @@
 $(function (){
-    var nav = $.sammy("#directory-nav", function (){
+    var nav = $.sammy("#group-events", function (){
         var speed = 200;
         var _app = this;
-        var _lastgroup = "current-events";
+        var _lastgroup = "current";
         
         function show_default(){
-            $("#directory-nav").show();
-            $("#current-events, #future-events, #past-events").hide();
-            $("#current-events li, #future-events li, #past-events li").show();
+            this.$element(".directory-nav").show();
+            this.$element(".group-directory").show();
+            this.$element(".current .future .past").hide();
+            this.$element(".current li, .future li, .past li").show();
         }
 
         function do_search(){
@@ -16,10 +17,10 @@ $(function (){
                 _app.trigger("reconfigure");
                 _app.trigger("show-grouping", {grouping: _lastgroup, instant: true});
             } else {
-                $("#directory-nav").hide();
-                $("#current-events li, #future-events li, #past-events li").hide();
-                $("#current-events, #future-events, #past-events").show();
-                $("#current-events li, #future-events li, #past-events li").each(function (index) {
+                _app.$element(".directory-nav").hide();
+                _app.$element(".current li, .future li, .past li").hide();
+                _app.$element(".current, .future, .past").show();
+                _app.$element(".current li, .future li, .past li").each(function (index) {
                     var element = $(this);
                     if ($("a", element).text().toLowerCase().indexOf(string) >= 0) {
                         element.show();
@@ -36,29 +37,30 @@ $(function (){
         this.bind('run', function (){
             this.trigger("reconfigure");
 
-            $("#search").bind("keyup", do_search);
-            $("#search").bind("change", do_search);
-            $("#search").bind("click", do_search);
+            this.$element(".search").bind("keyup", do_search);
+            this.$element(".search").bind("change", do_search);
+            this.$element(".search").bind("click", do_search);
         });
 
         this.bind('show-grouping', function (e, data){
+            var self = this;
             _lastgroup = data.grouping;
             this.$element("li.selected").removeClass("selected");
-            this.$element("li#nav-"+data.grouping).addClass("selected");
+            this.$element("li.nav-"+data.grouping).addClass("selected");
 
-            var vis = $("#current-events:visible, #future-events:visible, #past-events:visible");
+            var vis = this.$element(".current, .future, .past").filter(":visible");
 
             if (data.instant){
                 vis.hide();
-                $("#"+data.grouping).show();
+                this.$element("."+data.grouping).show();
             }
             else if (vis.length){
                 vis.slideUp(speed, function (){
-                    $("#"+data.grouping).slideDown(speed);
+                    self.$element("."+data.grouping).slideDown(speed);
                 });
             }
             else {
-                $("#"+data.grouping).slideDown(speed);
+                this.$element("."+data.grouping).slideDown(speed);
             }
             
         });
@@ -72,7 +74,7 @@ $(function (){
 
         this.get("#!/", show_first);
 
-        this.get("#!/:grouping", function (){
+        this.get("#!/events/:grouping", function (){
             this.trigger("show-grouping", {grouping: this.params.grouping});
         });
     });
