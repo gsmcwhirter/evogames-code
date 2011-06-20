@@ -21,6 +21,8 @@ function (doc){
                         }
                     }
 
+                    stats.games = 1;
+
                     emit([player.handle.toLowerCase(), player.alias.toLowerCase(), 0, doc.gameid, gtname], stats);
                 })
             });

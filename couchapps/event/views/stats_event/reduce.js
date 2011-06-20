@@ -15,7 +15,6 @@ function (keys, values, rereduce){
         newval.handle = value.handle;
         newval.alias = value.alias;
         newval.groupcode = value.groupcode;
-        newval.games = (newval.games || 0) + (value.games || 0) + 1;
     });
 
     return newval;

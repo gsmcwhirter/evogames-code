@@ -14,8 +14,6 @@ function (keys, values, rereduce){
 
         newval.handle = value.handle;
         newval.alias = value.alias;
-        newval.gameid = value.gameid;
-        newval.gametype = value.gametype;
     });
 
     return newval;

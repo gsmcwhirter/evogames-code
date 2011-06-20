@@ -4,6 +4,8 @@ div
   input#search.search(type="search", placeholder="Search")
   ul.grid3(style="margin-bottom: 1em;")
     li
+      a(href="/game/"+game.code+"/event/stats") Statistics
+    li
       a(href="/game/"+game.code+"/event/matches") Recent Matches
     - if (player)
       li

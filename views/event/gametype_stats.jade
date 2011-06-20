@@ -1,0 +1,95 @@
+h1= game.name+" Statistics"
+
+div
+  ul.grid3(style="margin-bottom: 1em;")
+    li
+      a(href="/game/"+game.code+"/event/stats") Statistics
+    li
+      a(href="/game/"+game.code+"/event/matches") Recent Matches
+    - if (player)
+      li
+        a(href="/game/"+game.code+"/event/create") Create an Event
+
+ul#directory-nav
+  - each gametype in gametypes
+    li(id="nav-gametype-"+gametype.name.toLowerCase())
+      a.small(href="#!/"+gametype.name.toLowerCase(), rel=gametype.name.toLowerCase())= gametype.name.toUpperCase()
+
+ul
+  - each gametype in gametypes
+    li.stats-display(id="gametype-"+gametype.name.toLowerCase())
+      div
+        input#search.search(type="search", placeholder="Search")
+      h3= gametype.name.toUpperCase()
+      .gametype.template= JSON.stringify(gametype)
+      table
+        thead
+          tr
+            - var width = Math.floor(65. / (gametype.relevant_stats.length + (gametype.show_ties ? 6 : 5)) * 100) / 100
+            th.number(style="width: 5%;")
+              .clickable Rank
+            th(style="width: 30%;", colspan="2")
+              .clickable Player
+            th.number.rating-head(style="width: "+width+"%;")
+              .clickable Rating
+            th.number.integer(style="width: "+width+"%;", title="games")
+              .clickable Games
+            th.number.integer.hidden-stat-head(style="width: "+width+"%;", title="wins")
+              .clickable Wins
+            th.number.integer.hidden-stat-head(style="width: "+width+"%;", title="losses")
+              .clickable Losses
+            - if (gametype.show_ties)
+              th.number.integer.hidden-stat-head(style="width: "+width+"%;", title="ties")
+                .clickable Ties
+            th.number.winpct-head(style="width: "+width+"%;")
+              .clickable WinPct
+            - each stat in gametype.relevant_stats
+              th.number(class="stat-head "+stat.valtype, style="width: "+width+"%;", title=stat.name)
+                .clickable= stat.name
+        tbody
+          - each player in gametype.players
+            tr
+              td.number= player["0rank"]
+              td(colspan="2")
+                img.tiny-avatar(src=(avatars[player.handle.toLowerCase()] || system.default_avatar), alt="")
+                span.link-sep
+                a(href="/player/"+player.alias+"@"+player.handle)
+                  span.alias= player.alias
+                  span.handle= "@"+player.handle
+              td.number= player.rating.toFixed(2)
+              td.number= player.games
+              td.number= player.wins
+              td.number= player.losses
+              - if (gametype.show_ties)
+                td.number= player.ties
+              td.number= player.winpct.toFixed(3)
+              - each stat in gametype.relevant_stats
+                td.number
+                  - if (stat.valtype == "float" || stat.valtype == "formula")
+                    = player[stat.name.toLowerCase()].toFixed(2)
+                  - else
+                    = player[stat.name.toLowerCase()]
+
+        tfoot
+          tr
+            td
+            td(style="text-align: right;", colspan="2")
+              .record
+                | Gametype Totals:
+                span.link-sep
+                = gametype.players.length+" players"
+            td.number
+            td.number#total_games
+                = gametype.total_matches
+            td.number
+            td.number
+            - if (gametype.show_ties)
+              td.number
+            td.number
+            - each stat in gametype.relevant_stats
+              td.number
+
+script(type="text/javascript", src="/js/jquery/tablesorter.js")
+script(type="text/javascript", src="/js/client_math_lexer.js")
+script(type="text/javascript", src="/js/event_statsummary.js")
+script(type="text/javascript", src="/js/game_stats.js")
