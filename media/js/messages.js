@@ -9,9 +9,9 @@ $(function (){
         var last_view = '';
         
         var pages_ord = {
-            inbox: [],
-            outbox: [],
-            drafts: []
+            inbox: [""],
+            outbox: [""],
+            drafts: [""]
         };
 
         this.bind("run", function (){
@@ -107,7 +107,7 @@ $(function (){
                 var self = $(this);
                 var box = self.attr("id");
 
-                if (nextpage){
+                if (nextpage || nextpage === ""){
                     self.find(".nextpage").attr("href", "#!/"+box+"/"+nextpage).show();
                 }
                 else {
@@ -117,7 +117,7 @@ $(function (){
                 var self = $(this);
                 var box = self.attr("id");
 
-                if (prevpage){
+                if (prevpage || prevpage === ""){
                     self.find(".prevpage").attr("href", "#!/"+box+"/"+prevpage).show();
                 }
                 else {
@@ -224,11 +224,14 @@ $(function (){
                 return function (){
                     var perpage = parseInt($("#perpage").val()) || 10;
                     var url = "/messages/"+box+"?limit="+perpage;
-                    var page;
+                    var page = "";
+
+                    var self = this;
 
                     last_view = '';
 
                     if (this.params.page){
+                        console.log(this.params.page);
                         url += "&nextpage="+this.params.page;
                         page = this.params.page;
                     }
@@ -239,24 +242,25 @@ $(function (){
                     $("#"+box).trigger("loading");
                     $.get(url, function (data){
                         if (data.messages){
-                            last_box = box;
-                            last_page = page || '';
-
                             var pane = $("#"+box);
 
-                            var page_index = pages_ord[box].indexOf(last_page);
+                            var page_index2 = pages_ord[box].indexOf(last_page);
+                            var page_index = pages_ord[box].indexOf(page);
 
-                            if (page_index == -1){
-                                pages_ord[box] = [last_page];
-                                page_index = 0;
+                            if (page_index == -1 && page != last_page){
+                                pages_ord[box].push(page);
+                                page_index = 1;
                             }
+
+                            last_box = box;
+                            last_page = page || '';
 
                             if (page_index < pages_ord[box].length - 1 && data.nextpage != pages_ord[box][pages_ord[box].length - 1]){
                                 pages_ord[box] = pages_ord[box].slice(0, page_index + 1);
                             }
                             
                             if (data.nextpage){
-                                pages_ord[box].push(data.nextpage);
+                                pages_ord[box].push(self.json(data.nextpage));
                             }
 
                             if (page_index > 0){
@@ -290,21 +294,21 @@ $(function (){
         this.get('', show_box('inbox'));
         this.get("#!/", show_box('inbox'));
 
-        this.get("#!/inbox", show_box('inbox'));
+        this.get("#!/inbox/?", show_box('inbox'));
         this.get('#!/inbox/:page', show_box('inbox'));
 
-        this.get("#!/outbox", show_box('outbox'));
+        this.get("#!/outbox/?", show_box('outbox'));
         this.get("#!/outbox/:page", show_box('outbox'));
 
-        this.get("#!/drafts", show_box('drafts'));
+        this.get("#!/drafts/?", show_box('drafts'));
         this.get("#!/drafts/:page", show_box('drafts'));
 
-        this.get("#!/close", function (){
+        this.get("#!/close/?", function (){
             $("#compose form").attr("action", "#!/");
             this.redirect("#!/"+last_box+(last_page != "" ? "/"+last_page : ""));
         });
 
-        this.get("#!/close2", function (){
+        this.get("#!/close2/?", function (){
             if (last_view){
                 $("#compose form").attr("action", "#!/");
                 this.redirect("#!/view/"+last_view);
