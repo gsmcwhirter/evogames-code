@@ -5,5 +5,7 @@ cluster('./app')
     .use(cluster.stats())
     .use(cluster.pidfiles('/var/run/node/evogames'))
     .use(cluster.cli())
-    .use(cluster.repl(7090))
-    .listen(7080);
+    .use(cluster.repl(7090));
+
+require('./socketapp')(cluster);
+cluster.listen(7080);

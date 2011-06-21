@@ -203,7 +203,8 @@ $(function (){
 
     function startSocket(){
         if (pid){
-            var socket = new io.Socket(null, {port: 7081});
+            //var socket = new io.Socket(null, {port: 7081});
+            var socket = new io.Socket();
 
             socket.on("message", function (message){
                 if (typeof message != "object"){
