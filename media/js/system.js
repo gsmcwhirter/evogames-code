@@ -205,7 +205,9 @@ $(function (){
         if (pid){
             //var socket = new io.Socket(null, {port: 7081});
             //var socket = new io.Socket(null, {secure: window.location.protocol.substring(0, 5) == "https", port: 7081});
-            var socket = new io.Socket(null, {secure: window.location.protocol.substring(0, 5) == "https"});
+            var opts = {secure: window.location.protocol.substring(0, 5) == "https"};
+            if (opts.secure) opts.port = 443;
+            var socket = new io.Socket(null, opts);
 
             socket.on("message", function (message){
                 if (typeof message != "object"){
