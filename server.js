@@ -1,4 +1,5 @@
-var cluster = require('cluster');
+var cluster = require('cluster'),
+    http = require('http');
 
 cluster('./app')
     .use(cluster.logger('/var/log/node/evogames'))
@@ -7,3 +8,7 @@ cluster('./app')
     .use(cluster.cli())
     .use(cluster.repl(8888))
     .listen(7080);
+
+var ioserver = http.createServer();
+ioserver.listen(7081, 'www.evogames.org');
+require('socketapp')(ioserver);

@@ -64,7 +64,7 @@ module.exports = function (app){
         });
     });
 
-    couchdb.changes("?feed=continuous&filter=messages/sent&include_docs=true", function (change){
+    couchdb.changes("?feed=continuous&filter=messages/sent&include_docs=true&heartbeat=2000", function (change){
         //sys.log('change');
         //sys.log(sys.inspect(change));
         if (since > -1){
@@ -89,6 +89,9 @@ module.exports = function (app){
                         sock.send({type: 'msgchange', data: {id: message._id, is_read: handle[1], since: change.seq}});
                     });
                 });
+            }
+            else {
+                sys.log(sys.inspect(change));
             }
         }
     });

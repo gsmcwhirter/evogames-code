@@ -190,7 +190,7 @@ $(function (){
     //checkNewCount();
     //setInterval("checkNewCount()", 10000);
 
-    /*var pid;
+    var pid;
     var ids = {};
 
     $.get("/playerid", function (data){
@@ -203,7 +203,7 @@ $(function (){
 
     function startSocket(){
         if (pid){
-            var socket = new io.Socket();
+            var socket = new io.Socket(null, {port: 7081});
 
             socket.on("message", function (message){
                 if (typeof message != "object"){
@@ -271,5 +271,5 @@ $(function (){
         else {
             $("#player-info span.new-messages").empty();
         }
-    }*/
+    }
 });
