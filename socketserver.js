@@ -1,9 +1,13 @@
 var cluster = require('cluster');
 
+var ioserver = http.createServer();
+require('socketapp')(ioserver);
+
 cluster('./app')
+    .set('workers', 1)
     .use(cluster.logger('/var/log/node/evogames'))
     .use(cluster.stats())
     .use(cluster.pidfiles('/var/run/node/evogames'))
     .use(cluster.cli())
     .use(cluster.repl(8888))
-    .listen(7080);
+    .listen(7081);
