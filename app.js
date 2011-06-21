@@ -79,12 +79,15 @@ server.configure(function (){
     this.use("/messages", require('./lib/messages'));
 
     this.use(base.middleware.nice404());
+
 });
 
 server.configure('development', function (){
-    var ioserver = express.createServer();
+    /*var ioserver = express.createServer();
     ioserver.listen(7081);
-    require('./socketapp')(ioserver);
+    require('./socketapp')(ioserver);*/
+
+    require('./socketapp')(this);
 });
 
 module.exports = server;

@@ -204,7 +204,8 @@ $(function (){
     function startSocket(){
         if (pid){
             //var socket = new io.Socket(null, {port: 7081});
-            var socket = new io.Socket(null, {secure: window.location.protocol.substring(0, 5) == "https", port: 7081});
+            //var socket = new io.Socket(null, {secure: window.location.protocol.substring(0, 5) == "https", port: 7081});
+            var socket = new io.Socket(null, {secure: window.location.protocol.substring(0, 5) == "https"});
 
             socket.on("message", function (message){
                 if (typeof message != "object"){
