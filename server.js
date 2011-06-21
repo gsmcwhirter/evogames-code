@@ -8,5 +8,5 @@ var cserver = cluster('./app');
            .use(cluster.cli())
            .use(cluster.repl(7090));
 
-require('./socketapp')(cserver);
+//require('./socketapp')(cserver);
 cserver.listen(7080);
