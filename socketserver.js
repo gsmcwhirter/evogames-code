@@ -1,4 +1,5 @@
-var cluster = require('cluster');
+var cluster = require('cluster'),
+    http = require('http');
 
 var ioserver = http.createServer();
 require('socketapp')(ioserver);
