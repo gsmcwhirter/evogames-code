@@ -15,9 +15,10 @@ base.configureServer(server);
 var secure_session = true;
 
 server.configure('development', function (){
-    sys.puts("Starting in Development")
-    this.use(express.profiler());
-    this.use(express.logger());
+    sys.puts("Starting in Development");
+
+    //this.use(express.profiler());
+    //this.use(express.logger());
 
     secure_session = false;
 });
@@ -65,8 +66,6 @@ server.configure('development', function (){
     this.use(express["static"](__dirname + "/media"));
 });
 
-server.configure('production', function (){});
-
 server.configure(function (){
     this.use(this.router);
 
@@ -80,6 +79,10 @@ server.configure(function (){
     this.use("/messages", require('./lib/messages'));
 
     this.use(base.middleware.nice404());
+});
+
+server.configure('development', function (){
+    require('./socketapp')(this);
 });
 
 module.exports = server;

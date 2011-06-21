@@ -4,3 +4,6 @@
 [submodule "media/js/mathjax"]
 	path = media/js/mathjax
 	url = git://github.com/mathjax/MathJax.git
+[submodule "media/js/socket.io"]
+	path = media/js/socket.io
+	url = git://github.com/LearnBoost/Socket.IO.git

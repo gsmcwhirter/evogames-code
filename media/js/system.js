@@ -168,7 +168,7 @@ $(function (){
     validators.ready();
 });
 
-function checkNewCount(){
+/*function checkNewCount(){
     $.get("/messages/new", function (data){
         var ct = 0;
         if (!data.error){
@@ -182,12 +182,94 @@ function checkNewCount(){
             $("#player-info span.new-messages").empty();
         }
     });
-}
+}*/
 
 $(function (){
     $("a[rel=blank]").attr("target", "_blank");
 
-    checkNewCount();
+    //checkNewCount();
+    //setInterval("checkNewCount()", 10000);
 
-    setInterval("checkNewCount()", 10000);
+    /*var pid;
+    var ids = {};
+
+    $.get("/playerid", function (data){
+        console.log("got id request");
+        if (data.id){
+            pid = data.id;
+            startSocket();
+        }
+    });
+
+    function startSocket(){
+        if (pid){
+            var socket = new io.Socket();
+
+            socket.on("message", function (message){
+                if (typeof message != "object"){
+                    message = {type: message};
+                }
+
+                if (message.type == "setid-ok"){
+                    socket.send("getcount");
+                }
+                else if (message.type == "getcount"){
+                    var resp = message.data;
+
+                    if (resp){
+                        _(resp.ids).each(function (id){
+                            if (ids[id] && ids[id].since <= resp.since){
+                                ids[id].count = 1;
+                                ids[id].since = resp.since;
+                            }
+                            else {
+                                ids[id] = {count: 1, since: resp.since};
+                            }
+                        });
+                        updateCount();
+                    }
+                }
+                else if (message.type == "msgchange"){
+                    var data = message.data;
+
+                    if (data){
+                        console.log("msgchange", data);
+                        if (ids[data.id] && ids[data.id].since <= data.since){
+                            console.log("update");
+                            ids[data.id].count = data.is_read ? 0 : 1;
+                            ids[data.id].since = data.since;
+                        }
+                        else {
+                            console.log("add");
+                            ids[data.id] = {count: data.is_read ? 0 : 1, since: data.since};
+                        }
+
+                        updateCount();
+                    }
+                }
+            });
+
+            socket.on('connect', function (){
+                console.log("connected");
+                socket.send({type: "setid", id: pid});
+            });
+
+            socket.connect();
+
+        }
+    }
+
+    function updateCount(){
+        var count = 0;
+        for (var k in ids){
+            count += ids[k].count;
+        }
+
+        if (count > 0){
+            $("#player-info span.new-messages").text("("+count+" New)");
+        }
+        else {
+            $("#player-info span.new-messages").empty();
+        }
+    }*/
 });

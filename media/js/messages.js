@@ -293,6 +293,9 @@ $(function (){
 
         this.get('', show_box('inbox'));
         this.get("#!/", show_box('inbox'));
+        this.post("#!/", function (){
+            this.log("error setting form action");
+        });
 
         this.get("#!/inbox/?", show_box('inbox'));
         this.get('#!/inbox/:page', show_box('inbox'));
@@ -304,13 +307,13 @@ $(function (){
         this.get("#!/drafts/:page", show_box('drafts'));
 
         this.get("#!/close/?", function (){
-            $("#compose form").attr("action", "#!/");
+            //$("#compose form").attr("action", "#!/");
             this.redirect("#!/"+last_box+(last_page != "" ? "/"+last_page : ""));
         });
 
         this.get("#!/close2/?", function (){
             if (last_view){
-                $("#compose form").attr("action", "#!/");
+                //$("#compose form").attr("action", "#!/");
                 this.redirect("#!/view/"+last_view);
             }
             else {
@@ -384,7 +387,7 @@ $(function (){
             var compdiv = $("#compose");
             compdiv.show();
             compdiv.find(".loading").show();
-            compdiv.find("form").hide();
+            $("#compose-form").hide();
 
             $.get("/messages/"+msgid, function (data){
                 if (data.message){
@@ -424,7 +427,7 @@ $(function (){
                     }
 
                     compdiv.find(".loading").hide();
-                    compdiv.find("form").attr("action", "#!/edit/"+msgid).show();
+                    $("#compose-form").attr("action", "#!/edit/"+msgid).show();
                 }
             });
             
@@ -443,7 +446,7 @@ $(function (){
                 action: this.params.action
             };
 
-            compdiv.find("form").hide();
+            $("#compose-form").hide();
 
             var self = this;
 
@@ -463,13 +466,13 @@ $(function (){
                     {
                         $("#flash").trigger('error', [data.error]);
                         compdiv.find(".loading").hide();
-                        compdiv.find("form").show();
+                        $("#compose-form").show();
                     }
                 },
                 error: function (){
                     $("#flash").trigger('error', ['Request error']);
                     compdiv.find(".loading").hide();
-                    compdiv.find("form").show();
+                    $("#compose-form").show();
                 }
             });
         });
@@ -482,7 +485,7 @@ $(function (){
             var compdiv = $("#compose");
             compdiv.show();
             compdiv.find(".loading").show();
-            compdiv.find("form").hide();
+            $("#compose-form").hide();
 
             $.get("/messages/"+msgid+"?for_reply=1", function (data){
                 if (data.message){
@@ -504,7 +507,7 @@ $(function (){
                     compdiv.find("#delete").hide();
 
                     compdiv.find(".loading").hide();
-                    compdiv.find("form").attr("action", "#!/compose").show();
+                    $("#compose-form").attr("action", "#!/compose").show();
                 }
             });
         });
@@ -517,7 +520,7 @@ $(function (){
             var compdiv = $("#compose");
             compdiv.show();
             compdiv.find(".loading").show();
-            compdiv.find("form").hide();
+            $("#compose-form").hide();
 
             $.get("/messages/"+msgid+"?for_reply=1", function (data){
                 if (data.message){
@@ -545,7 +548,7 @@ $(function (){
                     compdiv.find("#delete").hide();
 
                     compdiv.find(".loading").hide();
-                    compdiv.find("form").attr("action", "#!/compose").show();
+                    $("#compose-form").attr("action", "#!/compose").show();
                 }
             });
         });
@@ -558,7 +561,7 @@ $(function (){
             var compdiv = $("#compose");
             compdiv.show();
             compdiv.find(".loading").show();
-            compdiv.find("form").hide();
+            $("#compose-form").hide();
 
             $.get("/messages/"+msgid, function (data){
                 if (data.message){
@@ -580,7 +583,7 @@ $(function (){
                     compdiv.find("#delete").hide();
 
                     compdiv.find(".loading").hide();
-                    compdiv.find("form").attr("action", "#!/compose").show();
+                    $("#compose-form").attr("action", "#!/compose").show();
                 }
             });
         });
@@ -591,7 +594,10 @@ $(function (){
             var compdiv = $("#compose");
             compdiv.show();
             compdiv.find(".loading").hide();
-            compdiv.find("form").attr("action", "#!/compose").show();
+            $("#compose-form").show();
+            $("#compose-form").attr("action", "#!/compose");
+
+            console.log($("#compose-form").attr("action"));
 
             compdiv.find("#delete").hide();
 
@@ -619,7 +625,7 @@ $(function (){
                 action: this.params.action
             };
 
-            compdiv.find("form").hide();
+            $("#compose-form").hide();
 
             var self = this;
 
@@ -639,13 +645,13 @@ $(function (){
                     {
                         $("#flash").trigger('error', [data.error]);
                         compdiv.find(".loading").hide();
-                        compdiv.find("form").show();
+                        $("#compose-form").show();
                     }
                 },
                 error: function (){
                     $("#flash").trigger('error', ['Request error']);
                     compdiv.find(".loading").hide();
-                    compdiv.find("form").show();
+                    $("#compose-form").show();
                 }
             });
         });
