@@ -2,7 +2,7 @@ var cluster = require('cluster'),
     http = require('http');
 
 var ioserver = http.createServer();
-require('socketapp')(ioserver);
+require('./socketapp')(ioserver);
 
 cluster('./app')
     .set('workers', 1)
