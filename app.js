@@ -82,7 +82,9 @@ server.configure(function (){
 });
 
 server.configure('development', function (){
-    require('./socketapp')(this);
+    var ioserver = express.createServer();
+    ioserver.listen(7081);
+    require('./socketapp')(ioserver);
 });
 
 module.exports = server;

@@ -1,7 +1,11 @@
 var cluster = require('cluster'),
-    http = require('http');
+    https = require('https'),
+    fs = require('fs');
 
-var ioserver = http.createServer();
+var ioserver = https.createServer({
+    key: fs.readFileSync("/etc/ssl.key/evogames_trusted.key"),
+    cert: fs.readFileSync("/etc/ssl.key/evogames_trusted.crt")
+});
 require('./socketapp')(ioserver);
 
 cluster('./app')
