@@ -80,7 +80,7 @@ server.configure(function (){
 
     this.use(base.middleware.nice404());
 
-    require('./socketapp')(this);
+    //require('./socketapp')(this);
 });
 
 server.configure('development', function (){

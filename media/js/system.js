@@ -168,7 +168,7 @@ $(function (){
     validators.ready();
 });
 
-/*function checkNewCount(){
+function checkNewCount(){
     $.get("/messages/new", function (data){
         var ct = 0;
         if (!data.error){
@@ -182,15 +182,15 @@ $(function (){
             $("#player-info span.new-messages").empty();
         }
     });
-}*/
+}
 
 $(function (){
     $("a[rel=blank]").attr("target", "_blank");
 
-    //checkNewCount();
-    //setInterval("checkNewCount()", 10000);
+    checkNewCount();
+    setInterval("checkNewCount()", 10000);
 
-    var pid;
+    /*var pid;
     var ids = {};
 
     $.get("/playerid", function (data){
@@ -203,8 +203,6 @@ $(function (){
 
     function startSocket(){
         if (pid){
-            //var socket = new io.Socket(null, {port: 7081});
-            //var socket = new io.Socket(null, {secure: window.location.protocol.substring(0, 5) == "https", port: 7081});
             var opts = {secure: window.location.protocol.substring(0, 5) == "https"};
             if (opts.secure) opts.port = 443;
             var socket = new io.Socket(null, opts);
@@ -275,5 +273,5 @@ $(function (){
         else {
             $("#player-info span.new-messages").empty();
         }
-    }
+    }*/
 });
