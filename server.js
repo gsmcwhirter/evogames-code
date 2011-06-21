@@ -10,5 +10,5 @@ cluster('./app')
     .listen(7080);
 
 var ioserver = http.createServer();
-ioserver.listen(7081, 'www.evogames.org');
+ioserver.listen(7081);
 require('socketapp')(ioserver);
