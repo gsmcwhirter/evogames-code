@@ -10,5 +10,5 @@ cluster('./app')
     .use(cluster.stats())
     .use(cluster.pidfiles('/var/run/node/evogames'))
     .use(cluster.cli())
-    .use(cluster.repl(8888))
+    .use(cluster.repl(7091))
     .listen(7081);
