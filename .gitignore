@@ -6,3 +6,4 @@ node_modules
 nohup.out
 config.live.js
 config.js
+/.komodotools/

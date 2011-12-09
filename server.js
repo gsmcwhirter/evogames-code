@@ -1,12 +1,19 @@
-var cluster = require('cluster');
+var cluster = require('cluster'),
+    config = require('./config.live'),
+    numWorkers = require('os').cpus().length;
 
-var cserver = cluster('./app');
+if (cluster.isMaster){
+    for (var i = 0; i < numWorkers; i++){
+        cluster.fork();
+    }
 
-    cserver.use(cluster.logger('/var/log/node/evogames'))
-           .use(cluster.stats())
-           .use(cluster.pidfiles('/var/run/node/evogames'))
-           .use(cluster.cli())
-           .use(cluster.repl(7090));
+    cluster.on('death', function (worker){
+        console.log('worker ' + worker.pid + ' died');
+	cluster.fork();
+    });
+}
+else {
+    var server = require('./app');
 
-//require('./socketapp')(cserver);
-cserver.listen(7080);
+    server.listen(config.port);
+}
