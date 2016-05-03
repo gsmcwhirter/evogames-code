@@ -7,3 +7,5 @@ nohup.out
 config.live.js
 config.js
 /.komodotools/
+*.log
+configs
