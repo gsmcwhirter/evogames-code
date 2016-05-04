@@ -1,4 +1,7 @@
-= ABOUT
+# ABOUT
+
+This website requires a **very old** version of node. Newer versions might work,
+but they have not been tested.
 
 See the INSTALL file for prerequisites/setup.
 
@@ -10,7 +13,8 @@ behind a proxy that handles the ssl connection in production).
 
 Everything is in an pre-alpha state, so don't be surprised if anything breaks.
 
-= LICENSE
+# LICENSE
 
 For now, this project is not licensed for any use besides that of the author. 
 This will likely change, but it is what it is for now.
+
